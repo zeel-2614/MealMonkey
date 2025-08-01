@@ -9,8 +9,15 @@ import UIKit
 
 class ForgetPasswordViewController: UIViewController {
 
+    @IBOutlet weak var btnSend: UIButton!
+    
+    @IBOutlet weak var txtEmail: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        txtEmail.layer.cornerRadius = 28
+        txtEmail.setPadding(left: 34, right: 10)
+        btnSend.applyBorderStyle()
 
         // Do any additional setup after loading the view.
     }
@@ -25,5 +32,7 @@ class ForgetPasswordViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    @IBAction func btnSendClick(_ sender: Any) {
+    }
+    
 }

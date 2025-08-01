@@ -445,9 +445,79 @@
                     <view key="view" contentMode="scaleToFill" id="aTq-zk-CzY">
                         <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r2w-lR-Wyj">
+                                <rect key="frame" x="0.0" y="124" width="440" height="764"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fre-zf-PLk">
+                                        <rect key="frame" x="36" y="42" width="368" height="34.666666666666657"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your email to receive a link to create a new password via email" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnM-9k-Kez">
+                                        <rect key="frame" x="53" y="89.666666666666657" width="329" height="33.666666666666657"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Fq-uz-3Tj">
+                                        <rect key="frame" x="34" y="182.33333333333331" width="372" height="56"/>
+                                        <color key="backgroundColor" name="textfieldBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="5O1-qL-4Qm"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="XYj-M0-P2X" id="cxr-ES-J0o"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMk-iD-XEn">
+                                        <rect key="frame" x="34" y="272.33333333333331" width="372" height="56"/>
+                                        <color key="backgroundColor" name="loginButtonColor "/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="xvZ-e2-e6I"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Send">
+                                            <color key="titleColor" systemColor="systemGroupedBackgroundColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnSendClick:" destination="XYj-M0-P2X" eventType="touchUpInside" id="h9z-kX-ZNx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="cnM-9k-Kez" firstAttribute="top" secondItem="fre-zf-PLk" secondAttribute="bottom" constant="13" id="D3Z-32-ysC"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Fq-uz-3Tj" secondAttribute="trailing" constant="34" id="DXr-Ua-M4S"/>
+                                    <constraint firstAttribute="trailing" secondItem="cnM-9k-Kez" secondAttribute="trailing" constant="58" id="OA5-ST-tfH"/>
+                                    <constraint firstItem="OMk-iD-XEn" firstAttribute="top" secondItem="7Fq-uz-3Tj" secondAttribute="bottom" constant="34" id="Qer-cG-zLf"/>
+                                    <constraint firstItem="cnM-9k-Kez" firstAttribute="leading" secondItem="r2w-lR-Wyj" secondAttribute="leading" constant="53" id="SJu-G6-Oiq"/>
+                                    <constraint firstItem="OMk-iD-XEn" firstAttribute="leading" secondItem="r2w-lR-Wyj" secondAttribute="leading" constant="34" id="UdS-4M-Rps"/>
+                                    <constraint firstItem="7Fq-uz-3Tj" firstAttribute="top" secondItem="cnM-9k-Kez" secondAttribute="bottom" constant="59" id="XLo-cC-EPl"/>
+                                    <constraint firstItem="7Fq-uz-3Tj" firstAttribute="leading" secondItem="r2w-lR-Wyj" secondAttribute="leading" constant="34" id="YYR-22-SER"/>
+                                    <constraint firstItem="fre-zf-PLk" firstAttribute="top" secondItem="r2w-lR-Wyj" secondAttribute="top" constant="42" id="Ynz-74-7QA"/>
+                                    <constraint firstItem="fre-zf-PLk" firstAttribute="leading" secondItem="r2w-lR-Wyj" secondAttribute="leading" constant="36" id="mlR-aV-etZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="OMk-iD-XEn" secondAttribute="trailing" constant="34" id="qT4-bt-7rE"/>
+                                    <constraint firstAttribute="trailing" secondItem="fre-zf-PLk" secondAttribute="trailing" constant="36" id="uSq-OI-sev"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="nq8-Jx-IDP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="r2w-lR-Wyj" firstAttribute="leading" secondItem="nq8-Jx-IDP" secondAttribute="leading" id="d2g-3Z-Gqq"/>
+                            <constraint firstItem="r2w-lR-Wyj" firstAttribute="top" secondItem="nq8-Jx-IDP" secondAttribute="top" id="eC6-Fo-si8"/>
+                            <constraint firstItem="nq8-Jx-IDP" firstAttribute="bottom" secondItem="r2w-lR-Wyj" secondAttribute="bottom" id="rPG-El-BMv"/>
+                            <constraint firstItem="nq8-Jx-IDP" firstAttribute="trailing" secondItem="r2w-lR-Wyj" secondAttribute="trailing" id="zQF-F8-g7a"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnSend" destination="OMk-iD-XEn" id="2VB-HZ-E2H"/>
+                        <outlet property="txtEmail" destination="7Fq-uz-3Tj" id="GOR-FR-4v8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ex-2N-8fx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -492,6 +562,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
