@@ -33,6 +33,11 @@ class ForgetPasswordViewController: UIViewController {
     }
     */
     @IBAction func btnSendClick(_ sender: Any) {
+        self.navigationController?.navigationBar.isHidden = true
+        let storyboard = UIStoryboard(name: "UserStoryboard", bundle: nil)
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "NewPasswordViewController") as? NewPasswordViewController {
+                self.navigationController?.pushViewController(nvc, animated: true)
+        }
     }
     
 }
