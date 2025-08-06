@@ -15,26 +15,17 @@ class NewPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        txtEmail.applyBorderStyle()
-        txtEmail.setPadding(left: 34, right: 10)
-        txtPassword.applyBorderStyle()
-        txtPassword.setPadding(left: 34, right: 10)
-        btnNext.applyBorderStyle()
+        EditStyle.setborder(textfields: [txtEmail,txtPassword, btnNext])
+        EditStyle.setPadding(textFields: [txtEmail,txtPassword], paddingWidth: 34)
 
         // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     @IBAction func btnNextClick(_ sender: Any) {
+        self.navigationController?.navigationBar.isHidden = true
+        let storyboard = UIStoryboard(name: "FeaturesStoryboard", bundle: nil)
+            if let fvc = storyboard.instantiateViewController(withIdentifier: "FeaturesViewController") as? FeaturesViewController {
+                self.navigationController?.pushViewController(fvc, animated: true)
+        }
     }
 }

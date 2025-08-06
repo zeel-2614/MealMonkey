@@ -19,16 +19,24 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        btnLogin.applyBorderStyle()
-        txtEmail.applyBorderStyle()
-        txtEmail.setPadding(left: 34, right: 10)
-        txtPassword.applyBorderStyle()
-        txtPassword.setPadding(left: 34, right: 10)
-        btnLoginWithFacebook.applyBorderStyle()
-        btnLoginWithGoogle.applyBorderStyle()
+        EditStyle.setborder(textfields: [txtEmail,txtPassword,btnLogin,btnLoginWithGoogle,btnLoginWithFacebook])
+        EditStyle.setPadding(textFields: [txtEmail,txtPassword], paddingWidth: 34)
+    }
+
+    @IBAction func btnLoginClick(_ sender: Any) {
+        showMainTabBar()
     }
     
-    @IBAction func btnLoginClick(_ sender: Any) {
+    private func showMainTabBar() {
+        let storyboard = UIStoryboard(name: "HomeStoryboard", bundle: nil)
+        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "HomeTabBarViewController") as? UITabBarController {
+            // Set as rootViewController
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let sceneDelegate = windowScene.delegate as? SceneDelegate {
+                sceneDelegate.window?.rootViewController = tabBarController
+                sceneDelegate.window?.makeKeyAndVisible()
+            }
+        }
     }
     
     @IBAction func btnForgetPasswordClick(_ sender: Any) {

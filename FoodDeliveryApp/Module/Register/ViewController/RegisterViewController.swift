@@ -20,25 +20,11 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        txtMobileNo.applyBorderStyle()
-        txtMobileNo.setPadding(left: 34, right: 10)
-        txtName.applyBorderStyle()
-        txtName.setPadding(left: 34, right: 10)
-        txtEmail.applyBorderStyle()
-        txtEmail.setPadding(left: 34, right: 10)
-        txtAddress.applyBorderStyle()
-        txtAddress.setPadding(left: 34, right: 10)
-        txtPassword.applyBorderStyle()
-        txtPassword.setPadding(left: 34, right: 10)
-        txtConfirmPassword.applyBorderStyle()
-        txtConfirmPassword.setPadding(left: 34, right: 10)
-        btnSignUp.applyBorderStyle()
-
-        // Do any additional setup after loading the view.
+        EditStyle.setborder(textfields: [txtEmail,txtPassword,txtName,txtAddress,txtMobileNo, txtConfirmPassword, btnSignUp])
+        EditStyle.setPadding(textFields: [txtEmail,txtPassword, txtName, txtAddress, txtMobileNo, txtConfirmPassword], paddingWidth: 34)
     }
 
     @IBAction func btnSignUpClick(_ sender: Any) {
-        
     }
     
     @IBAction func btnBackToLoginClick(_ sender: Any) {

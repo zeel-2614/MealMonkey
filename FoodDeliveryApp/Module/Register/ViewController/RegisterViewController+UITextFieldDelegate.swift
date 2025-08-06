@@ -9,29 +9,33 @@ import Foundation
 import UIKit
 
 extension RegisterViewController: UITextFieldDelegate {
-    func textFieldShouldReturn (_ textField: UITextField) -> Bool{
-        if textField == txtName && textField.returnKeyType == .next{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case txtName where textField.returnKeyType == .next:
             txtName.resignFirstResponder()
             txtEmail.becomeFirstResponder()
-        }
-        else if textField == txtEmail && textField.returnKeyType == .next{
+            
+        case txtEmail where textField.returnKeyType == .next:
             txtEmail.resignFirstResponder()
             txtMobileNo.becomeFirstResponder()
-        }
-        else if textField == txtMobileNo && textField.returnKeyType == .next{
+            
+        case txtMobileNo where textField.returnKeyType == .next:
             txtMobileNo.resignFirstResponder()
             txtAddress.becomeFirstResponder()
-        }
-        else if textField == txtAddress && textField.returnKeyType == .next{
+            
+        case txtAddress where textField.returnKeyType == .next:
             txtAddress.resignFirstResponder()
             txtPassword.becomeFirstResponder()
-        }
-        else if textField == txtPassword && textField.returnKeyType == .next{
+            
+        case txtPassword where textField.returnKeyType == .next:
             txtPassword.resignFirstResponder()
             txtConfirmPassword.becomeFirstResponder()
-        }
-        else{
+            
+        case txtConfirmPassword:
             txtConfirmPassword.resignFirstResponder()
+            
+        default:
+            textField.resignFirstResponder()
         }
         return true
     }

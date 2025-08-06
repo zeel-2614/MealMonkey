@@ -10,28 +10,14 @@ import UIKit
 class ForgetPasswordViewController: UIViewController {
 
     @IBOutlet weak var btnSend: UIButton!
-    
     @IBOutlet weak var txtEmail: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        txtEmail.layer.cornerRadius = 28
-        txtEmail.setPadding(left: 34, right: 10)
-        btnSend.applyBorderStyle()
-
-        // Do any additional setup after loading the view.
+        EditStyle.setborder(textfields: [txtEmail,btnSend])
+        EditStyle.setPadding(textFields: [txtEmail], paddingWidth: 34)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     @IBAction func btnSendClick(_ sender: Any) {
         self.navigationController?.navigationBar.isHidden = true
         let storyboard = UIStoryboard(name: "UserStoryboard", bundle: nil)

@@ -1,31 +1,23 @@
-//
-//  Extensions.swift
-//  FoodDeliveryApp
-//
-//  Created by Zeel Shah on 01/08/25.
-//
-
 import Foundation
 import UIKit
 
-extension UIView {
-    func applyBorderStyle() {
-        self.layer.borderWidth = 0
-        self.layer.cornerRadius = 28
-    }
-}
-
-extension UITextField {
-    func setPadding(left: CGFloat = 0, right: CGFloat = 0) {
-        if left > 0 {
-            let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: left, height: self.frame.height))
-            self.leftView = paddingView
-            self.leftViewMode = .always
+class EditStyle {
+    class func setborder(textfields: [UIView]) {
+        for textField in textfields {
+            textField.layer.borderColor = UIColor.lightGray.cgColor
+            textField.layer.cornerRadius = 28
+            textField.clipsToBounds = false
         }
-        if right > 0 {
-            let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: right, height: self.frame.height))
-            self.rightView = paddingView
-            self.rightViewMode = .always
+       
+    }
+    
+    class func setPadding(textFields: [UIView], paddingWidth: CGFloat) {
+        for view in textFields {
+            if let textField = view as? UITextField {
+                let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: paddingWidth, height: textField.frame.height))
+                textField.leftView = paddingView
+                textField.leftViewMode = .always
+            }
         }
     }
 }

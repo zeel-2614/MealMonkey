@@ -39,7 +39,7 @@
                                                         <color key="textColor" name="forgetPasswordButtonColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FZ1-ye-Zop">
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FZ1-ye-Zop">
                                                         <rect key="frame" x="34" y="143" width="372" height="56"/>
                                                         <color key="backgroundColor" name="textfieldBackgroundColor"/>
                                                         <constraints>
@@ -58,7 +58,7 @@
                                                             <constraint firstAttribute="height" constant="56" id="IKV-AP-IvL"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="Y6W-OH-hqX" id="ZtA-6R-OC1"/>
                                                         </connections>
@@ -314,7 +314,7 @@
                                                                 <rect key="frame" x="0.0" y="336" width="372" height="56"/>
                                                                 <color key="backgroundColor" name="textfieldBackgroundColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="5LP-bQ-fRk" id="diY-Qx-LJc"/>
                                                                 </connections>
@@ -323,7 +323,7 @@
                                                                 <rect key="frame" x="0.0" y="420" width="372" height="56"/>
                                                                 <color key="backgroundColor" name="textfieldBackgroundColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="5LP-bQ-fRk" id="oMG-Cl-GQu"/>
                                                                 </connections>
@@ -668,7 +668,7 @@ link to  create a new password via email</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
