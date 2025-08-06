@@ -26,7 +26,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="552" height="379"/>
             <connections>
-                <outlet property="imgView" destination="6Fm-P2-pDY" id="Ek7-2W-DHR"/>
+                <outlet property="imgView" destination="6Fm-P2-pDY" id="diX-F5-zOA"/>
             </connections>
             <point key="canvasLocation" x="439.69465648854958" y="136.26760563380282"/>
         </collectionViewCell>
