@@ -13,10 +13,16 @@ class MoreViewController: UIViewController {
     var arrMoreItems: [MoreModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setLeftAlignedTitle("More")
+        self.setCartButton(target: self, action: #selector(cartButtonTapped))
         arrMoreItems = MoreModel.getMoreData()
 
         // Do any additional setup after loading the view.
         tblMoreItems.register(UINib(nibName: "MoreTableViewCell", bundle: nil), forCellReuseIdentifier: "MoreTableViewCell")
+    }
+    
+    @objc func cartButtonTapped() {
+        print("Cart button tapped")
     }
 }
 

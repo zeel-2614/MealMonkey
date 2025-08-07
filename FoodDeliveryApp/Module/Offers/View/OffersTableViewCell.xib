@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="253" id="drS-RF-mxi" customClass="OffersTableViewCell" customModule="Meal_Monkey_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="408" height="253"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="drS-RF-mxi" id="DmG-0M-v9w">
+                <rect key="frame" x="0.0" y="0.0" width="408" height="253"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Vo-gd-aKW">
+                        <rect key="frame" x="0.0" y="0.0" width="408" height="183"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Café de Noires" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IdL-9i-FsA">
+                        <rect key="frame" x="21" y="191" width="107" height="18.666666666666657"/>
+                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                        <color key="textColor" red="0.2901960784" green="0.29411764709999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zug-Vb-hUl">
+                        <rect key="frame" x="10" y="214.66666666666666" width="38" height="28.333333333333343"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="ic_Offer_star"/>
+                    </button>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DlG-qL-Nl1">
+                        <rect key="frame" x="49" y="214.66666666666666" width="205" height="28.333333333333343"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLH-oZ-QVi">
+                                <rect key="frame" x="0.0" y="0.0" width="17" height="28.333333333333332"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="0.71372549019999998" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(124 ratings)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEo-yW-kzs">
+                                <rect key="frame" x="22" y="0.0" width="67.666666666666671" height="28.333333333333332"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                <color key="textColor" red="0.71372549019999998" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cafe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3f-wE-pYC">
+                                <rect key="frame" x="94.666666666666657" y="0.0" width="23" height="28.333333333333332"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                <color key="textColor" red="0.71372549019999998" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_dot" translatesAutoresizingMaskIntoConstraints="NO" id="Z5f-bk-TD0">
+                                <rect key="frame" x="122.66666666666666" y="0.0" width="2" height="28.333333333333332"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Western Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xx5-ob-fDm">
+                                <rect key="frame" x="129.66666666666666" y="0.0" width="75.333333333333343" height="28.333333333333332"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                <color key="textColor" red="0.71372549019999998" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="zug-Vb-hUl" firstAttribute="leading" secondItem="DmG-0M-v9w" secondAttribute="leading" constant="10" id="003-it-LSL"/>
+                    <constraint firstItem="zug-Vb-hUl" firstAttribute="centerY" secondItem="cLH-oZ-QVi" secondAttribute="centerY" id="0WB-hy-vW1"/>
+                    <constraint firstItem="IdL-9i-FsA" firstAttribute="leading" secondItem="DmG-0M-v9w" secondAttribute="leading" constant="21" id="5jg-FA-wXo"/>
+                    <constraint firstItem="IdL-9i-FsA" firstAttribute="top" secondItem="1Vo-gd-aKW" secondAttribute="bottom" constant="8" id="Bfn-RH-liH"/>
+                    <constraint firstAttribute="bottom" secondItem="1Vo-gd-aKW" secondAttribute="bottom" constant="70" id="C7r-Of-Wky"/>
+                    <constraint firstItem="1Vo-gd-aKW" firstAttribute="leading" secondItem="DmG-0M-v9w" secondAttribute="leading" id="Ext-ht-vew"/>
+                    <constraint firstItem="zug-Vb-hUl" firstAttribute="top" secondItem="IdL-9i-FsA" secondAttribute="bottom" constant="5" id="RYP-Sr-WXf"/>
+                    <constraint firstItem="DlG-qL-Nl1" firstAttribute="top" secondItem="IdL-9i-FsA" secondAttribute="bottom" constant="5" id="bzl-op-Zrc"/>
+                    <constraint firstAttribute="trailing" secondItem="1Vo-gd-aKW" secondAttribute="trailing" id="dSR-s5-J1a"/>
+                    <constraint firstItem="1Vo-gd-aKW" firstAttribute="top" secondItem="DmG-0M-v9w" secondAttribute="top" id="gk0-Dw-uJe"/>
+                    <constraint firstItem="DlG-qL-Nl1" firstAttribute="leading" secondItem="zug-Vb-hUl" secondAttribute="trailing" constant="1" id="lIE-0l-Qu7"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="krM-rS-d2y"/>
+            <connections>
+                <outlet property="imgView" destination="1Vo-gd-aKW" id="UDA-ct-g0y"/>
+                <outlet property="lblCafeName" destination="IdL-9i-FsA" id="HnR-1B-50a"/>
+                <outlet property="lblFoodType" destination="Xx5-ob-fDm" id="eWf-IY-kLN"/>
+                <outlet property="lblRattings" destination="cEo-yW-kzs" id="K6q-mi-fNN"/>
+                <outlet property="lblRestroType" destination="o3f-wE-pYC" id="ynV-CI-ZRK"/>
+            </connections>
+            <point key="canvasLocation" x="105.34351145038167" y="2.4647887323943665"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_Offer_star" width="14" height="14.333333015441895"/>
+        <image name="ic_dot" width="2" height="2"/>
+    </resources>
+</document>

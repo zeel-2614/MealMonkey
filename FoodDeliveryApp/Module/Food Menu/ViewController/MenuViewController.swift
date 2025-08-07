@@ -18,6 +18,8 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setLeftAlignedTitle("Menu")
+        self.setCartButton(target: self, action: #selector(cartButtonTapped))
         arrMenuItems = MenuModel.getMenuData()
         
         tblMenu.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "MenuTableViewCell")
@@ -27,6 +29,10 @@ class MenuViewController: UIViewController {
         EditStyle.setPadding(textFields: [txtSearch], paddingWidth: 34)
 
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func cartButtonTapped() {
+        print("Cart button tapped")
     }
     
     func applyCornerRadiusTLBR() {
@@ -50,5 +56,25 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configureCell(with: foodModel)
         cell.backgroundColor = .clear
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        switch indexPath.row{
+        case 0:
+            print("Food")
+        case 1:
+            print("breverges")
+        case 2:
+            print("Desserts")
+            let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
+            if let secondVc = storyboard.instantiateViewController(withIdentifier : "DessertsViewController") as? DessertsViewController{
+                self.navigationController?.pushViewController(secondVc, animated: true)
+            }
+        case 3:
+            print("Promotions")
+        default: break
+            
+        }
     }
 }

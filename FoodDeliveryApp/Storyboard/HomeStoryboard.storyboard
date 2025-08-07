@@ -10,21 +10,77 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Offers-->
+        <!--Offers View Controller-->
         <scene sceneID="acJ-hB-Bix">
             <objects>
-                <viewController id="pqv-T2-DIs" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="AGk-le-t59">
+                <viewController storyboardIdentifier="OffersViewController" id="pqv-T2-DIs" customClass="OffersViewController" customModule="FoodDeliveryApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zIv-ds-S3F">
                         <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="eJ4-Uc-jPC"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXu-gu-Prr">
+                                <rect key="frame" x="0.0" y="168" width="440" height="671"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCU-2b-6G2">
+                                        <rect key="frame" x="21" y="15" width="183.66666666666666" height="32.333333333333336"/>
+                                        <string key="text">Find discounts, Offers special
+meals and more!</string>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                        <color key="textColor" red="0.48627450979999998" green="0.49019607840000001" blue="0.4941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ODD-hW-qn7">
+                                        <rect key="frame" x="21" y="71.333333333333343" width="64" height="25"/>
+                                        <color key="backgroundColor" name="loginButtonColor "/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Check Offers">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnCheckOffersClick:" destination="pqv-T2-DIs" eventType="touchUpInside" id="gkn-Lw-89d"/>
+                                        </connections>
+                                    </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="st3-7Z-pz1">
+                                        <rect key="frame" x="0.0" y="129.33333333333331" width="440" height="541.66666666666674"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="pqv-T2-DIs" id="NVp-W8-XNb"/>
+                                            <outlet property="delegate" destination="pqv-T2-DIs" id="4kO-CJ-Ywi"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="qCU-2b-6G2" firstAttribute="leading" secondItem="eXu-gu-Prr" secondAttribute="leading" constant="21" id="9rH-A1-58w"/>
+                                    <constraint firstItem="ODD-hW-qn7" firstAttribute="top" secondItem="qCU-2b-6G2" secondAttribute="bottom" constant="24" id="9u6-S4-eWo"/>
+                                    <constraint firstAttribute="trailing" secondItem="st3-7Z-pz1" secondAttribute="trailing" id="Ad6-WV-YwI"/>
+                                    <constraint firstItem="ODD-hW-qn7" firstAttribute="leading" secondItem="eXu-gu-Prr" secondAttribute="leading" constant="21" id="Dlh-Zb-muv"/>
+                                    <constraint firstAttribute="bottom" secondItem="st3-7Z-pz1" secondAttribute="bottom" id="Rsh-Ln-fO1"/>
+                                    <constraint firstItem="st3-7Z-pz1" firstAttribute="top" secondItem="ODD-hW-qn7" secondAttribute="bottom" constant="33" id="Udz-3t-zd8"/>
+                                    <constraint firstItem="qCU-2b-6G2" firstAttribute="top" secondItem="eXu-gu-Prr" secondAttribute="top" constant="15" id="WVB-HS-1OE"/>
+                                    <constraint firstItem="st3-7Z-pz1" firstAttribute="leading" secondItem="eXu-gu-Prr" secondAttribute="leading" id="ZUC-y8-grv"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="R0U-39-fX3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="R0U-39-fX3" firstAttribute="bottom" secondItem="eXu-gu-Prr" secondAttribute="bottom" id="8De-zE-fhN"/>
+                            <constraint firstItem="eXu-gu-Prr" firstAttribute="leading" secondItem="R0U-39-fX3" secondAttribute="leading" id="GGi-lL-niV"/>
+                            <constraint firstItem="eXu-gu-Prr" firstAttribute="top" secondItem="R0U-39-fX3" secondAttribute="top" id="XoQ-o1-fwa"/>
+                            <constraint firstItem="R0U-39-fX3" firstAttribute="trailing" secondItem="eXu-gu-Prr" secondAttribute="trailing" id="aGN-qW-8b8"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Offers" image="ic_offersImage" id="4KN-uk-59Q"/>
+                    <navigationItem key="navigationItem" id="I4r-FM-ryl"/>
+                    <connections>
+                        <outlet property="btnCheckOffers" destination="ODD-hW-qn7" id="lhL-1h-TCJ"/>
+                        <outlet property="tblOffers" destination="st3-7Z-pz1" id="Cfn-co-uGV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I0m-Lh-OkL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-11" y="731"/>
+            <point key="canvasLocation" x="879.54545454545462" y="730.54393305439339"/>
         </scene>
         <!--Home-->
         <scene sceneID="UEc-Jo-Pa2">
@@ -42,7 +98,7 @@
             </objects>
             <point key="canvasLocation" x="-935" y="731"/>
         </scene>
-        <!--Profile-->
+        <!--Profie View Controller-->
         <scene sceneID="bYq-yp-acX">
             <objects>
                 <viewController storyboardIdentifier="ProfieViewController" id="oaT-BQ-Bc8" customClass="ProfieViewController" customModule="FoodDeliveryApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -51,19 +107,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pqt-3r-nFC">
-                                <rect key="frame" x="0.0" y="124" width="440" height="715"/>
+                                <rect key="frame" x="0.0" y="168" width="440" height="671"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wGl-Yq-Jv6">
-                                        <rect key="frame" x="0.0" y="0.0" width="440" height="715"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="440" height="671"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8U-B5-igu">
-                                                <rect key="frame" x="0.0" y="0.0" width="440" height="769.66666666666663"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="440" height="770.66666666666663"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4XT-Nb-ES0">
                                                         <rect key="frame" x="168" y="31" width="104" height="104"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Hbs-sA-mP7">
-                                                                <rect key="frame" x="0.0" y="0.6666666666666643" width="104" height="102.66666666666669"/>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_ProfileImage" translatesAutoresizingMaskIntoConstraints="NO" id="Hbs-sA-mP7">
+                                                                <rect key="frame" x="0.0" y="0.0" width="104" height="104"/>
                                                             </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -77,7 +133,7 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fWc-bf-BgV">
-                                                        <rect key="frame" x="190" y="154" width="60" height="11"/>
+                                                        <rect key="frame" x="186.66666666666666" y="154" width="67" height="12"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" image="ic_editProfileImage">
                                                             <attributedString key="attributedTitle">
@@ -85,7 +141,7 @@
                                                                     <attributes>
                                                                         <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <color key="NSColor" red="0.9882352941176471" green="0.37647058823529411" blue="0.066666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <font key="NSFont" size="10" name=".SFNS-Regular"/>
+                                                                        <font key="NSFont" metaFont="system" size="10"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                     </attributes>
                                                                 </fragment>
@@ -95,14 +151,14 @@
                                                             <action selector="btnEditProfileAction:" destination="oaT-BQ-Bc8" eventType="touchUpInside" id="MfG-aJ-1YK"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eyv-i4-WCx">
-                                                        <rect key="frame" x="201.66666666666666" y="178" width="36.666666666666657" height="18.666666666666657"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi there Emilia" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eyv-i4-WCx">
+                                                        <rect key="frame" x="168" y="179" width="104.33333333333331" height="18.666666666666657"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R81-bJ-gxY">
-                                                        <rect key="frame" x="198.66666666666666" y="202.66666666666669" width="43" height="25"/>
+                                                        <rect key="frame" x="198.66666666666666" y="203.66666666666669" width="43" height="25"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Sign Out">
@@ -113,7 +169,7 @@
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="lR8-tI-33v">
-                                                        <rect key="frame" x="21" y="275.66666666666674" width="398" height="494"/>
+                                                        <rect key="frame" x="21" y="276.66666666666674" width="398" height="494"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="USi-qS-Cm6">
                                                                 <rect key="frame" x="0.0" y="0.0" width="398" height="56"/>
@@ -128,7 +184,7 @@
                                                                 </connections>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OTb-DQ-8db">
-                                                                <rect key="frame" x="0.0" y="73" width="398" height="56"/>
+                                                                <rect key="frame" x="0.0" y="72.999999999999943" width="398" height="56"/>
                                                                 <color key="backgroundColor" name="textfieldBackgroundColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -231,7 +287,7 @@
                             <constraint firstItem="Pqt-3r-nFC" firstAttribute="top" secondItem="MH0-Qe-5z8" secondAttribute="top" id="s5F-ci-HRc"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" image="ic_profileImage" id="RUr-pg-424"/>
+                    <navigationItem key="navigationItem" id="eLJ-4i-eqX"/>
                     <connections>
                         <outlet property="btnEditProfile" destination="fWc-bf-BgV" id="TEJ-8p-BnW"/>
                         <outlet property="btnSaveUser" destination="MGt-hN-pO1" id="m47-7M-vNF"/>
@@ -249,7 +305,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YZl-8c-84P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="931.36363636363637" y="730.54393305439339"/>
+            <point key="canvasLocation" x="2715" y="730.54393305439339"/>
         </scene>
         <!--More View Controller-->
         <scene sceneID="MaW-xs-gYu">
@@ -284,9 +340,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C8v-7g-lJK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2820.6106870229005" y="730.98591549295782"/>
+            <point key="canvasLocation" x="4603.636363636364" y="730.54393305439339"/>
         </scene>
-        <!--Menu-->
+        <!--Menu View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="MenuViewController" id="Y6W-OH-hqX" customClass="MenuViewController" customModule="FoodDeliveryApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -295,7 +351,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2z-9F-Huc">
-                                <rect key="frame" x="0.0" y="124" width="440" height="715"/>
+                                <rect key="frame" x="0.0" y="168" width="440" height="671"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search Food" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qqb-YV-fvM">
                                         <rect key="frame" x="21" y="25" width="398" height="45"/>
@@ -310,13 +366,13 @@
                                         </connections>
                                     </textField>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_SidebarImage" translatesAutoresizingMaskIntoConstraints="NO" id="FSA-a8-lO6">
-                                        <rect key="frame" x="0.0" y="100" width="97" height="615"/>
+                                        <rect key="frame" x="0.0" y="100" width="97" height="571"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="97" id="qao-Ue-oFr"/>
                                         </constraints>
                                     </imageView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bOH-Ld-nO7">
-                                        <rect key="frame" x="21" y="130" width="398" height="585"/>
+                                        <rect key="frame" x="21" y="130" width="398" height="541"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="dataSource" destination="Y6W-OH-hqX" id="mQS-xE-XNX"/>
@@ -348,7 +404,7 @@
                             <constraint firstItem="a2z-9F-Huc" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="upa-Bm-dtw"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Menu" image="ic_MenuImage" id="qEI-50-fFR"/>
+                    <navigationItem key="navigationItem" id="dR4-rM-uBL"/>
                     <connections>
                         <outlet property="imgSideBar" destination="FSA-a8-lO6" id="slK-a1-MAg"/>
                         <outlet property="tblMenu" destination="bOH-Ld-nO7" id="hO5-aD-hKu"/>
@@ -358,7 +414,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="915.26717557251902" y="3.5211267605633805"/>
+            <point key="canvasLocation" x="1806.818181818182" y="3.1380753138075317"/>
         </scene>
         <!--Home Tab Bar View Controller-->
         <scene sceneID="zEY-1f-Vtq">
@@ -371,10 +427,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="viewControllers" id="KDG-ug-Ag9"/>
-                        <segue destination="pqv-T2-DIs" kind="relationship" relationship="viewControllers" id="Kwf-VH-KPd"/>
+                        <segue destination="eYr-O6-6rA" kind="relationship" relationship="viewControllers" id="KDG-ug-Ag9"/>
+                        <segue destination="mrD-dA-LgT" kind="relationship" relationship="viewControllers" id="Kwf-VH-KPd"/>
                         <segue destination="8wU-Z0-3bD" kind="relationship" relationship="viewControllers" id="oFI-KV-oPF"/>
-                        <segue destination="oaT-BQ-Bc8" kind="relationship" relationship="viewControllers" id="HJG-jL-OrV"/>
+                        <segue destination="7Sq-eU-PCI" kind="relationship" relationship="viewControllers" id="HJG-jL-OrV"/>
                         <segue destination="yNT-C5-leJ" kind="relationship" relationship="viewControllers" id="eA8-MT-xoh"/>
                     </connections>
                 </tabBarController>
@@ -399,18 +455,75 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hmn-0F-fep" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1893.8931297709923" y="730.98591549295782"/>
+            <point key="canvasLocation" x="3676.3636363636365" y="730.54393305439339"/>
+        </scene>
+        <!--Menu-->
+        <scene sceneID="w2y-r8-Jq2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eYr-O6-6rA" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Menu" image="ic_MenuImage" id="qEI-50-fFR"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vj1-dE-EjI">
+                        <rect key="frame" x="0.0" y="124" width="440" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="CD4-Jz-xn4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nx2-yu-Jmy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="915.00000000000011" y="3.1380753138075317"/>
+        </scene>
+        <!--Offers-->
+        <scene sceneID="jnx-uq-Gcn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mrD-dA-LgT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Offers" image="ic_offersImage" id="4KN-uk-59Q"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w5f-wH-0UB">
+                        <rect key="frame" x="0.0" y="124" width="440" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="pqv-T2-DIs" kind="relationship" relationship="rootViewController" id="R2c-Yv-o10"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2n7-2j-OqN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-12.272727272727273" y="730.54393305439339"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="u0C-Or-g2s">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7Sq-eU-PCI" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="ic_profileImage" id="RUr-pg-424"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0E8-Ol-nno">
+                        <rect key="frame" x="0.0" y="124" width="440" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="oaT-BQ-Bc8" kind="relationship" relationship="rootViewController" id="WSr-H9-A4e"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="asW-Gw-443" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1823.1818181818182" y="730.54393305439339"/>
         </scene>
     </scenes>
     <resources>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="ic_MenuImage" width="14.333333015441895" height="14"/>
         <image name="ic_MoreImage" width="16" height="16"/>
+        <image name="ic_ProfileImage" width="103" height="102"/>
         <image name="ic_SidebarImage" width="97" height="485"/>
         <image name="ic_editProfileImage" width="11" height="11"/>
         <image name="ic_offersImage" width="16.666666030883789" height="16"/>
         <image name="ic_profileImage" width="13.666666984558105" height="17.666666030883789"/>
-        <image name="person.circle" catalog="system" width="128" height="123"/>
         <namedColor name="SignOutButtonColor">
             <color red="0.48627450980392156" green="0.49019607843137253" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

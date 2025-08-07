@@ -35,8 +35,13 @@ class ProfieViewController: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openImagePicker))
         imgUser.addGestureRecognizer(tapGesture)
-        
+        self.setLeftAlignedTitle("Profile")
+        self.setCartButton(target: self, action: #selector(cartButtonTapped))
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func cartButtonTapped() {
+        print("Cart button tapped")
     }
    
     @objc func profileCartBtn() {
