@@ -4,93 +4,131 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="253" id="drS-RF-mxi" customClass="OffersTableViewCell" customModule="Meal_Monkey_App" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="408" height="253"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="278" id="KGk-i7-Jjw" customClass="OffersTableViewCell" customModule="MealMonkey" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="445" height="278"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="drS-RF-mxi" id="DmG-0M-v9w">
-                <rect key="frame" x="0.0" y="0.0" width="408" height="253"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="445" height="278"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Vo-gd-aKW">
-                        <rect key="frame" x="0.0" y="0.0" width="408" height="183"/>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Café de Noires" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IdL-9i-FsA">
-                        <rect key="frame" x="21" y="191" width="107" height="18.666666666666657"/>
-                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
-                        <color key="textColor" red="0.2901960784" green="0.29411764709999999" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zug-Vb-hUl">
-                        <rect key="frame" x="10" y="214.66666666666666" width="38" height="28.333333333333343"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" image="ic_Offer_star"/>
-                    </button>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DlG-qL-Nl1">
-                        <rect key="frame" x="49" y="214.66666666666666" width="205" height="28.333333333333343"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aHr-CY-xrP">
+                        <rect key="frame" x="0.0" y="0.0" width="445" height="278"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLH-oZ-QVi">
-                                <rect key="frame" x="0.0" y="0.0" width="17" height="28.333333333333332"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="textColor" red="0.71372549019999998" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(124 ratings)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEo-yW-kzs">
-                                <rect key="frame" x="22" y="0.0" width="67.666666666666671" height="28.333333333333332"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                <color key="textColor" red="0.71372549019999998" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cafe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3f-wE-pYC">
-                                <rect key="frame" x="94.666666666666657" y="0.0" width="23" height="28.333333333333332"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                <color key="textColor" red="0.71372549019999998" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_dot" translatesAutoresizingMaskIntoConstraints="NO" id="Z5f-bk-TD0">
-                                <rect key="frame" x="122.66666666666666" y="0.0" width="2" height="28.333333333333332"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GMK-Ia-GAb">
+                                <rect key="frame" x="0.0" y="13" width="445" height="206"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Western Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xx5-ob-fDm">
-                                <rect key="frame" x="129.66666666666666" y="0.0" width="75.333333333333343" height="28.333333333333332"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                <color key="textColor" red="0.71372549019999998" green="0.71764705880000002" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hQo-XG-AL6">
+                                <rect key="frame" x="21" y="227" width="403" height="38"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpu-cc-3e4">
+                                        <rect key="frame" x="0.0" y="0.0" width="403" height="18.666666666666668"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                        <color key="textColor" name="LabelPrimaryColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="dHz-QQ-7tP">
+                                        <rect key="frame" x="0.0" y="23.666666666666657" width="403" height="14.333333333333336"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BT1-WG-hud">
+                                                <rect key="frame" x="0.0" y="0.0" width="137.33333333333334" height="14.333333333333334"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLo-oH-077">
+                                                        <rect key="frame" x="0.0" y="0.0" width="13.666666666666666" height="14.333333333333334"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="13.789999999999999" id="KdE-D1-vxc"/>
+                                                            <constraint firstAttribute="height" constant="14.19" id="kRt-ls-yfH"/>
+                                                        </constraints>
+                                                        <color key="tintColor" name="ButtonBackgroundColor"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" image="star.fill" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="btnStarClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xgy-K8-U2d"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x4C-bJ-U6v">
+                                                        <rect key="frame" x="18.666666666666664" y="0.0" width="15.333333333333336" height="14.333333333333334"/>
+                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
+                                                        <color key="textColor" name="ButtonBackgroundColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(124 ratings)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72F-x5-QPd">
+                                                        <rect key="frame" x="39.000000000000007" y="0.0" width="67.666666666666686" height="14.333333333333334"/>
+                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                                        <color key="textColor" name="LabelOffer"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Café" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1U-9E-OYq">
+                                                        <rect key="frame" x="111.66666666666666" y="0.0" width="25.666666666666657" height="14.333333333333334"/>
+                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                                        <color key="textColor" name="LabelOffer"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Western Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="keJ-c4-OtV">
+                                                <rect key="frame" x="152.33333333333337" y="0.0" width="250.66666666666663" height="14.333333333333334"/>
+                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                                <color key="textColor" name="LabelOffer"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
-                    </stackView>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="GMK-Ia-GAb" firstAttribute="leading" secondItem="aHr-CY-xrP" secondAttribute="leading" id="01y-x3-fbE"/>
+                            <constraint firstItem="GMK-Ia-GAb" firstAttribute="top" secondItem="aHr-CY-xrP" secondAttribute="top" constant="13" id="N2h-Ih-Yzz"/>
+                            <constraint firstAttribute="trailing" secondItem="GMK-Ia-GAb" secondAttribute="trailing" id="UZN-qT-UTV"/>
+                            <constraint firstItem="hQo-XG-AL6" firstAttribute="leading" secondItem="aHr-CY-xrP" secondAttribute="leading" constant="21" id="eQa-pw-44N"/>
+                            <constraint firstItem="hQo-XG-AL6" firstAttribute="top" secondItem="GMK-Ia-GAb" secondAttribute="bottom" constant="8" id="x37-4w-0tZ"/>
+                            <constraint firstAttribute="trailing" secondItem="hQo-XG-AL6" secondAttribute="trailing" constant="21" id="xbc-2g-aeg"/>
+                            <constraint firstAttribute="bottom" secondItem="hQo-XG-AL6" secondAttribute="bottom" constant="13" id="zjw-E8-O9i"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="zug-Vb-hUl" firstAttribute="leading" secondItem="DmG-0M-v9w" secondAttribute="leading" constant="10" id="003-it-LSL"/>
-                    <constraint firstItem="zug-Vb-hUl" firstAttribute="centerY" secondItem="cLH-oZ-QVi" secondAttribute="centerY" id="0WB-hy-vW1"/>
-                    <constraint firstItem="IdL-9i-FsA" firstAttribute="leading" secondItem="DmG-0M-v9w" secondAttribute="leading" constant="21" id="5jg-FA-wXo"/>
-                    <constraint firstItem="IdL-9i-FsA" firstAttribute="top" secondItem="1Vo-gd-aKW" secondAttribute="bottom" constant="8" id="Bfn-RH-liH"/>
-                    <constraint firstAttribute="bottom" secondItem="1Vo-gd-aKW" secondAttribute="bottom" constant="70" id="C7r-Of-Wky"/>
-                    <constraint firstItem="1Vo-gd-aKW" firstAttribute="leading" secondItem="DmG-0M-v9w" secondAttribute="leading" id="Ext-ht-vew"/>
-                    <constraint firstItem="zug-Vb-hUl" firstAttribute="top" secondItem="IdL-9i-FsA" secondAttribute="bottom" constant="5" id="RYP-Sr-WXf"/>
-                    <constraint firstItem="DlG-qL-Nl1" firstAttribute="top" secondItem="IdL-9i-FsA" secondAttribute="bottom" constant="5" id="bzl-op-Zrc"/>
-                    <constraint firstAttribute="trailing" secondItem="1Vo-gd-aKW" secondAttribute="trailing" id="dSR-s5-J1a"/>
-                    <constraint firstItem="1Vo-gd-aKW" firstAttribute="top" secondItem="DmG-0M-v9w" secondAttribute="top" id="gk0-Dw-uJe"/>
-                    <constraint firstItem="DlG-qL-Nl1" firstAttribute="leading" secondItem="zug-Vb-hUl" secondAttribute="trailing" constant="1" id="lIE-0l-Qu7"/>
+                    <constraint firstAttribute="trailing" secondItem="aHr-CY-xrP" secondAttribute="trailing" id="0SZ-vu-dLg"/>
+                    <constraint firstItem="aHr-CY-xrP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="4uo-UY-e8i"/>
+                    <constraint firstAttribute="bottom" secondItem="aHr-CY-xrP" secondAttribute="bottom" id="8Ba-HC-jiM"/>
+                    <constraint firstItem="aHr-CY-xrP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="etV-zs-bTr"/>
                 </constraints>
             </tableViewCellContentView>
-            <viewLayoutGuide key="safeArea" id="krM-rS-d2y"/>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="imgView" destination="1Vo-gd-aKW" id="UDA-ct-g0y"/>
-                <outlet property="lblCafeName" destination="IdL-9i-FsA" id="HnR-1B-50a"/>
-                <outlet property="lblFoodType" destination="Xx5-ob-fDm" id="eWf-IY-kLN"/>
-                <outlet property="lblRattings" destination="cEo-yW-kzs" id="K6q-mi-fNN"/>
-                <outlet property="lblRestroType" destination="o3f-wE-pYC" id="ynV-CI-ZRK"/>
+                <outlet property="btnStar" destination="sLo-oH-077" id="LVJ-Y4-POi"/>
+                <outlet property="imgOffer" destination="GMK-Ia-GAb" id="R6Q-N4-wes"/>
+                <outlet property="lblCafe" destination="B1U-9E-OYq" id="qZq-K6-0LA"/>
+                <outlet property="lblFoodVariety" destination="keJ-c4-OtV" id="Bwe-cl-uSe"/>
+                <outlet property="lblOfferTitle" destination="wpu-cc-3e4" id="Emp-bo-U3e"/>
+                <outlet property="lblRater" destination="72F-x5-QPd" id="tg3-uX-nZt"/>
+                <outlet property="lblRating" destination="x4C-bJ-U6v" id="IUj-kM-RgV"/>
             </connections>
-            <point key="canvasLocation" x="105.34351145038167" y="2.4647887323943665"/>
+            <point key="canvasLocation" x="142.74809160305344" y="102.8169014084507"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ic_Offer_star" width="14" height="14.333333015441895"/>
-        <image name="ic_dot" width="2" height="2"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
+        <namedColor name="ButtonBackgroundColor">
+            <color red="0.9882352941176471" green="0.37647058823529411" blue="0.066666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="LabelOffer">
+            <color red="0.71372549019607845" green="0.71764705882352942" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="LabelPrimaryColor">
+            <color red="0.29019607843137257" green="0.29411764705882354" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

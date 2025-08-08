@@ -1,51 +1,43 @@
-//
-//  OfferModel.swift
-//  FoodDeliveryApp
-//
-//  Created by Zeel Shah on 07/08/25.
-//
-
 import Foundation
-import UIKit
 
-class offer: NSObject{
-    let imageCafe: String
-    let strCafeName: String
-    let strNoOfRatings: String
-    let strRestaurantType: String
-    let strFoodType: String
+class OfferModel: NSObject {
     
-    init(imageCafe: String, strCafeName: String, strNoOfRatings: String, strRestaurantType: String, strFoodType: String) {
-        self.imageCafe = imageCafe
+    var imgOffer: String?
+    var strOfferTitle: String?
+    var intRating: Float?
+    var intRater: Int?
+    var strCafeName: String?
+    var strFoodVariety: String?
+    
+    init(imgOffer: String? = nil, strOfferTitle: String? = nil, intRating: Float? = nil, intRater: Int? = nil, strCafeName: String? = nil, strFoodVariety: String? = nil) {
+        self.imgOffer = imgOffer
+        self.strOfferTitle = strOfferTitle
+        self.intRating = intRating
+        self.intRater = intRater
         self.strCafeName = strCafeName
-        self.strNoOfRatings = strNoOfRatings
-        self.strRestaurantType = strRestaurantType
-        self.strFoodType = strFoodType
+        self.strFoodVariety = strFoodVariety
     }
     
-    class func getAllOffers() -> [offer] {
-            return [
-                offer(
-                    imageCafe: "ic_offer_cafede",
-                    strCafeName: "Café de Noires",
-                    strNoOfRatings: "(124 ratings)",
-                    strRestaurantType: "Café",
-                    strFoodType: "Western Food"
-                ),
-                offer(
-                    imageCafe: "ic_offer_Isso",
-                    strCafeName: "Isso",
-                    strNoOfRatings: "(124 ratings)",
-                    strRestaurantType: "Café",
-                    strFoodType: "Western Food"
-                ),
-                offer(
-                    imageCafe: "ic_offer_cafeBean",
-                    strCafeName: "Cafe Beans",
-                    strNoOfRatings: "(124 ratings)",
-                    strRestaurantType: "Café",
-                    strFoodType: "Western Food"
-                )
-            ]
-        }
+    class func addOffers()-> [OfferModel] {
+        return [
+            OfferModel(imgOffer: "ic_offer1",
+                       strOfferTitle: "Café de Noires",
+                       intRating: 4.9,
+                       intRater: 124,
+                       strCafeName: "Cafe",
+                       strFoodVariety: "Western Food"),
+            OfferModel(imgOffer: "ic_offer2",
+                       strOfferTitle: "Isso",
+                       intRating: 4.9,
+                       intRater: 124,
+                       strCafeName: "Cafe",
+                       strFoodVariety: "Western Food"),
+            OfferModel(imgOffer: "ic_offer3",
+                       strOfferTitle: "Cafe Beans",
+                       intRating: 4.9,
+                       intRater: 124,
+                       strCafeName: "Cafe",
+                       strFoodVariety: "Western Food")
+        ]
+    }
 }

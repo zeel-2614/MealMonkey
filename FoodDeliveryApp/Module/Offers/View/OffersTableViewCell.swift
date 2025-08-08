@@ -1,37 +1,32 @@
-//
-//  OffersTableViewCell.swift
-//  FoodDeliveryApp
-//
-//  Created by Zeel Shah on 07/08/25.
-//
-
 import UIKit
 
 class OffersTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var lblRattings: UILabel!
-    @IBOutlet weak var lblCafeName: UILabel!
-    @IBOutlet weak var lblRestroType: UILabel!
-    @IBOutlet weak var imgView: UIImageView!
-    @IBOutlet weak var lblFoodType: UILabel!
+    @IBOutlet weak var imgOffer: UIImageView!
+    @IBOutlet weak var lblOfferTitle: UILabel!
+    @IBOutlet weak var btnStar: UIButton!
+    @IBOutlet weak var lblRating: UILabel!
+    @IBOutlet weak var lblRater: UILabel!
+    @IBOutlet weak var lblCafe: UILabel!
+    @IBOutlet weak var lblFoodVariety: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
-    func configOffer(offer : offer)
-    {
-        imgView.image = UIImage(named: "\(offer.imageCafe)")
-        lblCafeName.text = offer.strCafeName
-        lblRattings.text = offer.strNoOfRatings
-        lblRestroType.text = "\(offer.strCafeName)"
-        lblFoodType.text = "\(offer.strFoodType)"
+    @IBAction func btnStarClick(_ sender: Any) {
     }
     
+    func offerConfigureCell(offer: OfferModel) {
+        imgOffer.image = UIImage(named: offer.imgOffer ?? "")
+        lblOfferTitle.text = offer.strOfferTitle
+        lblRating.text = "\(offer.intRating ?? 0.0)"
+        lblRater.text = "(\(offer.intRater ?? 0) ratings)"
+        lblCafe.text = offer.strCafeName
+        lblFoodVariety.text = offer.strFoodVariety
+    }
 }

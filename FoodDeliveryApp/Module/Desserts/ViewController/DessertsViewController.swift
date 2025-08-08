@@ -1,48 +1,39 @@
-//
-//  DessertsViewController.swift
-//  FoodDeliveryApp
-//
-//  Created by Zeel Shah on 06/08/25.
-//
-
 import UIKit
 
 class DessertsViewController: UIViewController {
 
-    @IBOutlet weak var txtSearch: UITextField!
+    @IBOutlet weak var txtSearchDesserts: UITextField!
     @IBOutlet weak var tblDesserts: UITableView!
     
-    var arrdesserts : [Desserts] = Desserts.getDessertList()
+    var arrDessert: [DessertsModel] = DessertsModel.addDesserts()
     override func viewDidLoad() {
         super.viewDidLoad()
-        setLeftAlignedTitleWithBack("Dessert", target: self, action: #selector(backButtonTapped))
-        setCartButton(target: self, action: #selector(cartTapped))
+        
+        viewStyle(cornerRadius: txtSearchDesserts.frame.size.height/2, borderWidth: 0, borderColor: .systemGray, textField: [txtSearchDesserts])
+        
+        setPadding(textfield: [txtSearchDesserts])
+        
+        setLeftAlignedTitleWithBack("Desserts",
+                                    target: self,
+                                    action: #selector(btnBackTapped))
+        setCartButton(target: self,
+                      action: #selector(btnCartTapped))
         
         tblDesserts.register(UINib(nibName: "DessertsTableViewCell", bundle: nil), forCellReuseIdentifier: "DessertsTableViewCell")
+    }
+    
+    @objc func btnBackTapped() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func btnCartTapped() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func setPadding(textfield: [UITextField]){
         
-        EditStyle.setborder(textfields: [txtSearch])
-        EditStyle.setPadding(textFields: [txtSearch], paddingWidth: 34)
-
-        // Do any additional setup after loading the view.
+        for item in textfield {
+            item.setPadding(left: 34, right: 34)
+        }
     }
-    
-    @objc func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func cartTapped() {
-        print("Cart tapped")
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
