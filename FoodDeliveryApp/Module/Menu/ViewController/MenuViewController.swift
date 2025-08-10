@@ -13,7 +13,7 @@ class MenuViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = false
         setLeftAlignedTitle("Menu")
-        setCartButton(target: self, action: #selector(btnCartTapped))
+        setCartButton(target: self, action: #selector(cartBtnTapped))
         
         applyCornerRadiusTLBR()
         
@@ -25,7 +25,8 @@ class MenuViewController: UIViewController {
         tblCategory.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "MenuTableViewCell")
     }
     
-    @objc func btnCartTapped() {
+    @objc func cartBtnTapped() {
+        
     }
     
     func applyCornerRadiusTLBR() {

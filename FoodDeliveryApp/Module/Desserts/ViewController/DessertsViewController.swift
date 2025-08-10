@@ -13,21 +13,18 @@ class DessertsViewController: UIViewController {
         
         setPadding(textfield: [txtSearchDesserts])
         
-        setLeftAlignedTitleWithBack("Desserts",
-                                    target: self,
-                                    action: #selector(btnBackTapped))
-        setCartButton(target: self,
-                      action: #selector(btnCartTapped))
+        setLeftAlignedTitleWithBack("Desserts", target: self, action: #selector(dessertBackBtn))
+        setCartButton(target: self, action: #selector(btnCartTapped))
         
         tblDesserts.register(UINib(nibName: "DessertsTableViewCell", bundle: nil), forCellReuseIdentifier: "DessertsTableViewCell")
     }
     
-    @objc func btnBackTapped() {
+    @objc func dessertBackBtn() {
         self.navigationController?.popViewController(animated: true)
     }
     
     @objc func btnCartTapped() {
-        self.navigationController?.popViewController(animated: true)
+        
     }
     
     func setPadding(textfield: [UITextField]){

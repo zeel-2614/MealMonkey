@@ -8,8 +8,7 @@ class CollectionViewCellNextPageCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func configureCell(nextPage: NextPageClass) {
-        
-        imgNextPage.image = UIImage(named: nextPage.strImage)
+    func configure(with model: Feature){
+        imgNextPage.image = UIImage(named: model.imageName)
     }
 }

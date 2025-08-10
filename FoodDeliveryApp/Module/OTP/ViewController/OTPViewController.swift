@@ -12,6 +12,8 @@ class OTPViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setLeftAlignedTitleWithBack("OTP", target: self, action: #selector(otpBackBtnTapped))
+        
         let allviews = [txtFirstDigit!, txtSecondDigit!, txtThirdDigit!, txtFourthDigit!]
         for tf in allviews {
                     tf.delegate = self
@@ -21,6 +23,10 @@ class OTPViewController: UIViewController {
         
         viewStyle(cornerRadius: 12, borderWidth: 0, borderColor: .systemGray, textField: [txtFirstDigit, txtSecondDigit, txtThirdDigit, txtFourthDigit])
         viewStyle(cornerRadius: 28 , borderWidth: 0, borderColor: .systemGray, textField: [btnNext])
+    }
+    
+    @objc func otpBackBtnTapped() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnNextClick(_ sender: Any) {

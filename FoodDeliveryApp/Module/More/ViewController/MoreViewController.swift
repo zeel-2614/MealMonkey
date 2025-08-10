@@ -11,7 +11,7 @@ class MoreViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = false
         setLeftAlignedTitle("More")
-        setCartButton(target: self, action: #selector(btnCartTapped))
+        setCartButton(target: self, action: #selector(cartButtonTapped))
         
         tblMenu.register(UINib(nibName: "MoreTableViewCell", bundle: nil), forCellReuseIdentifier: "MoreTableViewCell")
     }
@@ -20,6 +20,7 @@ class MoreViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
     }
     
-    @objc func btnCartTapped() {
+    @objc func cartButtonTapped() {
+        
     }
 }

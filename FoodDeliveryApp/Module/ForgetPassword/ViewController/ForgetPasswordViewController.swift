@@ -7,12 +7,17 @@ class ForgetPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = ""
+//        self.title = ""
         self.navigationController?.isNavigationBarHidden = false
         
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .gray, textField: [txtEmail, btnSend])
         
         setPadding(textfield: [txtEmail])
+        setLeftAlignedTitleWithBack("Forgot Password", target: self, action: #selector(backButtonTapped))
+    }
+    
+    @objc func backButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func setPadding(textfield: [UITextField]){

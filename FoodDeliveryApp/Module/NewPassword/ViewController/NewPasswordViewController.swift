@@ -14,10 +14,10 @@ class NewPasswordViewController: UIViewController {
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .gray, textField: [txtNewPassword, txtConfiemPassword, btnNext])
         
         setPadding(textfield: [txtNewPassword, txtConfiemPassword])
+        
     }
     
     func setPadding(textfield: [UITextField]){
-        
         for item in textfield {
             item.setPadding(left: 34, right: 34)
         }

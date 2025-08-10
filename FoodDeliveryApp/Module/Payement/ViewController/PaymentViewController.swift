@@ -22,8 +22,8 @@ class PaymentViewController: UIViewController {
         super.viewDidLoad()
         
         viewAddCard.isHidden = true
-        setLeftAlignedTitleWithBack("Payment Details", target: self, action: #selector(btnBackTapped))
-        setCartButton(target: self, action: #selector(btnCartTapped))
+        setLeftAlignedTitleWithBack("Payment Details", target: self, action: #selector(backBtnTapped))
+        setCartButton(target: self, action: #selector(btnCartPressed))
         
         viewStyle(cornerRadius: btnAddCard.frame.size.height / 2, borderWidth: 0, borderColor: .systemGray, textField: [btnAddCard])
         viewStyle(cornerRadius: btnAddNewCard.frame.size.height / 2, borderWidth: 0, borderColor: .systemGray, textField: [btnAddNewCard])
@@ -57,12 +57,12 @@ class PaymentViewController: UIViewController {
         }
     }
     
-    @objc func btnBackTapped() {
+    @objc func backBtnTapped() {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func btnCartTapped() {
-        self.navigationController?.popViewController(animated: true)
+    @objc func btnCartPressed() {
+        
     }
     
     @IBAction func btnAddNewCardClick(_ sender: Any) {

@@ -13,6 +13,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationController?.isNavigationBarHidden = false
+        setLeftAlignedTitle("Profile")
+        setCartButton(target: self, action: #selector(profileCartBtn))
         
         let imgPicker = UITapGestureRecognizer(target: self, action: #selector(imgTap))
         imgProfile.addGestureRecognizer(imgPicker)
@@ -23,6 +25,10 @@ class ProfileViewController: UIViewController {
         
         setLeftAlignedTitle("Profile")
         setCartButton(target: self, action: #selector(btnCartTapped))
+    }
+    
+    @objc func profileCartBtn() {
+        
     }
     
     @objc func imgTap() {

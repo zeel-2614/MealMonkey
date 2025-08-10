@@ -1,47 +1,28 @@
 import Foundation
+import UIKit
 
-enum ButtonText {
+class Feature: NSObject{
     
-    case Next
-    case Done
-}
-
-class NextPageClass {
+    let imageName: String
+    let title: String
+    let subTitle: String
     
-    var strTitle: String = ""
-    var strTitleDescription: String = ""
-    var strImage: String = ""
-    var strButtonText: ButtonText = .Next
-    
-    init(strTitle: String, strTitleDescription: String, strImage: String, strButtonText: ButtonText = .Next){
-        
-        self.strTitle = strTitle
-        self.strTitleDescription = strTitleDescription
-        self.strImage = strImage
-        self.strButtonText = strButtonText
+    init(imageName: String, title: String, subTitle: String) {
+        self.imageName = imageName
+        self.title = title
+        self.subTitle = subTitle
     }
     
-    class func getNextPageData() -> [NextPageClass] {
-        
-        return [
-            NextPageClass(
-                strTitle: "Find Food You Love",
-                strTitleDescription: "Discover the best foods from over 1,000 restaurants and fast delivery to your doorstep",
-                strImage: "ic_image1",
-                strButtonText: .Next
-            ),
-            NextPageClass(
-                strTitle: "Fast Delivery",
-                strTitleDescription: "Get your food delivered in under 30 minutes wherever you are",
-                strImage: "ic_image2",
-                strButtonText: .Next
-            ),
-            NextPageClass(
-                strTitle: "Enjoy Your Meal",
-                strTitleDescription: "Eat healthy, tasty and affordable meals at your convenience",
-                strImage: "ic_image3",
-                strButtonText: .Done
-            )
-        ]
-    }
+    static let features: [Feature] = [
+        Feature(imageName: "ic_image1",
+                title: "Find Food You Love",
+                subTitle: "Discover the best foods from over 1,000 restaurants and fast delivery to your doorstep"),
+        Feature(imageName: "ic_image2",
+                title: "Fast Delivery",
+                subTitle: "Fast food delivery to your home, office wherever you are"),
+        Feature(imageName: "ic_image3",
+                title: "Live Tracking",
+                subTitle: "Real time tracking of your food on the app once you placed the order")
+    ]
+
 }

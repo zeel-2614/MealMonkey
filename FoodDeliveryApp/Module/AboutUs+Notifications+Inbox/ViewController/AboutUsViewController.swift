@@ -19,34 +19,42 @@ class AboutUsViewController: UIViewController {
             print("My Orders")
         case .Notification:
             arrCurrent = AboutModel.addNotificationData()
-            setLeftAlignedTitleWithBack("Notification",
-                                        target: self,
-                                        action: #selector(btnBackTapped))
-            setCartButton(target: self, action: #selector(btnCartTapped))
+            setLeftAlignedTitleWithBack("Notifications", target: self, action: #selector(backButtonTapped))
+            setCartButton(target: self, action: #selector(cartNotificationsTapped))
         case .Inbox:
             arrCurrent = AboutModel.addInboxData()
-            setLeftAlignedTitleWithBack("Inbox",
-                                        target: self,
-                                        action: #selector(btnBackTapped))
-            setCartButton(target: self,
-                          action: #selector(btnCartTapped))
+            setLeftAlignedTitleWithBack("Inbox", target: self, action: #selector(backButtonTapped))
+            setCartButton(target: self, action: #selector(cartInboxTapped))
         case .AboutUs:
             arrCurrent = AboutModel.addAboutData()
-            setLeftAlignedTitleWithBack("About Us",
-                                        target: self,
-                                        action: #selector(btnBackTapped))
-            setCartButton(target: self,
-                          action: #selector(btnCartTapped))
+            setLeftAlignedTitleWithBack("About Us", target: self, action: #selector(backButtonTapped))
+            setCartButton(target: self, action: #selector(cartAboutUsTapped))
         }
         
         tblMoreOpions.register(UINib(nibName: "AboutUsTableViewCell", bundle: nil), forCellReuseIdentifier: "AboutUsTableViewCell")
     }
     
-    @objc func btnBackTapped() {
+    @objc func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func btnCartTapped() {
-        self.navigationController?.popViewController(animated: true)
+    @objc func cartPaymentTapped() {
+        
+    }
+    
+    @objc func cartMyOrdersTapped() {
+        
+    }
+    
+    @objc func cartNotificationsTapped() {
+        
+    }
+    
+    @objc func cartInboxTapped() {
+        
+    }
+    
+    @objc func cartAboutUsTapped() {
+        
     }
 }
