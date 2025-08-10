@@ -1,18 +1,48 @@
 import Foundation
 import UIKit
 
-extension DessertsViewController: UITableViewDelegate {
-}
+extension DessertsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
+        -> Int
+    {
+        return arrProducts.count
+    }
 
-extension DessertsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrDessert.count
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+        -> UITableViewCell
+    {
+        let cell =
+            tableView.dequeueReusableCell(
+                withIdentifier: "DessertsTableViewCell",
+                for: indexPath
+            ) as! DessertsTableViewCell
+
+        cell.selectionStyle = .none
+
+        cell.dessertConfigureCell(dessert: arrProducts[indexPath.row])
+
+        return cell
+
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: DessertsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "DessertsTableViewCell", for: indexPath) as! DessertsTableViewCell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
+
+        switch indexPath.row{
+        case 0:
+            if let productvc = storyboard.instantiateViewController(
+                withIdentifier: "ProductDetailViewController"
+            ) as? ProductDetailViewController {
+                self.navigationController?.pushViewController(
+                    productvc,
+                    animated: true
+                )
+            }
+        default:
+            break;
+        }
+            
         
-        cell.dessertConfigureCell(dessert: arrDessert[indexPath.row])
-        return cell
     }
+
 }

@@ -4,6 +4,7 @@ class MenuTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imgCategory: UIImageView!
     @IBOutlet weak var lblCategoryTitle: UILabel!
+    @IBOutlet weak var imgArrow: UIImageView!
     @IBOutlet weak var lblItems: UILabel!
     @IBOutlet weak var viewMainMenu: UIView!
     

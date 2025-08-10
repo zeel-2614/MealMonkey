@@ -5,7 +5,21 @@ class DessertsViewController: UIViewController {
     @IBOutlet weak var txtSearchDesserts: UITextField!
     @IBOutlet weak var tblDesserts: UITableView!
     
-    var arrDessert: [DessertsModel] = DessertsModel.addDesserts()
+    var selectedProductType: ProductType = .Desserts
+    
+    var arrProductData:[ProductModel] = ProductModel.addProductData()
+
+    var arrProducts: [ProductModel] {
+        switch selectedProductType {
+        case .food:
+            return arrProductData.filter { $0.objProductType == .food }
+        case .Desserts:
+            return arrProductData.filter { $0.objProductType == .Desserts }
+        case .Beverages:
+            return arrProductData.filter { $0.objProductType == .Beverages }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -13,10 +27,35 @@ class DessertsViewController: UIViewController {
         
         setPadding(textfield: [txtSearchDesserts])
         
-        setLeftAlignedTitleWithBack("Desserts", target: self, action: #selector(dessertBackBtn))
         setCartButton(target: self, action: #selector(btnCartTapped))
         
+        tblDesserts.showsVerticalScrollIndicator = false
+        
         tblDesserts.register(UINib(nibName: "DessertsTableViewCell", bundle: nil), forCellReuseIdentifier: "DessertsTableViewCell")
+        
+        switch selectedProductType {
+        case .food:
+            setLeftAlignedTitleWithBack(
+                "Food",
+                target: self,
+                action: #selector(dessertBackBtn)
+            )
+
+        case .Beverages:
+            setLeftAlignedTitleWithBack(
+                "Beverages",
+                target: self,
+                action: #selector(dessertBackBtn)
+            )
+
+        case .Desserts:
+            setLeftAlignedTitleWithBack(
+                "Desserts",
+                target: self,
+                action: #selector(dessertBackBtn)
+            )
+
+        }
     }
     
     @objc func dessertBackBtn() {
