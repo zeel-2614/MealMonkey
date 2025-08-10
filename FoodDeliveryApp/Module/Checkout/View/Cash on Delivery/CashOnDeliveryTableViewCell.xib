@@ -11,58 +11,74 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="102" id="KGk-i7-Jjw" customClass="CashOnDeliveryTableViewCell" customModule="FoodDeliveryApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="117" id="anz-ce-6ud" customClass="CashOnDeliveryTableViewCell" customModule="FoodDeliveryApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="anz-ce-6ud" id="hkX-Jw-LeF">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJE-oQ-sAb">
-                        <rect key="frame" x="20" y="10" width="280" height="43"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jx2-wv-73n">
+                        <rect key="frame" x="0.0" y="6.6666666666666643" width="375" height="104"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   Cash on delivery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aew-hk-41U">
-                                <rect key="frame" x="0.0" y="0.0" width="230.33333333333334" height="43"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                <color key="textColor" red="0.1764705882" green="0.1764705882" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Phq-kK-bfJ">
-                                <rect key="frame" x="230.33333333333334" y="0.0" width="49.666666666666657" height="43"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="circle" catalog="system">
-                                    <color key="baseForegroundColor" name="ButtonBackgroundColor"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="btnSelectClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="i7E-Cr-yWp"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="6.2599999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="PyJ-Qo-nLg">
+                                <rect key="frame" x="21" y="14" width="340" height="76"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Cash on delivery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emk-AW-SBO">
+                                        <rect key="frame" x="0.0" y="0.0" width="314" height="76"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
+                                        <color key="textColor" name="LabelPrimaryColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tu6-qK-R7n">
+                                        <rect key="frame" x="320.33333333333331" y="0.0" width="19.666666666666686" height="76"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
+                                        <color key="tintColor" name="ButtonBackgroundColor"/>
+                                        <state key="normal" image="circle" catalog="system">
+                                            <color key="titleColor" name="ButtonBackgroundColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnSelectClick:" destination="anz-ce-6ud" eventType="touchUpInside" id="bBR-3g-seY"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="cardCellBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="43" id="2xC-bi-bDh"/>
+                            <constraint firstItem="PyJ-Qo-nLg" firstAttribute="top" secondItem="jx2-wv-73n" secondAttribute="top" constant="14" id="5Qg-So-G7z"/>
+                            <constraint firstItem="PyJ-Qo-nLg" firstAttribute="leading" secondItem="jx2-wv-73n" secondAttribute="leading" constant="21" id="JY1-Z3-Mpz"/>
+                            <constraint firstAttribute="bottom" secondItem="PyJ-Qo-nLg" secondAttribute="bottom" constant="14" id="NfU-XL-gsh"/>
+                            <constraint firstAttribute="trailing" secondItem="PyJ-Qo-nLg" secondAttribute="trailing" constant="14" id="o1b-0W-sbR"/>
                         </constraints>
-                    </stackView>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="fJE-oQ-sAb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Ayu-Qq-0sv"/>
-                    <constraint firstAttribute="trailing" secondItem="fJE-oQ-sAb" secondAttribute="trailing" constant="20" id="lUP-gD-dWG"/>
-                    <constraint firstAttribute="bottom" secondItem="fJE-oQ-sAb" secondAttribute="bottom" id="rwP-4N-d4g"/>
-                    <constraint firstItem="fJE-oQ-sAb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="seR-Ca-dFx"/>
+                    <constraint firstItem="jx2-wv-73n" firstAttribute="leading" secondItem="hkX-Jw-LeF" secondAttribute="leading" id="F9w-hl-QhX"/>
+                    <constraint firstAttribute="bottom" secondItem="jx2-wv-73n" secondAttribute="bottom" constant="6.5" id="QTW-6v-uwq"/>
+                    <constraint firstItem="jx2-wv-73n" firstAttribute="top" secondItem="hkX-Jw-LeF" secondAttribute="top" constant="6.5" id="Voc-kx-dxB"/>
+                    <constraint firstAttribute="trailing" secondItem="jx2-wv-73n" secondAttribute="trailing" id="ydG-eP-ZVE"/>
                 </constraints>
             </tableViewCellContentView>
-            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <viewLayoutGuide key="safeArea" id="FUG-Xg-8kq"/>
             <connections>
-                <outlet property="btnSelect" destination="Phq-kK-bfJ" id="0UY-kv-XzP"/>
-                <outlet property="stackView" destination="fJE-oQ-sAb" id="A0y-i9-dGX"/>
+                <outlet property="btnSelect" destination="tu6-qK-R7n" id="2Ra-B7-yc7"/>
+                <outlet property="stackView" destination="PyJ-Qo-nLg" id="6gr-TF-8JP"/>
+                <outlet property="viewCOD" destination="jx2-wv-73n" id="g7w-y1-TJW"/>
             </connections>
-            <point key="canvasLocation" x="62.595419847328245" y="71.126760563380287"/>
+            <point key="canvasLocation" x="89.312977099236633" y="46.126760563380287"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="circle" catalog="system" width="128" height="123"/>
         <namedColor name="ButtonBackgroundColor">
             <color red="0.9882352941176471" green="0.37647058823529411" blue="0.066666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="LabelPrimaryColor">
+            <color red="0.29019607843137257" green="0.29411764705882354" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="cardCellBackgroundColor">
+            <color red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

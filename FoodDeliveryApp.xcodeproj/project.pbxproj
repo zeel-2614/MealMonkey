@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1F15EFF92E48997400E9D6EB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F15EFF82E48997400E9D6EB /* MapKit.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		1F15EFF82E48997400E9D6EB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		1F7A3DEE2E3B986500D40DA2 /* FoodDeliveryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodDeliveryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -36,16 +41,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F15EFF92E48997400E9D6EB /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F15EFF72E48997400E9D6EB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1F15EFF82E48997400E9D6EB /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1F7A3DE52E3B986500D40DA2 = {
 			isa = PBXGroup;
 			children = (
 				1F7A3DF02E3B986500D40DA2 /* FoodDeliveryApp */,
+				1F15EFF72E48997400E9D6EB /* Frameworks */,
 				1F7A3DEF2E3B986500D40DA2 /* Products */,
 			);
 			sourceTree = "<group>";

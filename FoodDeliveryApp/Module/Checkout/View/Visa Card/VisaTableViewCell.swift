@@ -9,14 +9,15 @@ import UIKit
 
 class VisaTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var lblCardNo: UILabel!
     @IBOutlet weak var btnSelect: UIButton!
-    @IBOutlet weak var stackViewVisa: UIStackView!
+    @IBOutlet weak var lblCardNo: UILabel!
+    @IBOutlet weak var viewVisa: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        stackViewVisa.layer.borderColor = UIColor(red: 112/255, green: 112/255, blue: 112/255, alpha: 1.0).cgColor
-        stackViewVisa.layer.borderWidth = 1.0
-        stackViewVisa.layer.cornerRadius = 10
+//        stackViewVisa.layer.borderColor = UIColor(red: 112/255, green: 112/255, blue: 112/255, alpha: 1.0).cgColor
+//        stackViewVisa.layer.borderWidth = 1.0
+//        stackViewVisa.layer.cornerRadius = 10
+        viewStyle.viewStyle(cornerRadius: 6, borderWidth: 1, borderColor: .labelPrimary, textField: [viewVisa])
         // Initialization code
     }
 

@@ -8,139 +8,141 @@
 import UIKit
 
 class CheckoutViewController: UIViewController {
-
     
+    
+    @IBOutlet weak var btnCross: UIButton!
+    
+    @IBOutlet weak var btnTrackYourOrder: UIButton!
+    @IBOutlet weak var btnThankYouCross: UIButton!
+    @IBOutlet weak var viewThankYou2: UIView!
+    @IBOutlet weak var viewThankYou: UIView!
+    @IBOutlet weak var txtSecurityCode: UITextField!
+    @IBOutlet weak var txtCardNumber: UITextField!
+    @IBOutlet weak var btnEnterCard: UIButton!
+    @IBOutlet weak var txtLastName: UITextField!
+    @IBOutlet weak var txtExpiryMonth: UITextField!
+    @IBOutlet weak var txtExpiryYear: UITextField!
+    @IBOutlet weak var txtFirstName: UITextField!
+    @IBOutlet weak var viewAddCard2: UIView!
+    @IBOutlet weak var viewEnterCard: UIView!
+    @IBOutlet weak var viewTransparent: UIView!
+    @IBOutlet weak var tblCheckout: UITableView!
+    @IBOutlet weak var btnChangeAddress: UIButton!
+    @IBOutlet weak var btnAddCard: UIButton!
+    @IBOutlet weak var btnSendOrder: UIButton!
     var arrCards : [String] = ["Card -1 ", "card -2 ", "card -3 "]
     
-    @IBOutlet weak var thankyouViewScroll: UIView!
-    @IBOutlet weak var addNewCardView: UIView!
-    @IBOutlet weak var viewScroll: UIView!
-    @IBOutlet weak var txtLastName: UITextField!
-    @IBOutlet weak var btnBackToHome: UIButton!
-    @IBOutlet weak var txtExpiryMonth: UITextField!
     
-    @IBOutlet weak var txtCardNumber: UITextField!
-    @IBOutlet weak var txtFirstName: UITextField!
-    @IBOutlet weak var txtSecurityCode: UITextField!
-    @IBOutlet weak var btnCardAdded: UIButton!
-    @IBOutlet weak var txtExpiryYear: UITextField!
-    @IBOutlet weak var btnTrackOrder: UIButton!
-    @IBOutlet weak var lblSubTotal: UILabel!
-    @IBOutlet weak var btnClose: UIButton!
-    @IBOutlet weak var thankYouPageView: UIView!
-    @IBOutlet weak var btnAddCard: UIButton!
-    @IBOutlet weak var lblDeliveryCost: UILabel!
-    @IBOutlet weak var lblTotal: UILabel!
-    @IBOutlet weak var lblDiscount: UILabel!
-    @IBOutlet weak var tblCheckout: UITableView!
-    @IBOutlet weak var btnSendOrder: UIButton!
-    @IBOutlet weak var btnChangeAddress: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        thankYouPageView.isHidden = true
-        addNewCardView.isHidden = true
-
-        // Do any additional setup after loading the view.
+        setLeftAlignedTitleWithBack("Checkout",
+                                    target: self,
+                                    action: #selector(checkoutBackBtn))
+        
+        viewEnterCard.isHidden = true
+        viewTransparent.isHidden = true
+        viewThankYou.isHidden = true
+        
+        viewAddCard2.layer.cornerRadius = 20
+        viewAddCard2.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        viewAddCard2.layer.shadowColor = UIColor.black.cgColor
+        viewAddCard2.layer.shadowOpacity = 0.2
+        viewAddCard2.layer.shadowOffset = CGSize(width: 0, height: -2)
+        viewAddCard2.layer.shadowRadius = 10
+        
+        viewThankYou2.layer.cornerRadius = 20
+        viewThankYou2.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        viewThankYou2.layer.shadowColor = UIColor.black.cgColor
+        viewThankYou2.layer.shadowOpacity = 0.2
+        viewThankYou2.layer.shadowOffset = CGSize(width: 0, height: -2)
+        viewThankYou2.layer.shadowRadius = 10
+        
+        viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .systemGray, textField: [txtCardNumber, txtExpiryMonth, txtExpiryYear, txtSecurityCode, txtFirstName, txtLastName, btnEnterCard, btnTrackYourOrder])
+        
+        setPadding(textfield: [txtCardNumber, txtFirstName, txtLastName, txtExpiryYear, txtExpiryMonth, txtSecurityCode])
+        
+        viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .systemGray, textField: [btnSendOrder])
+        
+        tblCheckout.backgroundColor = .clear
+        tblCheckout.showsVerticalScrollIndicator = false
         tblCheckout.register(UINib(nibName: "CashOnDeliveryTableViewCell", bundle: nil), forCellReuseIdentifier: "CashOnDeliveryTableViewCell")
-        
         tblCheckout.register(UINib(nibName: "GmailTableViewCell", bundle: nil), forCellReuseIdentifier: "GmailTableViewCell")
-        
-        tblCheckout.register(UINib(nibName: "VisaTableViewCell", bundle: nil), forCellReuseIdentifier: "VisaTableViewCell")
-        
-        self.navigationController?.isNavigationBarHidden = false
-        setLeftAlignedTitleWithBack("Checkout", target: self, action: #selector(checkoutBackBtn))
-        // Do any additional setup after loading the view.
-        viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .gray, textField: [btnSendOrder, btnTrackOrder, btnCardAdded, txtLastName, txtFirstName, txtExpiryYear,txtCardNumber, txtExpiryMonth, txtSecurityCode])
-        
-        setPadding(textfield: [txtLastName, txtFirstName,txtCardNumber, txtExpiryYear, txtExpiryMonth, txtSecurityCode])
-        
-        addNewCardView.layer.cornerRadius = 20
-        addNewCardView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        addNewCardView.layer.shadowColor = UIColor.black.cgColor
-        addNewCardView.layer.shadowOpacity = 0.2
-        addNewCardView.layer.shadowOffset = CGSize(width: 0, height: -2)
-        addNewCardView.layer.shadowRadius = 10
-        
-        viewScroll.layer.cornerRadius = 20
-        viewScroll.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        viewScroll.layer.shadowColor = UIColor.black.cgColor
-        viewScroll.layer.shadowOpacity = 0.2
-        viewScroll.layer.shadowOffset = CGSize(width: 0, height: -2)
-        viewScroll.layer.shadowRadius = 10
-        
-        thankYouPageView.layer.cornerRadius = 20
-        thankYouPageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        thankYouPageView.layer.shadowColor = UIColor.black.cgColor
-        thankYouPageView.layer.shadowOpacity = 0.2
-        thankYouPageView.layer.shadowOffset = CGSize(width: 0, height: -2)
-        thankYouPageView.layer.shadowRadius = 10
-        
-        thankyouViewScroll.layer.cornerRadius = 20
-        thankyouViewScroll.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        thankyouViewScroll.layer.shadowColor = UIColor.black.cgColor
-        thankyouViewScroll.layer.shadowOpacity = 0.2
-        thankyouViewScroll.layer.shadowOffset = CGSize(width: 0, height: -2)
-        thankyouViewScroll.layer.shadowRadius = 10
-        
-    }
-    
-    func setPadding(textfield: [UITextField]){
-        for item in textfield {
-            item.setPadding(left: 34, right: 34)
-        }
-    }
+        tblCheckout.register(UINib(nibName: "VisaTableViewCell", bundle: nil), forCellReuseIdentifier: "VisaTableViewCell")    }
     
     @objc func checkoutBackBtn() {
         self.navigationController?.popViewController(animated: true)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setPadding(textfield: [UITextField]){
+        
+        for item in textfield {
+            item.setPadding(left: 34, right: 34)
+        }
     }
-    */
 
-    @IBAction func btnSendOrderClick(_ sender: Any) {
-        thankYouPageView.isHidden = false
-    }
-    
     @IBAction func btnChangeAddressClick(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "MoreStoryboard", bundle: nil)
+        if let VC = storyboard.instantiateViewController(withIdentifier: "AddressViewController") as? AddressViewController{
+            self.navigationController?.pushViewController(VC, animated: true)
+        }
     }
     
     @IBAction func btnAddCardClick(_ sender: Any) {
-        addNewCardView.isHidden = false
+        viewEnterCard.isHidden = false
+        viewTransparent.isHidden = false
         UIView.animate(withDuration: 0.3) {
-            self.addNewCardView.transform = .identity
-            self.tabBarController?.tabBar.isHidden = true
+            self.viewEnterCard.transform = .identity
+        }
+        setTabBar(hidden: true)
+    }
+    
+    @IBAction func btnSendOrderClick(_ sender: Any) {
+        viewThankYou.isHidden = false
+        viewTransparent.isHidden = false
+        UIView.animate(withDuration: 0.3) {
+            self.viewThankYou.transform = .identity
+        }
+        setTabBar(hidden: true)
+    }
+    
+    @IBAction func btnCrossClikc(_ sender: Any) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.viewEnterCard.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
+        }) { _ in
+            self.viewEnterCard.isHidden = true
+            self.viewTransparent.isHidden = true
+            self.setTabBar(hidden: false)
         }
     }
-    @IBAction func btnCloseClick(_ sender: Any) {
-        addNewCardView.isHidden = true
-        UIView.animate(
-            withDuration: 0.3,
-            animations: {
-                self.addNewCardView.transform = CGAffineTransform(
-                    translationX: 0,
-                    y: self.view.frame.height
-                )
+    
+    @IBAction func btnEnterCardClick(_ sender: Any) {
+    }
+    
+    @IBAction func btnThankYouCrossClick(_ sender: Any) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.viewThankYou.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
+        }) { _ in
+            self.viewThankYou.isHidden = true
+            self.viewTransparent.isHidden = true
+            self.setTabBar(hidden: false)
+        }
+    }
+    
+    func setTabBar(hidden: Bool, animated: Bool = true) {
+        guard let tabBar = self.tabBarController?.tabBar else { return }
+        
+        let frame = tabBar.frame
+        let offsetY = hidden ? UIScreen.main.bounds.height : UIScreen.main.bounds.height - frame.height
+        
+        if animated {
+            UIView.animate(withDuration: 0.3) {
+                tabBar.frame.origin.y = offsetY
             }
-        ) { _ in
-            self.addNewCardView.isHidden = true
+        } else {
+            tabBar.frame.origin.y = offsetY
         }
+    }
 
-    }
-    @IBAction func btnTrackOrderClick(_ sender: Any) {
-        
-    }
-    @IBAction func btnCardAddedClick(_ sender: Any) {
-        
-    }
-    @IBAction func btnBackToHomeClikc(_ sender: Any) {
-        
+    @IBAction func btnTrackYourOrderClick(_ sender: Any) {
     }
 }

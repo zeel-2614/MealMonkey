@@ -9,13 +9,15 @@ import UIKit
 
 class GmailTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var viewGmail: UIView!
     @IBOutlet weak var btnSelect: UIButton!
     @IBOutlet weak var stackViewGmail: UIStackView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        stackViewGmail.layer.borderColor = UIColor(red: 112/255, green: 112/255, blue: 112/255, alpha: 1.0).cgColor
-        stackViewGmail.layer.borderWidth = 1.0
-        stackViewGmail.layer.cornerRadius = 10
+//        stackViewGmail.layer.borderColor = UIColor(red: 112/255, green: 112/255, blue: 112/255, alpha: 1.0).cgColor
+//        stackViewGmail.layer.borderWidth = 1.0
+//        stackViewGmail.layer.cornerRadius = 10
+        viewStyle.viewStyle(cornerRadius: 6, borderWidth: 1, borderColor: .labelPrimary, textField: [viewGmail])
         // Initialization code
     }
 
