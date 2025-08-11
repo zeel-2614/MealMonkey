@@ -20,8 +20,6 @@ extension AddressViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: AddressTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AddressTableViewCell", for: indexPath) as! AddressTableViewCell
-        
-        //        cell.offerConfigureCell(offer: arrOffer[indexPath.row])
         return cell
     }
 }
@@ -52,7 +50,6 @@ extension AddressViewController: CLLocationManagerDelegate {
             }
         }
     }
-
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error getting location: \(error.localizedDescription)")
@@ -95,5 +92,4 @@ extension AddressViewController: MKMapViewDelegate {
         
         return annotationView
     }
-
 }

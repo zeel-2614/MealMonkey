@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="EoK-Bd-z1A" customClass="HomeCategoryCollectionViewCell" customModule="FoodDeliveryApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="247" height="207"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="247" height="207"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0lV-E6-QYr">
+                        <rect key="frame" x="0.0" y="0.0" width="247" height="207"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_1x_BeveragesMenu" translatesAutoresizingMaskIntoConstraints="NO" id="fpT-NU-pux">
+                                <rect key="frame" x="9" y="0.0" width="229" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="Txo-ve-Iec"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTY-9G-KAi">
+                                <rect key="frame" x="95" y="87" width="57" height="16.333333333333329"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="fpT-NU-pux" secondAttribute="trailing" constant="9" id="3p1-sW-qmh"/>
+                            <constraint firstItem="GTY-9G-KAi" firstAttribute="centerX" secondItem="fpT-NU-pux" secondAttribute="centerX" id="4tq-RW-CxC"/>
+                            <constraint firstItem="fpT-NU-pux" firstAttribute="top" secondItem="0lV-E6-QYr" secondAttribute="top" id="8fd-ne-tfK"/>
+                            <constraint firstItem="GTY-9G-KAi" firstAttribute="top" secondItem="fpT-NU-pux" secondAttribute="bottom" constant="7" id="eMh-eE-2PV"/>
+                            <constraint firstItem="fpT-NU-pux" firstAttribute="leading" secondItem="0lV-E6-QYr" secondAttribute="leading" constant="9" id="gEl-Yq-O42"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="74q-W4-iHz"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="0lV-E6-QYr" secondAttribute="trailing" id="2mn-P2-vc0"/>
+                <constraint firstItem="0lV-E6-QYr" firstAttribute="top" secondItem="EoK-Bd-z1A" secondAttribute="top" id="TyF-Zi-zdF"/>
+                <constraint firstAttribute="bottom" secondItem="0lV-E6-QYr" secondAttribute="bottom" id="UNu-N0-7tS"/>
+                <constraint firstItem="0lV-E6-QYr" firstAttribute="leading" secondItem="EoK-Bd-z1A" secondAttribute="leading" id="z2t-wo-iz3"/>
+            </constraints>
+            <size key="customSize" width="247" height="207"/>
+            <connections>
+                <outlet property="imgCategory" destination="fpT-NU-pux" id="YBN-um-v2e"/>
+                <outlet property="lblCategory" destination="GTY-9G-KAi" id="3F3-LF-mAu"/>
+            </connections>
+            <point key="canvasLocation" x="-136.64122137404578" y="36.267605633802816"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="ic_1x_BeveragesMenu" width="76" height="76"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

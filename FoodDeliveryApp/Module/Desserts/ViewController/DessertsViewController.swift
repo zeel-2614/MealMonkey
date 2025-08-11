@@ -1,14 +1,13 @@
 import UIKit
 
 class DessertsViewController: UIViewController {
-
+    
     @IBOutlet weak var txtSearchDesserts: UITextField!
     @IBOutlet weak var tblDesserts: UITableView!
     
     var selectedProductType: ProductType = .Desserts
     
     var arrProductData:[ProductModel] = ProductModel.addProductData()
-
     var arrProducts: [ProductModel] {
         switch selectedProductType {
         case .food:
@@ -40,21 +39,21 @@ class DessertsViewController: UIViewController {
                 target: self,
                 action: #selector(dessertBackBtn)
             )
-
+            
         case .Beverages:
             setLeftAlignedTitleWithBack(
                 "Beverages",
                 target: self,
                 action: #selector(dessertBackBtn)
             )
-
+            
         case .Desserts:
             setLeftAlignedTitleWithBack(
                 "Desserts",
                 target: self,
                 action: #selector(dessertBackBtn)
             )
-
+            
         }
     }
     

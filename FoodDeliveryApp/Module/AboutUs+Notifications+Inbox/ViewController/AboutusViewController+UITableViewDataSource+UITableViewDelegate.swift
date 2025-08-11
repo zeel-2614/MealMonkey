@@ -1,10 +1,7 @@
 import Foundation
 import UIKit
 
-extension AboutUsViewController: UITableViewDelegate {
-}
-
-extension AboutUsViewController: UITableViewDataSource {
+extension AboutUsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return arrCurrent.count
@@ -13,7 +10,6 @@ extension AboutUsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: AboutUsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AboutUsTableViewCell", for: indexPath) as! AboutUsTableViewCell
-        
         switch objPageType {
         case .AboutUs:
             cell.configureCellAboutUs(details: arrCurrent[indexPath.row])
@@ -24,7 +20,6 @@ extension AboutUsViewController: UITableViewDataSource {
         default:
             return UITableViewCell()
         }
-        
         return cell
     }
 }

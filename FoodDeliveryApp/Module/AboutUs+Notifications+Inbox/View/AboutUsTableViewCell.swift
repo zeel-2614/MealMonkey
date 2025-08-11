@@ -19,7 +19,6 @@ class AboutUsTableViewCell: UITableViewCell {
     }
     
     func configureCellAboutUs(details: AboutModel){
-        
         lblText.text = details.strText
         lblText2.isHidden = true
         lblTimezone.isHidden = true
@@ -29,7 +28,6 @@ class AboutUsTableViewCell: UITableViewCell {
     }
     
     func configureCellNotifications(details: AboutModel){
-        
         lblText.text = details.strText
         lblText2.text = details.strTimezone
         lblTimezone.isHidden = true
@@ -38,7 +36,6 @@ class AboutUsTableViewCell: UITableViewCell {
     }
      
     func configureCellInbox(details: AboutModel){
-        
         lblText.text = details.strText
         lblText2.text = details.strText2
         lblTimezone.text = details.strRightSideText
