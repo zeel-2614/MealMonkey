@@ -19,7 +19,6 @@ extension NextPageViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSizeMake(collectionView.frame.size.width, 313.26)
     }
-    
 }
 
 extension NextPageViewController: UIScrollViewDelegate{
@@ -32,6 +31,6 @@ extension NextPageViewController: UIScrollViewDelegate{
         let index = Int(scrollView.contentOffset.x / scrollView.frame.width)
         updateLabels(for: index)
     }
-
+    
     
 }

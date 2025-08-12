@@ -1,12 +1,12 @@
 import Foundation
 
 class AboutModel {
-
+    
     var strText: String?
     var strTimezone: String?
     var strRightSideText: String?
     var strText2: String?
-
+    
     init(
         strText: String? = nil,
         strTimezone: String? = nil,
@@ -18,7 +18,7 @@ class AboutModel {
         self.strRightSideText = strRightSideText
         self.strText2 = strText2
     }
-
+    
     class func addAboutData() -> [AboutModel] {
         
         return [
@@ -31,7 +31,7 @@ class AboutModel {
             AboutModel(strText: "Sustainability matters to us. We support eco-friendly business practices and work with partners who share our values to reduce our environmental impact.")
         ]
     }
-
+    
     class func addNotificationData() -> [AboutModel] {
         
         return [
@@ -67,7 +67,7 @@ class AboutModel {
                        strTimezone: "1w ago")
         ]
     }
-
+    
     class func addInboxData() -> [AboutModel] {
         
         return [

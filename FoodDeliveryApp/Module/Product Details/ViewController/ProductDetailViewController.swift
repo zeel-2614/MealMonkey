@@ -8,10 +8,11 @@
 import UIKit
 
 class ProductDetailViewController: UIViewController {
-
+    
     var selectedProduct: ProductModel?
     var currentQuantity: Int = 1
     
+    @IBOutlet weak var countView: UIView!
     @IBOutlet weak var btnCart: UIButton!
     @IBOutlet weak var lblLKR: UILabel!
     @IBOutlet weak var btnAddToCart: UIButton!
@@ -39,6 +40,7 @@ class ProductDetailViewController: UIViewController {
         viewStyle(cornerRadius: 4, borderWidth: 0, borderColor: .gray, textField: [stackPortion, stackIngredients])
         viewStyle(cornerRadius: 15, borderWidth: 0, borderColor: .gray, textField: [btnPlus, btnMinus])
         viewStyle(cornerRadius: 7.42, borderWidth: 0, borderColor: .gray, textField: [btnAddToCart])
+        viewStyle(cornerRadius: 15, borderWidth: 1, borderColor: .buttonBackground, textField: [countView])
         
         viewScroll.layer.cornerRadius = 20
         viewScroll.layer.maskedCorners = [
@@ -60,6 +62,9 @@ class ProductDetailViewController: UIViewController {
         productDetailView.layer.shadowOffset = CGSize(width: 0, height: -2)
         productDetailView.layer.shadowRadius = 10
         
+        setLeftAlignedTitleWithBack("Food Detail", target: self, action: #selector(detailBackBtnTapped))
+        setCartButton(target: self, action: #selector(cartBtnTapped))
+        
         configureUI()
         currentQuantity = 1
         
@@ -67,10 +72,21 @@ class ProductDetailViewController: UIViewController {
             lblTitle.text = product.strProductName
             lblDescription.text = product.strProductDescription
             lblPrice.text = "\(product.doubleProductPrice)"
-            lblRattings.text = "\(product.floatProductRating) ★"
+            lblRattings.text = "\(product.floatProductRating) Star Ratings"
             imgProduct.image = UIImage(named: product.strProductImage)
         }
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func detailBackBtnTapped() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func cartBtnTapped() {
+        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+            self.navigationController?.pushViewController(menuVC, animated: true)
+        }
     }
     
     func configureUI() {
@@ -87,7 +103,7 @@ class ProductDetailViewController: UIViewController {
         guard let product = selectedProduct else { return }
         let total = product.doubleProductPrice * Double(currentQuantity)
         lblPrice.text = "$\(String(format: "%.2f", product.doubleProductPrice))"
-        lblPrice.text = "$\(String(format: "%.2f", total))"
+        lblLKR.text = "$\(String(format: "%.2f", total))"
         lblCount.text = "\(currentQuantity)"
     }
     
@@ -130,13 +146,8 @@ class ProductDetailViewController: UIViewController {
     
     @IBAction func btnCartClick(_ sender: Any) {
         let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
-        if let carVc = storyboard.instantiateViewController(
-            withIdentifier: "CartViewController"
-        ) as? CartViewController {
-            self.navigationController?.pushViewController(
-                carVc,
-                animated: true
-            )
+        if let cartVc = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+            self.navigationController?.pushViewController(cartVc, animated: true)
         }
     }
 }

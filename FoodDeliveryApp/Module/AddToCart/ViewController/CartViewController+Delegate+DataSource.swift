@@ -21,7 +21,4 @@ extension CartViewController: UITableViewDelegate,UITableViewDataSource {
         }
         return cell
     }
-    
-
-    
 }

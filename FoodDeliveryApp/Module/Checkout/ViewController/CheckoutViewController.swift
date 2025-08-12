@@ -11,7 +11,6 @@ class CheckoutViewController: UIViewController {
     
     
     @IBOutlet weak var btnCross: UIButton!
-    
     @IBOutlet weak var btnTrackYourOrder: UIButton!
     @IBOutlet weak var btnThankYouCross: UIButton!
     @IBOutlet weak var viewThankYou2: UIView!
@@ -57,17 +56,16 @@ class CheckoutViewController: UIViewController {
         viewThankYou2.layer.shadowOffset = CGSize(width: 0, height: -2)
         viewThankYou2.layer.shadowRadius = 10
         
-        viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .systemGray, textField: [txtCardNumber, txtExpiryMonth, txtExpiryYear, txtSecurityCode, txtFirstName, txtLastName, btnEnterCard, btnTrackYourOrder])
+        viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .systemGray, textField: [txtCardNumber, txtExpiryMonth, txtExpiryYear, txtSecurityCode, txtFirstName, txtLastName, btnEnterCard, btnTrackYourOrder, btnSendOrder])
         
         setPadding(textfield: [txtCardNumber, txtFirstName, txtLastName, txtExpiryYear, txtExpiryMonth, txtSecurityCode])
-        
-        viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .systemGray, textField: [btnSendOrder])
         
         tblCheckout.backgroundColor = .clear
         tblCheckout.showsVerticalScrollIndicator = false
         tblCheckout.register(UINib(nibName: "CashOnDeliveryTableViewCell", bundle: nil), forCellReuseIdentifier: "CashOnDeliveryTableViewCell")
         tblCheckout.register(UINib(nibName: "GmailTableViewCell", bundle: nil), forCellReuseIdentifier: "GmailTableViewCell")
-        tblCheckout.register(UINib(nibName: "VisaTableViewCell", bundle: nil), forCellReuseIdentifier: "VisaTableViewCell")    }
+        tblCheckout.register(UINib(nibName: "VisaTableViewCell", bundle: nil), forCellReuseIdentifier: "VisaTableViewCell")
+    }
     
     @objc func checkoutBackBtn() {
         self.navigationController?.popViewController(animated: true)
@@ -79,7 +77,7 @@ class CheckoutViewController: UIViewController {
             item.setPadding(left: 34, right: 34)
         }
     }
-
+    
     @IBAction func btnChangeAddressClick(_ sender: Any) {
         let storyboard = UIStoryboard(name: "MoreStoryboard", bundle: nil)
         if let VC = storyboard.instantiateViewController(withIdentifier: "AddressViewController") as? AddressViewController{
@@ -142,7 +140,7 @@ class CheckoutViewController: UIViewController {
             tabBar.frame.origin.y = offsetY
         }
     }
-
+    
     @IBAction func btnTrackYourOrderClick(_ sender: Any) {
     }
 }

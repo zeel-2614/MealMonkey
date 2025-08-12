@@ -11,104 +11,33 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="386" id="JtP-5h-kvX" customClass="MyOrderTableViewCell" customModule="FoodDeliveryApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="386"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="249" id="JtP-5h-kvX" customClass="MyOrderTableViewCell" customModule="FoodDeliveryApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="249"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JtP-5h-kvX" id="hix-M8-Rwv">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="386"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="249"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ic_restaurantFood" translatesAutoresizingMaskIntoConstraints="NO" id="3mD-c9-iNe">
-                        <rect key="frame" x="21" y="32" width="80" height="80"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="80" id="Qsz-Yx-AL4"/>
-                            <constraint firstAttribute="width" constant="80" id="ukM-BO-Trg"/>
-                        </constraints>
-                    </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="mQr-vk-Em2">
-                        <rect key="frame" x="118" y="28.999999999999993" width="181" height="79.333333333333314"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQ0-gB-LQx">
-                                <rect key="frame" x="0.0" y="0.0" width="181" height="23.333333333333332"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="gNW-pl-IBh">
-                                <rect key="frame" x="0.0" y="28.333333333333336" width="181" height="14"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_starFill" translatesAutoresizingMaskIntoConstraints="NO" id="pZp-9l-5vA">
-                                        <rect key="frame" x="0.0" y="0.0" width="13" height="14"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="14" id="Tsh-AV-IrR"/>
-                                            <constraint firstAttribute="width" constant="13" id="e9E-Vs-LLa"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hW-Aq-y2j">
-                                        <rect key="frame" x="17" y="0.0" width="27" height="14"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l41-Xf-WDc">
-                                        <rect key="frame" x="48" y="0.0" width="133" height="14"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="XDh-Pc-4PE">
-                                <rect key="frame" x="0.0" y="47.333333333333329" width="181" height="14"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPs-LC-bEV">
-                                        <rect key="frame" x="0.0" y="0.0" width="88.666666666666671" height="14"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Wl-z6-xoT">
-                                        <rect key="frame" x="92.666666666666657" y="0.0" width="88.333333333333343" height="14"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="kF6-0j-aIL">
-                                <rect key="frame" x="0.0" y="66.333333333333329" width="181" height="13"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ic_location-pin" translatesAutoresizingMaskIntoConstraints="NO" id="E55-Ge-lR9">
-                                        <rect key="frame" x="0.0" y="0.0" width="10" height="13"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="10" id="12i-s5-aXP"/>
-                                            <constraint firstAttribute="height" constant="13" id="Qhi-0d-Gwk"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74f-9V-bsT">
-                                        <rect key="frame" x="14" y="0.0" width="167" height="13"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                    </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16.5" translatesAutoresizingMaskIntoConstraints="NO" id="T2e-9P-VGK">
-                        <rect key="frame" x="21" y="157.33333333333331" width="278" height="212.33333333333331"/>
+                        <rect key="frame" x="21" y="10" width="278" height="33.333333333333336"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aVe-7W-bq7">
-                                <rect key="frame" x="0.0" y="0.0" width="278" height="15"/>
+                                <rect key="frame" x="0.0" y="0.0" width="278" height="15.666666666666666"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Beef Burger x1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mem-c8-aTn">
-                                        <rect key="frame" x="0.0" y="0.0" width="256" height="15"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="Beef Burger x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mem-c8-aTn">
+                                        <rect key="frame" x="0.0" y="0.0" width="79.666666666666671" height="15.666666666666666"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Qty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61A-CF-qUY">
+                                        <rect key="frame" x="79.666666666666671" y="0.0" width="176.33333333333331" height="15.666666666666666"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UQZ-SA-XTV">
-                                        <rect key="frame" x="256" y="0.0" width="22" height="15"/>
+                                        <rect key="frame" x="256" y="0.0" width="22" height="15.666666666666666"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -116,124 +45,26 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KZb-E9-uYX">
-                                <rect key="frame" x="0.0" y="31.666666666666657" width="278" height="1"/>
+                                <rect key="frame" x="0.0" y="32.333333333333336" width="278" height="1"/>
                                 <color key="backgroundColor" name="cardBgColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Q1T-8o-afr"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsn-tl-mqI">
-                                <rect key="frame" x="0.0" y="49.333333333333314" width="278" height="15"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Classic Burger x1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eZ-uz-T69">
-                                        <rect key="frame" x="0.0" y="0.0" width="256" height="15"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$14" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXx-jJ-psM">
-                                        <rect key="frame" x="256" y="0.0" width="22" height="15"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOg-3x-DGZ">
-                                <rect key="frame" x="0.0" y="81" width="278" height="1"/>
-                                <color key="backgroundColor" name="cardBgColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="XJz-xd-896"/>
-                                </constraints>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gdW-c6-Xvj">
-                                <rect key="frame" x="0.0" y="98.666666666666657" width="278" height="15"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cheese Chicken Burger x1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sfk-IS-S8H">
-                                        <rect key="frame" x="0.0" y="0.0" width="246" height="15"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJH-Zn-Wor">
-                                        <rect key="frame" x="246" y="0.0" width="32" height="15"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6sV-Nv-RP9">
-                                <rect key="frame" x="0.0" y="130.33333333333334" width="278" height="1"/>
-                                <color key="backgroundColor" name="cardBgColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="MRw-c3-lNK"/>
-                                </constraints>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayP-a4-EXk">
-                                <rect key="frame" x="0.0" y="147.99999999999997" width="278" height="15"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chicken Legs Basket x1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paV-1a-crr">
-                                        <rect key="frame" x="0.0" y="0.0" width="256" height="15"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="$15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVn-iO-d5c">
-                                        <rect key="frame" x="256" y="0.0" width="22" height="15"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jke-BB-8lB">
-                                <rect key="frame" x="0.0" y="179.66666666666666" width="278" height="1"/>
-                                <color key="backgroundColor" name="cardBgColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="2Vk-ve-Up6"/>
-                                </constraints>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4X5-eT-kIH">
-                                <rect key="frame" x="0.0" y="197.33333333333334" width="278" height="15"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="French Fries Large x1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwI-Sx-zLT">
-                                        <rect key="frame" x="0.0" y="0.0" width="263.33333333333331" height="15"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="$6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Z8-Mm-fdf">
-                                        <rect key="frame" x="263.33333333333331" y="0.0" width="14.666666666666686" height="15"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
                         </subviews>
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="T2e-9P-VGK" secondAttribute="bottom" constant="16.5" id="0md-g5-k1D"/>
-                    <constraint firstItem="3mD-c9-iNe" firstAttribute="top" secondItem="hix-M8-Rwv" secondAttribute="top" constant="32" id="2cp-ak-cJb"/>
-                    <constraint firstItem="mQr-vk-Em2" firstAttribute="top" secondItem="hix-M8-Rwv" secondAttribute="top" constant="29" id="77q-ai-CWY"/>
-                    <constraint firstItem="3mD-c9-iNe" firstAttribute="leading" secondItem="hix-M8-Rwv" secondAttribute="leading" constant="21" id="7OS-aO-fMl"/>
-                    <constraint firstItem="T2e-9P-VGK" firstAttribute="leading" secondItem="hix-M8-Rwv" secondAttribute="leading" constant="21" id="CgA-Dg-UNJ"/>
-                    <constraint firstAttribute="trailing" secondItem="T2e-9P-VGK" secondAttribute="trailing" constant="21" id="Nm5-rR-lfC"/>
-                    <constraint firstAttribute="trailing" secondItem="mQr-vk-Em2" secondAttribute="trailing" constant="21" id="aJj-VW-70C"/>
-                    <constraint firstItem="mQr-vk-Em2" firstAttribute="leading" secondItem="3mD-c9-iNe" secondAttribute="trailing" constant="17" id="cd4-Hw-JFW"/>
-                    <constraint firstItem="T2e-9P-VGK" firstAttribute="top" secondItem="mQr-vk-Em2" secondAttribute="bottom" constant="49" id="ub5-aA-05x"/>
+                    <constraint firstItem="T2e-9P-VGK" firstAttribute="top" secondItem="hix-M8-Rwv" secondAttribute="top" constant="10" id="Vw8-5K-A9N"/>
+                    <constraint firstAttribute="trailing" secondItem="T2e-9P-VGK" secondAttribute="trailing" constant="21" id="kOW-Zk-ct4"/>
+                    <constraint firstItem="T2e-9P-VGK" firstAttribute="leading" secondItem="hix-M8-Rwv" secondAttribute="leading" constant="21" id="kzW-5F-UnW"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="TIN-Yk-Qx9"/>
-            <point key="canvasLocation" x="-238.1679389312977" y="146.47887323943664"/>
+            <point key="canvasLocation" x="-238.1679389312977" y="97.535211267605632"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Ic_location-pin" width="11" height="15"/>
-        <image name="Ic_restaurantFood" width="80" height="81"/>
-        <image name="ic_starFill" width="15.666666984558105" height="15"/>
         <namedColor name="cardBgColor">
             <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

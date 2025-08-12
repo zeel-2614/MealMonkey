@@ -1,7 +1,7 @@
 import UIKit
 
 class OffersViewController: UIViewController {
-
+    
     @IBOutlet weak var btnCheckOffer: UIButton!
     @IBOutlet weak var tblOffers: UITableView!
     
@@ -19,5 +19,9 @@ class OffersViewController: UIViewController {
     }
     
     @objc func btnCartTapped() {
+        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+            self.navigationController?.pushViewController(menuVC, animated: true)
+        }
     }
 }

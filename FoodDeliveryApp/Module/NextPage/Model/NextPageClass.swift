@@ -24,5 +24,4 @@ class Feature: NSObject{
                 title: "Live Tracking",
                 subTitle: "Real time tracking of your food on the app once you placed the order")
     ]
-
 }

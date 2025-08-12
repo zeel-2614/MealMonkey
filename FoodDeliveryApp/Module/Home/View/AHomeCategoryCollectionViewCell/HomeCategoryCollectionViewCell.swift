@@ -1,7 +1,7 @@
 import UIKit
 
 class HomeCategoryCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var imgCategory: UIImageView!
     @IBOutlet weak var lblCategory: UILabel!
     override func awakeFromNib() {

@@ -18,7 +18,8 @@ class ProductModel {
     var intTotalNumberOfRatings: Int = 0
     var objProductCategory: ProductCategory = .Gujarati
     var objProductType: ProductType = .food
-
+    var orderNumber: Int?
+    
     init(
         intId: Int,
         strProductName: String,
@@ -42,7 +43,7 @@ class ProductModel {
         self.objProductCategory = objProductCategory
         self.objProductType = objProductType
     }
-
+    
     class func addProductData() -> [ProductModel] {
         return [
             ProductModel(
@@ -105,7 +106,7 @@ class ProductModel {
                 objProductCategory: .SouthIndian,
                 objProductType: .food
             ),
-
+            
             ProductModel(
                 intId: 6,
                 strProductName: "Payasam",
@@ -166,7 +167,7 @@ class ProductModel {
                 objProductCategory: .SouthIndian,
                 objProductType: .Desserts
             ),
-
+            
             ProductModel(
                 intId: 11,
                 strProductName: "Filter Coffee",
@@ -227,7 +228,7 @@ class ProductModel {
                 objProductCategory: .SouthIndian,
                 objProductType: .food
             ),
-
+            
             ProductModel(
                 intId: 16,
                 strProductName: "Hakka Noodles",
@@ -288,7 +289,7 @@ class ProductModel {
                 objProductCategory: .Chinese,
                 objProductType: .food
             ),
-
+            
             // Chinese Desserts
             ProductModel(
                 intId: 21,
@@ -465,7 +466,7 @@ class ProductModel {
                 objProductCategory: .Punjabi,
                 objProductType: .food
             ),
-
+            
             ProductModel(
                 intId: 36,
                 strProductName: "Gulab Jamun",
@@ -521,7 +522,7 @@ class ProductModel {
                 objProductCategory: .Punjabi,
                 objProductType: .Desserts
             ),
-
+            
             ProductModel(
                 intId: 41,
                 strProductName: "Lassi",
@@ -577,7 +578,7 @@ class ProductModel {
                 objProductCategory: .Punjabi,
                 objProductType: .Beverages
             ),
-
+            
             ProductModel(
                 intId: 46,
                 strProductName: "Undhiyu",
@@ -638,7 +639,7 @@ class ProductModel {
                 objProductCategory: .Gujarati,
                 objProductType: .food
             ),
-
+            
             ProductModel(
                 intId: 51,
                 strProductName: "Basundi",
@@ -697,7 +698,7 @@ class ProductModel {
                 objProductCategory: .Gujarati,
                 objProductType: .Desserts
             ),
-
+            
             ProductModel(
                 intId: 56,
                 strProductName: "Chaas",
@@ -812,7 +813,7 @@ class ProductModel {
                 objProductCategory: .WesternFood,
                 objProductType: .food
             ),
-
+            
             // WesternFood Desserts (66–70)
             ProductModel(
                 intId: 66,
@@ -874,7 +875,7 @@ class ProductModel {
                 objProductCategory: .WesternFood,
                 objProductType: .Desserts
             ),
-
+            
             ProductModel(
                 intId: 71,
                 strProductName: "Cappuccino",

@@ -34,6 +34,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.lblCollectionViewTitle.isHidden = true
             cell.btnViewAll.isHidden = true
             cell.delegate = self
+            cell.collectionViewHomeHeight.constant = 113 // fixed
             
         case 1:
             cell.collectionType = .popular
@@ -80,6 +81,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             break
         }
         cell.collectionViewHome.reloadData()
+        DispatchQueue.main.async {
+            cell.collectionViewHome.layoutIfNeeded()
+            cell.updateCollectionHeight()
+        }
         return cell
     }
 }

@@ -75,8 +75,8 @@
                                 <rect key="frame" x="0.0" y="118" width="393" height="666"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="rPw-zR-A5N" id="Ax6-n5-ntQ"/>
-                                    <outlet property="delegate" destination="rPw-zR-A5N" id="6SM-1d-cat"/>
+                                    <outlet property="dataSource" destination="rPw-zR-A5N" id="e8r-9s-AC6"/>
+                                    <outlet property="delegate" destination="rPw-zR-A5N" id="esJ-4A-Ucb"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -90,7 +90,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tblOrderList" destination="cqd-xj-ehb" id="Kvf-eq-bA4"/>
+                        <outlet property="tblOrderList" destination="cqd-xj-ehb" id="j5E-fy-RjW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BV9-aa-ZuN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -106,7 +106,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_masaladosa" translatesAutoresizingMaskIntoConstraints="NO" id="C4X-rs-gzr">
-                                <rect key="frame" x="0.0" y="118" width="393" height="160"/>
+                                <rect key="frame" x="0.0" y="138" width="393" height="160"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="160" id="Ylv-zv-9jh"/>
                                 </constraints>
@@ -114,16 +114,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKa-5n-eNx">
                                 <rect key="frame" x="0.0" y="328" width="393" height="456"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P7d-WY-5Hx">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7d-WY-5Hx">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="456"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l2m-9e-KQC">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="635.33333333333337"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="634.33333333333337"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Tandoori Chicken Pizza" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPp-0j-rtA">
                                                         <rect key="frame" x="22" y="31" width="230" height="25.333333333333329"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="22"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" name="FoodTitleColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1iu-qD-KWv">
@@ -169,31 +169,31 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 Star Ratings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8U-m3-moG">
                                                         <rect key="frame" x="22" y="82.333333333333314" width="70" height="12.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" name="ButtonBackgroundColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rs. 750" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Odc-n4-pDT">
                                                         <rect key="frame" x="259" y="70" width="107" height="35.666666666666657"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="31"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" name="FoodTitleColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/ per Portion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBG-xQ-26k">
                                                         <rect key="frame" x="297.33333333333331" y="110.66666666666669" width="65.666666666666686" height="14"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" name="FoodTitleColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWG-rQ-8H0">
                                                         <rect key="frame" x="22" y="125.99999999999999" width="70.333333333333329" height="16.333333333333329"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" name="FoodTitleColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ornare leo non mollis id cursus. Eu euismod faucibus in leo malesuada" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oXZ-1v-JAK">
                                                         <rect key="frame" x="22" y="152.33333333333331" width="349" height="27.666666666666657"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" name="FoodDescriptionColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="76B-Rj-hrZ">
@@ -204,25 +204,25 @@
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="254" text="Customize your Order" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fjm-aN-WQT">
-                                                        <rect key="frame" x="22" y="215" width="147" height="17.333333333333343"/>
-                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
-                                                        <nil key="textColor"/>
+                                                        <rect key="frame" x="22" y="215" width="137" height="16.333333333333343"/>
+                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                                        <color key="textColor" name="FoodTitleColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="40m-GQ-bgD">
-                                                        <rect key="frame" x="22" y="253.33333333333337" width="349" height="104"/>
+                                                        <rect key="frame" x="22" y="252.33333333333337" width="349" height="104"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mw4-pl-lZg">
                                                                 <rect key="frame" x="0.0" y="0.0" width="349" height="45"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="       - Select the size of portion -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUY-DS-mho">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="244" height="45"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                        <nil key="textColor"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="197.66666666666666" height="45"/>
+                                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                                                        <color key="textColor" name="FoodTitleColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6MI-Zg-RCC">
-                                                                        <rect key="frame" x="244" y="0.0" width="105" height="45"/>
+                                                                        <rect key="frame" x="197.66666666666663" y="0.0" width="151.33333333333337" height="45"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                         <state key="normal" title="" image="ic_dropDown"/>
                                                                     </button>
@@ -236,13 +236,13 @@
                                                                 <rect key="frame" x="0.0" y="59" width="349" height="45"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="       - Select the ingredients -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="leM-yo-fiV">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="220.33333333333334" height="45"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                        <nil key="textColor"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="179" height="45"/>
+                                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                                                        <color key="textColor" name="FoodTitleColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTF-eb-5TZ">
-                                                                        <rect key="frame" x="220.33333333333337" y="0.0" width="128.66666666666663" height="45"/>
+                                                                        <rect key="frame" x="179" y="0.0" width="170" height="45"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                         <state key="normal" title="" image="ic_dropDown"/>
                                                                     </button>
@@ -255,13 +255,13 @@
                                                         </subviews>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Portions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="llD-Ya-2HX">
-                                                        <rect key="frame" x="22" y="386.33333333333337" width="148.66666666666666" height="20.333333333333314"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
+                                                        <rect key="frame" x="22.000000000000007" y="385.33333333333337" width="120.66666666666669" height="16.333333333333314"/>
+                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                                        <color key="textColor" name="FoodTitleColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="gkP-ps-bs7">
-                                                        <rect key="frame" x="222.66666666666663" y="381.33333333333337" width="148.33333333333337" height="30"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="gkP-ps-bs7">
+                                                        <rect key="frame" x="205" y="380.33333333333337" width="166" height="30"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pa0-Lf-4lw">
                                                                 <rect key="frame" x="0.0" y="0.0" width="52" height="30"/>
@@ -279,18 +279,22 @@
                                                                     <action selector="btnMinusClick:" destination="uKC-99-4qi" eventType="touchUpInside" id="wbf-mG-Fzf"/>
                                                                 </connections>
                                                             </button>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hV8-n6-XwU">
-                                                                <rect key="frame" x="57.000000000000028" y="0.0" width="34.333333333333343" height="30"/>
-                                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZRZ-tQ-ndB">
+                                                                <rect key="frame" x="57" y="0.0" width="52" height="30"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hV8-n6-XwU">
+                                                                        <rect key="frame" x="0.0" y="-0.33333333333337123" width="52" height="30"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                                                        <color key="textColor" name="ButtonBackgroundColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            </view>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HHn-0N-wmW">
-                                                                <rect key="frame" x="96.333333333333343" y="0.0" width="52" height="30"/>
+                                                                <rect key="frame" x="114" y="0.0" width="52" height="30"/>
                                                                 <color key="backgroundColor" name="ButtonBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="52" id="aPp-VD-pHn"/>
-                                                                </constraints>
                                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" title="+">
@@ -303,20 +307,20 @@
                                                         </subviews>
                                                     </stackView>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_backImageB" translatesAutoresizingMaskIntoConstraints="NO" id="7HH-cH-zTI">
-                                                        <rect key="frame" x="0.0" y="433.66666666666663" width="97" height="171"/>
+                                                        <rect key="frame" x="0.0" y="428.66666666666663" width="97" height="171"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="171" id="XWQ-cI-Azp"/>
                                                             <constraint firstAttribute="width" constant="97" id="aif-NQ-LmM"/>
                                                         </constraints>
                                                     </imageView>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_backImageA" translatesAutoresizingMaskIntoConstraints="NO" id="HRp-34-Buz">
-                                                        <rect key="frame" x="45" y="453.33333333333337" width="304" height="122"/>
+                                                        <rect key="frame" x="45" y="452.33333333333337" width="304" height="122"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="122" id="700-zR-wUd"/>
                                                         </constraints>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uep-gj-SmE">
-                                                        <rect key="frame" x="155.66666666666666" y="530" width="82" height="14"/>
+                                                        <rect key="frame" x="155.66666666666666" y="527.66666666666663" width="82" height="14"/>
                                                         <color key="backgroundColor" name="ButtonBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="82" id="1zM-dz-GwE"/>
@@ -332,19 +336,19 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LKR 1500" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z22-I2-Jpy">
-                                                        <rect key="frame" x="152" y="495.66666666666663" width="89.333333333333314" height="25.333333333333371"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                                        <nil key="textColor"/>
+                                                        <rect key="frame" x="149.66666666666666" y="494.33333333333337" width="93.666666666666657" height="24.333333333333371"/>
+                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="21"/>
+                                                        <color key="textColor" name="FoodTitleColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mWq-g1-Nzh">
-                                                        <rect key="frame" x="166.66666666666666" y="476.33333333333337" width="59.666666666666657" height="14.333333333333314"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                        <nil key="textColor"/>
+                                                        <rect key="frame" x="168.33333333333334" y="475.33333333333337" width="56.333333333333343" height="14"/>
+                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                                        <color key="textColor" name="FoodTitleColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zId-0a-idg">
-                                                        <rect key="frame" x="325" y="495.66666666666663" width="47" height="47"/>
+                                                        <rect key="frame" x="325" y="490.66666666666663" width="47" height="47"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="47" id="Xok-te-rEo"/>
                                                             <constraint firstAttribute="width" constant="47" id="dqE-mv-8J6"/>
@@ -425,8 +429,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="MMB-Zf-hdJ" firstAttribute="bottom" secondItem="XKa-5n-eNx" secondAttribute="bottom" id="Fat-fq-Mbq"/>
-                            <constraint firstItem="XKa-5n-eNx" firstAttribute="top" secondItem="C4X-rs-gzr" secondAttribute="bottom" constant="50" id="UIk-yi-iRA"/>
-                            <constraint firstItem="C4X-rs-gzr" firstAttribute="top" secondItem="MMB-Zf-hdJ" secondAttribute="top" id="ZSK-Pu-VsR"/>
+                            <constraint firstItem="XKa-5n-eNx" firstAttribute="top" secondItem="C4X-rs-gzr" secondAttribute="bottom" constant="30" id="UIk-yi-iRA"/>
+                            <constraint firstItem="C4X-rs-gzr" firstAttribute="top" secondItem="MMB-Zf-hdJ" secondAttribute="top" constant="20" id="ZSK-Pu-VsR"/>
                             <constraint firstItem="MMB-Zf-hdJ" firstAttribute="trailing" secondItem="C4X-rs-gzr" secondAttribute="trailing" id="ftE-c9-rOS"/>
                             <constraint firstItem="XKa-5n-eNx" firstAttribute="leading" secondItem="MMB-Zf-hdJ" secondAttribute="leading" id="o1s-3x-DYg"/>
                             <constraint firstItem="MMB-Zf-hdJ" firstAttribute="trailing" secondItem="XKa-5n-eNx" secondAttribute="trailing" id="pem-q7-8Pj"/>
@@ -438,6 +442,7 @@
                         <outlet property="btnCart" destination="zId-0a-idg" id="z7Y-OW-lrl"/>
                         <outlet property="btnMinus" destination="Pa0-Lf-4lw" id="DhM-u2-XKW"/>
                         <outlet property="btnPlus" destination="HHn-0N-wmW" id="nh7-0Z-Dia"/>
+                        <outlet property="countView" destination="ZRZ-tQ-ndB" id="Lrk-4U-k3f"/>
                         <outlet property="imgProduct" destination="C4X-rs-gzr" id="yOf-iX-WVg"/>
                         <outlet property="lblCount" destination="hV8-n6-XwU" id="ecp-Ic-Tdv"/>
                         <outlet property="lblDescription" destination="oXZ-1v-JAK" id="gd1-4K-bFk"/>
@@ -469,6 +474,12 @@
         </namedColor>
         <namedColor name="Count_Btn_Shadow_color">
             <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="FoodDescriptionColor">
+            <color red="0.48627450980392156" green="0.49019607843137253" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="FoodTitleColor">
+            <color red="0.29019607843137257" green="0.29411764705882354" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Select_box_BgColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

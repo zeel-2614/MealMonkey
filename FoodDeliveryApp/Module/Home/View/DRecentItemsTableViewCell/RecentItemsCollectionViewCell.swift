@@ -1,7 +1,7 @@
 import UIKit
 
 class RecentItemsCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var lblTotalNumberOfRattings: UILabel!
     @IBOutlet weak var lblFoodType: UILabel!
     @IBOutlet weak var lblItemName: UILabel!

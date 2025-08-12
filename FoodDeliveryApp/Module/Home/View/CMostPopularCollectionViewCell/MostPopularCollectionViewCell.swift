@@ -1,7 +1,7 @@
 import UIKit
 
 class MostPopularCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var lblFoodName: UILabel!
     @IBOutlet weak var lblRattings: UILabel!
     @IBOutlet weak var lblFoodCategory: UILabel!

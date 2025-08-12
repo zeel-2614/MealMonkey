@@ -40,6 +40,10 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate {
     }
     
     @objc func btnCartTapped() {
+        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+            self.navigationController?.pushViewController(menuVC, animated: true)
+        }
     }
     
     func homeTableViewCell(_ cell: HomeTableViewCell, didSelectProduct product: ProductModel) {

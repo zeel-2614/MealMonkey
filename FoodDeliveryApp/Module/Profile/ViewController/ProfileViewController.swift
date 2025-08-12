@@ -1,7 +1,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
+    
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var txtName: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
@@ -11,11 +11,8 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationController?.isNavigationBarHidden = false
-        setLeftAlignedTitle("Profile")
-        setCartButton(target: self, action: #selector(profileCartBtn))
         
+        self.navigationController?.isNavigationBarHidden = false
         let imgPicker = UITapGestureRecognizer(target: self, action: #selector(imgTap))
         imgProfile.addGestureRecognizer(imgPicker)
         
@@ -27,8 +24,11 @@ class ProfileViewController: UIViewController {
         setCartButton(target: self, action: #selector(btnCartTapped))
     }
     
-    @objc func profileCartBtn() {
-        
+    @objc func btnCartTapped() {
+        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+            self.navigationController?.pushViewController(menuVC, animated: true)
+        }
     }
     
     @objc func imgTap() {
@@ -36,9 +36,6 @@ class ProfileViewController: UIViewController {
         pickerController.delegate = self
         pickerController.allowsEditing = true
         present(pickerController, animated: true)
-    }
-    
-    @objc func btnCartTapped() {
     }
     
     func setPadding(textfield: [UITextField]){

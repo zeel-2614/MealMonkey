@@ -15,8 +15,7 @@ class MenuTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func configureCell(category: ClassCategory){
-        
+    func configureCell(category: ClassCategory) {
         imgCategory.image = UIImage(named: category.imgCategory)
         lblCategoryTitle.text = category.strCategoryName
         lblItems.text = "\(category.intItems) Items"

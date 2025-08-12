@@ -26,21 +26,26 @@ class HomeTableViewCell: UITableViewCell {
     var categories: [ProductCategory] = [] {
         didSet {
             collectionViewHome.reloadData()
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+            DispatchQueue.main.async {
                 self.collectionViewHome.layoutIfNeeded()
-                self.collectionViewHomeHeight.constant = self.collectionViewHome.collectionViewLayout.collectionViewContentSize.height
+                self.updateCollectionHeight()
             }
         }
     }
     var products: [ProductModel] = [] {
         didSet {
             collectionViewHome.reloadData()
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+            DispatchQueue.main.async {
                 self.collectionViewHome.layoutIfNeeded()
-                self.collectionViewHomeHeight.constant = self.collectionViewHome.collectionViewLayout.collectionViewContentSize.height
+                self.updateCollectionHeight()
             }
+        }
+    }
+    
+    func updateCollectionHeight() {
+        if let layout = collectionViewHome.collectionViewLayout as? UICollectionViewFlowLayout,
+           layout.scrollDirection == .vertical {
+            self.collectionViewHomeHeight.constant = self.collectionViewHome.collectionViewLayout.collectionViewContentSize.height
         }
     }
     
@@ -65,7 +70,6 @@ class HomeTableViewCell: UITableViewCell {
 }
 
 extension HomeTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionType {
         case .category:
@@ -76,7 +80,6 @@ extension HomeTableViewCell: UICollectionViewDataSource, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         switch collectionType {
         case .category:
             let cell: HomeCategoryCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCategoryCollectionViewCell", for: indexPath) as! HomeCategoryCollectionViewCell
@@ -108,7 +111,7 @@ extension HomeTableViewCell: UICollectionViewDataSource, UICollectionViewDelegat
         if collectionType == .category {
             return CGSize(width: 88, height: 113)
         } else if collectionType == .popular {
-            return CGSize(width: 375, height: 242.19)
+            return CGSize(width: collectionViewHome.frame.width, height: 242.19)
         } else if collectionType == .mostPopular {
             return CGSize(width: 228, height: 185)
         } else if collectionType == .RecentItems {

@@ -25,8 +25,7 @@ class PaymentViewController: UIViewController {
         setLeftAlignedTitleWithBack("Payment Details", target: self, action: #selector(backBtnTapped))
         setCartButton(target: self, action: #selector(btnCartPressed))
         
-        viewStyle(cornerRadius: btnAddCard.frame.size.height / 2, borderWidth: 0, borderColor: .systemGray, textField: [btnAddCard])
-        viewStyle(cornerRadius: btnAddNewCard.frame.size.height / 2, borderWidth: 0, borderColor: .systemGray, textField: [btnAddNewCard])
+        viewStyle(cornerRadius: btnAddCard.frame.size.height / 2, borderWidth: 0, borderColor: .systemGray, textField: [btnAddCard, btnAddNewCard])
         
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .gray, textField: [txtLastName, txtFirstName, txtExpiryYear,txtCardNumber, txtExpiryMonth, txtSecurityCode])
         
@@ -62,7 +61,10 @@ class PaymentViewController: UIViewController {
     }
     
     @objc func btnCartPressed() {
-        
+        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+            self.navigationController?.pushViewController(menuVC, animated: true)
+        }
     }
     
     @IBAction func btnAddNewCardClick(_ sender: Any) {

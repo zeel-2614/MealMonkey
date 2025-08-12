@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="eOP-hZ-WFB">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="Oz4-AG-7JY" customClass="LoginViewController" customModule="MealMonkey" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="Oz4-AG-7JY" customClass="LoginViewController" customModule="FoodDeliveryApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lRL-2u-Az0">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -256,7 +256,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="xcp-aR-zY9">
             <objects>
-                <viewController storyboardIdentifier="SignUpViewController" id="dOy-Gm-jfb" customClass="SignUpViewController" customModule="MealMonkey" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpViewController" id="dOy-Gm-jfb" customClass="SignUpViewController" customModule="FoodDeliveryApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EK0-TT-JLU">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -510,7 +510,7 @@
         <!--Forget Password View Controller-->
         <scene sceneID="IhD-JX-v3C">
             <objects>
-                <viewController storyboardIdentifier="ForgetPasswordViewController" id="Xqj-Hh-W1r" customClass="ForgetPasswordViewController" customModule="MealMonkey" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ForgetPasswordViewController" id="Xqj-Hh-W1r" customClass="ForgetPasswordViewController" customModule="FoodDeliveryApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WaN-ot-yv2">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -600,7 +600,7 @@ link to  create a new password via email</string>
         <!--New Password View Controller-->
         <scene sceneID="Fsr-uu-QRL">
             <objects>
-                <viewController storyboardIdentifier="NewPasswordViewController" id="vk9-nt-8s7" customClass="NewPasswordViewController" customModule="MealMonkey" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewPasswordViewController" id="vk9-nt-8s7" customClass="NewPasswordViewController" customModule="FoodDeliveryApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o7b-Lj-iaU">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -636,7 +636,7 @@ link to  create a new password via email</string>
                                         </constraints>
                                         <color key="textColor" name="LabelPrimaryColor"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEw-zY-Zez">
                                         <rect key="frame" x="34" y="360" width="325" height="56"/>
@@ -661,13 +661,40 @@ link to  create a new password via email</string>
                                         </constraints>
                                         <color key="textColor" name="LabelPrimaryColor"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DFE-GE-pYb">
+                                        <rect key="frame" x="303" y="192" width="56" height="56"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="fhx-qO-uct"/>
+                                            <constraint firstAttribute="width" constant="56" id="gGy-KV-kNG"/>
+                                        </constraints>
+                                        <color key="tintColor" name="TextFieldTextColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="eye.slash" catalog="system"/>
+                                        <connections>
+                                            <action selector="btnConfirmPasswordEyeClick:" destination="vk9-nt-8s7" eventType="touchUpInside" id="2gx-bT-8zt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S5L-Df-8Xo">
+                                        <rect key="frame" x="303" y="276" width="56" height="56"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="Oaf-gd-MzU"/>
+                                            <constraint firstAttribute="width" constant="56" id="eOv-xf-TtS"/>
+                                        </constraints>
+                                        <color key="tintColor" name="TextFieldTextColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="eye.slash" catalog="system"/>
+                                        <connections>
+                                            <action selector="btnPasswordEyeClick:" destination="vk9-nt-8s7" eventType="touchUpInside" id="eZR-pW-U6Q"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="6Ek-4N-mcg" firstAttribute="top" secondItem="jOc-dj-UAd" secondAttribute="bottom" constant="28" id="8Ir-kd-3rh"/>
                                     <constraint firstItem="giv-1J-OfN" firstAttribute="top" secondItem="eoA-Ew-zdu" secondAttribute="top" constant="42" id="DJE-9k-g4B"/>
+                                    <constraint firstItem="S5L-Df-8Xo" firstAttribute="top" secondItem="6Ek-4N-mcg" secondAttribute="top" id="Dp6-yW-bgF"/>
                                     <constraint firstItem="6Ek-4N-mcg" firstAttribute="leading" secondItem="jOc-dj-UAd" secondAttribute="leading" id="GIP-2l-nuS"/>
                                     <constraint firstItem="dEw-zY-Zez" firstAttribute="trailing" secondItem="6Ek-4N-mcg" secondAttribute="trailing" id="LF9-F6-h4K"/>
                                     <constraint firstAttribute="trailing" secondItem="jOc-dj-UAd" secondAttribute="trailing" constant="34" id="QhJ-Yj-8bC"/>
@@ -675,9 +702,12 @@ link to  create a new password via email</string>
                                     <constraint firstItem="zDW-Hq-qxf" firstAttribute="centerX" secondItem="eoA-Ew-zdu" secondAttribute="centerX" id="bkH-wc-l9s"/>
                                     <constraint firstItem="jOc-dj-UAd" firstAttribute="top" secondItem="zDW-Hq-qxf" secondAttribute="bottom" constant="59" id="cpe-GJ-btY"/>
                                     <constraint firstItem="dEw-zY-Zez" firstAttribute="top" secondItem="6Ek-4N-mcg" secondAttribute="bottom" constant="28" id="dWw-LY-5GG"/>
+                                    <constraint firstItem="DFE-GE-pYb" firstAttribute="trailing" secondItem="jOc-dj-UAd" secondAttribute="trailing" id="f4r-li-d46"/>
                                     <constraint firstItem="dEw-zY-Zez" firstAttribute="leading" secondItem="6Ek-4N-mcg" secondAttribute="leading" id="fmS-iw-pz1"/>
                                     <constraint firstItem="zDW-Hq-qxf" firstAttribute="top" secondItem="giv-1J-OfN" secondAttribute="bottom" constant="13" id="h76-HU-2oA"/>
+                                    <constraint firstItem="S5L-Df-8Xo" firstAttribute="trailing" secondItem="DFE-GE-pYb" secondAttribute="trailing" id="jNP-kH-ndq"/>
                                     <constraint firstItem="giv-1J-OfN" firstAttribute="centerX" secondItem="eoA-Ew-zdu" secondAttribute="centerX" id="obu-1M-gSU"/>
+                                    <constraint firstItem="DFE-GE-pYb" firstAttribute="centerY" secondItem="jOc-dj-UAd" secondAttribute="centerY" id="sgd-eY-LbH"/>
                                     <constraint firstItem="6Ek-4N-mcg" firstAttribute="trailing" secondItem="jOc-dj-UAd" secondAttribute="trailing" id="yL2-Qx-OCT"/>
                                 </constraints>
                             </view>
@@ -692,7 +722,9 @@ link to  create a new password via email</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnConfirmPasswordEye" destination="DFE-GE-pYb" id="E8A-7v-jEM"/>
                         <outlet property="btnNext" destination="dEw-zY-Zez" id="ML4-4l-qPx"/>
+                        <outlet property="btnPasswordEye" destination="S5L-Df-8Xo" id="kbf-Ly-gCN"/>
                         <outlet property="txtConfiemPassword" destination="6Ek-4N-mcg" id="Q71-iw-0nU"/>
                         <outlet property="txtNewPassword" destination="jOc-dj-UAd" id="Z8f-qQ-KaC"/>
                     </connections>
@@ -704,7 +736,7 @@ link to  create a new password via email</string>
         <!--Next Page View Controller-->
         <scene sceneID="BkW-Vw-dfv">
             <objects>
-                <viewController storyboardIdentifier="NextPageViewController" id="zHl-xR-18l" customClass="NextPageViewController" customModule="MealMonkey" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NextPageViewController" id="zHl-xR-18l" customClass="NextPageViewController" customModule="FoodDeliveryApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OyR-Po-hzW">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -837,7 +869,7 @@ link to  create a new password via email</string>
         <!--View Controller-->
         <scene sceneID="PnF-Kd-pl4">
             <objects>
-                <viewController storyboardIdentifier="OTPViewController" id="JjL-cZ-QlN" customClass="OTPViewController" customModule="MealMonkey" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTPViewController" id="JjL-cZ-QlN" customClass="OTPViewController" customModule="FoodDeliveryApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="49g-65-Oko">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

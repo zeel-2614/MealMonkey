@@ -1,7 +1,7 @@
 import UIKit
 
 class AboutUsTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var lblText: UILabel!
     @IBOutlet weak var lblText2: UILabel!
     @IBOutlet weak var lblTimezone: UILabel!
@@ -13,7 +13,7 @@ class AboutUsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -34,7 +34,7 @@ class AboutUsTableViewCell: UITableViewCell {
         btnStar.isHidden = true
         timezoneWidth.constant = 0
     }
-     
+    
     func configureCellInbox(details: AboutModel){
         lblText.text = details.strText
         lblText2.text = details.strText2

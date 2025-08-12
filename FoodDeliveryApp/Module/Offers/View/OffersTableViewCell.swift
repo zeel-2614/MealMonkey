@@ -1,7 +1,7 @@
 import UIKit
 
 class OffersTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var imgOffer: UIImageView!
     @IBOutlet weak var lblOfferTitle: UILabel!
     @IBOutlet weak var btnStar: UIButton!
@@ -13,7 +13,7 @@ class OffersTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

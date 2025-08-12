@@ -1,7 +1,7 @@
 import UIKit
 
 class NextPageViewController: UIViewController {
-
+    
     @IBOutlet weak var collectionViewNextPage: UICollectionView!
     @IBOutlet weak var btnDone: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -13,8 +13,6 @@ class NextPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        self.title = "Next Page"
         self.navigationController?.isNavigationBarHidden = true
         
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .systemGray, textField: [btnDone])
@@ -29,11 +27,11 @@ class NextPageViewController: UIViewController {
         
         let storyboard = UIStoryboard(name: "HomeStoryboard", bundle: nil)
         if let tabBarController = storyboard.instantiateViewController(withIdentifier: "MainTabViewController") as? UITabBarController {
-
+            
             // Set as rootViewController
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let sceneDelegate = windowScene.delegate as? SceneDelegate {
-
+                
                 sceneDelegate.window?.rootViewController = tabBarController
                 sceneDelegate.window?.makeKeyAndVisible()
             }

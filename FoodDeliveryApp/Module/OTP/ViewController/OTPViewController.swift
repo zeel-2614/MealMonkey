@@ -1,7 +1,7 @@
 import UIKit
 
 class OTPViewController: UIViewController {
-
+    
     @IBOutlet weak var txtFirstDigit: UITextField!
     @IBOutlet weak var txtSecondDigit: UITextField!
     @IBOutlet weak var txtThirdDigit: UITextField!
@@ -16,10 +16,10 @@ class OTPViewController: UIViewController {
         
         let allviews = [txtFirstDigit!, txtSecondDigit!, txtThirdDigit!, txtFourthDigit!]
         for tf in allviews {
-                    tf.delegate = self
-                    tf.keyboardType = .numberPad
-                    tf.textAlignment = .center
-                }
+            tf.delegate = self
+            tf.keyboardType = .numberPad
+            tf.textAlignment = .center
+        }
         
         viewStyle(cornerRadius: 12, borderWidth: 0, borderColor: .systemGray, textField: [txtFirstDigit, txtSecondDigit, txtThirdDigit, txtFourthDigit])
         viewStyle(cornerRadius: 28 , borderWidth: 0, borderColor: .systemGray, textField: [btnNext])

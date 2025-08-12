@@ -26,23 +26,22 @@ class MenuViewController: UIViewController {
     }
     
     @objc func cartBtnTapped() {
-        
+        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+            self.navigationController?.pushViewController(menuVC, animated: true)
+        }
     }
     
     func applyCornerRadiusTLBR() {
-        
         tblBackView.layer.cornerRadius = 28
-        
         tblBackView.layer.maskedCorners = [
             .layerMaxXMinYCorner,
             .layerMinXMaxYCorner,
         ]
-        
         tblBackView.clipsToBounds = true
     }
     
-    func setPadding(textfield: [UITextField]){
-        
+    func setPadding(textfield: [UITextField]) {
         for item in textfield {
             item.setPadding(left: 34, right: 34)
         }

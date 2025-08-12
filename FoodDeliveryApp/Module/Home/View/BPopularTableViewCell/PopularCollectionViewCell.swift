@@ -1,7 +1,7 @@
 import UIKit
 
 class PopularCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var lblProductName: UILabel!
     @IBOutlet weak var lblFoodCategory: UILabel!
     @IBOutlet weak var lblRattings: UILabel!

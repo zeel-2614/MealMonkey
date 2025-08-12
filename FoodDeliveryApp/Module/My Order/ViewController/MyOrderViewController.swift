@@ -8,7 +8,7 @@
 import UIKit
 
 class MyOrderViewController: UIViewController {
-
+    
     @IBOutlet weak var lblDeliveryCost: UILabel!
     @IBOutlet weak var lblTotal: UILabel!
     @IBOutlet weak var btnCheckout: UIButton!
@@ -16,7 +16,7 @@ class MyOrderViewController: UIViewController {
     @IBOutlet weak var tblOrder: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.navigationController?.isNavigationBarHidden = false
         setLeftAlignedTitleWithBack("My Order", target: self, action: #selector(myOrderBackBtn))
         // Do any additional setup after loading the view.
@@ -28,10 +28,10 @@ class MyOrderViewController: UIViewController {
     @objc func myOrderBackBtn() {
         self.navigationController?.popViewController(animated: true)
     }
-
+    
     @IBAction func btnCheckoutClick(_ sender: Any) {
         let storyboard = UIStoryboard(name: "MoreStoryboard", bundle: nil)
-        if let VC = storyboard.instantiateViewController(withIdentifier: "CheckoutViewController") as? CheckoutViewController{
+        if let VC = storyboard.instantiateViewController(withIdentifier: "CheckoutViewController") as? CheckoutViewController {
             self.navigationController?.pushViewController(VC, animated: true)
         }
     }

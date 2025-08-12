@@ -46,5 +46,4 @@ extension OTPViewController: UITextFieldDelegate {
         }
         return true
     }
-    
 }
