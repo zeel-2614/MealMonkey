@@ -18,8 +18,7 @@ class ProductModel {
     var intTotalNumberOfRatings: Int = 0
     var objProductCategory: ProductCategory = .Gujarati
     var objProductType: ProductType = .food
-    var orderNumber: Int?
-    
+
     init(
         intId: Int,
         strProductName: String,

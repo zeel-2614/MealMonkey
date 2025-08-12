@@ -8,7 +8,7 @@
 import UIKit
 
 class OrderListTableViewCell: UITableViewCell {
-    
+
     @IBOutlet weak var lblProductName: UILabel!
     @IBOutlet weak var lblOrderNumber: UILabel!
     @IBOutlet weak var lblTotal: UILabel!
@@ -17,24 +17,19 @@ class OrderListTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
+
         // Configure the view for the selected state
     }
     
-    func configure(with orderNumber: Int, products: [ProductModel]) {
-        lblOrderNumber.text = "Order No: \(orderNumber)"
-        lblProductName.text = "\(products.count) items"
-        
-        let total = products.reduce(0) { $0 + $1.doubleProductPrice }
-        lblTotal.text = "Total: $\(String(format: "%.2f", total))"
-        
-        if let firstProduct = products.first {
-            imgOrderedProduct.image = UIImage(named: firstProduct.strProductImage)
-        } else {
-            imgOrderedProduct.image = nil
-        }
-    }
+//    func configure(with products: [ProductModel], orderNumber: Int) {
+//        lblOrderNumber.text = "Order No: \(orderNumber)"
+//        if let firstProduct = products.first {
+//            lblProductName.text = "First Product: \(firstProduct.strProductName)"
+//            lblTotal.text = "Price: $\(String(format: "%.2f", firstProduct.doubleProductPrice))"
+//            imgOrderedProduct.image = UIImage(named: firstProduct.strProductImage)
+//        }
+//    }
 }
