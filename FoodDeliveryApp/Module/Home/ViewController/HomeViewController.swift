@@ -1,7 +1,33 @@
 import UIKit
 
-class HomeViewController: UIViewController, HomeTableViewCellDelegate {
+class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFieldDelegate, MapViewControllerDelegate {
     
+    func didSelectAddress(_ address: String) {
+        // Remove duplicate place name at start if repeated
+        var cleanedAddress = address
+        if let firstComma = address.firstIndex(of: ",") {
+            let firstPart = address[..<firstComma].trimmingCharacters(in: .whitespaces)
+            let rest = address[address.index(after: firstComma)...].trimmingCharacters(in: .whitespaces)
+            
+            if rest.hasPrefix(firstPart) {
+                cleanedAddress = rest // drop the duplicate
+            }
+        }
+        
+        // Now split into two lines max
+        if let commaIndex = cleanedAddress.firstIndex(of: ",") {
+            let firstLine = cleanedAddress[..<commaIndex].trimmingCharacters(in: .whitespaces)
+            let secondLine = cleanedAddress[address.index(after: commaIndex)...].trimmingCharacters(in: .whitespaces)
+            lblCurrentLocation.text = "\(firstLine)\n\(secondLine)"
+        } else {
+            lblCurrentLocation.text = cleanedAddress
+        }
+        
+        lblCurrentLocation.numberOfLines = 2
+        lblCurrentLocation.lineBreakMode = .byTruncatingTail
+    }
+    
+    @IBOutlet weak var lblCurrentLocation: UILabel!
     @IBOutlet weak var tblHome: UITableView!
     @IBOutlet weak var txtSearch: UITextField!
     
@@ -9,10 +35,12 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate {
     var arrProductData: [ProductModel] = ProductModel.addProductData()
     var objProductCategory: ProductModel?
     var recentItems: [ProductModel] = []
+    var filteredProductData: [ProductModel] = [] //new added
     
     override func viewWillAppear(_ animated: Bool) {
         recentItems = RecentItemsHelper.shared.getRecentItems()
         tblHome.reloadData()
+        filterProducts(with: txtSearch.text) //added new
     }
     
     override func viewDidLoad() {
@@ -27,6 +55,13 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate {
         
         tblHome.showsVerticalScrollIndicator = false
         tblHome.register(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: "HomeTableViewCell")
+        
+        txtSearch.delegate = self //new added
+        
+        txtSearch.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged) //new added
+        
+        
+        filteredProductData = arrProductData //new added
         
         DispatchQueue.main.async {
             self.tblHome.reloadData()
@@ -60,5 +95,29 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate {
     func homeTableViewCell(_ cell: HomeTableViewCell, didSelectCategory category: ProductCategory) {
         selectedCategory = category
         tblHome.reloadData()
+    }
+    
+    // Use this method for real-time filtering as the user types
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        filterProducts(with: textField.text)
+    }
+    
+    func filterProducts(with searchText: String?) {
+        if let text = searchText, !text.isEmpty {
+            let lowercaseText = text.lowercased()
+            filteredProductData = arrProductData.filter { product in
+                // Check if the product name or the product category contains the search text
+                let productNameMatches = product.strProductName.lowercased().contains(lowercaseText)
+                let productCategoryMatches = product.objProductCategory.rawValue.lowercased().contains(lowercaseText)
+                return productNameMatches || productCategoryMatches
+            }
+        } else {
+            // If the search bar is empty, show all products
+            filteredProductData = arrProductData
+        }
+        
+        DispatchQueue.main.async {
+            self.tblHome.reloadData()
+        }
     }
 }

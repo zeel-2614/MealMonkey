@@ -2,7 +2,6 @@ import UIKit
 
 class PaymentViewController: UIViewController {
     
-    
     @IBOutlet weak var viewMain: UIView!
     @IBOutlet weak var btnAddNewCard: UIButton!
     @IBOutlet weak var viewAddCard: UIView!
@@ -17,6 +16,8 @@ class PaymentViewController: UIViewController {
     @IBOutlet weak var txtFirstName: UITextField!
     @IBOutlet weak var tblCardDetails: UITableView!
     @IBOutlet weak var switchRemoveCard: UISwitch!
+    
+    var arrCards: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +49,11 @@ class PaymentViewController: UIViewController {
         viewScroll.layer.shadowOpacity = 0.2
         viewScroll.layer.shadowOffset = CGSize(width: 0, height: -2)
         viewScroll.layer.shadowRadius = 10
+        
+        if let savedCards = UserDefaults.standard.array(forKey: "savedCards") as? [String] {
+            arrCards = savedCards
+        }
+        
     }
     
     func setPadding(textfield: [UITextField]){
@@ -68,11 +74,14 @@ class PaymentViewController: UIViewController {
     }
     
     @IBAction func btnAddNewCardClick(_ sender: Any) {
+        clearCardEntryFields()
         viewAddCard.isHidden = false
         UIView.animate(withDuration: 0.3) {
             self.viewAddCard.transform = .identity
             self.tabBarController?.tabBar.isHidden = true
-            
+        } completion: { _ in
+            // ✅ Focus on card number field
+            self.txtCardNumber.becomeFirstResponder()
         }
     }
     
@@ -90,5 +99,53 @@ class PaymentViewController: UIViewController {
     }
     
     @IBAction func btnAddCardClick(_ sender: Any) {
+        // 1️⃣ Validation
+        guard let cardNumber = txtCardNumber.text, cardNumber.count == 16 else {
+            showAlert(message: "Card number must be exactly 16 digits.")
+            return
+        }
+        guard let expiryMonth = txtExpiryMonth.text, expiryMonth.count == 2 else {
+            showAlert(message: "Expiry month must be 2 digits.")
+            return
+        }
+        guard let expiryYear = txtExpiryYear.text, expiryYear.count == 2 else {
+            showAlert(message: "Expiry year must be 2 digits.")
+            return
+        }
+        
+        // 2️⃣ Show Confirmation Alert
+        let confirmAlert = UIAlertController(
+            title: "Confirm Card Details",
+            message: "Card Number: \(cardNumber)\nExpiry: \(expiryMonth)/\(expiryYear)\nDo you want to save this card?",
+            preferredStyle: .alert
+        )
+        
+        confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        confirmAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
+            // 3️⃣ Save card
+            self.arrCards.append(cardNumber)
+            self.saveCardsToDefaults()
+            self.tblCardDetails.reloadData()
+            self.btnCloseAddCardViewClick(sender)
+        }))
+        
+        present(confirmAlert, animated: true)
+        
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Invalid Input", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    func clearCardEntryFields() {
+        txtCardNumber.text = ""
+        txtExpiryMonth.text = ""
+        txtExpiryYear.text = ""
+        txtSecurityCode.text = ""
+        txtFirstName.text = ""
+        txtLastName.text = ""
     }
 }

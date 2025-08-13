@@ -71,7 +71,7 @@ class ProductDetailViewController: UIViewController {
         if let product = selectedProduct {
             lblTitle.text = product.strProductName
             lblDescription.text = product.strProductDescription
-            lblPrice.text = "\(product.doubleProductPrice)"
+            lblPrice.text = "$\(product.doubleProductPrice)"
             lblRattings.text = "\(product.floatProductRating) Star Ratings"
             imgProduct.image = UIImage(named: product.strProductImage)
         }
@@ -142,6 +142,9 @@ class ProductDetailViewController: UIViewController {
             appDelegate.arrCart.append(newProduct)
             print("Added \(productToAdd.strProductName) with quantity \(currentQuantity).")
         }
+        
+        let cartDictArray = appDelegate.arrCart.map { productToDict($0) }
+        saveCartToUserDefaults(cartArray: cartDictArray)
     }
     
     @IBAction func btnCartClick(_ sender: Any) {

@@ -26,6 +26,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.collectionViewHome.collectionViewLayout.invalidateLayout()
         }
         
+        let isSearching = !(txtSearch.text ?? "").isEmpty // new addede
+        
         switch indexPath.row {
         case 0:
             cell.collectionType = .category
@@ -41,8 +43,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.lblCollectionViewTitle.isHidden = false
             cell.btnViewAll.isHidden = false
             cell.lblCollectionViewTitle.text = "Popular"
+            cell.lblCollectionViewTitle.text = isSearching ? "Search Results" : "Popular" // new
             cell.delegate = self
-            if selectedCategory == .All {
+            if isSearching {
+                cell.products = filteredProductData.filter { $0.floatProductRating >= 4.0 && $0.floatProductRating < 4.5 }
+            } else if selectedCategory == .All {
                 cell.products = arrProductData.filter { $0.floatProductRating >= 4.0 && $0.floatProductRating < 4.5 }
             } else {
                 cell.products = arrProductData.filter {
@@ -56,10 +61,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.collectionType = .mostPopular
             cell.lblCollectionViewTitle.isHidden = false
             cell.btnViewAll.isHidden = false
+            cell.lblCollectionViewTitle.text = isSearching ? "Search Results" : "Most Popular"
             cell.lblCollectionViewTitle.text = "Most Popular"
             cell.collectionViewHomeHeight.constant = 185
             cell.delegate = self
-            if selectedCategory == .All {
+            if isSearching {
+                cell.products = filteredProductData.filter { $0.floatProductRating >= 4.5 && $0.floatProductRating <= 5.0 }
+            } else if selectedCategory == .All {
                 cell.products = arrProductData.filter { $0.floatProductRating >= 4.5 && $0.floatProductRating <= 5.0 }
             } else {
                 cell.products = arrProductData.filter {

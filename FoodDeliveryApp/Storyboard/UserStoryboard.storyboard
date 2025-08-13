@@ -54,6 +54,9 @@
                                                         <color key="textColor" name="LabelPrimaryColor"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="Oz4-AG-7JY" id="iZv-ch-bKA"/>
+                                                        </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fhz-p2-32r">
                                                         <rect key="frame" x="34" y="231" width="325" height="56"/>
@@ -64,6 +67,9 @@
                                                         <color key="textColor" name="LabelPrimaryColor"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="Oz4-AG-7JY" id="Olu-vH-T68"/>
+                                                        </connections>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2w0-l5-NG3">
                                                         <rect key="frame" x="34" y="315" width="325" height="56"/>
@@ -297,6 +303,9 @@
                                                         <color key="textColor" name="LabelPrimaryColor"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="dOy-Gm-jfb" id="DE0-6I-dvU"/>
+                                                        </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y4L-1Q-GVz">
                                                         <rect key="frame" x="34" y="221" width="325" height="56"/>
@@ -307,6 +316,9 @@
                                                         <color key="textColor" name="LabelPrimaryColor"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="dOy-Gm-jfb" id="kCP-3Y-g0K"/>
+                                                        </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile No" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DZJ-et-a2h">
                                                         <rect key="frame" x="34" y="305" width="325" height="56"/>
@@ -317,6 +329,9 @@
                                                         <color key="textColor" name="LabelPrimaryColor"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="dOy-Gm-jfb" id="hj3-Mi-DMT"/>
+                                                        </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2OA-8g-yN5">
                                                         <rect key="frame" x="34" y="389" width="325" height="56"/>
@@ -327,6 +342,9 @@
                                                         <color key="textColor" name="LabelPrimaryColor"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="dOy-Gm-jfb" id="q7v-DX-FH1"/>
+                                                        </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cm3-A1-dcJ">
                                                         <rect key="frame" x="34" y="473" width="325" height="56"/>
@@ -337,6 +355,9 @@
                                                         <color key="textColor" name="LabelPrimaryColor"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="dOy-Gm-jfb" id="8ML-Zy-Hku"/>
+                                                        </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirem Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XCJ-vX-Ayd">
                                                         <rect key="frame" x="34" y="557" width="325" height="56"/>
@@ -347,6 +368,9 @@
                                                         <color key="textColor" name="LabelPrimaryColor"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="dOy-Gm-jfb" id="AX8-g5-BYG"/>
+                                                        </connections>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="93c-EF-7gE">
                                                         <rect key="frame" x="34" y="641" width="325" height="56"/>
@@ -547,6 +571,9 @@ link to  create a new password via email</string>
                                         <color key="textColor" name="LabelPrimaryColor"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Xqj-Hh-W1r" id="UPb-75-eG6"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjC-3J-f3s">
                                         <rect key="frame" x="34" y="282" width="325" height="56"/>
@@ -637,6 +664,9 @@ link to  create a new password via email</string>
                                         <color key="textColor" name="LabelPrimaryColor"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="vk9-nt-8s7" id="XEe-gA-tTp"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEw-zY-Zez">
                                         <rect key="frame" x="34" y="360" width="325" height="56"/>
@@ -662,6 +692,9 @@ link to  create a new password via email</string>
                                         <color key="textColor" name="LabelPrimaryColor"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="vk9-nt-8s7" id="RY3-1X-KfG"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DFE-GE-pYb">
                                         <rect key="frame" x="303" y="192" width="56" height="56"/>

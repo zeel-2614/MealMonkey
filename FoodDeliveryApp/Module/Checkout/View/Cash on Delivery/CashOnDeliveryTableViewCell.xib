@@ -38,7 +38,7 @@
                                             <color key="titleColor" name="ButtonBackgroundColor"/>
                                         </state>
                                         <connections>
-                                            <action selector="btnSelectClick:" destination="anz-ce-6ud" eventType="touchUpInside" id="bBR-3g-seY"/>
+                                            <action selector="btnSelectClick:" destination="anz-ce-6ud" eventType="touchUpInside" id="ELF-CN-pWE"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -62,7 +62,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="FUG-Xg-8kq"/>
             <connections>
-                <outlet property="btnSelect" destination="tu6-qK-R7n" id="2Ra-B7-yc7"/>
+                <outlet property="btnSelect" destination="tu6-qK-R7n" id="GsP-Ua-EWa"/>
                 <outlet property="stackView" destination="PyJ-Qo-nLg" id="6gr-TF-8JP"/>
                 <outlet property="viewCOD" destination="jx2-wv-73n" id="g7w-y1-TJW"/>
             </connections>

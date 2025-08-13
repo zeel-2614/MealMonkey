@@ -23,13 +23,4 @@ class OrderListTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-//    func configure(with products: [ProductModel], orderNumber: Int) {
-//        lblOrderNumber.text = "Order No: \(orderNumber)"
-//        if let firstProduct = products.first {
-//            lblProductName.text = "First Product: \(firstProduct.strProductName)"
-//            lblTotal.text = "Price: $\(String(format: "%.2f", firstProduct.doubleProductPrice))"
-//            imgOrderedProduct.image = UIImage(named: firstProduct.strProductImage)
-//        }
-//    }
 }

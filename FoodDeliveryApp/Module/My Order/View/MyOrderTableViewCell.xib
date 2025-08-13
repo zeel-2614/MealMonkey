@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -46,6 +47,7 @@
                         </subviews>
                     </stackView>
                 </subviews>
+                <color key="backgroundColor" name="orderCellBackgorundColor"/>
                 <constraints>
                     <constraint firstItem="T2e-9P-VGK" firstAttribute="top" secondItem="hix-M8-Rwv" secondAttribute="top" constant="10" id="Vw8-5K-A9N"/>
                     <constraint firstAttribute="bottom" secondItem="T2e-9P-VGK" secondAttribute="bottom" constant="10" id="jwW-yE-k5V"/>
@@ -62,4 +64,9 @@
             <point key="canvasLocation" x="-238.1679389312977" y="25"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="orderCellBackgorundColor">
+            <color red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

@@ -9,14 +9,15 @@ import UIKit
 
 class OrderListViewController: UIViewController {
     
+    @IBOutlet weak var lblEmptyOrder: UILabel!
     @IBOutlet weak var tblOrderList: UITableView!
     
-    var orders: [[ProductModel]] {
-        return (UIApplication.shared.delegate as? AppDelegate)?.arrOrders ?? []
-    }
+    var orders: [[ProductModel]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        orders = loadOrdersFromUserDefaults()
         setLeftAlignedTitleWithBack("Order List", target: self, action: #selector(myOrderBackBtn))
         
         // Do any additional setup after loading the view.
@@ -25,5 +26,17 @@ class OrderListViewController: UIViewController {
     
     @objc func myOrderBackBtn() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    private func updateEmptyOrderUI() {
+        let isOrderEmpty = orders.isEmpty
+        lblEmptyOrder.isHidden = !isOrderEmpty
+        tblOrderList.isHidden = isOrderEmpty
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateEmptyOrderUI()
+        tblOrderList.reloadData()
     }
 }

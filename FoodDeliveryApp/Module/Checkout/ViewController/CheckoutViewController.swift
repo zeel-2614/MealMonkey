@@ -7,11 +7,40 @@
 
 import UIKit
 
-class CheckoutViewController: UIViewController {
+class CheckoutViewController: UIViewController, MapViewControllerDelegate {
+    func didSelectAddress(_ address: String) {
+        // Remove duplicate place name at start if repeated
+        var cleanedAddress = address
+        if let firstComma = address.firstIndex(of: ",") {
+            let firstPart = address[..<firstComma].trimmingCharacters(in: .whitespaces)
+            let rest = address[address.index(after: firstComma)...].trimmingCharacters(in: .whitespaces)
+            
+            if rest.hasPrefix(firstPart) {
+                cleanedAddress = rest // drop the duplicate
+            }
+        }
+        
+        // Now split into two lines max
+        if let commaIndex = cleanedAddress.firstIndex(of: ",") {
+            let firstLine = cleanedAddress[..<commaIndex].trimmingCharacters(in: .whitespaces)
+            let secondLine = cleanedAddress[address.index(after: commaIndex)...].trimmingCharacters(in: .whitespaces)
+            lblDeliveryAddress.text = "\(firstLine)\n\(secondLine)"
+        } else {
+            lblDeliveryAddress.text = cleanedAddress
+        }
+        
+        lblDeliveryAddress.numberOfLines = 2
+        lblDeliveryAddress.lineBreakMode = .byTruncatingTail
+    }
     
-    
+    @IBOutlet weak var lblDeliveryAddress: UILabel!
+    @IBOutlet weak var lblTotal: UILabel!
+    @IBOutlet weak var lblDiscount: UILabel!
+    @IBOutlet weak var lblDeliveryCost: UILabel!
+    @IBOutlet weak var lblSubTotal: UILabel!
     @IBOutlet weak var btnCross: UIButton!
     @IBOutlet weak var btnTrackYourOrder: UIButton!
+    @IBOutlet weak var btnBackToHome: UIButton!
     @IBOutlet weak var btnThankYouCross: UIButton!
     @IBOutlet weak var viewThankYou2: UIView!
     @IBOutlet weak var viewThankYou: UIView!
@@ -29,8 +58,12 @@ class CheckoutViewController: UIViewController {
     @IBOutlet weak var btnChangeAddress: UIButton!
     @IBOutlet weak var btnAddCard: UIButton!
     @IBOutlet weak var btnSendOrder: UIButton!
-    var arrCards : [String] = ["Card -1 ", "card -2 ", "card -3 "]
     
+    var arrCards : [String] = ["Card -1 ", "card -2 ", "card -3 "]
+    var selectedPaymentIndex: Int = 0 // Default COD is selected
+    var checkoutSubtotal: Double = 0.0
+    var checkoutDeliveryCost: Double = 0.0
+    var checkoutTotal: Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,20 +74,8 @@ class CheckoutViewController: UIViewController {
         viewEnterCard.isHidden = true
         viewTransparent.isHidden = true
         viewThankYou.isHidden = true
-        
-        viewAddCard2.layer.cornerRadius = 20
-        viewAddCard2.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        viewAddCard2.layer.shadowColor = UIColor.black.cgColor
-        viewAddCard2.layer.shadowOpacity = 0.2
-        viewAddCard2.layer.shadowOffset = CGSize(width: 0, height: -2)
-        viewAddCard2.layer.shadowRadius = 10
-        
-        viewThankYou2.layer.cornerRadius = 20
-        viewThankYou2.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        viewThankYou2.layer.shadowColor = UIColor.black.cgColor
-        viewThankYou2.layer.shadowOpacity = 0.2
-        viewThankYou2.layer.shadowOffset = CGSize(width: 0, height: -2)
-        viewThankYou2.layer.shadowRadius = 10
+        styleBottomRoundedView(viewAddCard2)
+        styleBottomRoundedView(viewThankYou2)
         
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .systemGray, textField: [txtCardNumber, txtExpiryMonth, txtExpiryYear, txtSecurityCode, txtFirstName, txtLastName, btnEnterCard, btnTrackYourOrder, btnSendOrder])
         
@@ -65,6 +86,16 @@ class CheckoutViewController: UIViewController {
         tblCheckout.register(UINib(nibName: "CashOnDeliveryTableViewCell", bundle: nil), forCellReuseIdentifier: "CashOnDeliveryTableViewCell")
         tblCheckout.register(UINib(nibName: "GmailTableViewCell", bundle: nil), forCellReuseIdentifier: "GmailTableViewCell")
         tblCheckout.register(UINib(nibName: "VisaTableViewCell", bundle: nil), forCellReuseIdentifier: "VisaTableViewCell")
+        
+        if let savedCards = UserDefaults.standard.array(forKey: "savedCards") as? [String] {
+            arrCards = savedCards
+        }
+        
+        lblSubTotal.text = "$\(String(format: "%.2f", checkoutSubtotal))"
+        lblDeliveryCost.text = "$\(String(format: "%.2f", checkoutDeliveryCost))"
+        lblTotal.text = "$\(String(format: "%.2f", checkoutTotal))"
+        
+        tblCheckout.reloadData()
     }
     
     @objc func checkoutBackBtn() {
@@ -72,7 +103,6 @@ class CheckoutViewController: UIViewController {
     }
     
     func setPadding(textfield: [UITextField]){
-        
         for item in textfield {
             item.setPadding(left: 34, right: 34)
         }
@@ -81,6 +111,7 @@ class CheckoutViewController: UIViewController {
     @IBAction func btnChangeAddressClick(_ sender: Any) {
         let storyboard = UIStoryboard(name: "MoreStoryboard", bundle: nil)
         if let VC = storyboard.instantiateViewController(withIdentifier: "AddressViewController") as? AddressViewController{
+            VC.delegate = self  // ✅ Set delegate here
             self.navigationController?.pushViewController(VC, animated: true)
         }
     }
@@ -114,6 +145,50 @@ class CheckoutViewController: UIViewController {
     }
     
     @IBAction func btnEnterCardClick(_ sender: Any) {
+        guard let cardNumber = txtCardNumber.text, cardNumber.count == 16 else {
+            showAlert(message: "Card number must be exactly 16 digits.")
+            return
+        }
+        guard let expiryMonth = txtExpiryMonth.text, expiryMonth.count == 2 else {
+            showAlert(message: "Expiry month must be 2 digits.")
+            return
+        }
+        guard let expiryYear = txtExpiryYear.text, expiryYear.count == 2 else {
+            showAlert(message: "Expiry year must be 2 digits.")
+            return
+        }
+        
+        // ✅ Confirmation Alert before saving
+        let confirmAlert = UIAlertController(title: "Confirm Card",
+                                             message: "Do you want to save this card?",
+                                             preferredStyle: .alert)
+        
+        confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        confirmAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
+            // Load existing cards from UserDefaults
+            var savedCards = UserDefaults.standard.array(forKey: "savedCards") as? [String] ?? []
+            savedCards.append(cardNumber)
+            
+            // Save back to UserDefaults
+            UserDefaults.standard.set(savedCards, forKey: "savedCards")
+            
+            // Update local arrCards
+            self.arrCards = savedCards
+            self.tblCheckout.reloadData()
+            
+            // Close enter card view
+            self.btnCrossClikc(sender)
+        }))
+        
+        present(confirmAlert, animated: true)
+        tblCheckout.reloadData()
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Invalid Input", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
     
     @IBAction func btnThankYouCrossClick(_ sender: Any) {
@@ -141,6 +216,22 @@ class CheckoutViewController: UIViewController {
         }
     }
     
+    func styleBottomRoundedView(_ view: UIView) {
+        view.layer.cornerRadius = 20
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset = CGSize(width: 0, height: -2)
+        view.layer.shadowRadius = 10
+    }
+    
     @IBAction func btnTrackYourOrderClick(_ sender: Any) {
+    }
+    
+    @IBAction func btnBackToHomeClick(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "HomeStoryboard", bundle: nil)
+        if let mlvc = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController {
+            self.navigationController?.pushViewController(mlvc, animated: true)
+        }
     }
 }

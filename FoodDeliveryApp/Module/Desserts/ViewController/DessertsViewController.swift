@@ -19,6 +19,10 @@ class DessertsViewController: UIViewController {
         }
     }
     
+    // Search filtered list
+    var filteredProducts: [ProductModel] = []
+    var isSearching: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,6 +35,9 @@ class DessertsViewController: UIViewController {
         tblDesserts.showsVerticalScrollIndicator = false
         
         tblDesserts.register(UINib(nibName: "DessertsTableViewCell", bundle: nil), forCellReuseIdentifier: "DessertsTableViewCell")
+        
+        // Default table data is unfiltered
+        filteredProducts = arrProducts
         
         switch selectedProductType {
         case .food:
@@ -54,6 +61,25 @@ class DessertsViewController: UIViewController {
                 action: #selector(dessertBackBtn)
             )
         }
+        
+        txtSearchDesserts.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
+    }
+    
+    @objc func searchTextChanged(_ textField: UITextField) {
+        let searchText = textField.text?.lowercased() ?? ""
+        
+        if searchText.isEmpty {
+            isSearching = false
+            filteredProducts = arrProducts
+        } else {
+            isSearching = true
+            filteredProducts = arrProducts.filter {
+                $0.strProductName.lowercased().contains(searchText) ||
+                $0.strProductDescription.lowercased().contains(searchText)
+            }
+        }
+        
+        tblDesserts.reloadData()
     }
     
     @objc func dessertBackBtn() {

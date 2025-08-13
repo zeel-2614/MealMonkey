@@ -45,7 +45,7 @@
                                             <color key="titleColor" name="ButtonBackgroundColor"/>
                                         </state>
                                         <connections>
-                                            <action selector="btnSelectClick:" destination="ELd-Rm-oHL" eventType="touchUpInside" id="xuf-nR-lMF"/>
+                                            <action selector="btnSelectClick:" destination="ELd-Rm-oHL" eventType="touchUpInside" id="Db3-dw-MqX"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -69,7 +69,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="eTn-8y-b9F"/>
             <connections>
-                <outlet property="btnSelect" destination="HCz-4B-GOP" id="5CN-5i-6DN"/>
+                <outlet property="btnSelect" destination="HCz-4B-GOP" id="KFl-gD-lWm"/>
                 <outlet property="stackViewGmail" destination="Zks-3q-7MR" id="TFc-Ft-xf8"/>
                 <outlet property="viewGmail" destination="zEf-JB-cBr" id="lPU-Mk-VuW"/>
             </connections>

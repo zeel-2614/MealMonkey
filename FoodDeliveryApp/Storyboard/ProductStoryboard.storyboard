@@ -18,6 +18,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cart is empty" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNN-fl-BFu">
+                                <rect key="frame" x="150.66666666666666" y="417" width="91.666666666666657" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="520-7C-sTf">
                                 <rect key="frame" x="0.0" y="118" width="393" height="575"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -50,12 +56,15 @@
                             <constraint firstItem="Udh-nI-RDH" firstAttribute="trailing" secondItem="VLd-3b-7m7" secondAttribute="trailing" constant="21" id="6im-nd-XxO"/>
                             <constraint firstItem="VLd-3b-7m7" firstAttribute="leading" secondItem="Udh-nI-RDH" secondAttribute="leading" constant="21" id="AOn-id-Wkn"/>
                             <constraint firstItem="520-7C-sTf" firstAttribute="leading" secondItem="Udh-nI-RDH" secondAttribute="leading" id="DMi-nm-kFL"/>
+                            <constraint firstItem="FNN-fl-BFu" firstAttribute="centerY" secondItem="FCY-Dm-cXq" secondAttribute="centerY" id="K0r-Fb-SFh"/>
                             <constraint firstItem="VLd-3b-7m7" firstAttribute="top" secondItem="520-7C-sTf" secondAttribute="bottom" constant="15" id="Lpc-c6-b7x"/>
+                            <constraint firstItem="FNN-fl-BFu" firstAttribute="centerX" secondItem="FCY-Dm-cXq" secondAttribute="centerX" id="O30-9I-3I6"/>
                             <constraint firstItem="Udh-nI-RDH" firstAttribute="bottom" secondItem="VLd-3b-7m7" secondAttribute="bottom" constant="20" id="hj2-LU-LFC"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnPlaceOrder" destination="VLd-3b-7m7" id="1ff-x1-YjV"/>
+                        <outlet property="lblEmptyCart" destination="FNN-fl-BFu" id="dgV-qa-7Qh"/>
                         <outlet property="tblCartView" destination="520-7C-sTf" id="Qu6-K5-hQi"/>
                     </connections>
                 </viewController>
@@ -71,6 +80,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order List is Empty" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7y-6f-emK">
+                                <rect key="frame" x="131.33333333333337" y="417" width="130.66666666666663" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cqd-xj-ehb">
                                 <rect key="frame" x="0.0" y="118" width="393" height="666"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -85,11 +100,14 @@
                         <constraints>
                             <constraint firstItem="cqd-xj-ehb" firstAttribute="top" secondItem="KrI-54-8Bg" secondAttribute="top" id="T22-0d-p0F"/>
                             <constraint firstItem="cqd-xj-ehb" firstAttribute="leading" secondItem="KrI-54-8Bg" secondAttribute="leading" id="cQU-t4-new"/>
+                            <constraint firstItem="Q7y-6f-emK" firstAttribute="centerX" secondItem="CjR-CK-czv" secondAttribute="centerX" id="mKm-hu-NXL"/>
                             <constraint firstItem="KrI-54-8Bg" firstAttribute="bottom" secondItem="cqd-xj-ehb" secondAttribute="bottom" id="oPo-Ct-akf"/>
                             <constraint firstItem="KrI-54-8Bg" firstAttribute="trailing" secondItem="cqd-xj-ehb" secondAttribute="trailing" id="otL-3W-7t9"/>
+                            <constraint firstItem="Q7y-6f-emK" firstAttribute="centerY" secondItem="CjR-CK-czv" secondAttribute="centerY" id="vHd-3z-5s6"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="lblEmptyOrder" destination="Q7y-6f-emK" id="DgG-KO-2N9"/>
                         <outlet property="tblOrderList" destination="cqd-xj-ehb" id="j5E-fy-RjW"/>
                     </connections>
                 </viewController>
