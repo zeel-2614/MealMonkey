@@ -7,30 +7,9 @@
 
 import UIKit
 
-class CheckoutViewController: UIViewController, MapViewControllerDelegate {
+class CheckoutViewController: UIViewController, ChangeAddressDelegate {
     func didSelectAddress(_ address: String) {
-        // Remove duplicate place name at start if repeated
-        var cleanedAddress = address
-        if let firstComma = address.firstIndex(of: ",") {
-            let firstPart = address[..<firstComma].trimmingCharacters(in: .whitespaces)
-            let rest = address[address.index(after: firstComma)...].trimmingCharacters(in: .whitespaces)
-            
-            if rest.hasPrefix(firstPart) {
-                cleanedAddress = rest // drop the duplicate
-            }
-        }
-        
-        // Now split into two lines max
-        if let commaIndex = cleanedAddress.firstIndex(of: ",") {
-            let firstLine = cleanedAddress[..<commaIndex].trimmingCharacters(in: .whitespaces)
-            let secondLine = cleanedAddress[address.index(after: commaIndex)...].trimmingCharacters(in: .whitespaces)
-            lblDeliveryAddress.text = "\(firstLine)\n\(secondLine)"
-        } else {
-            lblDeliveryAddress.text = cleanedAddress
-        }
-        
-        lblDeliveryAddress.numberOfLines = 2
-        lblDeliveryAddress.lineBreakMode = .byTruncatingTail
+        lblDeliveryAddress.text = address
     }
     
     @IBOutlet weak var lblDeliveryAddress: UILabel!
@@ -60,27 +39,17 @@ class CheckoutViewController: UIViewController, MapViewControllerDelegate {
     @IBOutlet weak var btnSendOrder: UIButton!
     
     var arrCards : [String] = ["Card -1 ", "card -2 ", "card -3 "]
-    var selectedPaymentIndex: Int = 0 // Default COD is selected
+    var selectedPaymentIndex: Int = 0
     var checkoutSubtotal: Double = 0.0
     var checkoutDeliveryCost: Double = 0.0
     var checkoutTotal: Double = 0.0
+    var discount: Double = 4.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setLeftAlignedTitleWithBack("Checkout",
-                                    target: self,
-                                    action: #selector(checkoutBackBtn))
+        setLeftAlignedTitleWithBack("Checkout", target: self, action: #selector(checkoutBackBtn))
         
-        viewEnterCard.isHidden = true
-        viewTransparent.isHidden = true
-        viewThankYou.isHidden = true
-        styleBottomRoundedView(viewAddCard2)
-        styleBottomRoundedView(viewThankYou2)
-        
-        viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .systemGray, textField: [txtCardNumber, txtExpiryMonth, txtExpiryYear, txtSecurityCode, txtFirstName, txtLastName, btnEnterCard, btnTrackYourOrder, btnSendOrder])
-        
-        setPadding(textfield: [txtCardNumber, txtFirstName, txtLastName, txtExpiryYear, txtExpiryMonth, txtSecurityCode])
-        
+        setupUI()
         tblCheckout.backgroundColor = .clear
         tblCheckout.showsVerticalScrollIndicator = false
         tblCheckout.register(UINib(nibName: "CashOnDeliveryTableViewCell", bundle: nil), forCellReuseIdentifier: "CashOnDeliveryTableViewCell")
@@ -91,11 +60,15 @@ class CheckoutViewController: UIViewController, MapViewControllerDelegate {
             arrCards = savedCards
         }
         
-        lblSubTotal.text = "$\(String(format: "%.2f", checkoutSubtotal))"
-        lblDeliveryCost.text = "$\(String(format: "%.2f", checkoutDeliveryCost))"
-        lblTotal.text = "$\(String(format: "%.2f", checkoutTotal))"
+        updateCheckoutLabels()
         
         tblCheckout.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let savedAddress = UserDefaults.standard.string(forKey: "currentAddress") {
+            lblDeliveryAddress.text = savedAddress
+        }
     }
     
     @objc func checkoutBackBtn() {
@@ -158,7 +131,7 @@ class CheckoutViewController: UIViewController, MapViewControllerDelegate {
             return
         }
         
-        // ✅ Confirmation Alert before saving
+        // Confirmation Alert before saving
         let confirmAlert = UIAlertController(title: "Confirm Card",
                                              message: "Do you want to save this card?",
                                              preferredStyle: .alert)
@@ -223,6 +196,44 @@ class CheckoutViewController: UIViewController, MapViewControllerDelegate {
         view.layer.shadowOpacity = 0.2
         view.layer.shadowOffset = CGSize(width: 0, height: -2)
         view.layer.shadowRadius = 10
+    }
+    
+    private func setupUI() {
+        viewEnterCard.isHidden = true
+        viewTransparent.isHidden = true
+        viewThankYou.isHidden = true
+        
+        styleBottomRoundedView(viewAddCard2)
+        styleBottomRoundedView(viewThankYou2)
+        
+        viewStyle(
+            cornerRadius: 28,
+            borderWidth: 0,
+            borderColor: .systemGray,
+            textField: [
+                txtCardNumber, txtExpiryMonth, txtExpiryYear,
+                txtSecurityCode, txtFirstName, txtLastName,
+                btnEnterCard, btnTrackYourOrder, btnSendOrder
+            ]
+        )
+        
+        setPadding(textfield: [
+            txtCardNumber, txtFirstName, txtLastName,
+            txtExpiryYear, txtExpiryMonth, txtSecurityCode
+        ])
+    }
+    
+    private func updateCheckoutLabels() {
+        lblSubTotal.text = formatPrice(checkoutSubtotal)
+        lblDiscount.text = formatPrice(discount)
+        lblDeliveryCost.text = formatPrice(checkoutDeliveryCost)
+        
+        let discountedTotal = max(0, (checkoutSubtotal - discount) + checkoutDeliveryCost)
+        lblTotal.text = formatPrice(discountedTotal)
+    }
+    
+    private func formatPrice(_ value: Double) -> String {
+        return "$\(String(format: "%.2f", value))"
     }
     
     @IBAction func btnTrackYourOrderClick(_ sender: Any) {

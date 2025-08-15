@@ -9,93 +9,163 @@ import UIKit
 import MapKit
 import CoreLocation
 
-protocol MapViewControllerDelegate: AnyObject {
+protocol ChangeAddressDelegate: AnyObject {
     func didSelectAddress(_ address: String)
 }
 
-class AddressViewController: UIViewController {
+/// A view controller that allows users to search, select, and confirm an address using a map view.
+class AddressViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, MKMapViewDelegate {
     
-    weak var delegate: MapViewControllerDelegate?
+    weak var delegate: ChangeAddressDelegate?
     @IBOutlet weak var btnRedirectCurrentAddress: UIButton!
     @IBOutlet weak var btnSavedAddress: UIButton!
     @IBOutlet weak var imgStar: UIImageView!
     @IBOutlet weak var txtSearchAddress: UITextField!
     @IBOutlet weak var mapView: MKMapView!
     
+    /// Location manager for fetching device's current location.
     let locationManager = CLLocationManager()
+    /// Geocoder for converting coordinates to human-readable addresses and vice versa.
     let geocoder = CLGeocoder()
     
+    /// Called after the controller's view is loaded into memory.
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.delegate = self
+        setupUI()
+        setupMap()
+    }
+    /// Sets up the UI components.
+    private func setupUI() {
+        /// Applies styling to the search text field.
+        viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .gray, textField: [txtSearchAddress])
+        setPadding(textfield: [txtSearchAddress])
+        mapView.delegate = self
         
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        checkLocationPermission()
-        mapView.showsUserLocation = true
-        let location = CLLocationCoordinate2D(
-            latitude: 23.0225,
-            longitude: 72.5714
-        )
-        
-        centerMap(on: location)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.addPinAtCenterAndReverseGeocode()
-        }
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
-        mapView.addGestureRecognizer(tapGesture)
-        
+        /// Adds a back button with a title in the navigation bar.
         setLeftAlignedTitleWithBack(
             "Change Address",
             target: self,
-            action: #selector(backBtnTapped)
+            action: #selector(BackBtnTapped)
         )
-        setLeftAlignedTitleWithBack("Change Address", target: self, action: #selector(backBtnTapped))
+        /// Adds a tap gesture recognizer to the map view for placing pins.
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(mapTapped(_:))
+        )
+        mapView.addGestureRecognizer(tapGesture)
         
-        viewStyle(cornerRadius: txtSearchAddress.frame.size.height/2, borderWidth: 0, borderColor: .systemGray, textField: [txtSearchAddress])
-        
-        setPadding(textfield: [txtSearchAddress])
+        /// Adds an action to trigger address search when the user presses return.
+        txtSearchAddress.addTarget(
+            self,
+            action: #selector(searchAddress),
+            for: .editingDidEndOnExit
+        )
     }
     
+    /// Adds left and right padding to given text fields.
+    func setPadding(textfield: [UITextField]){
+        for item in textfield {
+            item.setPadding(left: 34, right: 34)
+        }
+    }
+    
+    /// Sets up the map with a default location and a pin.
+    private func setupMap() {
+        mapView.showsUserLocation = true
+        // Default location (e.g., your city)
+        let defaultLocation = CLLocationCoordinate2D(
+            latitude: 23.0225,
+            longitude: 72.5714
+        )
+        centerMap(on: defaultLocation)
+        addPinAtCenterAndReverseGeocode()
+    }
+    // MARK: - Map tap
+    /// Triggered when the user taps on the map.
     @objc func mapTapped(_ gesture: UITapGestureRecognizer) {
         let touchPoint = gesture.location(in: mapView)
         let coordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-        
-        // Remove old pins
-        mapView.removeAnnotations(mapView.annotations.filter { !($0 is MKUserLocation) })
-        
-        // Add new pin
+        updatePinAndAddress(at: coordinate)
+    }
+    
+    /// Updates the pin on the map and fetches the address for a given coordinate.
+    private func updatePinAndAddress(at coordinate: CLLocationCoordinate2D) {
+        // Remove previous pins except user location
+        mapView.removeAnnotations(
+            mapView.annotations.filter { !($0 is MKUserLocation) }
+        )
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
         annotation.title = "Loading address..."
         mapView.addAnnotation(annotation)
-        
-        // Get location details
-        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        CLGeocoder().reverseGeocodeLocation(location) { [weak self] placemarks, error in
+        let location = CLLocation(
+            latitude: coordinate.latitude,
+            longitude: coordinate.longitude
+        )
+        /// Reverse geocodes the coordinate to get a human-readable address.
+        geocoder.reverseGeocodeLocation(location) {
+            [weak self] placemarks, error in
             guard let self = self else { return }
+            var fullAddress = "Unknown Location"
             if let placemark = placemarks?.first {
-                var addressComponents: [String] = []
-                if let name = placemark.name { addressComponents.append(name) }
-                if let thoroughfare = placemark.thoroughfare { addressComponents.append(thoroughfare) }
-                if let subLocality = placemark.subLocality { addressComponents.append(subLocality) }
-                if let locality = placemark.locality { addressComponents.append(locality) }
-                if let administrativeArea = placemark.administrativeArea { addressComponents.append(administrativeArea) }
-                if let postalCode = placemark.postalCode { addressComponents.append(postalCode) }
-                if let country = placemark.country { addressComponents.append(country) }
-                let fullAddress = addressComponents.joined(separator: ", ")
-                annotation.title = placemark.name ?? "Selected Location"
-                annotation.subtitle = fullAddress //
-            } else {
-                annotation.title = "Lat: \(coordinate.latitude), Lon: \(coordinate.longitude)"
-                annotation.subtitle = nil
+                let name = placemark.name ?? ""
+                let city = placemark.locality ?? ""
+                let country = placemark.country ?? ""
+                fullAddress = "\(name), \(city), \(country)"
+                annotation.title = name
+                annotation.subtitle = "\(city), \(country)"
             }
-            
-            // Refresh annotation view
             self.mapView.selectAnnotation(annotation, animated: true)
+            self.delegate?.didSelectAddress(fullAddress)
+            locationManager.stopUpdatingLocation()
+            // Store current location in UserDefaults
+            UserDefaults.standard.set(fullAddress, forKey: "currentAddress")
         }
     }
+    // MARK: - Search Address
+    /// Searches for an address entered in the text field and moves the map to that location.
+    @objc func searchAddress() {
+        guard let query = txtSearchAddress.text, !query.isEmpty else { return }
+        geocoder.geocodeAddressString(query) { [weak self] placemarks, error in
+            guard let self = self, let placemark = placemarks?.first,
+                  let location = placemark.location
+            else { return }
+            let coordinate = location.coordinate
+            self.centerMap(on: coordinate)
+            self.updatePinAndAddress(at: coordinate)
+        }
+        txtSearchAddress.resignFirstResponder()
+    }
+    // MARK: - Current Location
+    /// Action for the "Current Location" button. Starts fetching the user's location.
+    @IBAction func btnCurrentLocationTapped(_ sender: Any) {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        checkLocationPermission()
+        locationManager.startUpdatingLocation() // Start fetching current location
+    }
+    // MARK: - Map helpers
+    /// Centers the map on a specific location.
+    func centerMap(
+        on location: CLLocationCoordinate2D,
+        regionRadius: CLLocationDistance = 1000
+    ) {
+        let region = MKCoordinateRegion(
+            center: location,
+            latitudinalMeters: regionRadius,
+            longitudinalMeters: regionRadius
+        )
+        mapView.setRegion(region, animated: true)
+    }
     
+    /// Adds a pin at the map's center and fetches the address.
+    func addPinAtCenterAndReverseGeocode() {
+        let centerCoord = mapView.centerCoordinate
+        updatePinAndAddress(at: centerCoord)
+    }
+    // MARK: - Location Permission
+    /// Checks and requests location permission from the user.
     func checkLocationPermission() {
         if #available(iOS 14.0, *) {
             switch locationManager.authorizationStatus {
@@ -120,6 +190,7 @@ class AddressViewController: UIViewController {
         }
     }
     
+    /// Shows an alert prompting the user to enable location permissions.
     func showPermissionAlert() {
         let alert = UIAlertController(
             title: "Location Permission Needed",
@@ -127,9 +198,7 @@ class AddressViewController: UIViewController {
                 "Please enable location access in Settings to use this feature.",
             preferredStyle: .alert
         )
-        alert.addAction(
-            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        )
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alert.addAction(
             UIAlertAction(
                 title: "Open Settings",
@@ -145,135 +214,83 @@ class AddressViewController: UIViewController {
         )
         present(alert, animated: true)
     }
-    
-    func locationManager(
-        _ manager: CLLocationManager,
-        didUpdateLocations locations: [CLLocation]
-    ) {
+    // MARK: - CLLocationManagerDelegate
+    /// Called when the location manager updates the user's location.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         
-        let region = MKCoordinateRegion(
-            center: location.coordinate,
-            span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        )
-        mapView.setRegion(region, animated: true)
+        let coordinate = location.coordinate
+        centerMap(on: coordinate)
         
-        let annotations = mapView.annotations.filter { !($0 is MKUserLocation) }
-        mapView.removeAnnotations(annotations)
-        
-        // Add pin for current location
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = location.coordinate
-        annotation.title = "You are here"
-        mapView.addAnnotation(annotation)
-        
-        // Stop further updates to save battery
+        geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
+            guard let self = self else { return }
+            
+            var fullAddress = "Unknown Location"
+            if let placemark = placemarks?.first {
+                let name = placemark.name ?? ""
+                let city = placemark.locality ?? ""
+                let country = placemark.country ?? ""
+                fullAddress = "\(name), \(city), \(country)"
+            }
+            
+            // Save to UserDefaults
+            UserDefaults.standard.set(fullAddress, forKey: "currentAddress")
+            UserDefaults.standard.synchronize()
+            
+            // Update pin on map
+            self.updatePinAndAddress(at: coordinate)
+        }
         locationManager.stopUpdatingLocation()
     }
     
+    /// Called when location manager fails to get location.
     func locationManager(
         _ manager: CLLocationManager,
         didFailWithError error: Error
     ) {
         print("Failed to get location: \(error.localizedDescription)")
     }
-    
-    func centerMap(
-        on location: CLLocationCoordinate2D,
-        regionRadius: CLLocationDistance = 1000
-    ) {
-        let coordinateRegion = MKCoordinateRegion(
-            center: location,
-            latitudinalMeters: regionRadius,
-            longitudinalMeters: regionRadius
-        )
-        mapView.setRegion(coordinateRegion, animated: true)
-    }
-    
-    func addPinAtCenterAndReverseGeocode() {
-        let centerCoord = mapView.centerCoordinate
-        let location = CLLocation(
-            latitude: centerCoord.latitude,
-            longitude: centerCoord.longitude
-        )
-        
-        geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
-            guard let self = self else { return }
-            if let error = error {
-                print("Reverse geocoding failed: \(error.localizedDescription)")
-                return
+    // MARK: - Navigation
+    /// Action for the back button. Sends selected address to delegate before navigating back.
+    @objc func BackBtnTapped() {
+        if let selectedAnnotation = mapView.annotations.first(where: {
+            !($0 is MKUserLocation)
+        }) {
+            if let title = selectedAnnotation.title ?? "", !title.isEmpty {
+                delegate?.didSelectAddress(title)
             }
-            
-            var address = "Unknown Location"
-            if let placemark = placemarks?.first {
-                // Build the full address string from the placemark details
-                var addressComponents: [String] = []
-                if let name = placemark.name { addressComponents.append(name) }
-                if let thoroughfare = placemark.thoroughfare { addressComponents.append(thoroughfare) }
-                if let subLocality = placemark.subLocality { addressComponents.append(subLocality) }
-                if let locality = placemark.locality { addressComponents.append(locality) }
-                if let administrativeArea = placemark.administrativeArea { addressComponents.append(administrativeArea) }
-                if let postalCode = placemark.postalCode { addressComponents.append(postalCode) }
-                if let country = placemark.country { addressComponents.append(country) }
-                
-                address = addressComponents.joined(separator: ", ")
-            }
-            
-            // Remove old pins to prevent duplicates
-            self.mapView.removeAnnotations(self.mapView.annotations.filter { !($0 is MKUserLocation) })
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = centerCoord
-            annotation.title = "Selected Location"
-            annotation.subtitle = address // Set the full address as the subtitle
-            self.mapView.addAnnotation(annotation)
         }
+        navigationController?.popViewController(animated: true)
     }
-    
+    // MARK: - MKMapViewDelegate
+    /// Provides a custom annotation view for map pins.
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
-            return nil // keep blue dot for user location
+            return nil
         }
-        
         let identifier = "CustomPin"
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-        
+        var annotationView = mapView.dequeueReusableAnnotationView(
+            withIdentifier: identifier
+        )
         if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView = MKAnnotationView(
+                annotation: annotation,
+                reuseIdentifier: identifier
+            )
             annotationView?.canShowCallout = true
-            
-            // Set custom image from assets as pin
-            annotationView?.image = UIImage(named: "Ic_Location_Pin") // asset name
-            annotationView?.centerOffset = CGPoint(x: 0, y: -(annotationView?.image?.size.height ?? 0) / 2)
-            
-            // Right detail button
+            // Set your custom image
+            annotationView?.image = UIImage(named: "ic_current_position")
+            // Optional: center the pin bottom on the coordinate
+            annotationView?.centerOffset = CGPoint(
+                x: 0,
+                y: -(annotationView?.image?.size.height ?? 0) / 2
+            )
+            // Optional: add a detail button on callout
             let button = UIButton(type: .detailDisclosure)
             annotationView?.rightCalloutAccessoryView = button
         } else {
             annotationView?.annotation = annotation
         }
         return annotationView
-    }
-    
-    func setPadding(textfield: [UITextField]) {
-        for item in textfield {
-            item.setPadding(left: 34, right: 34)
-        }
-    }
-    
-    @IBAction func btnSavedAddressClick(_ sender: Any) {
-    }
-    
-    @IBAction func btnRedirectCurrentAddressClick(_ sender: Any) {
-        if let pin = mapView.annotations.first(where: { !($0 is MKUserLocation) }) {
-            if let address = pin.subtitle {
-                delegate?.didSelectAddress(address ?? "")
-            }
-        }
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func backBtnTapped() {
-        self.navigationController?.popViewController(animated: true)
     }
 }

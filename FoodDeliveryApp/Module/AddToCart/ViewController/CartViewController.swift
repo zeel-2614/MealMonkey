@@ -13,7 +13,6 @@ class CartViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Reload the data every time the view appears to get the latest cart items.
         updateEmptyCartUI()
         tblCartView.reloadData()
     }
@@ -48,7 +47,6 @@ class CartViewController: UIViewController {
             let savedOrders = loadOrdersFromUserDefaults()
             appDelegate.arrOrders = savedOrders
         }
-        
     }
     
     @IBAction func btnPlaceOrderClick(_ sender: Any) {
@@ -64,6 +62,9 @@ class CartViewController: UIViewController {
             // Clear cart
             appDelegate.arrCart.removeAll()
             saveCartToUserDefaults(cartArray: [])
+            
+            updateEmptyCartUI()
+            tblCartView.reloadData()
             
             // Show success alert
             let alert = UIAlertController(title: "Order Placed",

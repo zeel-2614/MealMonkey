@@ -6,6 +6,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var txtName: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtMobileNo: UITextField!
+    @IBOutlet weak var btnSignOut: UIButton!
     @IBOutlet weak var txtAddress: UITextField!
     @IBOutlet weak var btnSave: UIButton!
     
@@ -36,6 +37,21 @@ class ProfileViewController: UIViewController {
         pickerController.delegate = self
         pickerController.allowsEditing = true
         present(pickerController, animated: true)
+    }
+    
+    @IBAction func btnSignOutClick(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "UserStoryboard", bundle: nil)
+        if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+            
+            // Make it the root view controller
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let sceneDelegate = windowScene.delegate as? SceneDelegate {
+                
+                let navController = UINavigationController(rootViewController: loginVC)
+                sceneDelegate.window?.rootViewController = navController
+                sceneDelegate.window?.makeKeyAndVisible()
+            }
+        }
     }
     
     func setPadding(textfield: [UITextField]){

@@ -54,9 +54,6 @@ extension MoreViewController: UITableViewDataSource {
 }
 
 enum PageType {
-    
-    case PayMent
-    case MyOrders
     case Notification
     case Inbox
     case AboutUs

@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import UIKit
 
-class ProductModel {
+class ProductModel: Codable {
     var intId: Int = 0
     var strProductName: String = ""
     var strProductDescription: String = ""
@@ -937,13 +938,13 @@ class ProductModel {
         ]
     }
 }
-enum ProductType: String {
+enum ProductType: String, Codable {
     case food
     case Beverages
     case Desserts
 }
 
-enum ProductCategory: String, CaseIterable {
+enum ProductCategory: String, CaseIterable, Codable {
     case All
     case Punjabi
     case Chinese

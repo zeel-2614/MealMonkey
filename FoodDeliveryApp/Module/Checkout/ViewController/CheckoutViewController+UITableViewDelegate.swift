@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 
 extension CheckoutViewController : UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1 + arrCards.count + 1
     }
@@ -9,35 +10,35 @@ extension CheckoutViewController : UITableViewDelegate, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: "CashOnDeliveryTableViewCell",
-                    for: indexPath
-                ) as! CashOnDeliveryTableViewCell
-                
-                cell.btnSelect.setImage(UIImage(systemName: selectedPaymentIndex == indexPath.row ? "circle.inset.filled" : "circle"), for: .normal)
-                return cell
-            }
-            
-            if indexPath.row > 0 && indexPath.row <= arrCards.count {
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: "VisaTableViewCell",
-                    for: indexPath
-                ) as! VisaTableViewCell
-                
-                let cardIndex = indexPath.row - 1
-                let fullCardNumber = arrCards[cardIndex]
-                cell.lblCardNo.text = maskedCardNumber(fullCardNumber)
-                cell.btnSelect.setImage(UIImage(systemName: selectedPaymentIndex == indexPath.row ? "circle.inset.filled" : "circle"), for: .normal)
-                return cell
-            }
-            
             let cell = tableView.dequeueReusableCell(
-                withIdentifier: "GmailTableViewCell",
+                withIdentifier: "CashOnDeliveryTableViewCell",
                 for: indexPath
-            ) as! GmailTableViewCell
+            ) as! CashOnDeliveryTableViewCell
             
             cell.btnSelect.setImage(UIImage(systemName: selectedPaymentIndex == indexPath.row ? "circle.inset.filled" : "circle"), for: .normal)
             return cell
+        }
+        
+        if indexPath.row > 0 && indexPath.row <= arrCards.count {
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "VisaTableViewCell",
+                for: indexPath
+            ) as! VisaTableViewCell
+            
+            let cardIndex = indexPath.row - 1
+            let fullCardNumber = arrCards[cardIndex]
+            cell.lblCardNo.text = maskedCardNumber(fullCardNumber)
+            cell.btnSelect.setImage(UIImage(systemName: selectedPaymentIndex == indexPath.row ? "circle.inset.filled" : "circle"), for: .normal)
+            return cell
+        }
+        
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "GmailTableViewCell",
+            for: indexPath
+        ) as! GmailTableViewCell
+        
+        cell.btnSelect.setImage(UIImage(systemName: selectedPaymentIndex == indexPath.row ? "circle.inset.filled" : "circle"), for: .normal)
+        return cell
     }
     
     func maskedCardNumber(_ number: String) -> String {

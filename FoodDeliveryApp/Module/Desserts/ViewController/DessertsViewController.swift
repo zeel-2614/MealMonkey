@@ -6,7 +6,6 @@ class DessertsViewController: UIViewController {
     @IBOutlet weak var tblDesserts: UITableView!
     
     var selectedProductType: ProductType = .Desserts
-    
     var arrProductData:[ProductModel] = ProductModel.addProductData()
     var arrProducts: [ProductModel] {
         switch selectedProductType {
@@ -19,7 +18,6 @@ class DessertsViewController: UIViewController {
         }
     }
     
-    // Search filtered list
     var filteredProducts: [ProductModel] = []
     var isSearching: Bool = false
     
@@ -33,35 +31,20 @@ class DessertsViewController: UIViewController {
         setCartButton(target: self, action: #selector(btnCartTapped))
         
         tblDesserts.showsVerticalScrollIndicator = false
-        
         tblDesserts.register(UINib(nibName: "DessertsTableViewCell", bundle: nil), forCellReuseIdentifier: "DessertsTableViewCell")
-        
-        // Default table data is unfiltered
         filteredProducts = arrProducts
         
         switch selectedProductType {
         case .food:
-            setLeftAlignedTitleWithBack(
-                "Food",
-                target: self,
-                action: #selector(dessertBackBtn)
-            )
+            setLeftAlignedTitleWithBack("Food", target: self, action: #selector(dessertBackBtn))
             
         case .Beverages:
-            setLeftAlignedTitleWithBack(
-                "Beverages",
-                target: self,
-                action: #selector(dessertBackBtn)
-            )
+            setLeftAlignedTitleWithBack("Beverages", target: self, action: #selector(dessertBackBtn))
             
         case .Desserts:
-            setLeftAlignedTitleWithBack(
-                "Desserts",
-                target: self,
-                action: #selector(dessertBackBtn)
-            )
+            setLeftAlignedTitleWithBack("Desserts", target: self, action: #selector(dessertBackBtn))
         }
-        
+        // Listen for search text changes.
         txtSearchDesserts.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
     }
     
