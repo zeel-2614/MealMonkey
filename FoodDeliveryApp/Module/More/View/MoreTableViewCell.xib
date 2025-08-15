@@ -5,85 +5,80 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="134" id="KGk-i7-Jjw" customClass="MoreTableViewCell" customModule="FoodDeliveryApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="134"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="134"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="186" id="ame-T0-3gJ" customClass="MoreTableViewCell" customModule="FoodDeliveryApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="186"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ame-T0-3gJ" id="gkl-5f-mcA">
+                <rect key="frame" x="0.0" y="0.0" width="393" height="186"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DuT-4J-mox">
-                        <rect key="frame" x="0.0" y="19" width="320" height="113"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uef-g9-EX8">
+                        <rect key="frame" x="21" y="19" width="335" height="167"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="6fU-lp-Hhn">
-                                <rect key="frame" x="13" y="13" width="294" height="91"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="FXg-NA-NCg">
+                                <rect key="frame" x="10" y="10" width="275" height="147"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hjo-Nt-Bpd">
-                                        <rect key="frame" x="0.0" y="0.0" width="53" height="91"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iUx-v5-Ttu">
+                                        <rect key="frame" x="0.0" y="0.0" width="53" height="147"/>
                                         <color key="backgroundColor" name="ImageBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="53" id="C2R-X1-PoW"/>
-                                            <constraint firstAttribute="width" constant="53" id="EVX-14-5Gd"/>
+                                            <constraint firstAttribute="height" constant="53" id="0tv-eb-Gnb"/>
+                                            <constraint firstAttribute="width" constant="53" id="RhN-rA-pjS"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ygo-nf-6i6">
-                                        <rect key="frame" x="72" y="0.0" width="222" height="91"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4E-sK-mKe">
+                                        <rect key="frame" x="72" y="0.0" width="203" height="147"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" name="LabelPrimaryColor"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDr-f5-2Sd">
-                                <rect key="frame" x="273" y="26" width="33" height="33"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="Bbs-Gd-CsK"/>
-                                    <constraint firstAttribute="width" constant="33" id="Uvj-dd-v6R"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="Ic_rightArraow"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" name="MoreCellContentColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="6fU-lp-Hhn" secondAttribute="trailing" constant="13" id="1Nb-Qo-tol"/>
-                            <constraint firstAttribute="trailing" secondItem="CDr-f5-2Sd" secondAttribute="trailing" constant="14" id="Kas-gs-8dQ"/>
-                            <constraint firstAttribute="bottom" secondItem="6fU-lp-Hhn" secondAttribute="bottom" constant="9" id="MDU-9R-BS9"/>
-                            <constraint firstItem="6fU-lp-Hhn" firstAttribute="top" secondItem="DuT-4J-mox" secondAttribute="top" constant="13" id="SyY-Lm-ZUW"/>
-                            <constraint firstItem="6fU-lp-Hhn" firstAttribute="leading" secondItem="DuT-4J-mox" secondAttribute="leading" constant="13" id="iqK-uz-Oyu"/>
-                            <constraint firstItem="CDr-f5-2Sd" firstAttribute="top" secondItem="DuT-4J-mox" secondAttribute="top" constant="26" id="n4S-Fb-3EF"/>
+                            <constraint firstAttribute="trailing" secondItem="FXg-NA-NCg" secondAttribute="trailing" constant="50" id="HGd-KQ-2Ay"/>
+                            <constraint firstItem="FXg-NA-NCg" firstAttribute="top" secondItem="uef-g9-EX8" secondAttribute="top" constant="10" id="XWe-2X-K7K"/>
+                            <constraint firstItem="FXg-NA-NCg" firstAttribute="leading" secondItem="uef-g9-EX8" secondAttribute="leading" constant="10" id="w5e-sN-Rch"/>
+                            <constraint firstAttribute="bottom" secondItem="FXg-NA-NCg" secondAttribute="bottom" constant="10" id="ynL-DE-x0P"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92F-dm-hDd">
+                        <rect key="frame" x="339" y="86" width="33" height="33"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="33" id="fF8-hE-Mtp"/>
+                            <constraint firstAttribute="height" constant="33" id="wPl-46-iiB"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" image="ic_menu_arrow"/>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="DuT-4J-mox" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="19" id="AEs-zX-ei6"/>
-                    <constraint firstItem="DuT-4J-mox" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Jhd-Pz-e4b"/>
-                    <constraint firstAttribute="bottom" secondItem="DuT-4J-mox" secondAttribute="bottom" id="Kkc-Sw-HHl"/>
-                    <constraint firstAttribute="trailing" secondItem="DuT-4J-mox" secondAttribute="trailing" id="ncB-2s-ibR"/>
+                    <constraint firstAttribute="trailing" secondItem="92F-dm-hDd" secondAttribute="trailing" constant="21" id="2s8-XC-QHN"/>
+                    <constraint firstItem="uef-g9-EX8" firstAttribute="leading" secondItem="gkl-5f-mcA" secondAttribute="leading" constant="21" id="EXR-2t-rQB"/>
+                    <constraint firstItem="uef-g9-EX8" firstAttribute="top" secondItem="gkl-5f-mcA" secondAttribute="top" constant="19" id="Eru-1V-Ph7"/>
+                    <constraint firstAttribute="bottom" secondItem="uef-g9-EX8" secondAttribute="bottom" id="jv6-2U-uCt"/>
+                    <constraint firstAttribute="trailing" secondItem="uef-g9-EX8" secondAttribute="trailing" constant="37" id="oyp-Zi-5vD"/>
+                    <constraint firstItem="92F-dm-hDd" firstAttribute="centerY" secondItem="v4E-sK-mKe" secondAttribute="centerY" id="rC0-YY-EB9"/>
                 </constraints>
             </tableViewCellContentView>
-            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="imgMenu" destination="hjo-Nt-Bpd" id="yZ4-RI-rC9"/>
-                <outlet property="lblMenu" destination="Ygo-nf-6i6" id="7tS-aA-0Ih"/>
-                <outlet property="viewMain" destination="DuT-4J-mox" id="XRW-hV-Mbv"/>
+                <outlet property="imgMenu" destination="iUx-v5-Ttu" id="A5H-dg-yCa"/>
+                <outlet property="lblMenu" destination="v4E-sK-mKe" id="Vsv-NN-Dc2"/>
+                <outlet property="viewMain" destination="uef-g9-EX8" id="goB-gO-cQd"/>
             </connections>
-            <point key="canvasLocation" x="83.969465648854964" y="51.408450704225352"/>
+            <point key="canvasLocation" x="90.839694656488547" y="225.35211267605635"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Ic_rightArraow" width="7" height="14"/>
+        <image name="ic_menu_arrow" width="39" height="39"/>
         <namedColor name="ImageBackgroundColor">
             <color red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="LabelPrimaryColor">
-            <color red="0.29019607843137257" green="0.29411764705882354" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="MoreCellContentColor">
             <color red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

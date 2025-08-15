@@ -14,7 +14,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Log in"
         self.navigationController?.isNavigationBarHidden = true
         
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .gray, textField: [txtEmail, txtPassword, btnLogin, btnGoogle, btnFacebook])
@@ -31,14 +30,12 @@ class LoginViewController: UIViewController {
     }
     
     private func showMainTabBar() {
-        
         let storyboard = UIStoryboard(name: "HomeStoryboard", bundle: nil)
         if let tabBarController = storyboard.instantiateViewController(withIdentifier: "MainTabViewController") as? UITabBarController {
             
             // Set as rootViewController
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let sceneDelegate = windowScene.delegate as? SceneDelegate {
-                
                 sceneDelegate.window?.rootViewController = tabBarController
                 sceneDelegate.window?.makeKeyAndVisible()
             }
@@ -46,7 +43,6 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func btnForgetPasswordClick(_ sender: Any) {
-        
         let storyboard = UIStoryboard(name: "UserStoryboard", bundle: nil)
         if let VC = storyboard.instantiateViewController(withIdentifier: "ForgetPasswordViewController") as? ForgetPasswordViewController{
             self.navigationController?.pushViewController(VC, animated: true)
@@ -54,7 +50,6 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func btnSignUpClick(_ sender: Any) {
-        
         let storyboard = UIStoryboard(name: "UserStoryboard", bundle: nil)
         if let VC = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController{
             self.navigationController?.pushViewController(VC, animated: true)
@@ -62,7 +57,6 @@ class LoginViewController: UIViewController {
     }
     
     func setPadding(textfield: [UITextField]){
-        
         for item in textfield {
             item.setPadding(left: 34, right: 34)
         }

@@ -993,7 +993,7 @@ continue to reset your password</string>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="37"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                                 <connections>
-                                                    <outlet property="delegate" destination="JjL-cZ-QlN" id="ef5-zm-QxV"/>
+                                                    <outlet property="delegate" destination="JjL-cZ-QlN" id="sQL-hw-Isf"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="37" translatesAutoresizingMaskIntoConstraints="NO" id="eiA-8B-MSv">
@@ -1007,7 +1007,7 @@ continue to reset your password</string>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="37"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                                 <connections>
-                                                    <outlet property="delegate" destination="JjL-cZ-QlN" id="dvs-gS-sUT"/>
+                                                    <outlet property="delegate" destination="JjL-cZ-QlN" id="EbO-CW-gJC"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="37" translatesAutoresizingMaskIntoConstraints="NO" id="GwR-WC-ch8">
@@ -1021,7 +1021,7 @@ continue to reset your password</string>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="37"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                                 <connections>
-                                                    <outlet property="delegate" destination="JjL-cZ-QlN" id="xer-TU-eFp"/>
+                                                    <outlet property="delegate" destination="JjL-cZ-QlN" id="fCj-SH-MHz"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="37" translatesAutoresizingMaskIntoConstraints="NO" id="SXD-ks-bBk">
@@ -1035,7 +1035,7 @@ continue to reset your password</string>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="37"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                                 <connections>
-                                                    <outlet property="delegate" destination="JjL-cZ-QlN" id="PtN-U0-8d1"/>
+                                                    <outlet property="delegate" destination="JjL-cZ-QlN" id="dSO-4E-vhV"/>
                                                 </connections>
                                             </textField>
                                         </subviews>

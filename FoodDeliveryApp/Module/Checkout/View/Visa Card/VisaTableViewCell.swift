@@ -12,6 +12,7 @@ class VisaTableViewCell: UITableViewCell {
     @IBOutlet weak var btnSelect: UIButton!
     @IBOutlet weak var lblCardNo: UILabel!
     @IBOutlet weak var viewVisa: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         viewStyle.viewStyle(cornerRadius: 6, borderWidth: 1, borderColor: .labelPrimary, textField: [viewVisa])
@@ -22,7 +23,5 @@ class VisaTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
-    }
-    @IBAction func btnSelectClick(_ sender: Any) {
     }
 }

@@ -1,30 +1,8 @@
 import UIKit
 
-class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFieldDelegate, MapViewControllerDelegate {
-    
+class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFieldDelegate, ChangeAddressDelegate {
     func didSelectAddress(_ address: String) {
-        // Remove duplicate place name at start if repeated
-        var cleanedAddress = address
-        if let firstComma = address.firstIndex(of: ",") {
-            let firstPart = address[..<firstComma].trimmingCharacters(in: .whitespaces)
-            let rest = address[address.index(after: firstComma)...].trimmingCharacters(in: .whitespaces)
-            
-            if rest.hasPrefix(firstPart) {
-                cleanedAddress = rest // drop the duplicate
-            }
-        }
-        
-        // Now split into two lines max
-        if let commaIndex = cleanedAddress.firstIndex(of: ",") {
-            let firstLine = cleanedAddress[..<commaIndex].trimmingCharacters(in: .whitespaces)
-            let secondLine = cleanedAddress[address.index(after: commaIndex)...].trimmingCharacters(in: .whitespaces)
-            lblCurrentLocation.text = "\(firstLine)\n\(secondLine)"
-        } else {
-            lblCurrentLocation.text = cleanedAddress
-        }
-        
-        lblCurrentLocation.numberOfLines = 2
-        lblCurrentLocation.lineBreakMode = .byTruncatingTail
+        lblCurrentLocation.text = address
     }
     
     @IBOutlet weak var lblCurrentLocation: UILabel!
@@ -38,6 +16,9 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
     var filteredProductData: [ProductModel] = [] //new added
     
     override func viewWillAppear(_ animated: Bool) {
+        if let savedAddress = UserDefaults.standard.string(forKey: "currentAddress") {
+            lblCurrentLocation.text = savedAddress
+        }
         recentItems = RecentItemsHelper.shared.getRecentItems()
         tblHome.reloadData()
         filterProducts(with: txtSearch.text) //added new

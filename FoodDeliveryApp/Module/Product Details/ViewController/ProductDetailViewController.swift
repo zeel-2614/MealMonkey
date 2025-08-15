@@ -36,31 +36,7 @@ class ProductDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewScroll.showsVerticalScrollIndicator = false
-        
-        viewStyle(cornerRadius: 4, borderWidth: 0, borderColor: .gray, textField: [stackPortion, stackIngredients])
-        viewStyle(cornerRadius: 15, borderWidth: 0, borderColor: .gray, textField: [btnPlus, btnMinus])
-        viewStyle(cornerRadius: 7.42, borderWidth: 0, borderColor: .gray, textField: [btnAddToCart])
-        viewStyle(cornerRadius: 15, borderWidth: 1, borderColor: .buttonBackground, textField: [countView])
-        
-        viewScroll.layer.cornerRadius = 20
-        viewScroll.layer.maskedCorners = [
-            .layerMinXMinYCorner, .layerMaxXMinYCorner,
-        ]
-        
-        viewScroll.layer.shadowColor = UIColor.black.cgColor
-        viewScroll.layer.shadowOpacity = 0.3
-        viewScroll.layer.shadowOffset = CGSize(width: 0, height: -2)
-        viewScroll.layer.shadowRadius = 10
-        
-        productDetailView.layer.cornerRadius = 20
-        productDetailView.layer.maskedCorners = [
-            .layerMinXMinYCorner, .layerMaxXMinYCorner,
-        ]
-        
-        productDetailView.layer.shadowColor = UIColor.black.cgColor
-        productDetailView.layer.shadowOpacity = 0.3
-        productDetailView.layer.shadowOffset = CGSize(width: 0, height: -2)
-        productDetailView.layer.shadowRadius = 10
+        setupUI()
         
         setLeftAlignedTitleWithBack("Food Detail", target: self, action: #selector(detailBackBtnTapped))
         setCartButton(target: self, action: #selector(cartBtnTapped))
@@ -153,4 +129,30 @@ class ProductDetailViewController: UIViewController {
             self.navigationController?.pushViewController(cartVc, animated: true)
         }
     }
+    
+    private func setupUI() {
+        // Style stacks
+        viewStyle(cornerRadius: 4, borderWidth: 0, borderColor: .gray, textField: [stackPortion, stackIngredients])
+        viewStyle(cornerRadius: 15, borderWidth: 0, borderColor: .gray, textField: [btnPlus, btnMinus])
+        viewStyle(cornerRadius: 7.42, borderWidth: 0, borderColor: .gray, textField: [btnAddToCart])
+        viewStyle(cornerRadius: 15, borderWidth: 1, borderColor: .buttonBackground, textField: [countView])
+        
+        // Style scroll view
+        viewScroll.layer.cornerRadius = 42
+        viewScroll.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        viewScroll.clipsToBounds = true
+        viewScroll.layer.shadowColor = UIColor.black.cgColor
+        viewScroll.layer.shadowOpacity = 0.3
+        viewScroll.layer.shadowOffset = CGSize(width: 0, height: -2)
+        viewScroll.layer.shadowRadius = 10
+        
+        // Style product detail view
+        productDetailView.layer.cornerRadius = 20
+        productDetailView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        productDetailView.layer.shadowColor = UIColor.black.cgColor
+        productDetailView.layer.shadowOpacity = 0.3
+        productDetailView.layer.shadowOffset = CGSize(width: 0, height: -2)
+        productDetailView.layer.shadowRadius = 10
+    }
+
 }

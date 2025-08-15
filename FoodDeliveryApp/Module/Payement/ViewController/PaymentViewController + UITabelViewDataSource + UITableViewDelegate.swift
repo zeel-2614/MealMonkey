@@ -54,15 +54,27 @@ extension PaymentViewController: UITableViewDataSource, UITableViewDelegate, Car
         switch textField {
             
         case txtCardNumber:
+            txtCardNumber.resignFirstResponder()
             txtExpiryMonth.becomeFirstResponder()
+            
         case txtExpiryMonth:
+            txtExpiryMonth.resignFirstResponder()
             txtExpiryYear.becomeFirstResponder()
+            
         case txtExpiryYear:
+            txtExpiryYear.resignFirstResponder()
             txtSecurityCode.becomeFirstResponder()
+            
         case txtSecurityCode:
+            txtSecurityCode.resignFirstResponder()
             txtFirstName.becomeFirstResponder()
+            
         case txtFirstName:
+            txtFirstName.resignFirstResponder()
             txtLastName.becomeFirstResponder()
+            
+        case txtLastName:
+            txtLastName.resignFirstResponder()
             
         default:
             textField.resignFirstResponder()

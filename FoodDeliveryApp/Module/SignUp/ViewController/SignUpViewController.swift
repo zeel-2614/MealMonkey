@@ -17,11 +17,16 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Sign Up"
-        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = false
+        
+        setLeftAlignedTitleWithBack("Sign Up", target: self, action: #selector(signUpBackBtnTapped))
         
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .systemGray, textField: [txtName, txtEmail, txtMobileNo, txtAddress, txtPassword, txtConfirmPassword, btnSignUp])
         setPadding(textfield: [txtName, txtEmail, txtMobileNo, txtAddress, txtPassword, txtConfirmPassword])
+    }
+    
+    @objc func signUpBackBtnTapped() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnBackToLoginClick(_ sender: Any) {
@@ -32,8 +37,7 @@ class SignUpViewController: UIViewController {
         }
     }
     
-    func setPadding(textfield: [UITextField]){
-        
+    func setPadding(textfield: [UITextField]) {
         for item in textfield {
             item.setPadding(left: 34, right: 34)
         }

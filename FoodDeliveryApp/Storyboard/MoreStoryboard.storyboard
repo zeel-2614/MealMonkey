@@ -199,12 +199,18 @@
                                                                 <color key="backgroundColor" name="TextFieldBackgroundColor"/>
                                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="JxK-9j-00k" id="QXJ-2p-vQo"/>
+                                                                </connections>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sy5-kS-q3I">
                                                                 <rect key="frame" x="0.0" y="299.99999999999994" width="398" height="56"/>
                                                                 <color key="backgroundColor" name="TextFieldBackgroundColor"/>
                                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="JxK-9j-00k" id="WXq-aP-1pJ"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -576,7 +582,7 @@ at anytime </string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N09-Ri-y2h" userLabel="address">
                                         <rect key="frame" x="0.0" y="0.0" width="440" height="116.66666666666667"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Delivery Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sv0-2j-nah">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Delivery Address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sv0-2j-nah">
                                                 <rect key="frame" x="21.000000000000007" y="37" width="97.666666666666686" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="Gql-BW-n7H"/>
@@ -604,7 +610,7 @@ Brooklyn, NY 11216</string>
                                                     <color key="titleColor" name="ButtonBackgroundColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="btnChangeAddressClick:" destination="QHg-KH-RxV" eventType="touchUpInside" id="V44-2X-dAP"/>
+                                                    <action selector="btnChangeAddressClick:" destination="QHg-KH-RxV" eventType="touchUpInside" id="B1d-4v-YSh"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1160,7 +1166,7 @@ at anytime </string>
                     <connections>
                         <outlet property="btnAddCard" destination="M6i-I5-WbC" id="KiW-lM-T85"/>
                         <outlet property="btnBackToHome" destination="5P5-tC-b9E" id="huU-6x-7lc"/>
-                        <outlet property="btnChangeAddress" destination="Cgw-JE-4GY" id="nVV-qY-S52"/>
+                        <outlet property="btnChangeAddress" destination="Cgw-JE-4GY" id="Hf4-MX-fIg"/>
                         <outlet property="btnCross" destination="DOT-4V-F9F" id="NOt-7d-g7A"/>
                         <outlet property="btnEnterCard" destination="hif-Bw-7No" id="hSO-AE-xEF"/>
                         <outlet property="btnSendOrder" destination="3hm-jh-NJB" id="TjO-Fh-BMr"/>
@@ -1255,7 +1261,7 @@ at anytime </string>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="ic_current_redirect"/>
                                         <connections>
-                                            <action selector="btnRedirectCurrentAddressClick:" destination="rwB-d8-3k9" eventType="touchUpInside" id="tDM-Mm-IhB"/>
+                                            <action selector="btnCurrentLocationTapped:" destination="rwB-d8-3k9" eventType="touchUpInside" id="Nuh-qM-sop"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1286,7 +1292,7 @@ at anytime </string>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btnRedirectCurrentAddress" destination="aft-mb-kWA" id="Mg6-2B-W6y"/>
+                        <outlet property="btnRedirectCurrentAddress" destination="aft-mb-kWA" id="Dpx-Xv-vaA"/>
                         <outlet property="btnSavedAddress" destination="dD7-yb-LYT" id="aiS-q6-dZb"/>
                         <outlet property="imgStar" destination="4eC-jD-dZ0" id="nBh-iW-EHr"/>
                         <outlet property="mapView" destination="k7W-XP-Eud" id="SU0-7p-dho"/>
@@ -1295,7 +1301,7 @@ at anytime </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pee-4b-4b3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3683" y="-3"/>
+            <point key="canvasLocation" x="3681.818181818182" y="-3.1380753138075317"/>
         </scene>
     </scenes>
     <resources>
