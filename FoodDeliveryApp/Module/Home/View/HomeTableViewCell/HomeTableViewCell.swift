@@ -1,12 +1,15 @@
 import UIKit
 
+// MARK: - HomeTableViewCellDelegate
 protocol HomeTableViewCellDelegate: AnyObject {
     func homeTableViewCell(_ cell: HomeTableViewCell, didSelectProduct product: ProductModel)
     func homeTableViewCell(_ cell: HomeTableViewCell, didSelectCategory category: ProductCategory)
 }
 
+// MARK: - HomeTableViewCell
 class HomeTableViewCell: UITableViewCell {
     
+    // MARK: - Outlets
     weak var delegate: HomeTableViewCellDelegate?
     
     @IBOutlet weak var lblCollectionViewTitle: UILabel!
@@ -49,6 +52,7 @@ class HomeTableViewCell: UITableViewCell {
         }
     }
     
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -65,10 +69,12 @@ class HomeTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    // MARK: - Actions
     @IBAction func btnViewAllClick(_ sender: Any) {
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension HomeTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionType {

@@ -1,60 +1,71 @@
 import UIKit
 
+// Main Home screen controller handling categories, products, recent items, and search functionality
 class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFieldDelegate, ChangeAddressDelegate {
     func didSelectAddress(_ address: String) {
         lblCurrentLocation.text = address
     }
-    
+    // MARK: - Outlets
     @IBOutlet weak var lblCurrentLocation: UILabel!
     @IBOutlet weak var tblHome: UITableView!
     @IBOutlet weak var txtSearch: UITextField!
     
+    // MARK: - Variables
     var selectedCategory: ProductCategory = .All
     var arrProductData: [ProductModel] = ProductModel.addProductData()
     var objProductCategory: ProductModel?
     var recentItems: [ProductModel] = []
     var filteredProductData: [ProductModel] = [] //new added
     
+    // MARK: - View Life Cycle
     override func viewWillAppear(_ animated: Bool) {
+        // Load saved address from UserDefaults
         if let savedAddress = UserDefaults.standard.string(forKey: "currentAddress") {
             lblCurrentLocation.text = savedAddress
         }
+        // Load recent items and reload the table
         recentItems = RecentItemsHelper.shared.getRecentItems()
         tblHome.reloadData()
-        filterProducts(with: txtSearch.text) //added new
+        
+        // Apply search filter if there’s existing text
+        filterProducts(with: txtSearch.text)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set navigation bar title and cart button
         setLeftAlignedTitle("Good morning Akila!")
         setCartButton(target: self, action: #selector(btnCartTapped))
         
         viewStyle(cornerRadius: txtSearch.frame.size.height/2, borderWidth: 0, borderColor: .systemGray, textField: [txtSearch])
-        
         setPadding(textfield: [txtSearch])
         
+        // TableView setup
         tblHome.showsVerticalScrollIndicator = false
         tblHome.register(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: "HomeTableViewCell")
         
+        // Search text field delegate and change listener
         txtSearch.delegate = self //new added
-        
         txtSearch.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged) //new added
         
-        
+        // Initially show all products
         filteredProductData = arrProductData //new added
         
+        // Reload the table after UI setup
         DispatchQueue.main.async {
             self.tblHome.reloadData()
         }
     }
     
+    // MARK: - Helper Methods
     func setPadding(textfield: [UITextField]) {
         for item in textfield {
             item.setPadding(left: 34, right: 34)
         }
     }
     
+    // MARK: - Actions
     @objc func btnCartTapped() {
         let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
         if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
@@ -62,6 +73,7 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
         }
     }
     
+    // MARK: - HomeTableViewCellDelegate methods
     func homeTableViewCell(_ cell: HomeTableViewCell, didSelectProduct product: ProductModel) {
         RecentItemsHelper.shared.addProduct(product)
         let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
@@ -78,6 +90,7 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
         tblHome.reloadData()
     }
     
+    // MARK: - Search Handling
     // Use this method for real-time filtering as the user types
     @objc func textFieldDidChange(_ textField: UITextField) {
         filterProducts(with: textField.text)

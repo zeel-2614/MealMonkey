@@ -7,17 +7,21 @@
 
 import UIKit
 
+/// A view controller that displays the user's current order, calculates totals, and allows checkout.
 class MyOrderViewController: UIViewController {
     
+    // MARK: - IBOutlets
     @IBOutlet weak var lblDeliveryCost: UILabel!
     @IBOutlet weak var lblTotal: UILabel!
     @IBOutlet weak var btnCheckout: UIButton!
     @IBOutlet weak var lblSubTotal: UILabel!
     @IBOutlet weak var tblOrder: UITableView!
     
+    /// The array holding the ordered products.
     var orderProducts: [ProductModel] = []
     let deliveryCost: Double = 5.0
     
+    /// Called after the controller's view is loaded into memory.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,16 +35,21 @@ class MyOrderViewController: UIViewController {
         calculateTotals()
     }
     
+    /// Calculates subtotal, delivery cost, and total, then updates the labels.
     func calculateTotals() {
         let subtotal = orderProducts.reduce(0) { $0 + ($1.doubleProductPrice * Double($1.intProductQty!)) }
         lblSubTotal.text = "$\(String(format: "%.2f", subtotal))"
         lblDeliveryCost.text = "$\(String(format: "%.2f", deliveryCost))"
         lblTotal.text = "$\(String(format: "%.2f", subtotal + deliveryCost))"
     }
+    
+    /// Action triggered when the back button in the navigation bar is tapped.
     @objc func myOrderBackBtn() {
         self.navigationController?.popViewController(animated: true)
     }
     
+    /// Action triggered when the checkout button is tapped.
+    /// - Parameter sender: The UI element that triggered this action.
     @IBAction func btnCheckoutClick(_ sender: Any) {
         let storyboard = UIStoryboard(name: "MoreStoryboard", bundle: nil)
         if let VC = storyboard.instantiateViewController(withIdentifier: "CheckoutViewController") as? CheckoutViewController {

@@ -2,11 +2,18 @@ import UIKit
 
 class DessertsViewController: UIViewController {
     
+    // MARK: - IBOutlets
     @IBOutlet weak var txtSearchDesserts: UITextField!
     @IBOutlet weak var tblDesserts: UITableView!
     
+    // MARK: - Properties
+    /// Currently selected product type (e.g., Desserts, Food, Beverages).
     var selectedProductType: ProductType = .Desserts
+    
+    /// Master product data array loaded from `ProductModel`.
     var arrProductData:[ProductModel] = ProductModel.addProductData()
+    
+    /// Computed property returning products filtered by `selectedProductType`.
     var arrProducts: [ProductModel] {
         switch selectedProductType {
         case .food:
@@ -18,9 +25,12 @@ class DessertsViewController: UIViewController {
         }
     }
     
+    /// Products filtered by the search text.
     var filteredProducts: [ProductModel] = []
     var isSearching: Bool = false
     
+    // MARK: - Lifecycle Methods
+    /// Called after the controller’s view is loaded into memory.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,6 +58,12 @@ class DessertsViewController: UIViewController {
         txtSearchDesserts.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
     }
     
+    // MARK: - Search Handling
+    /**
+     Triggered when the search text changes.
+     
+     - Parameter textField: The text field whose content has changed.
+     */
     @objc func searchTextChanged(_ textField: UITextField) {
         let searchText = textField.text?.lowercased() ?? ""
         
@@ -65,10 +81,13 @@ class DessertsViewController: UIViewController {
         tblDesserts.reloadData()
     }
     
+    // MARK: - Navigation
+    /// Navigates back to the previous screen.
     @objc func dessertBackBtn() {
         self.navigationController?.popViewController(animated: true)
     }
     
+    /// Navigates to the cart view controller.
     @objc func btnCartTapped() {
         let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
         if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {

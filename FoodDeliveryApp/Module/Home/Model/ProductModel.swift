@@ -223,7 +223,7 @@ class ProductModel: Codable {
                     "A spicy and tangy buttermilk-based curry with sundakkai (turkey berry), offering a unique flavor profile and served with rice.",
                 floatProductRating: 4.4,
                 doubleProductPrice: 130,
-                strProductImage: "ic_sundaikkai_mor_kulambu",
+                strProductImage: "Ic_sundaikkai_morkulambu",
                 intTotalNumberOfRatings: 100,
                 objProductCategory: .SouthIndian,
                 objProductType: .food
@@ -738,7 +738,7 @@ class ProductModel: Codable {
                 strProductDescription: "Fresh lemon water with sugar and salt",
                 floatProductRating: 4.6,
                 doubleProductPrice: 15.0,
-                strProductImage: "ic_limbu_pani",
+                strProductImage: "Ic_Limbu_Pani",
                 intTotalNumberOfRatings: 250,
                 objProductCategory: .Gujarati,
                 objProductType: .Beverages

@@ -9,9 +9,13 @@ import UIKit
 
 class ProductDetailViewController: UIViewController {
     
+    // MARK: - Properties
     var selectedProduct: ProductModel?
     var currentQuantity: Int = 1
+    var isHeartFilled = false
     
+    // MARK: - IBOutlets
+    @IBOutlet weak var btnHeart: UIButton!
     @IBOutlet weak var countView: UIView!
     @IBOutlet weak var btnCart: UIButton!
     @IBOutlet weak var lblLKR: UILabel!
@@ -29,10 +33,12 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var imgProduct: UIImageView!
     @IBOutlet weak var viewScroll: UIScrollView!
     
+    // Reference to AppDelegate for accessing shared cart array
     private var appDelegate: AppDelegate? {
         return UIApplication.shared.delegate as? AppDelegate
     }
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         viewScroll.showsVerticalScrollIndicator = false
@@ -52,8 +58,16 @@ class ProductDetailViewController: UIViewController {
             imgProduct.image = UIImage(named: product.strProductImage)
         }
         // Do any additional setup after loading the view.
+        
+        if let appDelegate = appDelegate,
+           appDelegate.arrWishlist.contains(where: { $0.intId == selectedProduct?.intId }) {
+            btnHeart.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else {
+            btnHeart.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
     }
     
+    // MARK: - Navigation Button Actions
     @objc func detailBackBtnTapped() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -65,6 +79,7 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
+    // MARK: - UI Setup
     func configureUI() {
         guard let product = selectedProduct else { return }
         self.title = product.strProductName
@@ -83,6 +98,7 @@ class ProductDetailViewController: UIViewController {
         lblCount.text = "\(currentQuantity)"
     }
     
+    // MARK: - Quantity Buttons
     @IBAction func btnMinusClick(_ sender: Any) {
         if currentQuantity > 1 {
             currentQuantity -= 1
@@ -95,6 +111,7 @@ class ProductDetailViewController: UIViewController {
         updatePriceAndQuantityUI()
     }
     
+    // MARK: - Add to Cart
     @IBAction func btnAddToCartClick(_ sender: Any) {
         print("add too cart from detail Page")
         guard let product = selectedProduct else {
@@ -123,13 +140,29 @@ class ProductDetailViewController: UIViewController {
         saveCartToUserDefaults(cartArray: cartDictArray)
     }
     
+    // MARK: - Cart Button
     @IBAction func btnCartClick(_ sender: Any) {
         let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
         if let cartVc = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
             self.navigationController?.pushViewController(cartVc, animated: true)
         }
     }
+    @IBAction func btnHeartClick(_ sender: UIButton) {
+        guard let product  = selectedProduct else {return}
+        guard let appDelegate = appDelegate else {return}
+        
+        if let existingIndex = appDelegate.arrWishlist.firstIndex(where: {$0 .intId == product.intId}) {
+            appDelegate.arrWishlist.remove(at: existingIndex)
+            btnHeart.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        else {
+            appDelegate.arrWishlist.append(product)
+            btnHeart.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+        saveWishlist(appDelegate.arrWishlist)
+    }
     
+    // MARK: - Styling
     private func setupUI() {
         // Style stacks
         viewStyle(cornerRadius: 4, borderWidth: 0, borderColor: .gray, textField: [stackPortion, stackIngredients])
@@ -147,12 +180,11 @@ class ProductDetailViewController: UIViewController {
         viewScroll.layer.shadowRadius = 10
         
         // Style product detail view
-        productDetailView.layer.cornerRadius = 20
+        productDetailView.layer.cornerRadius = 42
         productDetailView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         productDetailView.layer.shadowColor = UIColor.black.cgColor
         productDetailView.layer.shadowOpacity = 0.3
         productDetailView.layer.shadowOffset = CGSize(width: 0, height: -2)
         productDetailView.layer.shadowRadius = 10
     }
-
 }

@@ -1,16 +1,22 @@
 import UIKit
 
+/// A view controller that displays a multi-page onboarding flow using a collection view and page control.
 class NextPageViewController: UIViewController {
     
+    // MARK: - IBOutlets
     @IBOutlet weak var collectionViewNextPage: UICollectionView!
     @IBOutlet weak var btnDone: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDescription: UILabel!
     
+    /// All available features for the onboarding flow.
     let features: [Feature] = Feature.features
+    
+    /// The index of the currently displayed feature.
     var currentIndex: Int = 0
     
+    /// Called after the controller's view has been loaded into memory.
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
@@ -20,27 +26,26 @@ class NextPageViewController: UIViewController {
         updateLabels(for: 0)
         btnDone.setTitle("Next", for: .normal)
         
+        // Register the custom collection view cell
         collectionViewNextPage.register(UINib(nibName: "CollectionViewCellNextPageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCellNextPageCollectionViewCell")
     }
     
+    /// Shows the main tab bar as the root view controller.
     private func showMainTabBar() {
-        
         let storyboard = UIStoryboard(name: "HomeStoryboard", bundle: nil)
         if let tabBarController = storyboard.instantiateViewController(withIdentifier: "MainTabViewController") as? UITabBarController {
-            
             // Set as rootViewController
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let sceneDelegate = windowScene.delegate as? SceneDelegate {
-                
                 sceneDelegate.window?.rootViewController = tabBarController
                 sceneDelegate.window?.makeKeyAndVisible()
             }
         }
     }
     
+    /// Handles tap on the "Next"/"Done" button.
     @IBAction func btnDoneClick(_ sender: Any) {
         let currentPage = pageControl.currentPage
-        
         if currentPage < features.count - 1 {
             // Scroll to next page
             let nextPage = currentPage + 1
@@ -55,6 +60,8 @@ class NextPageViewController: UIViewController {
         }
     }
     
+    /// Updates the title, description, page control, and button text for a given feature index.
+    /// - Parameter index: The index of the feature to display.
     func updateLabels(for index: Int) {
         let model = features[index]
         lblTitle.text = model.title
