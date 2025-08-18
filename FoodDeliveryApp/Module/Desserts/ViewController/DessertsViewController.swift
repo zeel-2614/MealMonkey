@@ -11,19 +11,21 @@ class DessertsViewController: UIViewController {
     var selectedProductType: ProductType = .Desserts
     
     /// Master product data array loaded from `ProductModel`.
-    var arrProductData:[ProductModel] = ProductModel.addProductData()
+    var arrProducts: [ProductModel] {
+        return HomeViewController.arrProductData.filter { $0.objProductType == selectedProductType }
+    }
     
     /// Computed property returning products filtered by `selectedProductType`.
-    var arrProducts: [ProductModel] {
-        switch selectedProductType {
-        case .food:
-            return arrProductData.filter { $0.objProductType == .food }
-        case .Desserts:
-            return arrProductData.filter { $0.objProductType == .Desserts }
-        case .Beverages:
-            return arrProductData.filter { $0.objProductType == .Beverages }
-        }
-    }
+//    var arrProducts: [ProductModel] {
+//        switch selectedProductType {
+//        case .food:
+//            return arrProductData.filter { $0.objProductType == .food }
+//        case .Desserts:
+//            return arrProductData.filter { $0.objProductType == .Desserts }
+//        case .Beverages:
+//            return arrProductData.filter { $0.objProductType == .Beverages }
+//        }
+//    }
     
     /// Products filtered by the search text.
     var filteredProducts: [ProductModel] = []
@@ -33,6 +35,8 @@ class DessertsViewController: UIViewController {
     /// Called after the controller’s view is loaded into memory.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(productsLoaded), name: NSNotification.Name("ProductsLoaded"), object: nil)
         
         viewStyle(cornerRadius: txtSearchDesserts.frame.size.height/2, borderWidth: 0, borderColor: .systemGray, textField: [txtSearchDesserts])
         
@@ -57,6 +61,12 @@ class DessertsViewController: UIViewController {
         // Listen for search text changes.
         txtSearchDesserts.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
     }
+    
+    @objc func productsLoaded() {
+        filteredProducts = arrProducts
+        tblDesserts.reloadData()
+    }
+
     
     // MARK: - Search Handling
     /**

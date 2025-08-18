@@ -34,6 +34,7 @@ class CartTableViewCell: UITableViewCell {
 //        onDelete?()
 //    }
     @IBAction func btnDeleteClick(_ sender: Any) {
+        onDelete?()
     }
     
     /// Configures the cell with the given product details.

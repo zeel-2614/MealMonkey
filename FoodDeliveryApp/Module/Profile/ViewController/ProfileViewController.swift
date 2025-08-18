@@ -1,4 +1,5 @@
 import UIKit
+import CoreData
 
 class ProfileViewController: UIViewController {
     
@@ -10,6 +11,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var btnSignOut: UIButton!
     @IBOutlet weak var txtAddress: UITextField!
     @IBOutlet weak var btnSave: UIButton!
+    
+    var currentUser: User? // Store the fetched user
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -25,6 +28,33 @@ class ProfileViewController: UIViewController {
         
         setLeftAlignedTitle("Profile")
         setCartButton(target: self, action: #selector(btnCartTapped))
+        
+        loadUserData()
+    }
+    
+    func loadUserData() {
+        guard let email = UserDefaults.standard.string(forKey: "loggedInUserEmail"),
+              let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+        
+        do {
+            let users = try context.fetch(fetchRequest)
+            if let user = users.first {
+                currentUser = user
+                txtName.text = user.name
+                txtEmail.text = user.email
+                txtMobileNo.text = user.mobile
+                txtAddress.text = user.address
+                if let imageData = user.profileImage {
+                    imgProfile.image = UIImage(data: imageData)
+                }
+            }
+        } catch {
+            print("❌ Failed to load user: \(error.localizedDescription)")
+        }
     }
     
     // Navigate to cart screen when cart button is tapped
@@ -55,6 +85,28 @@ class ProfileViewController: UIViewController {
     func setPadding(textfield: [UITextField]) {
         for item in textfield {
             item.setPadding(left: 34, right: 34)
+        }
+    }
+    @IBAction func btnSaveClick(_ sender: Any) {
+        guard let user = currentUser,
+              let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        let context = appDelegate.persistentContainer.viewContext
+        
+        user.name = txtName.text
+        user.email = txtEmail.text
+        user.mobile = txtMobileNo.text
+        user.address = txtAddress.text
+        if let imageData = imgProfile.image?.jpegData(compressionQuality: 0.8) {
+            user.profileImage = imageData
+        }
+        // If you also want password update -> add here
+        
+        do {
+            try context.save()
+            UIAlertController.showAlert(title: "Success", message: "Profile updated successfully!", viewController: self)
+        } catch {
+            print("❌ Failed to update user: \(error.localizedDescription)")
         }
     }
 }

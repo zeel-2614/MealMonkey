@@ -48,6 +48,7 @@ class WishlistTableViewCell: UITableViewCell {
         lblProductName.text = product.strProductName
         lblProductCategory.text = product.objProductCategory.rawValue
         lblProductPrice.text = "\(product.doubleProductPrice)"
+        lblProductType.text = product.objProductType.rawValue
         imageProduct.image = UIImage(named: product.strProductImage)
         
         // Always show filled heart when in wishlist

@@ -78,7 +78,6 @@ class ProductDetailViewController: UIViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }
-    
     // MARK: - UI Setup
     func configureUI() {
         guard let product = selectedProduct else { return }

@@ -44,12 +44,16 @@ extension ProfileViewController: UITextFieldDelegate {
 
 // MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    // Called when an image is selected from the image picker
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        // Set the selected and edited image to the profile picture
-        imgProfile.image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
-        dismiss(animated: true) // Close the image picker
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let editedImage = info[.editedImage] as? UIImage {
+            imgProfile.image = editedImage
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            imgProfile.image = originalImage
+        }
+        dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
 }

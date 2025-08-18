@@ -12,7 +12,7 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
     
     // MARK: - Variables
     var selectedCategory: ProductCategory = .All
-    var arrProductData: [ProductModel] = ProductModel.addProductData()
+    static var arrProductData: [ProductModel] = []//API
     var objProductCategory: ProductModel?
     var recentItems: [ProductModel] = []
     var filteredProductData: [ProductModel] = [] //new added
@@ -34,6 +34,8 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.post(name: NSNotification.Name("ProductsLoaded"), object: nil)
+        
         // Set navigation bar title and cart button
         setLeftAlignedTitle("Good morning Akila!")
         setCartButton(target: self, action: #selector(btnCartTapped))
@@ -50,13 +52,41 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
         txtSearch.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged) //new added
         
         // Initially show all products
-        filteredProductData = arrProductData //new added
+        filteredProductData = HomeViewController.arrProductData //new added
+        
+        fetchProductDataFromAPI()
         
         // Reload the table after UI setup
         DispatchQueue.main.async {
             self.tblHome.reloadData()
         }
     }
+    
+    private func fetchProductDataFromAPI() {
+           // 🚨 IMPORTANT: Replace "YOUR_API_ENDPOINT_URL_HERE" with your actual URL.
+           let apiURLString = "https://mocki.io/v1/a2248104-c72d-4088-bd15-c34986dc071b"
+           
+           APICalls.getData(from: apiURLString) { [weak self] (products: [ProductModel]) in
+               guard let self = self else { return }
+               
+               // This closure runs on a background thread. All UI updates must be on the main thread.
+               DispatchQueue.main.async {
+                   if !products.isEmpty {
+                       HomeViewController.arrProductData = products
+                       self.filterProducts(with: self.txtSearch.text)
+                   } else {
+                       // Handle case where products array is empty (e.g., failed to fetch or decode)
+                       print("Could not fetch products or received an empty list.")
+                       // You might want to show an alert to the user here.
+                       let alert = UIAlertController(title: "Error", message: "Failed to load products. Please try again.", preferredStyle: .alert)
+                       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                       self.present(alert, animated: true, completion: nil)
+                   }
+                   self.tblHome.reloadData()
+                   print("Data is comming form api")
+               }
+           }
+       }
     
     // MARK: - Helper Methods
     func setPadding(textfield: [UITextField]) {
@@ -99,7 +129,7 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
     func filterProducts(with searchText: String?) {
         if let text = searchText, !text.isEmpty {
             let lowercaseText = text.lowercased()
-            filteredProductData = arrProductData.filter { product in
+            filteredProductData = HomeViewController.arrProductData.filter { product in
                 // Check if the product name or the product category contains the search text
                 let productNameMatches = product.strProductName.lowercased().contains(lowercaseText)
                 let productCategoryMatches = product.objProductCategory.rawValue.lowercased().contains(lowercaseText)
@@ -107,7 +137,7 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
             }
         } else {
             // If the search bar is empty, show all products
-            filteredProductData = arrProductData
+            filteredProductData = HomeViewController.arrProductData
         }
         
         DispatchQueue.main.async {

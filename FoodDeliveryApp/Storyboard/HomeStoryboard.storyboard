@@ -398,6 +398,9 @@ meals and more!</string>
                                                         <state key="normal" title="Save">
                                                             <color key="titleColor" name="ButtonTextColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="btnSaveClick:" destination="tgk-By-OlE" eventType="touchUpInside" id="7ia-ch-Mzt"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>

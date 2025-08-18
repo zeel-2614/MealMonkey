@@ -26,12 +26,9 @@ extension DessertsViewController: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "ProductDetailViewController"
         ) as? ProductDetailViewController {
             // Pass the selected product to the detail view controller
-            productVC.selectedProduct = arrProducts[indexPath.row]
-            
-            // Save the selected product to recent items
-            let selectedProduct = arrProducts[indexPath.row]
+            let selectedProduct = filteredProducts[indexPath.row]
+            productVC.selectedProduct = selectedProduct
             RecentItemsHelper.shared.addProduct(selectedProduct)
-            
             // Navigate to the product detail screen
             self.navigationController?.pushViewController(productVC, animated: true)
         }

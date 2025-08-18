@@ -1,4 +1,5 @@
 import UIKit
+import CoreData
 
 // MARK: - SignUpViewController
 class SignUpViewController: UIViewController {
@@ -30,7 +31,7 @@ class SignUpViewController: UIViewController {
     }
     
     // MARK: - Form Validation
-    func validateSignUpForm() {
+    func validateSignUpForm() -> Bool {
         let name = txtName.text ?? ""
         let email = txtEmail.text ?? ""
         let mobile = txtMobileNo.text ?? ""
@@ -38,41 +39,22 @@ class SignUpViewController: UIViewController {
         let password = txtPassword.text ?? ""
         let confirmPassword = txtConfirmPassword.text ?? ""
 
-        // Validate required fields with specific alerts
-        if name.isEmpty && email.isEmpty && mobile.isEmpty && address.isEmpty && password.isEmpty && confirmPassword.isEmpty {
+        if name.isEmpty || email.isEmpty || mobile.isEmpty || address.isEmpty || password.isEmpty || confirmPassword.isEmpty {
             UIAlertController.showAlert(title: "Missing Info", message: "Please enter all fields.", viewController: self)
-        } else if name.isEmpty && email.isEmpty {
-            UIAlertController.showAlert(title: "Missing Info", message: "Please enter your name and email.", viewController: self)
-        } else if email.isEmpty && password.isEmpty {
-            UIAlertController.showAlert(title: "Missing Info", message: "Please enter your email and password.", viewController: self)
-        } else if password.isEmpty && confirmPassword.isEmpty {
-            UIAlertController.showAlert(title: "Missing Info", message: "Please enter your password and confirm password.", viewController: self)
-        } else if name.isEmpty {
-            UIAlertController.showAlert(title: "Name Missing", message: "Please enter your name.", viewController: self)
-        } else if email.isEmpty {
-            UIAlertController.showAlert(title: "Email Missing", message: "Please enter your email.", viewController: self)
-        } else if mobile.isEmpty {
-            UIAlertController.showAlert(title: "Mobile Missing", message: "Please enter your mobile number.", viewController: self)
-        } else if address.isEmpty {
-            UIAlertController.showAlert(title: "Address Missing", message: "Please enter your address.", viewController: self)
-        } else if password.isEmpty {
-            UIAlertController.showAlert(title: "Password Missing", message: "Please enter your password.", viewController: self)
-        } else if confirmPassword.isEmpty {
-            UIAlertController.showAlert(title: "Confirm Password Missing", message: "Please confirm your password.", viewController: self)
+            return false
         } else if !isValidEmail(email) {
             UIAlertController.showAlert(title: "Invalid Email", message: "Please enter a valid email address.", viewController: self)
+            return false
         } else if !isValidPassword(password) {
             UIAlertController.showAlert(title: "Invalid Password", message: "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.", viewController: self)
+            return false
         } else if password != confirmPassword {
             UIAlertController.showAlert(title: "Passwords Do Not Match", message: "The password and confirm password must be the same.", viewController: self)
-        } else {
-            let storyboard = UIStoryboard(name: "UserStoryboard", bundle: nil)
-            if let VC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
-                self.navigationController?.pushViewController(VC, animated: true)
-            }
+            return false
         }
+        return true
     }
-    
+
     // MARK: - Email Validation
     func isValidEmail(_ email: String) -> Bool {
         let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
@@ -98,7 +80,6 @@ class SignUpViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         }
     }
-    
     // MARK: - UI Helpers
     func setPadding(textfield: [UITextField]) {
         for item in textfield {
@@ -127,6 +108,54 @@ class SignUpViewController: UIViewController {
     
     // MARK: - Sign Up Button Action
     @IBAction func btnSignUpClick(_ sender: Any) {
-        validateSignUpForm()
+        let name = txtName.text ?? ""
+            let email = txtEmail.text ?? ""
+            let mobile = txtMobileNo.text ?? ""
+            let address = txtAddress.text ?? ""
+            let password = txtPassword.text ?? ""
+            
+            if validateSignUpForm() {
+                saveUserToCoreData(name: name, email: email, mobile: mobile, address: address, password: password)
+            }
+    }
+}
+
+extension SignUpViewController {
+    
+    func saveUserToCoreData(name: String, email: String, mobile: String, address: String, password: String) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        
+        // Check if email already exists
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+        
+        do {
+            let existingUsers = try context.fetch(fetchRequest)
+            if !existingUsers.isEmpty {
+                UIAlertController.showAlert(title: "Error", message: "Email already registered. Please login.", viewController: self)
+                return
+            }
+            
+            // Create new User object
+            let newUser = User(context: context)
+            newUser.name = name
+            newUser.email = email
+            newUser.mobile = mobile
+            newUser.address = address
+            newUser.password = password
+            
+            try context.save()
+            print("✅ User saved successfully")
+            
+            // Navigate to Login
+            let storyboard = UIStoryboard(name: "UserStoryboard", bundle: nil)
+            if let VC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+                self.navigationController?.pushViewController(VC, animated: true)
+            }
+            
+        } catch {
+            print("❌ Failed to save user: \(error.localizedDescription)")
+        }
     }
 }

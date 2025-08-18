@@ -1,4 +1,5 @@
 import UIKit
+import CoreData
 
 // MARK: - LoginViewController
 /// Handles the login functionality, including email/password validation,
@@ -57,25 +58,35 @@ class LoginViewController: UIViewController {
             return
         }
         
-        guard isValidEmail(email) else {
-            UIAlertController.showAlert(title: "Invalid Email", message: "Please enter a valid email address.", viewController: self)
-            return
-        }
-        
         guard let password = txtPassword.text, !password.isEmpty else {
             UIAlertController.showAlert(title: "Error", message: "Please enter your password.", viewController: self)
             return
         }
         
-        guard isValidPassword(password) else {
-            UIAlertController.showAlert(
-                title: "Invalid Password",
-                message: "Password must have at least 8 characters, including uppercase, lowercase, a number, and a special symbol.",
-                viewController: self
-            )
-            return
+        // ✅ Core Data Fetch
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@ AND password == %@", email, password)
+        
+        do {
+            let users = try context.fetch(fetchRequest)
+            if users.isEmpty {
+                UIAlertController.showAlert(title: "Login Failed", message: "User not registered or invalid email Address or password.", viewController: self)
+            } else {
+                // ✅ Success -> Save logged-in user email
+                if let user = users.first {
+                    UserDefaults.standard.set(user.email, forKey: "loggedInUserEmail")
+                    UserDefaults.standard.synchronize()
+                }
+                
+                // Navigate to Main Tab
+                showMainTabBar()
+            }
+        } catch {
+            print("❌ Fetch error: \(error.localizedDescription)")
         }
-        showMainTabBar()
     }
     
     // MARK: - Actions
