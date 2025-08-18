@@ -1,61 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugj-0J-Wi0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SN5-z4-ZE8">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Splash View Controller-->
+        <!--Splash Screen View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="SplashViewController" id="BYZ-38-t0r" customClass="SplashViewController" customModule="FoodDeliveryApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SplashScreenViewController" id="BYZ-38-t0r" customClass="SplashScreenViewController" customModule="MealMonkey" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_SplashLogo" translatesAutoresizingMaskIntoConstraints="NO" id="xta-JD-nmX">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_splash" translatesAutoresizingMaskIntoConstraints="NO" id="Eah-Wv-VMn">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottomMargin" secondItem="xta-JD-nmX" secondAttribute="bottom" constant="-68" id="5fK-zy-Q7x"/>
-                            <constraint firstItem="xta-JD-nmX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7d7-Aj-Fux"/>
-                            <constraint firstItem="xta-JD-nmX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Hvd-N8-dAN"/>
-                            <constraint firstItem="xta-JD-nmX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Ku0-VH-hrT"/>
+                            <constraint firstItem="Eah-Wv-VMn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="BBd-q3-CEU"/>
+                            <constraint firstItem="Eah-Wv-VMn" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Iqd-f9-a4r"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Eah-Wv-VMn" secondAttribute="trailing" id="utw-TH-6a7"/>
+                            <constraint firstAttribute="bottom" secondItem="Eah-Wv-VMn" secondAttribute="bottom" id="wis-6D-kmn"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ueD-Fu-w2D"/>
+                    <navigationItem key="navigationItem" id="jpe-J5-XNW"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="901.52671755725191" y="3.5211267605633805"/>
+            <point key="canvasLocation" x="1900" y="-2.1126760563380285"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="0EZ-gX-1Di">
+        <scene sceneID="vsg-nb-wTb">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ugj-0J-Wi0" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SN5-z4-ZE8" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pq9-ui-w8d">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wcl-QL-69T">
                         <rect key="frame" x="0.0" y="118" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="jXM-8D-zwm"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="SM3-bB-I6h"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fgz-Vg-5ap" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gp5-gd-0ts" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-25.190839694656489" y="3.5211267605633805"/>
+            <point key="canvasLocation" x="973.28244274809151" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <resources>
-        <image name="ic_SplashLogo" width="375" height="812"/>
+        <image name="ic_splash" width="375" height="812"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
