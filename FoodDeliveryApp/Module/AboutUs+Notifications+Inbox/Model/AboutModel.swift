@@ -1,11 +1,27 @@
 import Foundation
 
+/// A model representing various text-based informational data for sections like About, Notifications, and Inbox.
 class AboutModel {
+    
+    /// The main text content.
     var strText: String?
+    
+    /// The time or relative time zone information (mainly used in notifications).
     var strTimezone: String?
+    
+    /// The right-side text (e.g., date in inbox messages).
     var strRightSideText: String?
+    
+    /// Additional text content (e.g., message body in inbox).
     var strText2: String?
     
+    /// Initializes a new `AboutModel` instance.
+    ///
+    /// - Parameters:
+    ///   - strText: The main text content.
+    ///   - strTimezone: The time or relative time zone string.
+    ///   - strRightSideText: Text displayed on the right side, often a date.
+    ///   - strText2: Additional descriptive text.
     init(
         strText: String? = nil,
         strTimezone: String? = nil,
@@ -18,6 +34,9 @@ class AboutModel {
         self.strText2 = strText2
     }
     
+    /// Provides predefined "About" section data.
+    ///
+    /// - Returns: An array of `AboutModel` containing about page content.
     class func addAboutData() -> [AboutModel] {
         return [
             AboutModel(strText: "Our mission is to deliver a seamless and intuitive shopping experience that prioritizes user satisfaction. We aim to create a platform where browsing, purchasing, and managing products feels effortless, thanks to our simple user interface and reliable service."),
@@ -29,7 +48,10 @@ class AboutModel {
             AboutModel(strText: "Sustainability matters to us. We support eco-friendly business practices and work with partners who share our values to reduce our environmental impact.")
         ]
     }
-
+    
+    /// Provides predefined notification data.
+    ///
+    /// - Returns: An array of `AboutModel` representing recent notifications with timestamps.
     class func addNotificationData() -> [AboutModel] {
         return [
             AboutModel(strText: "Order placed successfully", strTimezone: "Just now"),
@@ -49,7 +71,10 @@ class AboutModel {
             AboutModel(strText: "New restaurants added near you", strTimezone: "1w ago")
         ]
     }
- 
+    
+    /// Provides predefined inbox message data.
+    ///
+    /// - Returns: An array of `AboutModel` representing inbox messages with dates and descriptions.
     class func addInboxData() -> [AboutModel] {
         return [
             AboutModel(strText: "MealMonkey Promotions", strRightSideText: "6th July", strText2: "Get 20% off on your next meal!"),

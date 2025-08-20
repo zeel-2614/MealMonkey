@@ -1,33 +1,41 @@
 
 import UIKit
 
+/// A view controller responsible for displaying and managing the user's cart.
 class CartViewController: UIViewController {
     
+    // MARK: - IBOutlets
     @IBOutlet weak var btnPlaceOrder: UIButton!
     @IBOutlet weak var lblEmptyCart: UILabel!
     @IBOutlet weak var tblCartView: UITableView!
     
+    /// Computed property that retrieves the current cart items from the AppDelegate.
     var cartItems: [ProductModel] {
         return (UIApplication.shared.delegate as? AppDelegate)?.arrCart ?? []
     }
     
+    /// Called when the view is about to appear on the screen.
+    /// - Parameter animated: A Boolean value indicating whether the appearance is animated.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateEmptyCartUI()
         tblCartView.reloadData()
     }
     
-    private func updateEmptyCartUI() {
+    /// Updates the UI based on whether the cart is empty or not.
+   func updateEmptyCartUI() {
         let isCartEmpty = cartItems.isEmpty
         lblEmptyCart.isHidden = !isCartEmpty
         tblCartView.isHidden = isCartEmpty
         btnPlaceOrder.isHidden = isCartEmpty
     }
     
+    /// Handles the back button tap event by navigating to the previous screen.
     @objc func backBtnTapped() {
         self.navigationController?.popViewController(animated: true)
     }
     
+    /// Called after the controller's view is loaded into memory.
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -49,6 +57,8 @@ class CartViewController: UIViewController {
         }
     }
     
+    /// Action triggered when the "Place Order" button is tapped.
+    /// - Parameter sender: The object that initiated the action.
     @IBAction func btnPlaceOrderClick(_ sender: Any) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         

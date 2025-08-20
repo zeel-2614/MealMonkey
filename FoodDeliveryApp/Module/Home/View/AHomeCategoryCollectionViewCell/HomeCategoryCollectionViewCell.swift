@@ -1,19 +1,25 @@
 import UIKit
 
+// MARK: - HomeCategoryCollectionViewCell
 class HomeCategoryCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Outlets
     @IBOutlet weak var imgCategory: UIImageView!
     @IBOutlet weak var lblCategory: UILabel!
+    
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        // Style category image
         viewStyle.viewStyle(cornerRadius: 10, borderWidth: 0, borderColor: .systemGray, textField: [imgCategory])
     }
     
+    // MARK: - Configuration
+    /// Configures the cell with the given product category.
     func configure(with category: ProductCategory) {
         lblCategory.text = category.rawValue
         
-        // Provide images for categories explicitly, e.g.:
+        // Assign category-specific image
         switch category {
         case .All:
             imgCategory.image = UIImage(named: "ic_butternaan")

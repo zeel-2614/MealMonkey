@@ -1,7 +1,9 @@
 import UIKit
+import CoreData
 
 class ProfileViewController: UIViewController {
     
+    // MARK: - IBOutlets
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var txtName: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
@@ -10,6 +12,9 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var txtAddress: UITextField!
     @IBOutlet weak var btnSave: UIButton!
     
+    var currentUser: User? // Store the fetched user
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,8 +28,36 @@ class ProfileViewController: UIViewController {
         
         setLeftAlignedTitle("Profile")
         setCartButton(target: self, action: #selector(btnCartTapped))
+        
+        loadUserData()
     }
     
+    func loadUserData() {
+        guard let email = UserDefaults.standard.string(forKey: "loggedInUserEmail"),
+              let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+        
+        do {
+            let users = try context.fetch(fetchRequest)
+            if let user = users.first {
+                currentUser = user
+                txtName.text = user.name
+                txtEmail.text = user.email
+                txtMobileNo.text = user.mobile
+                txtAddress.text = user.address
+                if let imageData = user.profileImage {
+                    imgProfile.image = UIImage(data: imageData)
+                }
+            }
+        } catch {
+            print("❌ Failed to load user: \(error.localizedDescription)")
+        }
+    }
+    
+    // Navigate to cart screen when cart button is tapped
     @objc func btnCartTapped() {
         let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
         if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
@@ -32,6 +65,7 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    // Trigger image picker when profile image is tapped
     @objc func imgTap() {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
@@ -39,32 +73,40 @@ class ProfileViewController: UIViewController {
         present(pickerController, animated: true)
     }
     
+    // Sign out and navigate to login screen
     @IBAction func btnSignOutClick(_ sender: Any) {
         let storyboard = UIStoryboard(name: "UserStoryboard", bundle: nil)
         if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
-            
-            // Make it the root view controller
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-               let sceneDelegate = windowScene.delegate as? SceneDelegate {
-                
-                let navController = UINavigationController(rootViewController: loginVC)
-                sceneDelegate.window?.rootViewController = navController
-                sceneDelegate.window?.makeKeyAndVisible()
-            }
+            self.navigationController?.pushViewController(loginVC, animated: true)
         }
     }
     
-    func setPadding(textfield: [UITextField]){
-        
+    // Add left and right padding to specified text fields
+    func setPadding(textfield: [UITextField]) {
         for item in textfield {
             item.setPadding(left: 34, right: 34)
         }
     }
-}
-
-extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        imgProfile.image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
-        dismiss(animated: true)
+    @IBAction func btnSaveClick(_ sender: Any) {
+        guard let user = currentUser,
+              let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        let context = appDelegate.persistentContainer.viewContext
+        
+        user.name = txtName.text
+        user.email = txtEmail.text
+        user.mobile = txtMobileNo.text
+        user.address = txtAddress.text
+        if let imageData = imgProfile.image?.jpegData(compressionQuality: 0.8) {
+            user.profileImage = imageData
+        }
+        // If you also want password update -> add here
+        
+        do {
+            try context.save()
+            UIAlertController.showAlert(title: "Success", message: "Profile updated successfully!", viewController: self)
+        } catch {
+            print("❌ Failed to update user: \(error.localizedDescription)")
+        }
     }
 }

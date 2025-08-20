@@ -383,6 +383,9 @@
                                                         <state key="normal" title="Sign Up">
                                                             <color key="titleColor" name="ButtonTextColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="btnSignUpClick:" destination="dOy-Gm-jfb" eventType="touchUpInside" id="Fpg-Na-Pet"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uOl-f0-t4a">
                                                         <rect key="frame" x="96" y="722" width="201" height="17"/>

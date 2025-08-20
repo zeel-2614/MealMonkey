@@ -37,9 +37,6 @@
                                         <state key="normal" image="circle" catalog="system">
                                             <color key="titleColor" name="ButtonBackgroundColor"/>
                                         </state>
-                                        <connections>
-                                            <action selector="btnSelectClick:" destination="anz-ce-6ud" eventType="touchUpInside" id="ELF-CN-pWE"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
