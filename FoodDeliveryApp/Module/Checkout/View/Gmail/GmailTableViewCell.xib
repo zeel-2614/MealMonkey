@@ -44,9 +44,6 @@
                                         <state key="normal" image="circle" catalog="system">
                                             <color key="titleColor" name="ButtonBackgroundColor"/>
                                         </state>
-                                        <connections>
-                                            <action selector="btnSelectClick:" destination="ELd-Rm-oHL" eventType="touchUpInside" id="Db3-dw-MqX"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

@@ -43,9 +43,6 @@
                                         <state key="normal" image="circle" catalog="system">
                                             <color key="titleColor" name="ButtonBackgroundColor"/>
                                         </state>
-                                        <connections>
-                                            <action selector="btnSelectClick:" destination="DYn-Qq-O2i" eventType="touchUpInside" id="4Kx-pm-44m"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -68,7 +65,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="Fax-CU-cdE"/>
             <connections>
-                <outlet property="btnSelect" destination="cGo-ZK-20G" id="TIb-1Z-DBe"/>
+                <outlet property="btnSelect" destination="cGo-ZK-20G" id="fxG-sx-25m"/>
                 <outlet property="lblCardNo" destination="uXO-9G-8i0" id="IOE-hq-7Yf"/>
                 <outlet property="viewVisa" destination="mve-He-WnF" id="Q2P-FC-tuW"/>
             </connections>

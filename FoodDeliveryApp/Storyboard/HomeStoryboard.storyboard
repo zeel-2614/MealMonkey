@@ -163,6 +163,8 @@ meals and more!</string>
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="ButtonBackgroundColor"/>
+                        <color key="selectedImageTintColor" name="ButtonBackgroundColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="01h-XE-zNi" kind="relationship" relationship="viewControllers" id="PUm-yW-t8u"/>
@@ -396,6 +398,9 @@ meals and more!</string>
                                                         <state key="normal" title="Save">
                                                             <color key="titleColor" name="ButtonTextColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="btnSaveClick:" destination="tgk-By-OlE" eventType="touchUpInside" id="7ia-ch-Mzt"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>

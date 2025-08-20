@@ -7,20 +7,34 @@
 
 import UIKit
 
+/// A custom `UITableViewCell` subclass used to display order details in the order list.
 class OrderListTableViewCell: UITableViewCell {
-
+    
+    // MARK: - IBOutlets
     @IBOutlet weak var lblProductName: UILabel!
     @IBOutlet weak var lblOrderNumber: UILabel!
     @IBOutlet weak var lblTotal: UILabel!
     @IBOutlet weak var imgOrderedProduct: UIImageView!
+    
+    /**
+     Called after the cell has been loaded from the nib file.
+     This is where initial setup for the cell can be performed.
+     */
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
+    /**
+     Called when the cell’s selection state changes.
+     - Parameters:
+     - selected: A Boolean value indicating whether the cell is now selected.
+     - animated: A Boolean value indicating whether the change should be animated.
+     This can be used to configure the view for the selected state.
+     */
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
 }
