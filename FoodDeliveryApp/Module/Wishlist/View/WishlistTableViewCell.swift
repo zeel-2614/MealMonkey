@@ -15,14 +15,15 @@ class WishlistTableViewCell: UITableViewCell {
     @IBOutlet weak var lblProductPrice: UILabel!
     @IBOutlet weak var lblProductType: UILabel!
     @IBOutlet weak var lblProductCategory: UILabel!
+    @IBOutlet weak var lblProductQty: UILabel!
     @IBOutlet weak var btnWishlist: UIButton!
     @IBOutlet weak var lblProductName: UILabel!
     @IBOutlet weak var imageProduct: UIImageView!
     
     // MARK: - Properties
     /// Holds the product model associated with this cell.
-    var wishlistProduct: ProductModel?
-    
+    var wishlistProduct: Wishlist?
+    var onWishlistUpdate: (() -> Void)?   // closure callback
     // MARK: - Lifecycle
     /// Called when the cell is loaded from the nib file.
     override func awakeFromNib() {
@@ -43,15 +44,17 @@ class WishlistTableViewCell: UITableViewCell {
     // MARK: - Configuration
     /// Configures the wishlist cell with the given product details.
     /// - Parameter product: The `ProductModel` object containing product information.
-    func configure(with product: ProductModel) {
-        self.wishlistProduct = product
-        lblProductName.text = product.strProductName
-        lblProductCategory.text = product.objProductCategory.rawValue
-        lblProductPrice.text = "\(product.doubleProductPrice)"
-        lblProductType.text = product.objProductType.rawValue
-        imageProduct.image = UIImage(named: product.strProductImage)
+    func configure(with product: Wishlist) {
+        self.wishlistProduct = product  // now a Wishlist object
+        lblProductName.text = product.productName
+        lblProductCategory.text = product.category
+        lblProductPrice.text = "$\(product.price)"
+        lblProductType.text = product.type
+        lblProductQty.isHidden = true
+        if let imageName = product.image {
+            imageProduct.image = UIImage(named: imageName)
+        }
         
-        // Always show filled heart when in wishlist
         btnWishlist.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         btnWishlist.tintColor = .buttonBackground
     }
@@ -60,18 +63,11 @@ class WishlistTableViewCell: UITableViewCell {
     /// Handles wishlist button click to toggle product wishlist state.
     /// - Parameter sender: The button triggering the action.
     @IBAction func btnWishlistClick(_ sender: Any) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-              let product = wishlistProduct else { return }
+        guard let product = wishlistProduct,
+              let user = CoreDataManager.shared.getOrCreateCurrentUser() else { return }
         
-        if let index = appDelegate.arrWishlist.firstIndex(where: { $0.intId == product.intId }) {
-            // Remove
-            appDelegate.arrWishlist.remove(at: index)
-            btnWishlist.setImage(UIImage(systemName: "heart"), for: .normal)
-        } else {
-            // Add
-            appDelegate.arrWishlist.append(product)
-            btnWishlist.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        }
-        saveWishlist(appDelegate.arrWishlist)
+        CoreDataManager.shared.removeFromWishlist(productId: Int(product.id), for: user)
+        
+        onWishlistUpdate?()  // refresh table
     }
 }

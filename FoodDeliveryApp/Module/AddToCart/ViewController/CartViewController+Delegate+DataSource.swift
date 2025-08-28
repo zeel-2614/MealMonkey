@@ -24,24 +24,20 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CartTableViewCell", for: indexPath) as! CartTableViewCell
         
         // Retrieve product for the current row
-        let product = cartItems[indexPath.row]
-        
-        // Configure cell with product details
-        cell.configure(with: product)
+        let cartItem = cartItems[indexPath.row]
+        cell.configure(with: cartItem)
         
         // Handle product deletion when delete action is triggered
         cell.onDelete = { [weak self] in
             guard let self = self,
-                  let appDelegate = (UIApplication.shared.delegate as? AppDelegate) else { return }
+                  let user = CoreDataManager.shared.getOrCreateCurrentUser() else { return }
             
-            // Remove product from cart
-            appDelegate.arrCart.remove(at: indexPath.row)
+            let itemToDelete = self.cartItems[indexPath.row]
             
-            // Convert updated cart to dictionary array and save it
-            let cartDictArray = appDelegate.arrCart.map { productToDict($0) }
-            saveCartToUserDefaults(cartArray: cartDictArray)
+            CoreDataManager.shared.deleteCartItem(item: itemToDelete, for: user)
             
-            // Reload table view to reflect changes
+            // Refresh array
+            self.cartItems = CoreDataManager.shared.fetchCartItems(for: user)
             self.tblCartView.reloadData()
         }
         return cell

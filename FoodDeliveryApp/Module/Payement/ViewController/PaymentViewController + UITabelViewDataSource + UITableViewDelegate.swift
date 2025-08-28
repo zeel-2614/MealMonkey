@@ -37,10 +37,18 @@ extension PaymentViewController: UITableViewDataSource, UITableViewDelegate, Car
     
     // Handle delete button tap from CardTableViewCell
     func didTapDeleteButton(in cell: CardTableViewCell) {
-        if let indexPath = tblCardDetails.indexPath(for: cell) {
-            arrCards.remove(at: indexPath.row) // Remove the card from the list
-            saveCardsToDefaults() // Save updated list
-            tblCardDetails.reloadData() // Refresh table view
+        if let indexPath = tblCardDetails.indexPath(for: cell),
+           let user = currentUser {
+            let cards = CoreDataManager.shared.fetchCards(for: user)
+            let cardToDelete = cards[indexPath.row]
+
+            // ✅ Delete from Core Data
+            CoreDataManager.shared.deleteCard(cardToDelete)
+
+            // Refresh list
+            arrCards = CoreDataManager.shared.fetchCards(for: user).compactMap { $0.number }
+            tblCardDetails.reloadData()
+            self.updateEmptyCardLabel()
         }
     }
     

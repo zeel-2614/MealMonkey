@@ -30,11 +30,20 @@
                                         <color key="textColor" name="TextFieldTextColor"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Y6W-OH-hqX" id="iMk-gq-339"/>
+                                        </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SeF-M3-7Kp">
                                         <rect key="frame" x="0.0" y="100" width="97" height="451"/>
                                         <color key="backgroundColor" name="ButtonBackgroundColor"/>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Products Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqL-Kf-LD4">
+                                        <rect key="frame" x="123" y="276" width="147" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" systemColor="systemGray4Color"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Wdc-jR-OQr">
                                         <rect key="frame" x="21" y="100" width="351" height="451"/>
                                         <color key="backgroundColor" name="AccentColor"/>
@@ -47,11 +56,13 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="T0S-ZJ-4Ht" firstAttribute="top" secondItem="mWv-3d-bJk" secondAttribute="top" constant="25" id="93k-zO-g1u"/>
+                                    <constraint firstItem="hqL-Kf-LD4" firstAttribute="centerX" secondItem="mWv-3d-bJk" secondAttribute="centerX" id="9bm-L3-ljI"/>
                                     <constraint firstAttribute="trailing" secondItem="Wdc-jR-OQr" secondAttribute="trailing" constant="21" id="CTE-zr-4uF"/>
                                     <constraint firstAttribute="bottom" secondItem="Wdc-jR-OQr" secondAttribute="bottom" constant="22" id="JUj-eC-mQg"/>
                                     <constraint firstItem="SeF-M3-7Kp" firstAttribute="leading" secondItem="mWv-3d-bJk" secondAttribute="leading" id="OOy-DI-Djf"/>
                                     <constraint firstItem="Wdc-jR-OQr" firstAttribute="leading" secondItem="mWv-3d-bJk" secondAttribute="leading" constant="21" id="R9L-xX-jgw"/>
                                     <constraint firstItem="T0S-ZJ-4Ht" firstAttribute="leading" secondItem="mWv-3d-bJk" secondAttribute="leading" constant="21" id="Szb-Uw-5FY"/>
+                                    <constraint firstItem="hqL-Kf-LD4" firstAttribute="centerY" secondItem="mWv-3d-bJk" secondAttribute="centerY" id="eic-hE-6EJ"/>
                                     <constraint firstItem="Wdc-jR-OQr" firstAttribute="leading" secondItem="SeF-M3-7Kp" secondAttribute="trailing" constant="-76" id="hEf-OF-zjb"/>
                                     <constraint firstItem="SeF-M3-7Kp" firstAttribute="top" secondItem="T0S-ZJ-4Ht" secondAttribute="bottom" constant="30" id="mgF-P0-Kj8"/>
                                     <constraint firstItem="Wdc-jR-OQr" firstAttribute="top" secondItem="T0S-ZJ-4Ht" secondAttribute="bottom" constant="30" id="rQ5-dt-5jC"/>
@@ -72,6 +83,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="LYt-j8-2pp"/>
                     <connections>
+                        <outlet property="lblNoItem" destination="hqL-Kf-LD4" id="AA7-ud-YtD"/>
                         <outlet property="tblBackView" destination="SeF-M3-7Kp" id="TxY-Gm-fC0"/>
                         <outlet property="tblCategory" destination="Wdc-jR-OQr" id="o6V-OV-vZR"/>
                         <outlet property="txtSearchFood" destination="T0S-ZJ-4Ht" id="lMl-04-Tih"/>
@@ -209,6 +221,9 @@ meals and more!</string>
                                                 <color key="tintColor" name="ButtonBackgroundColor"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="chevron.down" catalog="system"/>
+                                                <connections>
+                                                    <action selector="btnCurrentLocationClick:" destination="3Ze-pN-OGb" eventType="touchUpInside" id="xxh-Tr-CnC"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -261,6 +276,7 @@ meals and more!</string>
                     </view>
                     <navigationItem key="navigationItem" id="a5g-O1-F4I"/>
                     <connections>
+                        <outlet property="btnCurrentLocation" destination="H4g-KI-kEv" id="CPB-e1-hsA"/>
                         <outlet property="lblCurrentLocation" destination="Pn2-7g-1LW" id="iw9-oF-0Jo"/>
                         <outlet property="tblHome" destination="2iP-y2-eMg" id="aDu-wg-Cvu"/>
                         <outlet property="txtSearch" destination="UcL-VY-n6g" id="I1G-r1-G4s"/>
@@ -467,6 +483,7 @@ meals and more!</string>
                         <outlet property="btnSave" destination="Guk-T9-L6m" id="WAs-Tg-W5i"/>
                         <outlet property="btnSignOut" destination="3rt-AJ-NGK" id="SZA-SW-gJ3"/>
                         <outlet property="imgProfile" destination="A0t-R1-yD0" id="yYn-wb-9Mc"/>
+                        <outlet property="lblUserName" destination="cr1-Gu-zRz" id="BYD-hw-877"/>
                         <outlet property="txtAddress" destination="3AL-p8-rIX" id="JyL-xE-tyR"/>
                         <outlet property="txtEmail" destination="bKI-mo-ZeY" id="vrV-vk-Mqk"/>
                         <outlet property="txtMobileNo" destination="LrL-bq-N4Z" id="zyI-CY-jsy"/>
@@ -667,6 +684,9 @@ meals and more!</string>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

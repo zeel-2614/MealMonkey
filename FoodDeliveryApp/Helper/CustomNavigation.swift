@@ -90,4 +90,56 @@ extension UIViewController {
         // Assign the cart button as right bar button item
         self.navigationItem.rightBarButtonItem = cartButton
     }
+    
+    func setCartButtonWithBadge(
+        target: Any?,
+        action: Selector,
+        tintColor: UIColor = UIColor(named: "NavigationColor") ?? .labelPrimary
+    ) {
+        let cartButton = UIButton(type: .custom)
+        let cartImage = UIImage(systemName: "cart.fill")?.withRenderingMode(.alwaysTemplate)
+        cartButton.setImage(cartImage, for: .normal)
+        cartButton.tintColor = tintColor
+        cartButton.addTarget(target, action: action, for: .touchUpInside)
+        cartButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        
+        // Add badge label
+        let badgeLabel = UILabel()
+        badgeLabel.tag = 999 // Identifier for updates
+        badgeLabel.frame = CGRect(x: 18, y: -5, width: 18, height: 18)
+        badgeLabel.backgroundColor = .red
+        badgeLabel.textColor = .white
+        badgeLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        badgeLabel.textAlignment = .center
+        badgeLabel.layer.cornerRadius = 9
+        badgeLabel.layer.masksToBounds = true
+        badgeLabel.isHidden = true
+        cartButton.addSubview(badgeLabel)
+        
+        // Add button to navigation bar
+        let barButtonItem = UIBarButtonItem(customView: cartButton)
+        self.navigationItem.rightBarButtonItem = barButtonItem
+        
+        // Initialize badge value
+        updateCartBadge()
+        
+        // Listen for updates
+        NotificationCenter.default.addObserver(
+            forName: .cartCountUpdated,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.updateCartBadge()
+        }
+    }
+
+    private func updateCartBadge() {
+        if let cartButton = self.navigationItem.rightBarButtonItem?.customView as? UIButton,
+           let badgeLabel = cartButton.viewWithTag(999) as? UILabel {
+            
+            let count = CartBadgeManager.shared.cartCount
+            badgeLabel.isHidden = count == 0
+            badgeLabel.text = "\(count)"
+        }
+    }
 }

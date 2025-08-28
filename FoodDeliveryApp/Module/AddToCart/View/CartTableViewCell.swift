@@ -39,12 +39,12 @@ class CartTableViewCell: UITableViewCell {
     
     /// Configures the cell with the given product details.
     /// - Parameter product: The product model containing the details to display.
-    func configure(with product: ProductModel) {
-        lblProductTitle.text = product.strProductName
-        imgProduct.image = UIImage(named: product.strProductImage)
-        lblPrice.text = "$\(String(format: "%.2f", product.doubleProductPrice))"
-        lblType.text = product.objProductType.rawValue.capitalized
-        lblCategory.text = product.objProductCategory.rawValue
-        lblQty.text = "QTY: \(product.intProductQty ?? 1)"
+    func configure(with cartItem: CartItems) {
+        lblProductTitle.text = cartItem.productName
+        imgProduct.image = UIImage(named: cartItem.image ?? "")
+        lblPrice.text = "$\(String(format: "%.2f", cartItem.price))"
+        lblType.text = cartItem.type ?? ""
+        lblCategory.text = cartItem.category ?? ""
+        lblQty.text = "QTY: \(cartItem.quantity)"
     }
 }

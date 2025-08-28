@@ -18,6 +18,7 @@ extension MoreViewController: UITableViewDelegate {
             // Navigate to My Orders screen.
             let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
             if let VC = storyboard.instantiateViewController(withIdentifier: "OrderListViewController") as? OrderListViewController {
+//                VC.order = selectedOrder  // <-- Assign here
                 self.navigationController?.pushViewController(VC, animated: true)
             }
         case 2:

@@ -46,7 +46,8 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
     @IBOutlet weak var btnSendOrder: UIButton!
     
     // MARK: - Properties
-    var arrCards : [String] = ["Card -1 ", "card -2 ", "card -3 "]
+    var arrCards: [String] = []     // was ["Card -1 ", "card -2 ", "card -3 "]
+    var currentUser: User?
     var selectedPaymentIndex: Int = 0
     var checkoutSubtotal: Double = 0.0
     var checkoutDeliveryCost: Double = 0.0
@@ -70,9 +71,11 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
         tblCheckout.register(UINib(nibName: "GmailTableViewCell", bundle: nil), forCellReuseIdentifier: "GmailTableViewCell")
         tblCheckout.register(UINib(nibName: "VisaTableViewCell", bundle: nil), forCellReuseIdentifier: "VisaTableViewCell")
         
+        currentUser = CoreDataManager.shared.getOrCreateCurrentUser()
+        
         // Load saved cards if available
-        if let savedCards = UserDefaults.standard.array(forKey: "savedCards") as? [String] {
-            arrCards = savedCards
+        if let user = currentUser {
+            arrCards = CoreDataManager.shared.fetchCards(for: user).compactMap { $0.number }
         }
         
         updateCheckoutLabels()
@@ -82,13 +85,17 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
     
     /// Called before the view appears on screen.
     override func viewWillAppear(_ animated: Bool) {
+        if let user = currentUser {
+            arrCards = CoreDataManager.shared.fetchCards(for: user).compactMap { $0.number }
+            tblCheckout.reloadData()
+        }
+        
         if let savedAddress = UserDefaults.standard.string(forKey: "currentAddress") {
             lblDeliveryAddress.text = savedAddress
         }
     }
     
     // MARK: - Navigation
-    
     /// Action for navigating back from the checkout screen.
     @objc func checkoutBackBtn() {
         self.navigationController?.popViewController(animated: true)
@@ -161,27 +168,28 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
             return
         }
         
-        // Confirmation Alert before saving
         let confirmAlert = UIAlertController(title: "Confirm Card",
                                              message: "Do you want to save this card?",
                                              preferredStyle: .alert)
-        
-        confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         confirmAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
-            // Load existing cards from UserDefaults
-            var savedCards = UserDefaults.standard.array(forKey: "savedCards") as? [String] ?? []
-            savedCards.append(cardNumber)
+            if let user = self.currentUser {
+                // uses your User/Card types
+                CoreDataManager.shared.addCard(
+                    for: user,
+                    number: cardNumber,
+                    expiryMonth: expiryMonth,
+                    expiryYear: expiryYear,
+                    securityCode: self.txtSecurityCode.text ?? "",
+                    firstName: self.txtFirstName.text ?? "",
+                    lastName: self.txtLastName.text ?? ""
+                )
+                self.arrCards = CoreDataManager.shared.fetchCards(for: user).compactMap { $0.number }
+            }
             
-            // Save back to UserDefaults
-            UserDefaults.standard.set(savedCards, forKey: "savedCards")
-            
-            // Update local arrCards
-            self.arrCards = savedCards
             self.tblCheckout.reloadData()
-            
-            // Close enter card view
-            self.btnCrossClikc(sender)
+            self.btnCrossClikc(sender) // close the sheet
         }))
         
         present(confirmAlert, animated: true)

@@ -15,6 +15,7 @@ class ProductDetailViewController: UIViewController {
     var isHeartFilled = false
     
     // MARK: - IBOutlets
+    @IBOutlet weak var productDetailActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var btnHeart: UIButton!
     @IBOutlet weak var countView: UIView!
     @IBOutlet weak var btnCart: UIButton!
@@ -42,13 +43,11 @@ class ProductDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewScroll.showsVerticalScrollIndicator = false
-        setupUI()
-        
         setLeftAlignedTitleWithBack("Food Detail", target: self, action: #selector(detailBackBtnTapped))
-        setCartButton(target: self, action: #selector(cartBtnTapped))
-        
-        configureUI()
+        setCartButtonWithBadge(target: self, action: #selector(cartBtnTapped))
+        // ✅ Set navigation bar title and icon color to white
         currentQuantity = 1
+        showLoadingState()
         
         if let product = selectedProduct {
             lblTitle.text = product.strProductName
@@ -59,14 +58,41 @@ class ProductDetailViewController: UIViewController {
         }
         // Do any additional setup after loading the view.
         
-        if let appDelegate = appDelegate,
-           appDelegate.arrWishlist.contains(where: { $0.intId == selectedProduct?.intId }) {
+        if let product = selectedProduct,
+           let user = CoreDataManager.shared.getOrCreateCurrentUser(),
+           CoreDataManager.shared.isInWishlist(productId: product.intId, for: user) {
             btnHeart.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         } else {
             btnHeart.setImage(UIImage(systemName: "heart"), for: .normal)
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)   // <-- This was missing
+        if let user = CoreDataManager.shared.getOrCreateCurrentUser() {
+            CartBadgeManager.shared.syncCartCount(for: user)
+        }
+        // Apply navigation bar styling after adding buttons
+        if let user = CoreDataManager.shared.getOrCreateCurrentUser() {
+            CartBadgeManager.shared.syncCartCount(for: user)
+        }
+        
+        let navBar = navigationController?.navigationBar
+            navigationController?.setNavigationBarHidden(false, animated: animated)
+            
+            // Force white tint and text
+            navBar?.tintColor = .white
+            navBar?.titleTextAttributes = [.foregroundColor: UIColor.white]
+            
+            // Clear background
+            navBar?.setBackgroundImage(UIImage(), for: .default)
+            navBar?.shadowImage = UIImage()
+            navBar?.isTranslucent = true
+            navBar?.backgroundColor = .clear
+
+            // ✅ Force layout update
+            navBar?.layoutIfNeeded()
+    }
     // MARK: - Navigation Button Actions
     @objc func detailBackBtnTapped() {
         self.navigationController?.popViewController(animated: true)
@@ -81,7 +107,6 @@ class ProductDetailViewController: UIViewController {
     // MARK: - UI Setup
     func configureUI() {
         guard let product = selectedProduct else { return }
-        self.title = product.strProductName
         lblTitle.text = product.strProductName
         lblDescription.text = product.strProductDescription
         imgProduct.image = UIImage(named: product.strProductImage)
@@ -109,36 +134,21 @@ class ProductDetailViewController: UIViewController {
         currentQuantity += 1
         updatePriceAndQuantityUI()
     }
-    
     // MARK: - Add to Cart
     @IBAction func btnAddToCartClick(_ sender: Any) {
-        print("add too cart from detail Page")
-        guard let product = selectedProduct else {
-            print("Error: No product selected to add to cart.")
-            return
-        }
-        checkProduct(productToAdd: product)
-        let alert = UIAlertController(title: "Success", message: "Added to cart!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func checkProduct(productToAdd: ProductModel) {
-        guard let appDelegate = appDelegate else { return }
-        if let existingIndex = appDelegate.arrCart.firstIndex(where: { $0.intId == productToAdd.intId }) {
-            appDelegate.arrCart[existingIndex].intProductQty = currentQuantity
-            print("Updated \(productToAdd.strProductName) quantity to \(currentQuantity).")
-        } else {
-            let newProduct = productToAdd
-            newProduct.intProductQty = currentQuantity
-            appDelegate.arrCart.append(newProduct)
-            print("Added \(productToAdd.strProductName) with quantity \(currentQuantity).")
-        }
+        guard let product = selectedProduct,
+              let user = CoreDataManager.shared.getOrCreateCurrentUser() else { return }
         
-        let cartDictArray = appDelegate.arrCart.map { productToDict($0) }
-        saveCartToUserDefaults(cartArray: cartDictArray)
+        CoreDataManager.shared.addOrUpdateCartItem(product: product, quantity: Int16(currentQuantity), for: user)
+        
+        // ✅ Use fetchCartItems instead of getCartItems
+        let cartCount = CoreDataManager.shared.fetchCartItems(for: user).count
+        CartBadgeManager.shared.updateCartCount(to: cartCount)
+        
+        let alert = UIAlertController(title: "Success", message: "Added to cart!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
-    
     // MARK: - Cart Button
     @IBAction func btnCartClick(_ sender: Any) {
         let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
@@ -146,23 +156,22 @@ class ProductDetailViewController: UIViewController {
             self.navigationController?.pushViewController(cartVc, animated: true)
         }
     }
+    
     @IBAction func btnHeartClick(_ sender: UIButton) {
-        guard let product  = selectedProduct else {return}
-        guard let appDelegate = appDelegate else {return}
+        guard let product  = selectedProduct,
+              let user = CoreDataManager.shared.getOrCreateCurrentUser() else { return }
         
-        if let existingIndex = appDelegate.arrWishlist.firstIndex(where: {$0 .intId == product.intId}) {
-            appDelegate.arrWishlist.remove(at: existingIndex)
+        if CoreDataManager.shared.isInWishlist(productId: product.intId, for: user) {
+            CoreDataManager.shared.removeFromWishlist(productId: product.intId, for: user)
             btnHeart.setImage(UIImage(systemName: "heart"), for: .normal)
-        }
-        else {
-            appDelegate.arrWishlist.append(product)
+        } else {
+            CoreDataManager.shared.addToWishlist(product: product, for: user)
             btnHeart.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         }
-        saveWishlist(appDelegate.arrWishlist)
     }
     
     // MARK: - Styling
-    private func setupUI() {
+    func setupUI() {
         // Style stacks
         viewStyle(cornerRadius: 4, borderWidth: 0, borderColor: .gray, textField: [stackPortion, stackIngredients])
         viewStyle(cornerRadius: 15, borderWidth: 0, borderColor: .gray, textField: [btnPlus, btnMinus])
@@ -185,5 +194,27 @@ class ProductDetailViewController: UIViewController {
         productDetailView.layer.shadowOpacity = 0.3
         productDetailView.layer.shadowOffset = CGSize(width: 0, height: -2)
         productDetailView.layer.shadowRadius = 10
+    }
+    
+    func showLoadingState() {
+        // Initially hide content and show loader
+        productDetailView.isHidden = true
+        imgProduct.isHidden = true
+        btnHeart.isHidden = true
+        productDetailActivityIndicator.startAnimating()
+        
+        // Simulate a loading delay of 3 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
+            guard let self = self else { return }
+            
+            self.productDetailActivityIndicator.stopAnimating()
+            self.productDetailView.isHidden = false
+            self.imgProduct.isHidden = false
+            self.btnHeart.isHidden = false
+            
+            // Set up the UI after "loading"
+            self.setupUI()
+            self.configureUI()
+        }
     }
 }

@@ -21,7 +21,6 @@ class DessertsTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
     // MARK: - Configuration Method
     /**
      Configures the cell UI elements with the provided `ProductModel` data.

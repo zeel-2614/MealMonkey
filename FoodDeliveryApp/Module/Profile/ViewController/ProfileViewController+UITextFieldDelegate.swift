@@ -51,6 +51,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             imgProfile.image = originalImage
         }
         dismiss(animated: true, completion: nil)
+        updateSaveButtonState()
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

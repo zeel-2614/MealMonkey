@@ -22,7 +22,7 @@ class HomeCategoryCollectionViewCell: UICollectionViewCell {
         // Assign category-specific image
         switch category {
         case .All:
-            imgCategory.image = UIImage(named: "ic_butternaan")
+            imgCategory.image = UIImage(named: "ic_all")
         case .Punjabi:
             imgCategory.image = UIImage(named: "ic_paneertikka")
         case .Chinese:

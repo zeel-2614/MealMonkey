@@ -97,7 +97,7 @@
                                                             <color key="titleColor" name="LabelSecondaryColor"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="btnForgetPasswordClick:" destination="Oz4-AG-7JY" eventType="touchUpInside" id="zz1-69-H94"/>
+                                                            <action selector="btnForgetPasswordAction:" destination="Oz4-AG-7JY" eventType="touchUpInside" id="kr6-nu-jcZ"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or Login With" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VkC-nw-dsJ">
@@ -120,6 +120,9 @@
                                                         <state key="normal" title="Login with Facebook" image="FacebookLogo">
                                                             <color key="titleColor" name="ButtonTextColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="btnRedirect:" destination="Oz4-AG-7JY" eventType="touchUpInside" id="gQ8-GS-IVx"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQO-lT-OGR">
                                                         <rect key="frame" x="30" y="592" width="333" height="55"/>
@@ -166,7 +169,7 @@
                                                             </attributedString>
                                                         </state>
                                                         <connections>
-                                                            <action selector="btnSignUpClick:" destination="Oz4-AG-7JY" eventType="touchUpInside" id="ll3-yF-Xii"/>
+                                                            <action selector="btnSignUpAction:" destination="Oz4-AG-7JY" eventType="touchUpInside" id="2Gt-Ll-5mL"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yvw-Ny-GiS">
@@ -249,15 +252,17 @@
                     <connections>
                         <outlet property="btnEye" destination="Yvw-Ny-GiS" id="Wi0-hr-qkF"/>
                         <outlet property="btnFacebook" destination="V9T-re-Diz" id="Slp-Hi-EMI"/>
+                        <outlet property="btnForgotPassword" destination="GfZ-8v-Huw" id="pB2-6q-wDq"/>
                         <outlet property="btnGoogle" destination="TQO-lT-OGR" id="edi-NQ-Msb"/>
                         <outlet property="btnLogin" destination="2w0-l5-NG3" id="jVW-ji-51s"/>
+                        <outlet property="btnSignup" destination="UmE-P3-Xkz" id="lHC-LI-jWZ"/>
                         <outlet property="txtEmail" destination="ugK-Uv-b8o" id="DZN-hg-TNm"/>
                         <outlet property="txtPassword" destination="fhz-p2-32r" id="5qE-Ee-fXG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z3d-vD-oTa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="878.62595419847321" y="3.5211267605633805"/>
+            <point key="canvasLocation" x="2732.06106870229" y="3.5211267605633805"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="xcp-aR-zY9">
@@ -359,7 +364,7 @@
                                                             <outlet property="delegate" destination="dOy-Gm-jfb" id="8ML-Zy-Hku"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirem Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XCJ-vX-Ayd">
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XCJ-vX-Ayd">
                                                         <rect key="frame" x="34" y="557" width="325" height="56"/>
                                                         <color key="backgroundColor" name="TextFieldBackgroundColor"/>
                                                         <constraints>
@@ -532,7 +537,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="if2-xq-2w3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1693.8931297709923" y="3.5211267605633805"/>
+            <point key="canvasLocation" x="3547.3282442748091" y="3.5211267605633805"/>
         </scene>
         <!--Forget Password View Controller-->
         <scene sceneID="IhD-JX-v3C">
@@ -625,7 +630,7 @@ link to  create a new password via email</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LhO-cg-fNt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2546" y="4"/>
+            <point key="canvasLocation" x="4399.2366412213742" y="3.5211267605633805"/>
         </scene>
         <!--New Password View Controller-->
         <scene sceneID="Fsr-uu-QRL">
@@ -767,7 +772,7 @@ link to  create a new password via email</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VHQ-MH-y9s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4086" y="4"/>
+            <point key="canvasLocation" x="5938.1679389312976" y="3.5211267605633805"/>
         </scene>
         <!--Next Page View Controller-->
         <scene sceneID="BkW-Vw-dfv">
@@ -900,7 +905,7 @@ link to  create a new password via email</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pkp-ac-UbQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4921" y="4"/>
+            <point key="canvasLocation" x="6773.2824427480909" y="3.5211267605633805"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="PnF-Kd-pl4">
@@ -1080,7 +1085,7 @@ continue to reset your password</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hk3-kv-tcU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3321" y="4"/>
+            <point key="canvasLocation" x="5173.2824427480909" y="3.5211267605633805"/>
         </scene>
     </scenes>
     <resources>

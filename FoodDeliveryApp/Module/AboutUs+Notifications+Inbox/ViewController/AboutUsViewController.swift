@@ -21,7 +21,7 @@ class AboutUsViewController: UIViewController {
         case .Notification:
             arrCurrent = AboutModel.addNotificationData()
             setLeftAlignedTitleWithBack("Notifications", target: self, action: #selector(backButtonTapped))
-            setCartButton(target: self, action: #selector(cartTapped))
+            setCartButtonWithBadge(target: self, action: #selector(cartTapped))
         case .Inbox:
             arrCurrent = AboutModel.addInboxData()
             setLeftAlignedTitleWithBack("Inbox", target: self, action: #selector(backButtonTapped))
@@ -38,6 +38,11 @@ class AboutUsViewController: UIViewController {
         tblMoreOpions.register(UINib(nibName: "AboutUsTableViewCell", bundle: nil), forCellReuseIdentifier: "AboutUsTableViewCell")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let user = CoreDataManager.shared.getOrCreateCurrentUser() {
+            CartBadgeManager.shared.syncCartCount(for: user)
+        }
+    }
     // MARK: - Actions
     @objc func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)

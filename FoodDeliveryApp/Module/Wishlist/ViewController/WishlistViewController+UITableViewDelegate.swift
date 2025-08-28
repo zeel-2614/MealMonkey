@@ -18,8 +18,7 @@ extension WishlistViewController: UITableViewDelegate, UITableViewDataSource {
     ///   - section: The index number of the section.
     /// - Returns: The number of wishlist products stored in `arrWishlist`.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return 0 }
-        return appDelegate.arrWishlist.count
+        return wishlistProduct.count
     }
     
     /// Provides the cell to display for a given row in the table view.
@@ -30,18 +29,18 @@ extension WishlistViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WishlistTableViewCell", for: indexPath) as! WishlistTableViewCell
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let product = appDelegate.arrWishlist[indexPath.row]
+        let product = wishlistProduct[indexPath.row]
         
-        /// Configure the wishlist cell with product details.
-        cell.configure(with: product)   // ✅ Clean & reusable
-        
+        cell.configure(with: product)
+        cell.onWishlistUpdate = { [weak self] in
+            self?.loadWishlist()
+        }
         return cell
     }
     
     /// Loads the wishlist products from the `AppDelegate` into the local `wishlistProduct` array.
-    func loadWishlistFromUserDefaults() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        wishlistProduct = appDelegate.arrWishlist
-    }
+    //    func loadWishlistFromUserDefaults() {
+    //        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+    //        wishlistProduct = appDelegate.arrWishlist
+    //    }
 }

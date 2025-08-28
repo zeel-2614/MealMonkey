@@ -12,7 +12,7 @@ class WishlistViewController: UIViewController {
     
     // MARK: - Properties
     /// An array holding the list of wishlist products.
-    var wishlistProduct: [ProductModel] = []
+    var wishlistProduct: [Wishlist] = []  // now Wishlist objects
     
     // MARK: - Outlets
     /// The table view used to display the wishlist items.
@@ -35,11 +35,14 @@ class WishlistViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         /// Fetch the wishlist data from the app delegate whenever the view appears.
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            wishlistProduct = appDelegate.arrWishlist
-        }
+        loadWishlist()
+    }
+    
+    func loadWishlist() {
+        guard let user = CoreDataManager.shared.getOrCreateCurrentUser() else { return }
+        wishlistProduct = CoreDataManager.shared.fetchWishlist(for: user)
         tblWishlist.reloadData()
-        /// Show or hide the empty wishlist label
+        
         lblEmptyWishlist.isHidden = !wishlistProduct.isEmpty
         tblWishlist.isHidden = wishlistProduct.isEmpty
     }

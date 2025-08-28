@@ -17,12 +17,17 @@ class OffersViewController: UIViewController {
         viewStyle(cornerRadius: btnCheckOffer.frame.size.height/2, borderWidth: 0, borderColor: .systemGray, textField: [btnCheckOffer])
         
         setLeftAlignedTitle("Latest Offers")
-        setCartButton(target: self, action: #selector(btnCartTapped))
+        setCartButtonWithBadge(target: self, action: #selector(btnCartTapped))
         
         tblOffers.showsVerticalScrollIndicator = false
         tblOffers.register(UINib(nibName: "OffersTableViewCell", bundle: nil), forCellReuseIdentifier: "OffersTableViewCell")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let user = CoreDataManager.shared.getOrCreateCurrentUser() {
+            CartBadgeManager.shared.syncCartCount(for: user)
+        }
+    }
     /**
      Action triggered when the cart button is tapped.
      This method navigates to the `CartViewController` in the "ProductStoryboard".
