@@ -15,18 +15,6 @@ class DessertsViewController: UIViewController {
         return HomeViewController.arrProductData.filter { $0.objProductType == selectedProductType }
     }
     
-    /// Computed property returning products filtered by `selectedProductType`.
-//    var arrProducts: [ProductModel] {
-//        switch selectedProductType {
-//        case .food:
-//            return arrProductData.filter { $0.objProductType == .food }
-//        case .Desserts:
-//            return arrProductData.filter { $0.objProductType == .Desserts }
-//        case .Beverages:
-//            return arrProductData.filter { $0.objProductType == .Beverages }
-//        }
-//    }
-    
     /// Products filtered by the search text.
     var filteredProducts: [ProductModel] = []
     var isSearching: Bool = false
@@ -42,7 +30,7 @@ class DessertsViewController: UIViewController {
         
         setPadding(textfield: [txtSearchDesserts])
         
-        setCartButton(target: self, action: #selector(btnCartTapped))
+        setCartButtonWithBadge(target: self, action: #selector(btnCartTapped))
         
         tblDesserts.showsVerticalScrollIndicator = false
         tblDesserts.register(UINib(nibName: "DessertsTableViewCell", bundle: nil), forCellReuseIdentifier: "DessertsTableViewCell")
@@ -62,12 +50,16 @@ class DessertsViewController: UIViewController {
         txtSearchDesserts.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let user = CoreDataManager.shared.getOrCreateCurrentUser() {
+            CartBadgeManager.shared.syncCartCount(for: user)
+        }
+    }
+    
     @objc func productsLoaded() {
         filteredProducts = arrProducts
         tblDesserts.reloadData()
     }
-
-    
     // MARK: - Search Handling
     /**
      Triggered when the search text changes.

@@ -5,6 +5,7 @@ class PaymentViewController: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var viewMain: UIView!
+    @IBOutlet weak var lblEmptyCard: UILabel!
     @IBOutlet weak var btnAddNewCard: UIButton!
     @IBOutlet weak var viewAddCard: UIView!
     @IBOutlet weak var viewScroll: UIView!
@@ -22,6 +23,7 @@ class PaymentViewController: UIViewController {
     // MARK: - Properties
     /// Array storing saved card numbers.
     var arrCards: [String] = []
+    var currentUser: User?
     
     // MARK: - Lifecycle Methods
     /// Called after the controller's view is loaded into memory.
@@ -30,14 +32,25 @@ class PaymentViewController: UIViewController {
         
         viewAddCard.isHidden = true
         setLeftAlignedTitleWithBack("Payment Details", target: self, action: #selector(backBtnTapped))
-        setCartButton(target: self, action: #selector(btnCartPressed))
+        setCartButtonWithBadge(target: self, action: #selector(btnCartPressed))
         
         setupUI()
         tblCardDetails.showsVerticalScrollIndicator = false
         tblCardDetails.register(UINib(nibName: "CardTableViewCell", bundle: nil), forCellReuseIdentifier: "CardTableViewCell")
         
-        if let savedCards = UserDefaults.standard.array(forKey: "savedCards") as? [String] {
-            arrCards = savedCards
+        // ✅ Fetch the current user based on login email
+        currentUser = CoreDataManager.shared.getOrCreateCurrentUser()
+        
+        // ✅ Load saved cards for the user
+        if let user = currentUser {
+            arrCards = CoreDataManager.shared.fetchCards(for: user).compactMap { $0.number }
+            updateEmptyCardLabel()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let user = CoreDataManager.shared.getOrCreateCurrentUser() {
+            CartBadgeManager.shared.syncCartCount(for: user)
         }
     }
     // MARK: - Helper Methods
@@ -49,6 +62,12 @@ class PaymentViewController: UIViewController {
         for item in textfield {
             item.setPadding(left: 34, right: 34)
         }
+    }
+    
+    /// Updates the visibility of the empty card label based on card count
+    func updateEmptyCardLabel() {
+        lblEmptyCard.isHidden = !arrCards.isEmpty
+        tblCardDetails.isHidden = arrCards.isEmpty
     }
     
     /// Navigates back to the previous screen when back button is tapped.
@@ -94,8 +113,8 @@ class PaymentViewController: UIViewController {
         }) { _ in
             self.viewAddCard.isHidden = true
             self.tabBarController?.tabBar.isHidden = false
-            
         }
+        setTabBar(hidden: false)
     }
     
     /// Action triggered when the remove card switch value changes.
@@ -123,7 +142,6 @@ class PaymentViewController: UIViewController {
             return
         }
         
-        // Show Confirmation Alert
         let confirmAlert = UIAlertController(
             title: "Confirm Card Details",
             message: "Card Number: \(cardNumber)\nExpiry: \(expiryMonth)/\(expiryYear)\nDo you want to save this card?",
@@ -131,13 +149,27 @@ class PaymentViewController: UIViewController {
         )
         confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         confirmAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
-            // Save card
-            self.arrCards.append(cardNumber)
-            self.saveCardsToDefaults()
-            self.tblCardDetails.reloadData()
-            self.btnCloseAddCardViewClick(sender)
+            if let user = self.currentUser {
+                // ✅ Save card using Core Data
+                CoreDataManager.shared.addCard(
+                    for: user,
+                    number: cardNumber,
+                    expiryMonth: expiryMonth,
+                    expiryYear: expiryYear,
+                    securityCode: self.txtSecurityCode.text ?? "",
+                    firstName: self.txtFirstName.text ?? "",
+                    lastName: self.txtLastName.text ?? ""
+                )
+                
+                // ✅ Refresh table
+                self.arrCards = CoreDataManager.shared.fetchCards(for: user).compactMap { $0.number }
+                self.tblCardDetails.reloadData()
+                self.updateEmptyCardLabel() // <-- update visibility here
+                self.btnCloseAddCardViewClick(sender)
+            }
         }))
         present(confirmAlert, animated: true)
+        setTabBar(hidden: true)
     }
     
     /**
@@ -197,4 +229,18 @@ class PaymentViewController: UIViewController {
         viewScroll.layer.shadowRadius = 10
     }
     
+    func setTabBar(hidden: Bool, animated: Bool = true) {
+        guard let tabBar = self.tabBarController?.tabBar else { return }
+        
+        let frame = tabBar.frame
+        let offsetY = hidden ? UIScreen.main.bounds.height : UIScreen.main.bounds.height - frame.height
+        
+        if animated {
+            UIView.animate(withDuration: 0.3) {
+                tabBar.frame.origin.y = offsetY
+            }
+        } else {
+            tabBar.frame.origin.y = offsetY
+        }
+    }
 }

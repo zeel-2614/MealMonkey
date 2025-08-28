@@ -17,7 +17,7 @@ class SessionManager {
         return UserDefaults.standard.string(forKey: userEmailKey)
     }
     
-    static func logout() {
+    static func clear() {
         UserDefaults.standard.removeObject(forKey: userEmailKey)
     }
 }

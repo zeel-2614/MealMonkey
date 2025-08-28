@@ -21,19 +21,22 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrderListTableViewCell", for: indexPath) as! OrderListTableViewCell
         
-        let order = orders[indexPath.row]
-        let firstProductName = order.first?.strProductName ?? "No Product"
+        // Each order is now [ProductModel]
+        let products = orders[indexPath.row]
         
-        // Calculate total price for all products in the order
-        let totalPrice = order.reduce(0.0) { $0 + ($1.doubleProductPrice * Double($1.intProductQty!)) }
+        // Show product names
+        cell.lblProductName.text = products.map { $0.strProductName }.joined(separator: ", ")
         
-        // Populate cell labels and image
-        cell.lblOrderNumber.text = "Order No : \(indexPath.row + 1)"
-        cell.lblProductName.text = firstProductName
-        cell.lblTotal.text = "$\(String(format: "%.2f", totalPrice))"
-        if let imgName = order.first?.strProductImage {
-            cell.imgOrderedProduct.image = UIImage(named: imgName)
-        }
+        // Show total amount
+        let total = products.reduce(0.0) { $0 + ($1.doubleProductPrice * Double($1.intProductQty ?? 1)) }
+        cell.lblTotal.text = "Total: $\(total)"
+        
+        // Product Image
+        cell.imgOrderedProduct.image = UIImage(named: products.first?.strProductImage ?? "placeholder")
+        
+        // Order number
+        cell.lblOrderNumber.text = "Order #\(indexPath.row + 1)"
+        
         return cell
     }
     
@@ -58,34 +61,11 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "MoreStoryboard", bundle: nil)
         if let detailVC = storyboard.instantiateViewController(withIdentifier: "MyOrderViewController") as? MyOrderViewController {
-            detailVC.orderProducts = orders[indexPath.row] // Pass the selected order
+            
+            // Pass the product array directly
+            detailVC.orderProducts = orders[indexPath.row]
+            
             self.navigationController?.pushViewController(detailVC, animated: true)
-        }
-    }
-    
-    /**
-     Saves the given list of orders to `UserDefaults`.
-     - Parameter orders: A two-dimensional array of `ProductModel` representing the orders.
-     */
-    func saveOrdersToUserDefaults(_ orders: [[ProductModel]]) {
-        let ordersArray = orders.map { order in
-            order.map { product in
-                productToDict(product) // Reuse the helper function to convert to dictionary
-            }
-        }
-        UserDefaults.standard.set(ordersArray, forKey: "orders")
-    }
-    
-    /**
-     Loads the list of orders from `UserDefaults`.
-     - Returns: A two-dimensional array of `ProductModel` representing the saved orders.
-     */
-    func loadOrdersFromUserDefaults() -> [[ProductModel]] {
-        guard let savedOrders = UserDefaults.standard.array(forKey: "orders") as? [[[String: Any]]] else {
-            return []
-        }
-        return savedOrders.map { orderDictArray in
-            orderDictArray.map { dictToProduct($0) } // Reuse the helper to convert dictionary back to model
         }
     }
 }

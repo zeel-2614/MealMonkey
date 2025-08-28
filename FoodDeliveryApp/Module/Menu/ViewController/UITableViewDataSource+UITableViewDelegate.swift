@@ -43,23 +43,60 @@ extension MenuViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension MenuViewController: UITableViewDataSource {
     
-    /// Returns the number of rows (categories) to display in the table view.
+    /// Returns the number of rows in the table view section
+    /// - Parameters:
+    ///   - tableView: The table view requesting this information
+    ///   - section: The index number of the section
+    /// - Returns: Number of categories in `arrCategory`
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrCategory.count
+        return arrFilterCategory.count
     }
     
-    /// Configures and returns the table view cell for a specific row.
+    /// Provides a cell object for each row at the specified index path
+    /// - Parameters:
+    ///   - tableView: The table view requesting the cell
+    ///   - indexPath: The index path specifying the location of the cell
+    /// - Returns: Configured `MenuTableViewCell` for the category
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: MenuTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell", for: indexPath) as! MenuTableViewCell
-        
-        // Set transparent backgrounds
+        /// Set transparent background for cell
         cell.backgroundColor = .clear
         cell.contentView.backgroundColor = .clear
-        
-        // Configure cell with category data
-        cell.configureCell(category: arrCategory[indexPath.row])
-        
+        /// Configure cell with category data
+        cell.configureCell(category: arrFilterCategory[indexPath.row])
         return cell
+    }
+}
+
+extension MenuViewController: UITextFieldDelegate {
+    
+    /// Handles character changes in the search text field
+    /// - Parameters:
+    ///   - textField: The active text field
+    ///   - range: The range of characters to be replaced
+    ///   - string: The replacement string
+    /// - Returns: Boolean indicating whether the text should change
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if let currentText = textField.text as NSString? {
+            let updatedText = currentText.replacingCharacters(in: range, with: string)
+            let query = updatedText.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            /// Update filtered products based on search query
+            if query.isEmpty {
+                arrFilterCategory = arrCategory
+            } else {
+                arrFilterCategory = arrCategory.filter { $0.strCategoryName.localizedCaseInsensitiveContains(query) }
+            }
+            
+            /// Show/hide "No Item" label
+            lblNoItem.isHidden = !arrFilterCategory.isEmpty
+            
+            /// Reload table view with filtered results
+            tblCategory.reloadData()
+        }
+        
+        return true
     }
 }

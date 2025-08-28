@@ -16,6 +16,7 @@ class OrderListViewController: UIViewController {
     
     /// A two-dimensional array containing orders, where each order is an array of `ProductModel` items.
     var orders: [[ProductModel]] = []
+    var currentUser: User?
     
     /**
      Called after the view controller's view has been loaded into memory.
@@ -24,13 +25,12 @@ class OrderListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        orders = loadOrdersFromUserDefaults()
         setLeftAlignedTitleWithBack("Order List", target: self, action: #selector(myOrderBackBtn))
         
         // Do any additional setup after loading the view.
         tblOrderList.register(UINib(nibName: "OrderListTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderListTableViewCell")
+//        fetchOrders()
     }
-    
     /**
      Action triggered when the back button is tapped.
      Navigates back to the previous screen in the navigation stack.
@@ -57,6 +57,8 @@ class OrderListViewController: UIViewController {
      */
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard let user = CoreDataManager.shared.getOrCreateCurrentUser() else { return }
+        orders = CoreDataManager.shared.fetchOrders(for: user)
         updateEmptyOrderUI()
         tblOrderList.reloadData()
     }

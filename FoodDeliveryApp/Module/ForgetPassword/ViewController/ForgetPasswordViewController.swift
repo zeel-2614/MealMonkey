@@ -25,7 +25,6 @@ class ForgetPasswordViewController: UIViewController {
         // Set a left-aligned navigation title with a back button
         setLeftAlignedTitleWithBack("Forgot Password", target: self, action: #selector(backButtonTapped))
     }
-    
     // MARK: - Navigation
     /// Handles the back button tap action.
     /// Pops the current view controller from the navigation stack.
@@ -47,12 +46,23 @@ class ForgetPasswordViewController: UIViewController {
     /// Validates the email and shows an appropriate alert.
     /// - Parameter sender: The UI element that triggered the action.
     @IBAction func btnSendClick(_ sender: Any) {
-        let email = txtEmail.text ?? ""
+        let email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         
-        if isValidEmail(txtEmail.text ?? "") {
-            showAlert(title: "Success", message: "OTP Sent Successfully", viewController: self)
-        } else if email.isEmpty {
-            UIAlertController.showAlert(title: "Email Missing", message: "Please enter your Email.", viewController: self)
+        if email.isEmpty {
+            // Email field is empty
+            UIAlertController.showAlert(title: "Email Missing",
+                                        message: "Please enter your Email.",
+                                        viewController: self)
+        } else if !isValidEmail(email) {
+            // Email is not valid
+            UIAlertController.showAlert(title: "Invalid Email",
+                                        message: "Please enter a valid email address.",
+                                        viewController: self)
+        } else {
+            // Email is valid, show success alert and navigate to OTP
+            showAlert(title: "Success",
+                      message: "OTP Sent Successfully",
+                      viewController: self)
         }
     }
     

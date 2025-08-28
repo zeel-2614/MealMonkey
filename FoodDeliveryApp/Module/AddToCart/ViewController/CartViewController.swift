@@ -10,20 +10,29 @@ class CartViewController: UIViewController {
     @IBOutlet weak var tblCartView: UITableView!
     
     /// Computed property that retrieves the current cart items from the AppDelegate.
-    var cartItems: [ProductModel] {
-        return (UIApplication.shared.delegate as? AppDelegate)?.arrCart ?? []
-    }
+    // Replace computed property with a stored property
+    var cartItems: [CartItems] = []
     
     /// Called when the view is about to appear on the screen.
     /// - Parameter animated: A Boolean value indicating whether the appearance is animated.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard let user = CoreDataManager.shared.getOrCreateCurrentUser() else { return }
+        cartItems = CoreDataManager.shared.fetchCartItems(for: user)
         updateEmptyCartUI()
         tblCartView.reloadData()
     }
     
+    func deleteCartItem(at indexPath: IndexPath) {
+        guard let user = CoreDataManager.shared.getOrCreateCurrentUser() else { return }
+        let productId = Int(cartItems[indexPath.row].productId)
+        CoreDataManager.shared.removeCartItem(productId: productId, for: user)
+        cartItems.remove(at: indexPath.row)
+        tblCartView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
     /// Updates the UI based on whether the cart is empty or not.
-   func updateEmptyCartUI() {
+    func updateEmptyCartUI() {
         let isCartEmpty = cartItems.isEmpty
         lblEmptyCart.isHidden = !isCartEmpty
         tblCartView.isHidden = isCartEmpty
@@ -45,44 +54,49 @@ class CartViewController: UIViewController {
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .gray, textField: [btnPlaceOrder])
         
         tblCartView.register(UINib(nibName: "CartTableViewCell", bundle: nil), forCellReuseIdentifier: "CartTableViewCell")
-        
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            // Load saved cart
-            let savedCartArray = loadCartFromUserDefaults()
-            appDelegate.arrCart = savedCartArray.map { dictToProduct($0) }
-            
-            // Load saved orders (THIS WAS MISSING)
-            let savedOrders = loadOrdersFromUserDefaults()
-            appDelegate.arrOrders = savedOrders
-        }
     }
     
     /// Action triggered when the "Place Order" button is tapped.
     /// - Parameter sender: The object that initiated the action.
     @IBAction func btnPlaceOrderClick(_ sender: Any) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        guard let user = CoreDataManager.shared.getOrCreateCurrentUser() else { return }
         
-        if !appDelegate.arrCart.isEmpty {
-            // Save the current cart as a new order
-            appDelegate.arrOrders.append(appDelegate.arrCart)
+        if !cartItems.isEmpty {
+            // Convert CartItems to ProductModel
+            let products: [ProductModel] = cartItems.map {
+                ProductModel(
+                    intId: Int($0.productId),
+                    strProductName: $0.productName ?? "",
+                    strProductDescription: "",
+                    floatProductRating: 0,
+                    doubleProductPrice: $0.price,
+                    strProductImage: $0.image ?? "",
+                    intProductQty: Int($0.quantity),
+                    intTotalNumberOfRatings: 0,
+                    objProductCategory: .All,
+                    objProductType: .food
+                )
+            }
             
-            // Save orders using helper function from helpers file
-            saveOrdersToUserDefaults(appDelegate.arrOrders)
+            // Place order using ProductModel
+            CoreDataManager.shared.placeOrder(products: products, for: user)
             
-            // Clear cart
-            appDelegate.arrCart.removeAll()
-            saveCartToUserDefaults(cartArray: [])
+            // Clear cart in Core Data
+            CoreDataManager.shared.clearCart(for: user)
             
-            updateEmptyCartUI()
+            // Clear local array and update UI
+            cartItems.removeAll()
             tblCartView.reloadData()
+            updateEmptyCartUI()
+            
+            // Update cart badge
+            CartBadgeManager.shared.updateCartCount(to: 0)
             
             // Show success alert
             let alert = UIAlertController(title: "Order Placed",
                                           message: "Your order has been placed successfully!",
                                           preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                self.tblCartView.reloadData()
-            }))
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true)
         } else {
             let alert = UIAlertController(title: "Cart is Empty",

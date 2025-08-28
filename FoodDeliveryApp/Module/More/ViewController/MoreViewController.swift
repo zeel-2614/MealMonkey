@@ -15,14 +15,16 @@ class MoreViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = false
         setLeftAlignedTitle("More")
-        setCartButton(target: self, action: #selector(cartButtonTapped))
-        
+        setCartButtonWithBadge(target: self, action: #selector(cartButtonTapped))
         tblMenu.register(UINib(nibName: "MoreTableViewCell", bundle: nil), forCellReuseIdentifier: "MoreTableViewCell")
     }
     
     /// Called before the view appears on screen.
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
+        if let user = CoreDataManager.shared.getOrCreateCurrentUser() {
+            CartBadgeManager.shared.syncCartCount(for: user)
+        }
     }
     
     /// Action triggered when the cart button is tapped.

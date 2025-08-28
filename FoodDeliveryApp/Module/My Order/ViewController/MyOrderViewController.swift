@@ -55,30 +55,10 @@ class MyOrderViewController: UIViewController {
         if let VC = storyboard.instantiateViewController(withIdentifier: "CheckoutViewController") as? CheckoutViewController {
             let subtotal = orderProducts.reduce(0) { $0 + ($1.doubleProductPrice * Double($1.intProductQty ?? 0)) }
             let total = subtotal + deliveryCost
-            
             VC.checkoutSubtotal = subtotal
             VC.checkoutDeliveryCost = deliveryCost
             VC.checkoutTotal = total
             self.navigationController?.pushViewController(VC, animated: true)
         }
     }
-    
-    // MARK: - UserDefaults Persistence
-        func saveOrdersToUserDefaults(_ orders: [[ProductModel]]) {
-            let ordersArray = orders.map { order in
-                order.map { product in
-                    productToDict(product)
-                }
-            }
-            UserDefaults.standard.set(ordersArray, forKey: "orders")
-        }
-
-        func loadOrdersFromUserDefaults() -> [[ProductModel]] {
-            guard let savedOrders = UserDefaults.standard.array(forKey: "orders") as? [[[String: Any]]] else {
-                return []
-            }
-            return savedOrders.map { orderDictArray in
-                orderDictArray.map { dictToProduct($0) }
-            }
-        }
 }

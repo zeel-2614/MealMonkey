@@ -5,6 +5,7 @@ import UIKit
 class MenuViewController: UIViewController {
     
     // MARK: - Outlets
+    @IBOutlet weak var lblNoItem: UILabel!
     @IBOutlet weak var txtSearchFood: UITextField!
     @IBOutlet weak var tblCategory: UITableView!
     @IBOutlet weak var tblBackView: UIView!
@@ -12,14 +13,17 @@ class MenuViewController: UIViewController {
     // MARK: - Properties
     /// Array holding all menu categories
     var arrCategory: [ClassCategory] = ClassCategory.addCategory()
+    var arrFilterCategory: [ClassCategory] = []
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        arrFilterCategory = arrCategory
+        lblNoItem.isHidden = true
         self.navigationController?.isNavigationBarHidden = false
         setLeftAlignedTitle("Menu")
-        setCartButton(target: self, action: #selector(cartBtnTapped))
+        setCartButtonWithBadge(target: self, action: #selector(cartBtnTapped))
         
         applyCornerRadiusTLBR()
         
@@ -31,6 +35,11 @@ class MenuViewController: UIViewController {
         tblCategory.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "MenuTableViewCell")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let user = CoreDataManager.shared.getOrCreateCurrentUser() {
+            CartBadgeManager.shared.syncCartCount(for: user)
+        }
+    }
     // MARK: - Actions
     /// Handles cart button tap event
     @objc func cartBtnTapped() {
