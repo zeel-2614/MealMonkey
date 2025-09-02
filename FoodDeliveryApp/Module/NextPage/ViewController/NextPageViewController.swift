@@ -27,13 +27,13 @@ class NextPageViewController: UIViewController {
         btnDone.setTitle("Next", for: .normal)
         
         // Register the custom collection view cell
-        collectionViewNextPage.register(UINib(nibName: "CollectionViewCellNextPageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCellNextPageCollectionViewCell")
+        collectionViewNextPage.register(UINib(nibName: Main.CellIdentifiers.nextPageCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: Main.CellIdentifiers.nextPageCollectionViewCell)
     }
     
     /// Shows the main tab bar as the root view controller.
     private func showMainTabBar() {
-        let storyboard = UIStoryboard(name: "HomeStoryboard", bundle: nil)
-        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "MainTabViewController") as? UITabBarController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.homeStoryBoard, bundle: nil)
+        if let tabBarController = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.mainTabBarViewController) as? UITabBarController {
             // Set as rootViewController
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let sceneDelegate = windowScene.delegate as? SceneDelegate {

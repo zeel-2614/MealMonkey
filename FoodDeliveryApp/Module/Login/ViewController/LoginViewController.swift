@@ -37,22 +37,6 @@ class LoginViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
     }
     
-    // MARK: - Validation
-    /// Validates whether the given email matches a standard email format.
-    func isValidEmail(_ email: String) -> Bool {
-        let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegex)
-        return emailTest.evaluate(with: email)
-    }
-    
-    /// Validates whether the given password meets the criteria:
-    /// at least 8 characters, 1 uppercase, 1 lowercase, 1 number, and 1 special character.
-    func isValidPassword(_ password: String) -> Bool {
-        let passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
-        let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-        return passwordTest.evaluate(with: password)
-    }
-    
     /// Validates user input for login and navigates to the main tab bar if valid.
     func validateLoginPassword() {
         guard let email = txtEmail.text, !email.isEmpty else {
@@ -61,6 +45,14 @@ class LoginViewController: UIViewController {
         }
         guard let password = txtPassword.text, !password.isEmpty else {
             UIAlertController.showAlert(title: "Error", message: "Please enter your password.", viewController: self)
+            return
+        }
+        guard ValidationHelper.isValidEmail(email) else {
+            UIAlertController.showAlert(title: "Invalid Email", message: "Please enter a valid email address.", viewController: self)
+            return
+        }
+        guard ValidationHelper.isValidPassword(password) else {
+            UIAlertController.showAlert(title: "Invalid Password", message: "Password must include uppercase, lowercase, number, and special character.", viewController: self)
             return
         }
         // ✅ Core Data Fetch
@@ -100,14 +92,15 @@ class LoginViewController: UIViewController {
     
     /// Navigates to the main tab bar controller after successful login.
     private func showMainTabBar() {
-        let storyboard = UIStoryboard(name: "HomeStoryboard", bundle: nil)
-        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "MainTabViewController") as? UITabBarController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.homeStoryBoard, bundle: nil)
+        if let tabBarController = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.mainTabBarViewController) as? UITabBarController {
             
             // Set as rootViewController
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let sceneDelegate = windowScene.delegate as? SceneDelegate {
                 sceneDelegate.window?.rootViewController = tabBarController
                 sceneDelegate.window?.makeKeyAndVisible()
+                tabBarController.selectedIndex = 2
             }
         }
     }
@@ -129,24 +122,24 @@ class LoginViewController: UIViewController {
         }
     }
     @IBAction func btnRedirect(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "UserStoryboard", bundle: nil)
-                if let VC = storyboard.instantiateViewController(withIdentifier: "ForgetPasswordViewController") as? ForgetPasswordViewController {
-                    self.navigationController?.pushViewController(VC, animated: true)
-                }
+        let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)
+        if let VC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.forgetPasswordViewController) as? ForgetPasswordViewController {
+            self.navigationController?.pushViewController(VC, animated: true)
+        }
     }
     /// Triggered when the "Forgot Password" button is clicked.
     @IBAction func btnForgetPasswordAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "UserStoryboard", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "ForgetPasswordViewController") as? ForgetPasswordViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.forgetPasswordViewController) as? ForgetPasswordViewController {
             self.navigationController?.pushViewController(vc, animated: true)
             print("Forget Password tapped")
         }
     }
-
+    
     /// Triggered when the "Sign Up" button is clicked.
     @IBAction func btnSignUpAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "UserStoryboard", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.signUpViewController) as? SignUpViewController {
             self.navigationController?.pushViewController(vc, animated: true)
             print("Sign Up tapped")
         } else {

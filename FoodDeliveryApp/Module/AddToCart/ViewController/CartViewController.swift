@@ -1,17 +1,19 @@
 
 import UIKit
+import Lottie
 
 /// A view controller responsible for displaying and managing the user's cart.
 class CartViewController: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var btnPlaceOrder: UIButton!
-    @IBOutlet weak var lblEmptyCart: UILabel!
     @IBOutlet weak var tblCartView: UITableView!
     
     /// Computed property that retrieves the current cart items from the AppDelegate.
     // Replace computed property with a stored property
     var cartItems: [CartItems] = []
+    var emptyCartAnimationView: LottieAnimationView?
+    var lblEmptyCart: UILabel!
     
     /// Called when the view is about to appear on the screen.
     /// - Parameter animated: A Boolean value indicating whether the appearance is animated.
@@ -34,11 +36,20 @@ class CartViewController: UIViewController {
     /// Updates the UI based on whether the cart is empty or not.
     func updateEmptyCartUI() {
         let isCartEmpty = cartItems.isEmpty
-        lblEmptyCart.isHidden = !isCartEmpty
+        
         tblCartView.isHidden = isCartEmpty
         btnPlaceOrder.isHidden = isCartEmpty
+        
+        if isCartEmpty {
+            lblEmptyCart.isHidden = false
+            emptyCartAnimationView?.isHidden = false
+            emptyCartAnimationView?.play()
+        } else {
+            lblEmptyCart.isHidden = true
+            emptyCartAnimationView?.isHidden = true
+            emptyCartAnimationView?.stop()
+        }
     }
-    
     /// Handles the back button tap event by navigating to the previous screen.
     @objc func backBtnTapped() {
         self.navigationController?.popViewController(animated: true)
@@ -53,7 +64,17 @@ class CartViewController: UIViewController {
         
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .gray, textField: [btnPlaceOrder])
         
-        tblCartView.register(UINib(nibName: "CartTableViewCell", bundle: nil), forCellReuseIdentifier: "CartTableViewCell")
+        tblCartView.register(UINib(nibName: Main.CellIdentifiers.cartTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.cartTableViewCell)
+        // Setup reusable empty state
+        let emptyState = EmptyStateHelper.setupEmptyState(
+            in: view,
+            animationName: "Empty Cart",   // name of your Lottie JSON
+            message: "Your Cart is Empty!"
+        )
+        emptyCartAnimationView = emptyState.animationView
+        lblEmptyCart = emptyState.label
+        emptyCartAnimationView?.isHidden = false
+        emptyCartAnimationView?.play()
     }
     
     /// Action triggered when the "Place Order" button is tapped.
@@ -62,7 +83,6 @@ class CartViewController: UIViewController {
         guard let user = CoreDataManager.shared.getOrCreateCurrentUser() else { return }
         
         if !cartItems.isEmpty {
-            // Convert CartItems to ProductModel
             let products: [ProductModel] = cartItems.map {
                 ProductModel(
                     intId: Int($0.productId),
@@ -78,21 +98,14 @@ class CartViewController: UIViewController {
                 )
             }
             
-            // Place order using ProductModel
             CoreDataManager.shared.placeOrder(products: products, for: user)
-            
-            // Clear cart in Core Data
             CoreDataManager.shared.clearCart(for: user)
             
-            // Clear local array and update UI
             cartItems.removeAll()
             tblCartView.reloadData()
             updateEmptyCartUI()
-            
-            // Update cart badge
             CartBadgeManager.shared.updateCartCount(to: 0)
             
-            // Show success alert
             let alert = UIAlertController(title: "Order Placed",
                                           message: "Your order has been placed successfully!",
                                           preferredStyle: .alert)

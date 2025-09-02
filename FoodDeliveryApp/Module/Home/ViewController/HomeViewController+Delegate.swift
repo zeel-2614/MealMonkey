@@ -20,7 +20,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // Dequeue reusable cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell", for: indexPath) as! HomeTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Main.CellIdentifiers.homeTableViewCell, for: indexPath) as! HomeTableViewCell
         
         // Adjust scroll direction of the collection view inside each table view cell
         if let layout = cell.collectionViewHome.collectionViewLayout as? UICollectionViewFlowLayout {

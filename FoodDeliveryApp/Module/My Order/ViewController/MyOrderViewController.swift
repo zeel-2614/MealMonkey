@@ -30,7 +30,7 @@ class MyOrderViewController: UIViewController {
         // Do any additional setup after loading the view.
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .gray, textField: [btnCheckout])
         
-        tblOrder.register(UINib(nibName: "MyOrderTableViewCell", bundle: nil), forCellReuseIdentifier: "MyOrderTableViewCell")
+        tblOrder.register(UINib(nibName: Main.CellIdentifiers.myOrderTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.myOrderTableViewCell)
         
         calculateTotals()
     }
@@ -51,8 +51,8 @@ class MyOrderViewController: UIViewController {
     /// Action triggered when the checkout button is tapped.
     /// - Parameter sender: The UI element that triggered this action.
     @IBAction func btnCheckoutClick(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "MoreStoryboard", bundle: nil)
-        if let VC = storyboard.instantiateViewController(withIdentifier: "CheckoutViewController") as? CheckoutViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.moreStoryBoard, bundle: nil)
+        if let VC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.checkoutViewController) as? CheckoutViewController {
             let subtotal = orderProducts.reduce(0) { $0 + ($1.doubleProductPrice * Double($1.intProductQty ?? 0)) }
             let total = subtotal + deliveryCost
             VC.checkoutSubtotal = subtotal

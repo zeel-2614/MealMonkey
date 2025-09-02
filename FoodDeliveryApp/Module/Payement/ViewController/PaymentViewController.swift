@@ -1,11 +1,11 @@
 import UIKit
+import Lottie
 
 /// View controller for managing saved payment cards and adding new cards.
-class PaymentViewController: UIViewController {
+class PaymentViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - IBOutlets
     @IBOutlet weak var viewMain: UIView!
-    @IBOutlet weak var lblEmptyCard: UILabel!
     @IBOutlet weak var btnAddNewCard: UIButton!
     @IBOutlet weak var viewAddCard: UIView!
     @IBOutlet weak var viewScroll: UIView!
@@ -24,7 +24,8 @@ class PaymentViewController: UIViewController {
     /// Array storing saved card numbers.
     var arrCards: [String] = []
     var currentUser: User?
-    
+    var emptyCardAnimationView: LottieAnimationView?
+    var lblEmptyCard: UILabel!
     // MARK: - Lifecycle Methods
     /// Called after the controller's view is loaded into memory.
     override func viewDidLoad() {
@@ -35,8 +36,16 @@ class PaymentViewController: UIViewController {
         setCartButtonWithBadge(target: self, action: #selector(btnCartPressed))
         
         setupUI()
+        // Setup reusable empty state
+        let emptyState = EmptyStateHelper.setupEmptyState(
+            in: view,
+            animationName: "Card Payment Unsuccessful",   // name of your Lottie JSON
+            message: "You have added no cards yet!"
+        )
+        emptyCardAnimationView = emptyState.animationView
+        lblEmptyCard = emptyState.label
         tblCardDetails.showsVerticalScrollIndicator = false
-        tblCardDetails.register(UINib(nibName: "CardTableViewCell", bundle: nil), forCellReuseIdentifier: "CardTableViewCell")
+        tblCardDetails.register(UINib(nibName: Main.CellIdentifiers.cardTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.cardTableViewCell)
         
         // ✅ Fetch the current user based on login email
         currentUser = CoreDataManager.shared.getOrCreateCurrentUser()
@@ -66,8 +75,19 @@ class PaymentViewController: UIViewController {
     
     /// Updates the visibility of the empty card label based on card count
     func updateEmptyCardLabel() {
-        lblEmptyCard.isHidden = !arrCards.isEmpty
-        tblCardDetails.isHidden = arrCards.isEmpty
+        let isEmpty = arrCards.isEmpty
+        
+        if isEmpty {
+            // Show empty state
+            emptyCardAnimationView?.isHidden = false
+            emptyCardAnimationView?.play()
+            lblEmptyCard.isHidden = false
+        } else {
+            // Hide empty state
+            emptyCardAnimationView?.isHidden = true
+            emptyCardAnimationView?.stop()
+            lblEmptyCard.isHidden = true
+        }
     }
     
     /// Navigates back to the previous screen when back button is tapped.
@@ -77,8 +97,8 @@ class PaymentViewController: UIViewController {
     
     /// Navigates to the cart view when the cart button is pressed.
     @objc func btnCartPressed() {
-        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.productStoryBoard, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.cartViewController) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }
@@ -100,6 +120,11 @@ class PaymentViewController: UIViewController {
             // ✅ Focus on card number field
             self.txtCardNumber.becomeFirstResponder()
         }
+        
+        // ✅ Hide animation when a card is added
+        self.emptyCardAnimationView?.isHidden = true
+        self.emptyCardAnimationView?.stop()
+        self.lblEmptyCard.isHidden = true
     }
     
     /**
@@ -133,15 +158,31 @@ class PaymentViewController: UIViewController {
             showAlert(message: "Card number must be exactly 16 digits.")
             return
         }
-        guard let expiryMonth = txtExpiryMonth.text, expiryMonth.count == 2 else {
-            showAlert(message: "Expiry month must be 2 digits.")
+        guard let expiryMonth = txtExpiryMonth.text, let month = Int(expiryMonth), expiryMonth.count == 2, (1...12).contains(month) else {
+            showAlert(message: "Expiry month must be between 01 and 12.")
             return
         }
-        guard let expiryYear = txtExpiryYear.text, expiryYear.count == 2 else {
+        guard let expiryYear = txtExpiryYear.text, let year = Int(expiryYear), expiryYear.count == 2 else {
             showAlert(message: "Expiry year must be 2 digits.")
             return
         }
+        guard let securityCode = txtSecurityCode.text, securityCode.count == 3 else {
+            showAlert(message: "Security Code must be 3 digits.")
+            return
+        }
         
+        // ✅ Validate expiry is not in the past
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: currentDate) % 100  // last 2 digits
+        let currentMonth = calendar.component(.month, from: currentDate)
+        
+        if year < currentYear || (year == currentYear && month < currentMonth) {
+            showAlert(message: "Card expiry date cannot be in the past.")
+            return
+        }
+        
+        // ✅ Confirmation Alert
         let confirmAlert = UIAlertController(
             title: "Confirm Card Details",
             message: "Card Number: \(cardNumber)\nExpiry: \(expiryMonth)/\(expiryYear)\nDo you want to save this card?",
@@ -150,7 +191,6 @@ class PaymentViewController: UIViewController {
         confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         confirmAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
             if let user = self.currentUser {
-                // ✅ Save card using Core Data
                 CoreDataManager.shared.addCard(
                     for: user,
                     number: cardNumber,
@@ -160,11 +200,9 @@ class PaymentViewController: UIViewController {
                     firstName: self.txtFirstName.text ?? "",
                     lastName: self.txtLastName.text ?? ""
                 )
-                
-                // ✅ Refresh table
                 self.arrCards = CoreDataManager.shared.fetchCards(for: user).compactMap { $0.number }
                 self.tblCardDetails.reloadData()
-                self.updateEmptyCardLabel() // <-- update visibility here
+                self.updateEmptyCardLabel()
                 self.btnCloseAddCardViewClick(sender)
             }
         }))
@@ -227,6 +265,13 @@ class PaymentViewController: UIViewController {
         viewScroll.layer.shadowOpacity = 0.2
         viewScroll.layer.shadowOffset = CGSize(width: 0, height: -2)
         viewScroll.layer.shadowRadius = 10
+        
+        txtSecurityCode.delegate = self
+        txtCardNumber.delegate = self
+        txtExpiryMonth.delegate = self
+        txtExpiryYear.delegate = self
+        txtFirstName.delegate = self
+        txtLastName.delegate = self
     }
     
     func setTabBar(hidden: Bool, animated: Bool = true) {

@@ -11,7 +11,7 @@ extension PaymentViewController: UITableViewDataSource, UITableViewDelegate, Car
     
     // Configure each card cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: CardTableViewCell = tableView.dequeueReusableCell(withIdentifier: "CardTableViewCell", for: indexPath) as! CardTableViewCell
+        let cell: CardTableViewCell = tableView.dequeueReusableCell(withIdentifier: Main.CellIdentifiers.cardTableViewCell, for: indexPath) as! CardTableViewCell
         cell.lblCardNumber.text = maskedCardNumber(arrCards[indexPath.row]) // Show masked card number
         cell.delegate = self // Set delegate to handle delete button tap
         return cell
@@ -64,6 +64,9 @@ extension PaymentViewController: UITableViewDataSource, UITableViewDelegate, Car
         if textField == txtExpiryMonth || textField == txtExpiryYear {
             // Allow only digits and max length 2
             return newText.count <= 2 && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string))
+        }
+        if textField == txtSecurityCode {
+            return newText.count <= 3 && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string))
         }
         return true
     }

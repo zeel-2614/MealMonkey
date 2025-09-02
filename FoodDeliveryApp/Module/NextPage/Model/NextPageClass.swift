@@ -21,13 +21,13 @@ class Feature: NSObject{
     
     /// A predefined list of app features.
     static let features: [Feature] = [
-        Feature(imageName: "ic_image1",
+        Feature(imageName: Main.Images.image1,
                 title: "Find Food You Love",
                 subTitle: "Discover the best foods from over 1,000 restaurants and fast delivery to your doorstep"),
-        Feature(imageName: "ic_image2",
+        Feature(imageName: Main.Images.image2,
                 title: "Fast Delivery",
                 subTitle: "Fast food delivery to your home, office wherever you are"),
-        Feature(imageName: "ic_image3",
+        Feature(imageName: Main.Images.image3,
                 title: "Live Tracking",
                 subTitle: "Real time tracking of your food on the app once you placed the order")
     ]

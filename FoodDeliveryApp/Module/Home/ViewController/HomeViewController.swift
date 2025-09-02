@@ -34,6 +34,7 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
         if let user = CoreDataManager.shared.getOrCreateCurrentUser() {
             CartBadgeManager.shared.syncCartCount(for: user)
         }
+        displayGreeting()
     }
     
     override func viewDidLoad() {
@@ -50,7 +51,7 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
         
         // TableView setup
         tblHome.showsVerticalScrollIndicator = false
-        tblHome.register(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: "HomeTableViewCell")
+        tblHome.register(UINib(nibName: Main.CellIdentifiers.homeTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.homeTableViewCell)
         
         // Search text field delegate and change listener
         txtSearch.delegate = self //new added
@@ -83,7 +84,7 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
             let name = users.first?.name ?? "User"
             setLeftAlignedTitle("Good morning, \(name)!")
         } catch {
-            print("❌ Failed to fetch user for greeting: \(error.localizedDescription)")
+            print("Failed to fetch user for greeting: \(error.localizedDescription)")
             setLeftAlignedTitle("Good morning, User!")
         }
     }
@@ -122,16 +123,16 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
     }
     // MARK: - Actions
     @objc func btnCartTapped() {
-        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.productStoryBoard, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.cartViewController) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }
     // MARK: - HomeTableViewCellDelegate methods
     func homeTableViewCell(_ cell: HomeTableViewCell, didSelectProduct product: ProductModel) {
         RecentItemsHelper.shared.addProduct(product)
-        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
-        if let detailVC = storyboard.instantiateViewController(withIdentifier: "ProductDetailViewController") as? ProductDetailViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.productStoryBoard, bundle: nil)
+        if let detailVC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.productDetailsViewController) as? ProductDetailViewController {
             detailVC.selectedProduct = product
             self.navigationController?.pushViewController(detailVC, animated: true)
         }
@@ -170,8 +171,8 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
     
     // MARK: - IBAction
     @IBAction func btnCurrentLocationClick(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "MoreStoryboard", bundle: nil)
-        if let mlvc = storyboard.instantiateViewController(withIdentifier: "AddressViewController") as? AddressViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.moreStoryBoard, bundle: nil)
+        if let mlvc = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.addressViewController) as? AddressViewController {
             self.navigationController?.pushViewController(mlvc, animated: true)
         }
     }

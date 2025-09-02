@@ -1,4 +1,5 @@
 import UIKit
+import Lottie
 
 class DessertsViewController: UIViewController {
     
@@ -9,6 +10,8 @@ class DessertsViewController: UIViewController {
     // MARK: - Properties
     /// Currently selected product type (e.g., Desserts, Food, Beverages).
     var selectedProductType: ProductType = .Desserts
+    var emptyAnimationView: LottieAnimationView!
+    var emptyLabel: UILabel!
     
     /// Master product data array loaded from `ProductModel`.
     var arrProducts: [ProductModel] {
@@ -33,7 +36,7 @@ class DessertsViewController: UIViewController {
         setCartButtonWithBadge(target: self, action: #selector(btnCartTapped))
         
         tblDesserts.showsVerticalScrollIndicator = false
-        tblDesserts.register(UINib(nibName: "DessertsTableViewCell", bundle: nil), forCellReuseIdentifier: "DessertsTableViewCell")
+        tblDesserts.register(UINib(nibName: Main.CellIdentifiers.dessertsTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.dessertsTableViewCell)
         filteredProducts = arrProducts
         
         switch selectedProductType {
@@ -48,6 +51,18 @@ class DessertsViewController: UIViewController {
         }
         // Listen for search text changes.
         txtSearchDesserts.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
+        let emptyState = EmptyStateHelper.setupEmptyState(
+            in: view,
+            animationName: "No data Found",   // name of your Lottie JSON
+            message: "No Data Found"
+        )
+        emptyAnimationView = emptyState.animationView
+        emptyLabel = emptyState.label
+        if filteredProducts.isEmpty {
+            EmptyStateHelper.show(animationView: emptyAnimationView, label: emptyLabel)
+        } else {
+            EmptyStateHelper.hide(animationView: emptyAnimationView, label: emptyLabel)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +95,12 @@ class DessertsViewController: UIViewController {
             }
         }
         
+        if filteredProducts.isEmpty {
+            EmptyStateHelper.show(animationView: emptyAnimationView, label: emptyLabel)
+        } else {
+            EmptyStateHelper.hide(animationView: emptyAnimationView, label: emptyLabel)
+        }
+        
         tblDesserts.reloadData()
     }
     
@@ -91,8 +112,8 @@ class DessertsViewController: UIViewController {
     
     /// Navigates to the cart view controller.
     @objc func btnCartTapped() {
-        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.productStoryBoard, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.cartViewController) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }

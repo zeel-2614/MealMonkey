@@ -17,7 +17,7 @@ extension MyOrderViewController: UITableViewDataSource, UITableViewDelegate {
     ///   - indexPath: The index path of the row.
     /// - Returns: A configured `MyOrderTableViewCell` displaying product details.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: MyOrderTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MyOrderTableViewCell", for: indexPath) as! MyOrderTableViewCell
+        let cell: MyOrderTableViewCell = tableView.dequeueReusableCell(withIdentifier: Main.CellIdentifiers.myOrderTableViewCell, for: indexPath) as! MyOrderTableViewCell
         let product = orderProducts[indexPath.row]
         cell.lblProductName.text = product.strProductName
         cell.lblProductQty.text = " x \(product.intProductQty ?? 0)"

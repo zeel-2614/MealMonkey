@@ -13,7 +13,7 @@ extension NextPageViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // Dequeue the reusable onboarding cell
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "CollectionViewCellNextPageCollectionViewCell",
+            withReuseIdentifier: Main.CellIdentifiers.nextPageCollectionViewCell,
             for: indexPath
         ) as! CollectionViewCellNextPageCollectionViewCell
         

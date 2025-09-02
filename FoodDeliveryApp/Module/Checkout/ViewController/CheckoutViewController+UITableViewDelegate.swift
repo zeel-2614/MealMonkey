@@ -25,7 +25,7 @@ extension CheckoutViewController : UITableViewDelegate, UITableViewDataSource, U
         // First row: Cash on Delivery option
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(
-                withIdentifier: "CashOnDeliveryTableViewCell",
+                withIdentifier: Main.CellIdentifiers.cashOnDeliveryTableViewCell,
                 for: indexPath
             ) as! CashOnDeliveryTableViewCell
             
@@ -36,7 +36,7 @@ extension CheckoutViewController : UITableViewDelegate, UITableViewDataSource, U
         // Middle rows: Saved Visa cards
         if indexPath.row > 0 && indexPath.row <= arrCards.count {
             let cell = tableView.dequeueReusableCell(
-                withIdentifier: "VisaTableViewCell",
+                withIdentifier: Main.CellIdentifiers.visaTableViewCell,
                 for: indexPath
             ) as! VisaTableViewCell
             
@@ -49,7 +49,7 @@ extension CheckoutViewController : UITableViewDelegate, UITableViewDataSource, U
         
         // Last row: Gmail option
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: "GmailTableViewCell",
+            withIdentifier: Main.CellIdentifiers.gmailTableViewCell,
             for: indexPath
         ) as! GmailTableViewCell
         
@@ -87,6 +87,9 @@ extension CheckoutViewController : UITableViewDelegate, UITableViewDataSource, U
         }
         if textField == txtExpiryMonth || textField == txtExpiryYear {
             return newText.count <= 2 && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string))
+        }
+        if textField == txtSecurityCode {
+            return newText.count <= 3 && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string))
         }
         return true
     }

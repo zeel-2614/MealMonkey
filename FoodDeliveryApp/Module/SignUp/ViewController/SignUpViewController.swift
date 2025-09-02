@@ -42,10 +42,10 @@ class SignUpViewController: UIViewController {
         if name.isEmpty || email.isEmpty || mobile.isEmpty || address.isEmpty || password.isEmpty || confirmPassword.isEmpty {
             UIAlertController.showAlert(title: "Missing Info", message: "Please enter all fields.", viewController: self)
             return false
-        } else if !isValidEmail(email) {
+        } else if !ValidationHelper.isValidEmail(email) {
             UIAlertController.showAlert(title: "Invalid Email", message: "Please enter a valid email address.", viewController: self)
             return false
-        } else if !isValidPassword(password) {
+        } else if !ValidationHelper.isValidPassword(password) {
             UIAlertController.showAlert(title: "Invalid Password", message: "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.", viewController: self)
             return false
         } else if password != confirmPassword {
@@ -54,21 +54,6 @@ class SignUpViewController: UIViewController {
         }
         return true
     }
-
-    // MARK: - Email Validation
-    func isValidEmail(_ email: String) -> Bool {
-        let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegex)
-        return emailTest.evaluate(with: email)
-    }
-
-    // MARK: - Password Validation
-    func isValidPassword(_ password: String) -> Bool {
-        let passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
-        let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-        return passwordTest.evaluate(with: password)
-    }
-    
     // MARK: - Navigation Actions
     @objc func signUpBackBtnTapped() {
         self.navigationController?.popViewController(animated: true)
@@ -149,8 +134,8 @@ extension SignUpViewController {
             print("✅ User saved successfully")
             
             // Navigate to Login
-            let storyboard = UIStoryboard(name: "UserStoryboard", bundle: nil)
-            if let VC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+            let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)
+            if let VC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.loginViewController) as? LoginViewController {
                 self.navigationController?.pushViewController(VC, animated: true)
             }
             

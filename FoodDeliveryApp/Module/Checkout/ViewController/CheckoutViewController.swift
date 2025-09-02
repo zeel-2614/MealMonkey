@@ -67,9 +67,9 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
         // Table view configuration
         tblCheckout.backgroundColor = .clear
         tblCheckout.showsVerticalScrollIndicator = false
-        tblCheckout.register(UINib(nibName: "CashOnDeliveryTableViewCell", bundle: nil), forCellReuseIdentifier: "CashOnDeliveryTableViewCell")
-        tblCheckout.register(UINib(nibName: "GmailTableViewCell", bundle: nil), forCellReuseIdentifier: "GmailTableViewCell")
-        tblCheckout.register(UINib(nibName: "VisaTableViewCell", bundle: nil), forCellReuseIdentifier: "VisaTableViewCell")
+        tblCheckout.register(UINib(nibName: Main.CellIdentifiers.cashOnDeliveryTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.cashOnDeliveryTableViewCell)
+        tblCheckout.register(UINib(nibName: Main.CellIdentifiers.gmailTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.gmailTableViewCell)
+        tblCheckout.register(UINib(nibName: Main.CellIdentifiers.visaTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.visaTableViewCell)
         
         currentUser = CoreDataManager.shared.getOrCreateCurrentUser()
         
@@ -100,7 +100,6 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
     @objc func checkoutBackBtn() {
         self.navigationController?.popViewController(animated: true)
     }
-    
     // MARK: - UI Helpers
     
     /// Adds left and right padding to an array of text fields.
@@ -110,13 +109,12 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
             item.setPadding(left: 34, right: 34)
         }
     }
-    
     // MARK: - IBActions
     
     /// Opens the address selection screen.
     @IBAction func btnChangeAddressClick(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "MoreStoryboard", bundle: nil)
-        if let VC = storyboard.instantiateViewController(withIdentifier: "AddressViewController") as? AddressViewController{
+        let storyboard = UIStoryboard(name: Main.Storyboards.moreStoryBoard, bundle: nil)
+        if let VC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.addressViewController) as? AddressViewController{
             VC.delegate = self  // ✅ Set delegate here
             self.navigationController?.pushViewController(VC, animated: true)
         }
@@ -155,19 +153,47 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
     
     /// Validates and saves a new card to user defaults.
     @IBAction func btnEnterCardClick(_ sender: Any) {
+        // Validate card number
         guard let cardNumber = txtCardNumber.text, cardNumber.count == 16 else {
             showAlert(message: "Card number must be exactly 16 digits.")
             return
         }
-        guard let expiryMonth = txtExpiryMonth.text, expiryMonth.count == 2 else {
-            showAlert(message: "Expiry month must be 2 digits.")
+        
+        // Validate expiry month
+        guard let expiryMonth = txtExpiryMonth.text,
+              let month = Int(expiryMonth),
+              expiryMonth.count == 2,
+              (1...12).contains(month) else {
+            showAlert(message: "Expiry month must be between 01 and 12.")
             return
         }
-        guard let expiryYear = txtExpiryYear.text, expiryYear.count == 2 else {
+        
+        // Validate expiry year
+        guard let expiryYear = txtExpiryYear.text,
+              let year = Int(expiryYear),
+              expiryYear.count == 2 else {
             showAlert(message: "Expiry year must be 2 digits.")
             return
         }
         
+        // Validate security code
+        guard let securityCode = txtSecurityCode.text, securityCode.count == 3 else {
+            showAlert(message: "Security Code must be 3 digits.")
+            return
+        }
+        
+        // ✅ Validate expiry is not in the past
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: currentDate) % 100  // Last two digits
+        let currentMonth = calendar.component(.month, from: currentDate)
+        
+        if year < currentYear || (year == currentYear && month < currentMonth) {
+            showAlert(message: "Card expiry date cannot be in the past.")
+            return
+        }
+        
+        // Confirmation Alert
         let confirmAlert = UIAlertController(title: "Confirm Card",
                                              message: "Do you want to save this card?",
                                              preferredStyle: .alert)
@@ -175,21 +201,19 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
         
         confirmAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
             if let user = self.currentUser {
-                // uses your User/Card types
                 CoreDataManager.shared.addCard(
                     for: user,
                     number: cardNumber,
                     expiryMonth: expiryMonth,
                     expiryYear: expiryYear,
-                    securityCode: self.txtSecurityCode.text ?? "",
+                    securityCode: securityCode,
                     firstName: self.txtFirstName.text ?? "",
                     lastName: self.txtLastName.text ?? ""
                 )
                 self.arrCards = CoreDataManager.shared.fetchCards(for: user).compactMap { $0.number }
             }
-            
             self.tblCheckout.reloadData()
-            self.btnCrossClikc(sender) // close the sheet
+            self.btnCrossClikc(sender) // Close the sheet
         }))
         
         present(confirmAlert, animated: true)
@@ -292,8 +316,8 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
     
     /// Navigates back to the home menu screen.
     @IBAction func btnBackToHomeClick(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "HomeStoryboard", bundle: nil)
-        if let mlvc = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.homeStoryBoard, bundle: nil)
+        if let mlvc = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.menuViewController) as? MenuViewController {
             self.navigationController?.pushViewController(mlvc, animated: true)
         }
     }

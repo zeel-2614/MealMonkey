@@ -23,23 +23,23 @@ class ClassMore: NSObject {
     /// - Returns: An array of `ClassMore` objects for the More screen.
     class func addMore() -> [ClassMore] {
         return [
-            ClassMore(strMoreName: "Payment Details",
-                      imgMenu: "ic_payment_details",
+            ClassMore(strMoreName: Main.more.paymentDetails,
+                      imgMenu: Main.Images.paymentDetails,
                       intTag: 0),
-            ClassMore(strMoreName: "My Orders",
-                      imgMenu: "ic_my_order",
+            ClassMore(strMoreName: Main.more.myOrder,
+                      imgMenu: Main.Images.myOrders,
                       intTag: 1),
-            ClassMore(strMoreName: "Notifications",
-                      imgMenu: "ic_notification",
+            ClassMore(strMoreName: Main.more.notification,
+                      imgMenu: Main.Images.notification,
                       intTag: 2),
-            ClassMore(strMoreName: "Inbox",
-                      imgMenu: "ic_inbox",
+            ClassMore(strMoreName: Main.more.inbox,
+                      imgMenu: Main.Images.inbox,
                       intTag: 3),
-            ClassMore(strMoreName: "About Us",
-                      imgMenu: "ic_aboutus",
+            ClassMore(strMoreName: Main.more.aboutUs,
+                      imgMenu: Main.Images.aboutUs,
                       intTag: 4),
-            ClassMore(strMoreName: "Wishlist",
-                      imgMenu: "ic_wishlist",
+            ClassMore(strMoreName: Main.more.wishlist,
+                      imgMenu: Main.Images.wishlist,
                       intTag: 5)
         ]
     }

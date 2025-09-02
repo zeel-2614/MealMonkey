@@ -279,7 +279,7 @@ class AddressViewController: UIViewController, CLLocationManagerDelegate, UISear
             )
             annotationView?.canShowCallout = true
             // Set your custom image
-            annotationView?.image = UIImage(named: "ic_current_position")
+            annotationView?.image = UIImage(named: Main.Images.addressCustomPin)
             // Optional: center the pin bottom on the coordinate
             annotationView?.centerOffset = CGPoint(
                 x: 0,

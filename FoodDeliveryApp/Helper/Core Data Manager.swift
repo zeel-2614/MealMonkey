@@ -180,9 +180,8 @@ final class CoreDataManager {
         let total = items.reduce(0.0) { $0 + (Double($1.quantity) * $1.price) }
         return (count, total)
     }
-    
-    /// Save an order for the given user
     // MARK: - Order Management
+    /// Save an order for the given user
     func placeOrder(products: [ProductModel], for user: User) {
         guard !products.isEmpty else { return }
         
@@ -192,10 +191,8 @@ final class CoreDataManager {
         order.userEmail = user.email
         saveContext()
         
-        print("✅ Order placed for user: \(user.email ?? "")")
+        print("Order placed for user: \(user.email ?? "")")
     }
-
-    
     /// Fetch all orders for a user
     func fetchOrders(for user: User) -> [[ProductModel]] {
         let fetchRequest: NSFetchRequest<Orders> = Orders.fetchRequest()

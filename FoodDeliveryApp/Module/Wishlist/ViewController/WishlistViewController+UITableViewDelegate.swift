@@ -27,20 +27,12 @@ extension WishlistViewController: UITableViewDelegate, UITableViewDataSource {
     ///   - indexPath: The index path locating the row in the table view.
     /// - Returns: A configured `WishlistTableViewCell` containing wishlist product data.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WishlistTableViewCell", for: indexPath) as! WishlistTableViewCell
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: Main.CellIdentifiers.wishlistTableViewCell, for: indexPath) as! WishlistTableViewCell
         let product = wishlistProduct[indexPath.row]
-        
         cell.configure(with: product)
         cell.onWishlistUpdate = { [weak self] in
             self?.loadWishlist()
         }
         return cell
     }
-    
-    /// Loads the wishlist products from the `AppDelegate` into the local `wishlistProduct` array.
-    //    func loadWishlistFromUserDefaults() {
-    //        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-    //        wishlistProduct = appDelegate.arrWishlist
-    //    }
 }

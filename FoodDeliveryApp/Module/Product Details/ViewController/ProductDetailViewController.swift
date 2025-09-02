@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class ProductDetailViewController: UIViewController {
     
@@ -13,9 +14,8 @@ class ProductDetailViewController: UIViewController {
     var selectedProduct: ProductModel?
     var currentQuantity: Int = 1
     var isHeartFilled = false
-    
+    var activityLoader: NVActivityIndicatorView?
     // MARK: - IBOutlets
-    @IBOutlet weak var productDetailActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var btnHeart: UIButton!
     @IBOutlet weak var countView: UIView!
     @IBOutlet weak var btnCart: UIButton!
@@ -99,8 +99,8 @@ class ProductDetailViewController: UIViewController {
     }
     
     @objc func cartBtnTapped() {
-        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.productStoryBoard, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.cartViewController) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }
@@ -151,8 +151,8 @@ class ProductDetailViewController: UIViewController {
     }
     // MARK: - Cart Button
     @IBAction func btnCartClick(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
-        if let cartVc = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.productStoryBoard, bundle: nil)
+        if let cartVc = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.cartViewController) as? CartViewController {
             self.navigationController?.pushViewController(cartVc, animated: true)
         }
     }
@@ -197,22 +197,50 @@ class ProductDetailViewController: UIViewController {
     }
     
     func showLoadingState() {
-        // Initially hide content and show loader
+        // Hide content first
         productDetailView.isHidden = true
         imgProduct.isHidden = true
         btnHeart.isHidden = true
-        productDetailActivityIndicator.startAnimating()
-        
-        // Simulate a loading delay of 3 seconds
+
+        // Create loader frame (centered in the screen)
+        let loaderFrame = CGRect(
+            x: (view.frame.width - 50) / 2,
+            y: (view.frame.height - 50) / 2,
+            width: 50,
+            height: 50
+        )
+
+        // Initialize loader only once
+        if activityLoader == nil {
+            activityLoader = NVActivityIndicatorView(
+                frame: loaderFrame,
+                type: .ballScaleRippleMultiple,
+                color: .buttonBackground,
+                padding: 0
+            )
+            if let loader = activityLoader {
+                view.addSubview(loader)
+            }
+        }
+
+        // Start loader animation
+        activityLoader?.startAnimating()
+
+        // Simulate loading delay
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
             guard let self = self else { return }
-            
-            self.productDetailActivityIndicator.stopAnimating()
+
+            // Stop loader and hide it
+            self.activityLoader?.stopAnimating()
+            self.activityLoader?.removeFromSuperview()
+            self.activityLoader = nil
+
+            // Show product details after loading
             self.productDetailView.isHidden = false
             self.imgProduct.isHidden = false
             self.btnHeart.isHidden = false
-            
-            // Set up the UI after "loading"
+
+            // Update UI with data
             self.setupUI()
             self.configureUI()
         }

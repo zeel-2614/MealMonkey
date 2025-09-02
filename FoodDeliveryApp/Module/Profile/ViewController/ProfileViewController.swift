@@ -38,6 +38,10 @@ class ProfileViewController: UIViewController {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         updateSaveButtonState()
+        if textField == txtName {
+            let newName = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            lblUserName.text = newName.isEmpty ? "Hello there, User" : "Hello there, \(newName)"
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,8 +95,8 @@ class ProfileViewController: UIViewController {
     
     // Navigate to cart screen when cart button is tapped
     @objc func btnCartTapped() {
-        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.productStoryBoard, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.cartViewController) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }
@@ -112,8 +116,8 @@ class ProfileViewController: UIViewController {
         SessionManager.clear()
         UserDefaults.standard.set(false, forKey: "isLoggedIn")
         UserDefaults.standard.synchronize()
-        let storyboard = UIStoryboard(name: "UserStoryboard", bundle: nil)
-        if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)
+        if let loginVC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.loginViewController) as? LoginViewController {
             self.navigationController?.pushViewController(loginVC, animated: true)
         }
     }
@@ -129,24 +133,51 @@ class ProfileViewController: UIViewController {
               let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
         let context = appDelegate.persistentContainer.viewContext
+        let newEmail = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         
-        // Normalize strings to avoid nil vs. empty or spacing issues
+        // ✅ 1. Check for valid email format using your existing helper
+        if !ValidationHelper.isValidEmail(newEmail) {
+            UIAlertController.showAlert(
+                title: "Invalid Email",
+                message: "Please enter a valid email address.",
+                viewController: self
+            )
+            return
+        }
+        
+        // ✅ 2. Check if email is already used by another user
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@ AND self != %@", newEmail, user)
+        
+        do {
+            let existingUsers = try context.fetch(fetchRequest)
+            if !existingUsers.isEmpty {
+                UIAlertController.showAlert(
+                    title: "Email Exists",
+                    message: "This email address is already registered with another account.",
+                    viewController: self
+                )
+                return
+            }
+        } catch {
+            print("❌ Error checking duplicate email: \(error.localizedDescription)")
+        }
+        
+        // ✅ Proceed with your existing save logic
         let nameChanged = (txtName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "") != (user.name ?? "")
-        let emailChanged = (txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "") != (user.email ?? "")
+        let emailChanged = newEmail != (user.email ?? "")
         let mobileChanged = (txtMobileNo.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "") != (user.mobile ?? "")
         let addressChanged = (txtAddress.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "") != (user.address ?? "")
         
-        // Compare images in a safer way
         let profileImageData = imgProfile.image?.jpegData(compressionQuality: 0.8)
         let imageChanged: Bool
-
         if let existingData = user.profileImage {
             imageChanged = profileImageData != existingData
         } else {
-            // Only mark as changed if the user actually picked a new image
             imageChanged = imgProfile.image != UIImage(named: "placeholderProfile")
         }
-        // Detect if there are NO changes
+        
+        // If no changes found, alert user
         if !nameChanged && !emailChanged && !mobileChanged && !addressChanged && !imageChanged {
             UIAlertController.showAlert(
                 title: "Info",
@@ -156,10 +187,10 @@ class ProfileViewController: UIViewController {
             return
         }
         
-        // Proceed with save only if something changed
+        // ✅ Save updated data
         do {
             user.name = txtName.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-            user.email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            user.email = newEmail
             user.mobile = txtMobileNo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             user.address = txtAddress.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             user.profileImage = profileImageData
