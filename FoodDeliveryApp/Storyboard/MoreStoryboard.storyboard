@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Yoe-ro-pp2">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Yoe-ro-pp2">
                                 <rect key="frame" x="0.0" y="148" width="440" height="740"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
@@ -56,12 +56,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zJK-P2-efO">
                                 <rect key="frame" x="0.0" y="124" width="440" height="764"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Cards" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyV-9y-zR4">
-                                        <rect key="frame" x="184.33333333333334" y="372" width="71.333333333333343" height="20.333333333333314"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" systemColor="systemGray4Color"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customize your payment method" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KOX-y2-3eD">
                                         <rect key="frame" x="21" y="30" width="235" height="19"/>
                                         <constraints>
@@ -103,14 +97,12 @@
                                 <constraints>
                                     <constraint firstItem="KOX-y2-3eD" firstAttribute="top" secondItem="zJK-P2-efO" secondAttribute="top" constant="30" id="7LN-jD-wpH"/>
                                     <constraint firstItem="RTL-Hh-Q7v" firstAttribute="top" secondItem="KOX-y2-3eD" secondAttribute="bottom" constant="17" id="7TC-oL-oc3"/>
-                                    <constraint firstItem="dyV-9y-zR4" firstAttribute="centerY" secondItem="zJK-P2-efO" secondAttribute="centerY" id="Czw-Cp-JUv"/>
                                     <constraint firstItem="Rbx-9m-ac6" firstAttribute="leading" secondItem="zJK-P2-efO" secondAttribute="leading" constant="21" id="E7O-IQ-xRe"/>
                                     <constraint firstAttribute="trailing" secondItem="4mi-Od-nol" secondAttribute="trailing" id="LBN-rh-Uni"/>
                                     <constraint firstItem="RTL-Hh-Q7v" firstAttribute="leading" secondItem="zJK-P2-efO" secondAttribute="leading" constant="21" id="P3p-rD-j27"/>
                                     <constraint firstItem="4mi-Od-nol" firstAttribute="leading" secondItem="zJK-P2-efO" secondAttribute="leading" id="PPR-MX-9N2"/>
                                     <constraint firstAttribute="bottom" secondItem="Rbx-9m-ac6" secondAttribute="bottom" priority="750" constant="20" id="X74-v9-JaO"/>
                                     <constraint firstAttribute="trailing" secondItem="RTL-Hh-Q7v" secondAttribute="trailing" constant="21" id="X9i-ma-Dox"/>
-                                    <constraint firstItem="dyV-9y-zR4" firstAttribute="centerX" secondItem="zJK-P2-efO" secondAttribute="centerX" id="erD-7A-Ego"/>
                                     <constraint firstAttribute="trailing" secondItem="Rbx-9m-ac6" secondAttribute="trailing" constant="21" id="kiU-pH-GtT"/>
                                     <constraint firstItem="KOX-y2-3eD" firstAttribute="leading" secondItem="zJK-P2-efO" secondAttribute="leading" constant="21" id="rFe-NL-2yi"/>
                                     <constraint firstItem="4mi-Od-nol" firstAttribute="top" secondItem="RTL-Hh-Q7v" secondAttribute="bottom" constant="18.5" id="xPl-3F-lQf"/>
@@ -197,7 +189,7 @@
                                                                 <rect key="frame" x="0.0" y="150" width="398" height="56"/>
                                                                 <color key="backgroundColor" name="TextFieldBackgroundColor"/>
                                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                                <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="JxK-9j-00k" id="MDL-3e-1Fi"/>
                                                                 </connections>
@@ -321,7 +313,6 @@ at anytime </string>
                         <outlet property="btnAddCard" destination="6p7-Ya-RCS" id="1vW-NG-jEj"/>
                         <outlet property="btnAddNewCard" destination="Rbx-9m-ac6" id="6Yc-Q3-2fJ"/>
                         <outlet property="btnCloseAddCardView" destination="hsM-rW-Fao" id="j6o-uS-cnx"/>
-                        <outlet property="lblEmptyCard" destination="dyV-9y-zR4" id="m7V-4X-nsW"/>
                         <outlet property="switchRemoveCard" destination="hta-7X-9Ez" id="sxC-A1-x3t"/>
                         <outlet property="tblCardDetails" destination="4mi-Od-nol" id="phc-Co-fTH"/>
                         <outlet property="txtCardNumber" destination="BG2-au-YwN" id="KiJ-8X-sSF"/>
@@ -942,7 +933,7 @@ Brooklyn, NY 11216</string>
                                                                 </constraints>
                                                                 <color key="textColor" name="LabelPrimaryColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next" secureTextEntry="YES"/>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="QHg-KH-RxV" id="dAz-Ey-9ge"/>
                                                                 </connections>

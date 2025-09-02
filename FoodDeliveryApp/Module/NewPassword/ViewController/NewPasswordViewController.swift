@@ -38,7 +38,7 @@ class NewPasswordViewController: UIViewController {
             UIAlertController.showAlert(title: "Error", message: "Please enter your new password.", viewController: self)
             return
         }
-        guard isValidPassword(newPassword) else {
+        guard !ValidationHelper.isValidPassword(newPassword) else {
             UIAlertController.showAlert(
                 title: "Invalid Password",
                 message: "Password must have at least 8 characters, including uppercase, lowercase, a number, and a special symbol.",
@@ -54,19 +54,10 @@ class NewPasswordViewController: UIViewController {
             UIAlertController.showAlert(title: "Error", message: "Passwords do not match.", viewController: self)
             return
         }
-        let storyboard = UIStoryboard(name: "UserStoryboard", bundle: nil)
-        if let VC = storyboard.instantiateViewController(withIdentifier: "NextPageViewController") as? NextPageViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)
+        if let VC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.nextPageViewController) as? NextPageViewController {
             self.navigationController?.pushViewController(VC, animated: true)
         }
-    }
-    
-    /// Checks whether the given password meets complexity requirements.
-    /// - Parameter password: The password string to validate.
-    /// - Returns: `true` if the password is valid, `false` otherwise.
-    func isValidPassword(_ password: String) -> Bool {
-        let passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
-        let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-        return passwordTest.evaluate(with: password)
     }
     // MARK: - Actions
     /// Handles back button tap by navigating to the previous screen.

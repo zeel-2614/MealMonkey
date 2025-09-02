@@ -21,7 +21,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // Dequeue reusable cart cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CartTableViewCell", for: indexPath) as! CartTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Main.CellIdentifiers.cartTableViewCell, for: indexPath) as! CartTableViewCell
         
         // Retrieve product for the current row
         let cartItem = cartItems[indexPath.row]
@@ -39,6 +39,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             // Refresh array
             self.cartItems = CoreDataManager.shared.fetchCartItems(for: user)
             self.tblCartView.reloadData()
+            self.updateEmptyCartUI()
         }
         return cell
     }

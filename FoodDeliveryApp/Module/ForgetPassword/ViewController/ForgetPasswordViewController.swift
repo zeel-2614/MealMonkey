@@ -53,7 +53,7 @@ class ForgetPasswordViewController: UIViewController {
             UIAlertController.showAlert(title: "Email Missing",
                                         message: "Please enter your Email.",
                                         viewController: self)
-        } else if !isValidEmail(email) {
+        } else if !ValidationHelper.isValidEmail(email) {
             // Email is not valid
             UIAlertController.showAlert(title: "Invalid Email",
                                         message: "Please enter a valid email address.",
@@ -75,21 +75,12 @@ class ForgetPasswordViewController: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: {_ in
-            let storyboard = UIStoryboard(name: "UserStoryboard", bundle: nil)
-            if let VC = storyboard.instantiateViewController(withIdentifier: "OTPViewController") as? OTPViewController {
+            let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)
+            if let VC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.otpViewController) as? OTPViewController {
                 self.navigationController?.pushViewController(VC, animated: true)
             }
         }))
         
         viewController.present(alert, animated: true)
-    }
-    
-    /// Checks whether a given email string matches the valid email format.
-    /// - Parameter email: The email string to validate.
-    /// - Returns: A Boolean value indicating whether the email is valid.
-    func isValidEmail(_ email: String) -> Bool {
-        let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegex)
-        return emailTest.evaluate(with: email)
     }
 }

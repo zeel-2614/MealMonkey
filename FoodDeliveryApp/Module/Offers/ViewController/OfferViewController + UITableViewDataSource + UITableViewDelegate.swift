@@ -24,7 +24,7 @@ extension OffersViewController: UITableViewDataSource, UITableViewDelegate {
      */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: OffersTableViewCell = tableView.dequeueReusableCell(
-            withIdentifier: "OffersTableViewCell",
+            withIdentifier: Main.CellIdentifiers.offersTableViewCell,
             for: indexPath
         ) as! OffersTableViewCell
         // Configure the cell with the offer at the current index.

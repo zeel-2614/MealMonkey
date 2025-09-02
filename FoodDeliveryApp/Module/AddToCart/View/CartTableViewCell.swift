@@ -38,7 +38,7 @@ class CartTableViewCell: UITableViewCell {
     }
     
     /// Configures the cell with the given product details.
-    /// - Parameter product: The product model containing the details to display.
+    /// - Parameter product: The product model containing the details to display.x
     func configure(with cartItem: CartItems) {
         lblProductTitle.text = cartItem.productName
         imgProduct.image = UIImage(named: cartItem.image ?? "")

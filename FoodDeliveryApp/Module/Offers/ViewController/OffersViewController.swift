@@ -20,7 +20,7 @@ class OffersViewController: UIViewController {
         setCartButtonWithBadge(target: self, action: #selector(btnCartTapped))
         
         tblOffers.showsVerticalScrollIndicator = false
-        tblOffers.register(UINib(nibName: "OffersTableViewCell", bundle: nil), forCellReuseIdentifier: "OffersTableViewCell")
+        tblOffers.register(UINib(nibName: Main.CellIdentifiers.offersTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.offersTableViewCell)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,8 +33,8 @@ class OffersViewController: UIViewController {
      This method navigates to the `CartViewController` in the "ProductStoryboard".
      */
     @objc func btnCartTapped() {
-        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.productStoryBoard, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.cartViewController) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }

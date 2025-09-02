@@ -35,7 +35,7 @@ class AboutUsViewController: UIViewController {
             break
         }
         /// Registers the table view cell for reuse.
-        tblMoreOpions.register(UINib(nibName: "AboutUsTableViewCell", bundle: nil), forCellReuseIdentifier: "AboutUsTableViewCell")
+        tblMoreOpions.register(UINib(nibName: Main.CellIdentifiers.aboutUsTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.aboutUsTableViewCell)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,8 +49,8 @@ class AboutUsViewController: UIViewController {
     }
     
     @objc private func cartTapped() {
-        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.productStoryBoard, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.cartViewController) as? CartViewController {
             navigationController?.pushViewController(menuVC, animated: true)
         }
     }

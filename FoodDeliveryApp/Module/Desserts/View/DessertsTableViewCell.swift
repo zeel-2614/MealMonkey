@@ -33,7 +33,7 @@ class DessertsTableViewCell: UITableViewCell {
         lblCategoryName.text = "\(dessert.objProductCategory)"
         lblRating.text = String(format: "%.1f", dessert.floatProductRating)
         imgDessert.image = UIImage(named: dessert.strProductImage)
-        imgShade.image = UIImage(named: "ic_desserts_back_shade")
+        imgShade.image = UIImage(named: Main.Images.dessertsBackShade)
     }
     
     // MARK: - Helper Method

@@ -59,10 +59,10 @@ class HomeTableViewCell: UITableViewCell {
         collectionViewHome.dataSource = self
         collectionViewHome.delegate = self
         
-        collectionViewHome.register(UINib(nibName: "HomeCategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeCategoryCollectionViewCell")
-        collectionViewHome.register(UINib(nibName: "PopularCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PopularCollectionViewCell")
-        collectionViewHome.register(UINib(nibName: "MostPopularCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MostPopularCollectionViewCell")
-        collectionViewHome.register(UINib(nibName: "RecentItemsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "RecentItemsCollectionViewCell")
+        collectionViewHome.register(UINib(nibName: Main.CellIdentifiers.homeCategoryCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: Main.CellIdentifiers.homeCategoryCollectionViewCell)
+        collectionViewHome.register(UINib(nibName: Main.CellIdentifiers.popularCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: Main.CellIdentifiers.popularCollectionViewCell)
+        collectionViewHome.register(UINib(nibName: Main.CellIdentifiers.mostPopularCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: Main.CellIdentifiers.mostPopularCollectionViewCell)
+        collectionViewHome.register(UINib(nibName: Main.CellIdentifiers.recentItemsCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: Main.CellIdentifiers.recentItemsCollectionViewCell)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -88,25 +88,25 @@ extension HomeTableViewCell: UICollectionViewDataSource, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionType {
         case .category:
-            let cell: HomeCategoryCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCategoryCollectionViewCell", for: indexPath) as! HomeCategoryCollectionViewCell
+            let cell: HomeCategoryCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Main.CellIdentifiers.homeCategoryCollectionViewCell, for: indexPath) as! HomeCategoryCollectionViewCell
             let category = categories[indexPath.row]
             cell.configure(with: category)
             return cell
             
         case .popular:
-            let cell: PopularCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCollectionViewCell", for: indexPath) as! PopularCollectionViewCell
+            let cell: PopularCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Main.CellIdentifiers.popularCollectionViewCell, for: indexPath) as! PopularCollectionViewCell
             let product = products[indexPath.row]
             cell.configure(with: product)
             return cell
             
         case .mostPopular:
-            let cell: MostPopularCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MostPopularCollectionViewCell", for: indexPath) as! MostPopularCollectionViewCell
+            let cell: MostPopularCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Main.CellIdentifiers.mostPopularCollectionViewCell, for: indexPath) as! MostPopularCollectionViewCell
             let product = products[indexPath.row]
             cell.configure(with: product)
             return cell
             
         case .RecentItems:
-            let cell: RecentItemsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecentItemsCollectionViewCell", for: indexPath) as! RecentItemsCollectionViewCell
+            let cell: RecentItemsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Main.CellIdentifiers.recentItemsCollectionViewCell, for: indexPath) as! RecentItemsCollectionViewCell
             let product = products[indexPath.row]
             cell.configure(with: product)
             return cell

@@ -938,7 +938,7 @@ continue to reset your password</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GxL-O9-MDj">
-                                        <rect key="frame" x="34" y="299.66666666666669" width="325" height="56"/>
+                                        <rect key="frame" x="34" y="298.66666666666669" width="325" height="56"/>
                                         <color key="backgroundColor" name="ButtonBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="dMR-HW-yg7"/>
@@ -953,7 +953,7 @@ continue to reset your password</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E2m-gR-UAT">
-                                        <rect key="frame" x="113" y="388.66666666666669" width="167" height="17"/>
+                                        <rect key="frame" x="113" y="387.66666666666669" width="167" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="uED-V3-wv0"/>
                                         </constraints>
@@ -987,80 +987,27 @@ continue to reset your password</string>
                                             <action selector="btnDidNotReceiveClick:" destination="JjL-cZ-QlN" eventType="touchUpInside" id="OjV-eu-hJ4"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="xV4-oJ-MSr">
-                                        <rect key="frame" x="42.666666666666657" y="207.66666666666669" width="308" height="56"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="37" translatesAutoresizingMaskIntoConstraints="NO" id="Kav-Zy-xDU">
-                                                <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
-                                                <color key="backgroundColor" name="TextFieldBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="56" id="1Ae-IN-LAR"/>
-                                                    <constraint firstAttribute="width" constant="56" id="exy-Es-fQp"/>
-                                                </constraints>
-                                                <color key="textColor" name="LabelPrimaryColor"/>
-                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="37"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="JjL-cZ-QlN" id="sQL-hw-Isf"/>
-                                                </connections>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="37" translatesAutoresizingMaskIntoConstraints="NO" id="eiA-8B-MSv">
-                                                <rect key="frame" x="84" y="0.0" width="56" height="56"/>
-                                                <color key="backgroundColor" name="TextFieldBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="56" id="W98-9Y-icG"/>
-                                                    <constraint firstAttribute="height" constant="56" id="wux-OC-aGs"/>
-                                                </constraints>
-                                                <color key="textColor" name="LabelPrimaryColor"/>
-                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="37"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="JjL-cZ-QlN" id="EbO-CW-gJC"/>
-                                                </connections>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="37" translatesAutoresizingMaskIntoConstraints="NO" id="GwR-WC-ch8">
-                                                <rect key="frame" x="168" y="0.0" width="56" height="56"/>
-                                                <color key="backgroundColor" name="TextFieldBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="56" id="Wbc-Kn-zEk"/>
-                                                    <constraint firstAttribute="width" constant="56" id="ZYB-JU-wv6"/>
-                                                </constraints>
-                                                <color key="textColor" name="LabelPrimaryColor"/>
-                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="37"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="JjL-cZ-QlN" id="fCj-SH-MHz"/>
-                                                </connections>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="37" translatesAutoresizingMaskIntoConstraints="NO" id="SXD-ks-bBk">
-                                                <rect key="frame" x="252" y="0.0" width="56" height="56"/>
-                                                <color key="backgroundColor" name="TextFieldBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="56" id="mnc-C0-ND2"/>
-                                                    <constraint firstAttribute="width" constant="56" id="nsE-39-a4D"/>
-                                                </constraints>
-                                                <color key="textColor" name="LabelPrimaryColor"/>
-                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="37"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="JjL-cZ-QlN" id="dSO-4E-vhV"/>
-                                                </connections>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1nU-9N-JGT" customClass="DPOTPView" customModule="DPOTPView">
+                                        <rect key="frame" x="34" y="207.66666666666669" width="325" height="56"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="xUH-mo-zpi"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="1nU-9N-JGT" secondAttribute="trailing" constant="34" id="2Ih-39-FaU"/>
                                     <constraint firstAttribute="trailing" secondItem="GxL-O9-MDj" secondAttribute="trailing" constant="34" id="6xE-p8-H0t"/>
-                                    <constraint firstItem="xV4-oJ-MSr" firstAttribute="centerX" secondItem="Gt4-nH-fA6" secondAttribute="centerX" id="BMu-sW-i8u"/>
-                                    <constraint firstItem="GxL-O9-MDj" firstAttribute="top" secondItem="xV4-oJ-MSr" secondAttribute="bottom" constant="36" id="DrZ-Fb-sIg"/>
                                     <constraint firstItem="E2m-gR-UAT" firstAttribute="top" secondItem="GxL-O9-MDj" secondAttribute="bottom" constant="33" id="NIK-zT-9lo"/>
                                     <constraint firstItem="h0i-Oc-8hb" firstAttribute="top" secondItem="Gt4-nH-fA6" secondAttribute="top" constant="42" id="Pmf-9x-vcN"/>
+                                    <constraint firstItem="1nU-9N-JGT" firstAttribute="top" secondItem="0eb-3S-Aey" secondAttribute="bottom" constant="53" id="Tsj-Mn-TWM"/>
                                     <constraint firstItem="0eb-3S-Aey" firstAttribute="centerX" secondItem="Gt4-nH-fA6" secondAttribute="centerX" id="f2g-Sl-nhs"/>
+                                    <constraint firstItem="GxL-O9-MDj" firstAttribute="top" secondItem="1nU-9N-JGT" secondAttribute="bottom" constant="35" id="f56-wy-VWo"/>
                                     <constraint firstItem="0eb-3S-Aey" firstAttribute="top" secondItem="h0i-Oc-8hb" secondAttribute="bottom" constant="13" id="lCJ-X9-Iko"/>
+                                    <constraint firstItem="1nU-9N-JGT" firstAttribute="leading" secondItem="Gt4-nH-fA6" secondAttribute="leading" constant="34" id="qAY-xv-nFW"/>
                                     <constraint firstItem="GxL-O9-MDj" firstAttribute="leading" secondItem="Gt4-nH-fA6" secondAttribute="leading" constant="34" id="rvq-Me-AAR"/>
                                     <constraint firstItem="h0i-Oc-8hb" firstAttribute="centerX" secondItem="Gt4-nH-fA6" secondAttribute="centerX" id="skf-uo-6Iw"/>
-                                    <constraint firstItem="xV4-oJ-MSr" firstAttribute="top" secondItem="0eb-3S-Aey" secondAttribute="bottom" constant="53" id="u7t-CJ-vdz"/>
                                     <constraint firstItem="E2m-gR-UAT" firstAttribute="centerX" secondItem="Gt4-nH-fA6" secondAttribute="centerX" id="uxT-bq-lPd"/>
                                 </constraints>
                             </view>
@@ -1077,10 +1024,7 @@ continue to reset your password</string>
                     <connections>
                         <outlet property="btnDidNotReceive" destination="E2m-gR-UAT" id="XXJ-th-37Y"/>
                         <outlet property="btnNext" destination="GxL-O9-MDj" id="K6C-W1-pWH"/>
-                        <outlet property="txtFirstDigit" destination="Kav-Zy-xDU" id="SIF-PA-EeM"/>
-                        <outlet property="txtFourthDigit" destination="SXD-ks-bBk" id="vMD-jK-RN8"/>
-                        <outlet property="txtSecondDigit" destination="eiA-8B-MSv" id="oS9-hW-9K9"/>
-                        <outlet property="txtThirdDigit" destination="GwR-WC-ch8" id="UdD-zt-BHC"/>
+                        <outlet property="otpView" destination="1nU-9N-JGT" id="qp5-ch-gkx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hk3-kv-tcU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

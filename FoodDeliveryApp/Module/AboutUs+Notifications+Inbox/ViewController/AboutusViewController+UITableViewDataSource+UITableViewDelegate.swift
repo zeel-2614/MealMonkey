@@ -19,7 +19,7 @@ extension AboutUsViewController: UITableViewDataSource, UITableViewDelegate {
     ///   - indexPath: The index path specifying the location of the cell.
     /// - Returns: A fully configured `AboutUsTableViewCell`.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: AboutUsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AboutUsTableViewCell", for: indexPath) as! AboutUsTableViewCell
+        let cell: AboutUsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Main.CellIdentifiers.aboutUsTableViewCell, for: indexPath) as! AboutUsTableViewCell
         
         // Configure cell based on the current page type
         switch objPageType {

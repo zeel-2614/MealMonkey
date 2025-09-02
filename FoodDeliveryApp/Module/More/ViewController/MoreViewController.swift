@@ -16,7 +16,7 @@ class MoreViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
         setLeftAlignedTitle("More")
         setCartButtonWithBadge(target: self, action: #selector(cartButtonTapped))
-        tblMenu.register(UINib(nibName: "MoreTableViewCell", bundle: nil), forCellReuseIdentifier: "MoreTableViewCell")
+        tblMenu.register(UINib(nibName: Main.CellIdentifiers.moreTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.moreTableViewCell)
     }
     
     /// Called before the view appears on screen.
@@ -29,8 +29,8 @@ class MoreViewController: UIViewController {
     
     /// Action triggered when the cart button is tapped.
     @objc func cartButtonTapped() {
-        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.productStoryBoard, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.cartViewController) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }

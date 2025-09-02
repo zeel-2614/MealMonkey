@@ -23,19 +23,19 @@
                         <rect key="frame" x="9.6666666666666572" y="0.0" width="308" height="231"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_Popular_sample" translatesAutoresizingMaskIntoConstraints="NO" id="otQ-M7-g9q">
-                                <rect key="frame" x="0.0" y="13" width="308" height="163.66666666666666"/>
+                                <rect key="frame" x="0.0" y="13" width="308" height="160.66666666666666"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="aNh-aN-Oas">
-                                <rect key="frame" x="21" y="184.66666666666666" width="266" height="33.333333333333343"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aNh-aN-Oas">
+                                <rect key="frame" x="21" y="181.66666666666666" width="266" height="36.333333333333343"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Café De Bambaa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Yt-ze-CzT">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Café De Bambaa" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Yt-ze-CzT">
                                         <rect key="frame" x="0.0" y="0.0" width="266" height="14"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
                                         <color key="textColor" name="LabelPrimaryColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="18.940000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="xzU-5L-GYA">
-                                        <rect key="frame" x="0.0" y="19" width="266" height="14.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="22" width="266" height="14.333333333333336"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Café    Western Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pk-ye-vN1">
                                                 <rect key="frame" x="0.0" y="0.0" width="114" height="14.333333333333334"/>

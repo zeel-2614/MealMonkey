@@ -1,11 +1,10 @@
 import UIKit
+import Lottie
 
 // MARK: - MenuViewController
 /// Displays the menu screen with a list of food categories and a search bar.
 class MenuViewController: UIViewController {
-    
     // MARK: - Outlets
-    @IBOutlet weak var lblNoItem: UILabel!
     @IBOutlet weak var txtSearchFood: UITextField!
     @IBOutlet weak var tblCategory: UITableView!
     @IBOutlet weak var tblBackView: UIView!
@@ -14,25 +13,23 @@ class MenuViewController: UIViewController {
     /// Array holding all menu categories
     var arrCategory: [ClassCategory] = ClassCategory.addCategory()
     var arrFilterCategory: [ClassCategory] = []
-    
+    var emptyAnimationView: LottieAnimationView!
+    var emptyLabel: UILabel!
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
         arrFilterCategory = arrCategory
-        lblNoItem.isHidden = true
         self.navigationController?.isNavigationBarHidden = false
         setLeftAlignedTitle("Menu")
         setCartButtonWithBadge(target: self, action: #selector(cartBtnTapped))
         
         applyCornerRadiusTLBR()
         
-        viewStyle(cornerRadius: txtSearchFood.frame.size.height/2 , borderWidth: 0, borderColor: .systemGray, textField: [txtSearchFood])
-        setPadding(textfield: [txtSearchFood])
-        
         tblCategory.showsVerticalScrollIndicator = false
         tblCategory.backgroundColor = .clear
-        tblCategory.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "MenuTableViewCell")
+        tblCategory.register(UINib(nibName: Main.CellIdentifiers.menuTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.menuTableViewCell)
+        setAnimation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,12 +40,11 @@ class MenuViewController: UIViewController {
     // MARK: - Actions
     /// Handles cart button tap event
     @objc func cartBtnTapped() {
-        let storyboard = UIStoryboard(name: "ProductStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.Storyboards.productStoryBoard, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.cartViewController) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }
-    
     // MARK: - UI Styling Helpers
     /// Applies top-left and bottom-right corner radius to the table background view
     func applyCornerRadiusTLBR() {
@@ -66,5 +62,22 @@ class MenuViewController: UIViewController {
         for item in textfield {
             item.setPadding(left: 34, right: 34)
         }
+    }
+    
+    func setAnimation() {
+        let emptyState = EmptyStateHelper.setupEmptyState(
+            in: view,
+            animationName: "Search",   // name of your Lottie JSON
+            message: "No Data Found"
+        )
+        emptyAnimationView = emptyState.animationView
+        emptyLabel = emptyState.label
+        if arrFilterCategory.isEmpty {
+            EmptyStateHelper.show(animationView: emptyAnimationView, label: emptyLabel)
+        } else {
+            EmptyStateHelper.hide(animationView: emptyAnimationView, label: emptyLabel)
+        }
+        viewStyle(cornerRadius: txtSearchFood.frame.size.height/2 , borderWidth: 0, borderColor: .systemGray, textField: [txtSearchFood])
+        setPadding(textfield: [txtSearchFood])
     }
 }

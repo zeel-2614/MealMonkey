@@ -22,17 +22,17 @@ class HomeCategoryCollectionViewCell: UICollectionViewCell {
         // Assign category-specific image
         switch category {
         case .All:
-            imgCategory.image = UIImage(named: "ic_all")
+            imgCategory.image = UIImage(named: Main.Images.all)
         case .Punjabi:
-            imgCategory.image = UIImage(named: "ic_paneertikka")
+            imgCategory.image = UIImage(named: Main.Images.paneertikka)
         case .Chinese:
-            imgCategory.image = UIImage(named: "ic_hakkanoodles")
+            imgCategory.image = UIImage(named: Main.Images.hakkanoodles)
         case .Gujarati:
-            imgCategory.image = UIImage(named: "Ic_Khaman_Dhokla")
+            imgCategory.image = UIImage(named: Main.Images.khamanDhokla)
         case .SouthIndian:
-            imgCategory.image = UIImage(named: "ic_masaladosa")
+            imgCategory.image = UIImage(named: Main.Images.masalaDosa)
         case .WesternFood:
-            imgCategory.image = UIImage(named: "ic_margherita_pizza")
+            imgCategory.image = UIImage(named: Main.Images.margheritaPizza)
         }
     }
 }
