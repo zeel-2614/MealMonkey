@@ -120,9 +120,6 @@
                                                         <state key="normal" title="Login with Facebook" image="FacebookLogo">
                                                             <color key="titleColor" name="ButtonTextColor"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="btnRedirect:" destination="Oz4-AG-7JY" eventType="touchUpInside" id="gQ8-GS-IVx"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQO-lT-OGR">
                                                         <rect key="frame" x="30" y="592" width="333" height="55"/>
@@ -251,7 +248,7 @@
                     </view>
                     <connections>
                         <outlet property="btnEye" destination="Yvw-Ny-GiS" id="Wi0-hr-qkF"/>
-                        <outlet property="btnFacebook" destination="V9T-re-Diz" id="Slp-Hi-EMI"/>
+                        <outlet property="btnFacebook" destination="V9T-re-Diz" id="wxk-pC-XTU"/>
                         <outlet property="btnForgotPassword" destination="GfZ-8v-Huw" id="pB2-6q-wDq"/>
                         <outlet property="btnGoogle" destination="TQO-lT-OGR" id="edi-NQ-Msb"/>
                         <outlet property="btnLogin" destination="2w0-l5-NG3" id="jVW-ji-51s"/>

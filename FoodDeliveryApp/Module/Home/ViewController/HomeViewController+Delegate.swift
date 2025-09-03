@@ -51,8 +51,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.collectionType = .popular
             cell.lblCollectionViewTitle.isHidden = false
             cell.btnViewAll.isHidden = false
-            cell.lblCollectionViewTitle.text = "Popular"
-            cell.lblCollectionViewTitle.text = isSearching ? "Search Results" : "Popular"
+            cell.lblCollectionViewTitle.text = Main.setTitle.popularTitle
+            cell.lblCollectionViewTitle.text = isSearching ? Main.setTitle.searchingTitle : Main.setTitle.popularTitle
             cell.delegate = self
             
             // Show products based on search or category selection
@@ -75,8 +75,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.collectionType = .mostPopular
             cell.lblCollectionViewTitle.isHidden = false
             cell.btnViewAll.isHidden = false
-            cell.lblCollectionViewTitle.text = isSearching ? "Search Results" : "Most Popular"
-            cell.lblCollectionViewTitle.text = "Most Popular" // Ensures fixed title
+            cell.lblCollectionViewTitle.text = isSearching ? Main.setTitle.searchingTitle : Main.setTitle.mostPopularTitle
+            cell.lblCollectionViewTitle.text = Main.setTitle.mostPopularTitle // Ensures fixed title
             cell.collectionViewHomeHeight.constant = 185
             cell.delegate = self
             
@@ -97,7 +97,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.collectionType = .RecentItems
             cell.lblCollectionViewTitle.isHidden = false
             cell.btnViewAll.isHidden = false
-            cell.lblCollectionViewTitle.text = "Recent Items"
+            cell.lblCollectionViewTitle.text = Main.setTitle.recentItemsTitle
             cell.products = recentItems
             cell.delegate = self
             

@@ -48,14 +48,14 @@ class WishlistTableViewCell: UITableViewCell {
         self.wishlistProduct = product  // now a Wishlist object
         lblProductName.text = product.productName
         lblProductCategory.text = product.category
-        lblProductPrice.text = "$\(product.price)"
+        lblProductPrice.text = "\(Main.cartAlertMessage.priceSymbol)\(product.price)"
         lblProductType.text = product.type
         lblProductQty.isHidden = true
         if let imageName = product.image {
             imageProduct.image = UIImage(named: imageName)
         }
         
-        btnWishlist.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        btnWishlist.setImage(UIImage(systemName: Main.Images.btnWishlist), for: .normal)
         btnWishlist.tintColor = .buttonBackground
     }
     

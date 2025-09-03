@@ -21,7 +21,7 @@ class MenuViewController: UIViewController {
         
         arrFilterCategory = arrCategory
         self.navigationController?.isNavigationBarHidden = false
-        setLeftAlignedTitle("Menu")
+        setLeftAlignedTitle(Main.setTitle.menuTitle)
         setCartButtonWithBadge(target: self, action: #selector(cartBtnTapped))
         
         applyCornerRadiusTLBR()
@@ -67,8 +67,8 @@ class MenuViewController: UIViewController {
     func setAnimation() {
         let emptyState = EmptyStateHelper.setupEmptyState(
             in: view,
-            animationName: "Search",   // name of your Lottie JSON
-            message: "No Data Found"
+            animationName: Main.Animation.menuAnimationName.0,   // name of your Lottie JSON
+            message: Main.Animation.menuAnimationName.1
         )
         emptyAnimationView = emptyState.animationView
         emptyLabel = emptyState.label

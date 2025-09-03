@@ -22,13 +22,13 @@ class Feature: NSObject{
     /// A predefined list of app features.
     static let features: [Feature] = [
         Feature(imageName: Main.Images.image1,
-                title: "Find Food You Love",
-                subTitle: "Discover the best foods from over 1,000 restaurants and fast delivery to your doorstep"),
+                title: Main.nextPage.nextPage1.0,
+                subTitle: Main.nextPage.nextPage1.1),
         Feature(imageName: Main.Images.image2,
-                title: "Fast Delivery",
-                subTitle: "Fast food delivery to your home, office wherever you are"),
+                title: Main.nextPage.nextPage2.0,
+                subTitle: Main.nextPage.nextPage2.1),
         Feature(imageName: Main.Images.image3,
-                title: "Live Tracking",
-                subTitle: "Real time tracking of your food on the app once you placed the order")
+                title: Main.nextPage.nextPage3.0,
+                subTitle: Main.nextPage.nextPage3.1)
     ]
 }

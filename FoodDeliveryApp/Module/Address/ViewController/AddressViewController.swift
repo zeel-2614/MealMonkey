@@ -44,7 +44,7 @@ class AddressViewController: UIViewController, CLLocationManagerDelegate, UISear
         
         /// Adds a back button with a title in the navigation bar.
         setLeftAlignedTitleWithBack(
-            "Change Address",
+            Main.setTitle.changeAddressTitle,
             target: self,
             action: #selector(BackBtnTapped)
         )
@@ -97,7 +97,7 @@ class AddressViewController: UIViewController, CLLocationManagerDelegate, UISear
         )
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
-        annotation.title = "Loading address..."
+        annotation.title = Main.addressAlertMessage.addressTitle3
         mapView.addAnnotation(annotation)
         let location = CLLocation(
             latitude: coordinate.latitude,
@@ -107,7 +107,7 @@ class AddressViewController: UIViewController, CLLocationManagerDelegate, UISear
         geocoder.reverseGeocodeLocation(location) {
             [weak self] placemarks, error in
             guard let self = self else { return }
-            var fullAddress = "Unknown Location"
+            var fullAddress = Main.addressAlertMessage.fullAddress
             if let placemark = placemarks?.first {
                 let name = placemark.name ?? ""
                 let city = placemark.locality ?? ""
@@ -120,7 +120,7 @@ class AddressViewController: UIViewController, CLLocationManagerDelegate, UISear
             self.delegate?.didSelectAddress(fullAddress)
             locationManager.stopUpdatingLocation()
             // Store current location in UserDefaults
-            UserDefaults.standard.set(fullAddress, forKey: "currentAddress")
+            UserDefaults.standard.set(fullAddress, forKey: Main.Key.addressKey)
         }
     }
     // MARK: - Search Address
@@ -193,15 +193,15 @@ class AddressViewController: UIViewController, CLLocationManagerDelegate, UISear
     /// Shows an alert prompting the user to enable location permissions.
     func showPermissionAlert() {
         let alert = UIAlertController(
-            title: "Location Permission Needed",
+            title: Main.addressAlertMessage.addressTitle,
             message:
-                "Please enable location access in Settings to use this feature.",
+                Main.addressAlertMessage.addressMessage,
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: Main.addressAlertMessage.addressAction, style: .cancel))
         alert.addAction(
             UIAlertAction(
-                title: "Open Settings",
+                title: Main.addressAlertMessage.addressTitle2,
                 style: .default,
                 handler: { _ in
                     if let settingsURL = URL(
@@ -225,7 +225,7 @@ class AddressViewController: UIViewController, CLLocationManagerDelegate, UISear
         geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
             guard let self = self else { return }
             
-            var fullAddress = "Unknown Location"
+            var fullAddress = Main.addressAlertMessage.fullAddress
             if let placemark = placemarks?.first {
                 let name = placemark.name ?? ""
                 let city = placemark.locality ?? ""
@@ -234,7 +234,7 @@ class AddressViewController: UIViewController, CLLocationManagerDelegate, UISear
             }
             
             // Save to UserDefaults
-            UserDefaults.standard.set(fullAddress, forKey: "currentAddress")
+            UserDefaults.standard.set(fullAddress, forKey: Main.Key.addressKey)
             UserDefaults.standard.synchronize()
             
             // Update pin on map
@@ -268,7 +268,7 @@ class AddressViewController: UIViewController, CLLocationManagerDelegate, UISear
         if annotation is MKUserLocation {
             return nil
         }
-        let identifier = "CustomPin"
+        let identifier = Main.addressAlertMessage.identifier
         var annotationView = mapView.dequeueReusableAnnotationView(
             withIdentifier: identifier
         )

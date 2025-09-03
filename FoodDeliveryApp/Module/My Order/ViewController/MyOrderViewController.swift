@@ -26,7 +26,7 @@ class MyOrderViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationController?.isNavigationBarHidden = false
-        setLeftAlignedTitleWithBack("My Order", target: self, action: #selector(myOrderBackBtn))
+        setLeftAlignedTitleWithBack(Main.setTitle.myOrderTitle, target: self, action: #selector(myOrderBackBtn))
         // Do any additional setup after loading the view.
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .gray, textField: [btnCheckout])
         
@@ -38,9 +38,9 @@ class MyOrderViewController: UIViewController {
     /// Calculates subtotal, delivery cost, and total, then updates the labels.
     func calculateTotals() {
         let subtotal = orderProducts.reduce(0) { $0 + ($1.doubleProductPrice * Double($1.intProductQty!)) }
-        lblSubTotal.text = "$\(String(format: "%.2f", subtotal))"
-        lblDeliveryCost.text = "$\(String(format: "%.2f", deliveryCost))"
-        lblTotal.text = "$\(String(format: "%.2f", subtotal + deliveryCost))"
+        lblSubTotal.text = "\(Main.cartAlertMessage.priceSymbol)\(String(format: Main.cartAlertMessage.priceFormat, subtotal))"
+        lblDeliveryCost.text = "\(Main.cartAlertMessage.priceSymbol)\(String(format: Main.cartAlertMessage.priceFormat, deliveryCost))"
+        lblTotal.text = "\(Main.cartAlertMessage.priceSymbol)\(String(format: Main.cartAlertMessage.priceFormat, subtotal + deliveryCost))"
     }
     
     /// Action triggered when the back button in the navigation bar is tapped.

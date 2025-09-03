@@ -13,7 +13,6 @@ extension MenuViewController: UITableViewDelegate {
         switch indexPath.row {
         case 0:
             // Navigate to Food category
-            print("Food")
             if let foodvc = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.dessertsViewController) as? DessertsViewController {
                 foodvc.selectedProductType = .food
                 self.navigationController?.pushViewController(foodvc, animated: true)
@@ -21,7 +20,6 @@ extension MenuViewController: UITableViewDelegate {
             
         case 1:
             // Navigate to Beverages category
-            print("Beverages")
             if let beveragesvc = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.dessertsViewController) as? DessertsViewController {
                 beveragesvc.selectedProductType = .Beverages
                 self.navigationController?.pushViewController(beveragesvc, animated: true)
@@ -33,7 +31,6 @@ extension MenuViewController: UITableViewDelegate {
                 dessertvc.selectedProductType = .Desserts
                 self.navigationController?.pushViewController(dessertvc, animated: true)
             }
-            
         default:
             break
         }

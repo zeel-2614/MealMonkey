@@ -26,15 +26,15 @@ class OrderListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setLeftAlignedTitleWithBack("Order List", target: self, action: #selector(myOrderBackBtn))
+        setLeftAlignedTitleWithBack(Main.setTitle.orderListTitle, target: self, action: #selector(myOrderBackBtn))
         
         // Do any additional setup after loading the view.
         tblOrderList.register(UINib(nibName: Main.CellIdentifiers.orderListTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.orderListTableViewCell)
         // Setup reusable empty state
         let emptyState = EmptyStateHelper.setupEmptyState(
             in: view,
-            animationName: "no result found",   // name of your Lottie JSON
-            message: "You have no orders yet!"
+            animationName: Main.Animation.orderListAnimationName.0,   // name of your Lottie JSON
+            message: Main.Animation.orderListAnimationName.1
         )
         emptyAnimationView = emptyState.animationView
         emptyLabel = emptyState.label

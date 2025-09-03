@@ -24,7 +24,7 @@ class SignUpViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = false
         
-        setLeftAlignedTitleWithBack("Sign Up", target: self, action: #selector(signUpBackBtnTapped))
+        setLeftAlignedTitleWithBack(Main.setTitle.signUpTitle, target: self, action: #selector(signUpBackBtnTapped))
         
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .systemGray, textField: [txtName, txtEmail, txtMobileNo, txtAddress, txtPassword, txtConfirmPassword, btnSignUp])
         setPadding(textfield: [txtName, txtEmail, txtMobileNo, txtAddress, txtPassword, txtConfirmPassword])
@@ -40,16 +40,16 @@ class SignUpViewController: UIViewController {
         let confirmPassword = txtConfirmPassword.text ?? ""
 
         if name.isEmpty || email.isEmpty || mobile.isEmpty || address.isEmpty || password.isEmpty || confirmPassword.isEmpty {
-            UIAlertController.showAlert(title: "Missing Info", message: "Please enter all fields.", viewController: self)
+            UIAlertController.showAlert(title: Main.signUpAlert.missingInfoAlertTitle, message: Main.signUpAlert.missingInfoAlertMessage, viewController: self)
             return false
         } else if !ValidationHelper.isValidEmail(email) {
-            UIAlertController.showAlert(title: "Invalid Email", message: "Please enter a valid email address.", viewController: self)
+            UIAlertController.showAlert(title: Main.profileAlert.invalidEmailAlertTitle, message: Main.profileAlert.invalidEmailAlertMessage, viewController: self)
             return false
         } else if !ValidationHelper.isValidPassword(password) {
-            UIAlertController.showAlert(title: "Invalid Password", message: "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.", viewController: self)
+            UIAlertController.showAlert(title: Main.newPasswordAlert.newPasswordAlertTitle, message: Main.signUpAlert.passwordAlertMessage, viewController: self)
             return false
         } else if password != confirmPassword {
-            UIAlertController.showAlert(title: "Passwords Do Not Match", message: "The password and confirm password must be the same.", viewController: self)
+            UIAlertController.showAlert(title: Main.signUpAlert.invalidConfirmPassword, message: Main.signUpAlert.invalidConfirmPasswordMessage, viewController: self)
             return false
         }
         return true
@@ -60,8 +60,8 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func btnBackToLoginClick(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "UserStoryboard", bundle: nil)
-        if storyboard.instantiateViewController(withIdentifier: "LoginViewController") is LoginViewController{
+        let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)
+        if storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.loginViewController) is LoginViewController {
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -76,7 +76,7 @@ class SignUpViewController: UIViewController {
     @IBAction func btnEyeClick(_ sender: Any) {
         isPasswordVisible = !isPasswordVisible
         txtPassword.isSecureTextEntry = !isPasswordVisible
-        let imageName = isPasswordVisible ? "eye" : "eye.slash"
+        let imageName = isPasswordVisible ? Main.Images.btnPassword : Main.Images.btnPasswordVisible
         if let button = sender as? UIButton {
             button.setImage(UIImage(systemName: imageName), for: .normal)
         }
@@ -85,7 +85,7 @@ class SignUpViewController: UIViewController {
     @IBAction func btnConfirmEyeClick(_ sender: Any) {
         isPasswordVisible = !isPasswordVisible
         txtConfirmPassword.isSecureTextEntry = !isPasswordVisible
-        let imageName = isPasswordVisible ? "eye" : "eye.slash"
+        let imageName = isPasswordVisible ? Main.Images.btnPassword : Main.Images.btnPasswordVisible
         if let button = sender as? UIButton {
             button.setImage(UIImage(systemName: imageName), for: .normal)
         }
@@ -113,12 +113,12 @@ extension SignUpViewController {
         
         // Check if email already exists
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+        fetchRequest.predicate = NSPredicate(format: Main.loginAlert.emailFormat, email)
         
         do {
             let existingUsers = try context.fetch(fetchRequest)
             if !existingUsers.isEmpty {
-                UIAlertController.showAlert(title: "Error", message: "Email already registered. Please login.", viewController: self)
+                UIAlertController.showAlert(title: Main.signUpAlert.existedEmailALertTitle, message: Main.signUpAlert.existedEmailALertMessage, viewController: self)
                 return
             }
             
@@ -131,7 +131,7 @@ extension SignUpViewController {
             newUser.password = password
             
             try context.save()
-            print("✅ User saved successfully")
+            print("User saved successfully")
             
             // Navigate to Login
             let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)
@@ -140,7 +140,7 @@ extension SignUpViewController {
             }
             
         } catch {
-            print("❌ Failed to save user: \(error.localizedDescription)")
+            print("Failed to save user: \(error.localizedDescription)")
         }
     }
 }

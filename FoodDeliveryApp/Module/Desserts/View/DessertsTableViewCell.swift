@@ -29,9 +29,9 @@ class DessertsTableViewCell: UITableViewCell {
      */
     func dessertConfigureCell(dessert: ProductModel) {
         lblDessertTitle.text = dessert.strProductName
-        lblRestaurantName.text = "Meal Monkey"
+        lblRestaurantName.text = Main.setTitle.restaurantName
         lblCategoryName.text = "\(dessert.objProductCategory)"
-        lblRating.text = String(format: "%.1f", dessert.floatProductRating)
+        lblRating.text = String(format: Main.cartAlertMessage.dessertPriceFormat, dessert.floatProductRating)
         imgDessert.image = UIImage(named: dessert.strProductImage)
         imgShade.image = UIImage(named: Main.Images.dessertsBackShade)
     }

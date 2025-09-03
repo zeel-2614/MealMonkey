@@ -42,9 +42,9 @@ class CartTableViewCell: UITableViewCell {
     func configure(with cartItem: CartItems) {
         lblProductTitle.text = cartItem.productName
         imgProduct.image = UIImage(named: cartItem.image ?? "")
-        lblPrice.text = "$\(String(format: "%.2f", cartItem.price))"
+        lblPrice.text = "\(Main.cartAlertMessage.priceSymbol)\(String(format: Main.cartAlertMessage.priceFormat, cartItem.price))"
         lblType.text = cartItem.type ?? ""
         lblCategory.text = cartItem.category ?? ""
-        lblQty.text = "QTY: \(cartItem.quantity)"
+        lblQty.text = "\(Main.cartAlertMessage.quantity) \(cartItem.quantity)"
     }
 }

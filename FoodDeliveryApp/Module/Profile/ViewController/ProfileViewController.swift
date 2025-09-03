@@ -27,7 +27,7 @@ class ProfileViewController: UIViewController {
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .systemGray, textField: [txtName, txtEmail, txtAddress, txtMobileNo, btnSave])
         setPadding(textfield: [txtName, txtEmail, txtAddress, txtMobileNo])
         
-        setLeftAlignedTitle("Profile")
+        setLeftAlignedTitle(Main.setTitle.profileTitle)
         setCartButtonWithBadge(target: self, action: #selector(btnCartTapped))
         // Add listeners to text fields for change detection
         [txtName, txtEmail, txtMobileNo, txtAddress].forEach {
@@ -40,7 +40,7 @@ class ProfileViewController: UIViewController {
         updateSaveButtonState()
         if textField == txtName {
             let newName = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-            lblUserName.text = newName.isEmpty ? "Hello there, User" : "Hello there, \(newName)"
+            lblUserName.text = newName.isEmpty ? Main.setTitle.profilePageTitle : "Hello there, \(newName)"
         }
     }
     
@@ -65,12 +65,12 @@ class ProfileViewController: UIViewController {
     }
     
     func loadUserData() {
-        guard let email = UserDefaults.standard.string(forKey: "loggedInUserEmail"),
+        guard let email = UserDefaults.standard.string(forKey: Main.Key.loggedInUserEmailKey),
               let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
         let context = appDelegate.persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+        fetchRequest.predicate = NSPredicate(format: Main.loginAlert.emailFormat, email)
         
         do {
             let users = try context.fetch(fetchRequest)
@@ -114,7 +114,7 @@ class ProfileViewController: UIViewController {
     @IBAction func btnSignOutClick(_ sender: Any) {
         // Clear session data
         SessionManager.clear()
-        UserDefaults.standard.set(false, forKey: "isLoggedIn")
+        UserDefaults.standard.set(false, forKey: Main.Key.isLoggedInKey)
         UserDefaults.standard.synchronize()
         let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)
         if let loginVC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.loginViewController) as? LoginViewController {
@@ -135,35 +135,35 @@ class ProfileViewController: UIViewController {
         let context = appDelegate.persistentContainer.viewContext
         let newEmail = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         
-        // ✅ 1. Check for valid email format using your existing helper
+        // 1. Check for valid email format using your existing helper
         if !ValidationHelper.isValidEmail(newEmail) {
             UIAlertController.showAlert(
-                title: "Invalid Email",
-                message: "Please enter a valid email address.",
+                title: Main.profileAlert.invalidEmailAlertTitle,
+                message: Main.profileAlert.invalidEmailAlertMessage,
                 viewController: self
             )
             return
         }
         
-        // ✅ 2. Check if email is already used by another user
+        // 2. Check if email is already used by another user
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "email == %@ AND self != %@", newEmail, user)
+        fetchRequest.predicate = NSPredicate(format: Main.profileAlert.newEmailFormat, newEmail, user)
         
         do {
             let existingUsers = try context.fetch(fetchRequest)
             if !existingUsers.isEmpty {
                 UIAlertController.showAlert(
-                    title: "Email Exists",
-                    message: "This email address is already registered with another account.",
+                    title: Main.profileAlert.emailExistAlertTitle,
+                    message: Main.profileAlert.emailExistAlertMessage,
                     viewController: self
                 )
                 return
             }
         } catch {
-            print("❌ Error checking duplicate email: \(error.localizedDescription)")
+            print("Error checking duplicate email: \(error.localizedDescription)")
         }
         
-        // ✅ Proceed with your existing save logic
+        // Proceed with your existing save logic
         let nameChanged = (txtName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "") != (user.name ?? "")
         let emailChanged = newEmail != (user.email ?? "")
         let mobileChanged = (txtMobileNo.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "") != (user.mobile ?? "")
@@ -174,20 +174,20 @@ class ProfileViewController: UIViewController {
         if let existingData = user.profileImage {
             imageChanged = profileImageData != existingData
         } else {
-            imageChanged = imgProfile.image != UIImage(named: "placeholderProfile")
+            imageChanged = imgProfile.image != UIImage(named: Main.Images.profileImage)
         }
         
         // If no changes found, alert user
         if !nameChanged && !emailChanged && !mobileChanged && !addressChanged && !imageChanged {
             UIAlertController.showAlert(
-                title: "Info",
-                message: "No changes detected.",
+                title: Main.profileAlert.noFieldChangedAlert,
+                message: Main.profileAlert.noFieldChangedMessage,
                 viewController: self
             )
             return
         }
         
-        // ✅ Save updated data
+        // Save updated data
         do {
             user.name = txtName.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             user.email = newEmail
@@ -199,14 +199,14 @@ class ProfileViewController: UIViewController {
             currentUser = user
             
             UIAlertController.showAlert(
-                title: "Success",
-                message: "Profile updated successfully!",
+                title: Main.profileAlert.successAlertTitle,
+                message: Main.profileAlert.successAlertMessage,
                 viewController: self
             )
             
             updateSaveButtonState()
         } catch {
-            print("❌ Failed to update user: \(error.localizedDescription)")
+            print("Failed to update user: \(error.localizedDescription)")
         }
     }
 }

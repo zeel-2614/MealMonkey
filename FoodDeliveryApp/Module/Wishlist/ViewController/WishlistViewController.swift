@@ -24,14 +24,14 @@ class WishlistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         /// Set custom navigation title with back button.
-        setLeftAlignedTitleWithBack("WishList", target: self, action: #selector(backBtnTapped))
+        setLeftAlignedTitleWithBack(Main.setTitle.wishlistTitle, target: self, action: #selector(backBtnTapped))
         /// Register the custom table view cell for wishlist items.
         tblWishlist.register(UINib(nibName: Main.CellIdentifiers.wishlistTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.wishlistTableViewCell)
         // Setup reusable empty state
         let emptyState = EmptyStateHelper.setupEmptyState(
             in: view,
-            animationName: "Wishlist empty",   // name of your Lottie JSON
-            message: "Your wishlist is empty!"
+            animationName: Main.Animation.wishlistAnimationName.0,   // name of your Lottie JSON
+            message: Main.Animation.wishlistAnimationName.1
         )
         emptyAnimationView = emptyState.animationView
         emptyLabel = emptyState.label

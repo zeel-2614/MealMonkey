@@ -32,25 +32,25 @@ class PaymentViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         viewAddCard.isHidden = true
-        setLeftAlignedTitleWithBack("Payment Details", target: self, action: #selector(backBtnTapped))
+        setLeftAlignedTitleWithBack(Main.setTitle.paymentDetailsTitle, target: self, action: #selector(backBtnTapped))
         setCartButtonWithBadge(target: self, action: #selector(btnCartPressed))
         
         setupUI()
         // Setup reusable empty state
         let emptyState = EmptyStateHelper.setupEmptyState(
             in: view,
-            animationName: "Card Payment Unsuccessful",   // name of your Lottie JSON
-            message: "You have added no cards yet!"
+            animationName: Main.Animation.paymentAnimationName.0,   // name of your Lottie JSON
+            message: Main.Animation.paymentAnimationName.1
         )
         emptyCardAnimationView = emptyState.animationView
         lblEmptyCard = emptyState.label
         tblCardDetails.showsVerticalScrollIndicator = false
         tblCardDetails.register(UINib(nibName: Main.CellIdentifiers.cardTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.cardTableViewCell)
         
-        // ✅ Fetch the current user based on login email
+        // Fetch the current user based on login email
         currentUser = CoreDataManager.shared.getOrCreateCurrentUser()
         
-        // ✅ Load saved cards for the user
+        // Load saved cards for the user
         if let user = currentUser {
             arrCards = CoreDataManager.shared.fetchCards(for: user).compactMap { $0.number }
             updateEmptyCardLabel()
@@ -117,11 +117,11 @@ class PaymentViewController: UIViewController, UITextFieldDelegate {
             self.viewAddCard.transform = .identity
             self.tabBarController?.tabBar.isHidden = true
         } completion: { _ in
-            // ✅ Focus on card number field
+            // Focus on card number field
             self.txtCardNumber.becomeFirstResponder()
         }
         
-        // ✅ Hide animation when a card is added
+        // Hide animation when a card is added
         self.emptyCardAnimationView?.isHidden = true
         self.emptyCardAnimationView?.stop()
         self.lblEmptyCard.isHidden = true
@@ -155,41 +155,61 @@ class PaymentViewController: UIViewController, UITextFieldDelegate {
     @IBAction func btnAddCardClick(_ sender: Any) {
         // Validation
         guard let cardNumber = txtCardNumber.text, cardNumber.count == 16 else {
-            showAlert(message: "Card number must be exactly 16 digits.")
-            return
-        }
-        guard let expiryMonth = txtExpiryMonth.text, let month = Int(expiryMonth), expiryMonth.count == 2, (1...12).contains(month) else {
-            showAlert(message: "Expiry month must be between 01 and 12.")
-            return
-        }
-        guard let expiryYear = txtExpiryYear.text, let year = Int(expiryYear), expiryYear.count == 2 else {
-            showAlert(message: "Expiry year must be 2 digits.")
-            return
-        }
-        guard let securityCode = txtSecurityCode.text, securityCode.count == 3 else {
-            showAlert(message: "Security Code must be 3 digits.")
+            showAlert(message: Main.checkoutAlertMessage.cardNumberAlert)
             return
         }
         
-        // ✅ Validate expiry is not in the past
+        guard let expiryMonth = txtExpiryMonth.text,
+              let month = Int(expiryMonth),
+              expiryMonth.count == 2,
+              (1...12).contains(month) else {
+            showAlert(message: Main.checkoutAlertMessage.expiryMonthAlert)
+            return
+        }
+        
+        guard let expiryYear = txtExpiryYear.text,
+              let year = Int(expiryYear),
+              expiryYear.count == 2 else {
+            showAlert(message: Main.checkoutAlertMessage.expiryYearAlert)
+            return
+        }
+        
+        guard let securityCode = txtSecurityCode.text, securityCode.count == 3 else {
+            showAlert(message: Main.checkoutAlertMessage.securityCodeAlert)
+            return
+        }
+        
+        // First name validation
+        guard let firstName = txtFirstName.text, !firstName.trimmingCharacters(in: .whitespaces).isEmpty else {
+            showAlert(message: Main.checkoutAlertMessage.firstNameAlert)
+            return
+        }
+        
+        // Last name validation
+        guard let lastName = txtLastName.text, !lastName.trimmingCharacters(in: .whitespaces).isEmpty else {
+            showAlert(message: Main.checkoutAlertMessage.lastNameAlert)
+            return
+        }
+        
+        // Validate expiry is not in the past
         let currentDate = Date()
         let calendar = Calendar.current
         let currentYear = calendar.component(.year, from: currentDate) % 100  // last 2 digits
         let currentMonth = calendar.component(.month, from: currentDate)
         
         if year < currentYear || (year == currentYear && month < currentMonth) {
-            showAlert(message: "Card expiry date cannot be in the past.")
+            showAlert(message: Main.checkoutAlertMessage.expiryMonthYearAlert)
             return
         }
         
-        // ✅ Confirmation Alert
+        // Confirmation Alert
         let confirmAlert = UIAlertController(
-            title: "Confirm Card Details",
-            message: "Card Number: \(cardNumber)\nExpiry: \(expiryMonth)/\(expiryYear)\nDo you want to save this card?",
+            title: Main.checkoutAlertMessage.cardAlertTitle,
+            message: Main.checkoutAlertMessage.cardAlertMessage,
             preferredStyle: .alert
         )
-        confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        confirmAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
+        confirmAlert.addAction(UIAlertAction(title: Main.checkoutAlertMessage.cardCancelAction, style: .cancel))
+        confirmAlert.addAction(UIAlertAction(title: Main.checkoutAlertMessage.cardSaveAction, style: .default, handler: { _ in
             if let user = self.currentUser {
                 CoreDataManager.shared.addCard(
                     for: user,
@@ -197,8 +217,8 @@ class PaymentViewController: UIViewController, UITextFieldDelegate {
                     expiryMonth: expiryMonth,
                     expiryYear: expiryYear,
                     securityCode: self.txtSecurityCode.text ?? "",
-                    firstName: self.txtFirstName.text ?? "",
-                    lastName: self.txtLastName.text ?? ""
+                    firstName: firstName,
+                    lastName: lastName
                 )
                 self.arrCards = CoreDataManager.shared.fetchCards(for: user).compactMap { $0.number }
                 self.tblCardDetails.reloadData()
@@ -208,6 +228,7 @@ class PaymentViewController: UIViewController, UITextFieldDelegate {
         }))
         present(confirmAlert, animated: true)
         setTabBar(hidden: true)
+        
     }
     
     /**
@@ -215,8 +236,8 @@ class PaymentViewController: UIViewController, UITextFieldDelegate {
      - Parameter message: The message to display in the alert.
      */
     func showAlert(message: String) {
-        let alert = UIAlertController(title: "Invalid Input", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        let alert = UIAlertController(title: Main.checkoutAlertMessage.cardAlertTitle2, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Main.checkoutAlertMessage.cardOkAction, style: .default))
         present(alert, animated: true)
     }
     

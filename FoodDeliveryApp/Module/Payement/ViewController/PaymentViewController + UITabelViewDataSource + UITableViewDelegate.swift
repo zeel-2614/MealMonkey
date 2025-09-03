@@ -19,7 +19,7 @@ extension PaymentViewController: UITableViewDataSource, UITableViewDelegate, Car
     
     // Save current cards to UserDefaults
     func saveCardsToDefaults() {
-        UserDefaults.standard.set(arrCards, forKey: "savedCards")
+        UserDefaults.standard.set(arrCards, forKey: Main.Key.savedCardsKey)
     }
     
     // Mask card number, leaving only the last 4 digits visible and formatting with spaces
@@ -42,7 +42,7 @@ extension PaymentViewController: UITableViewDataSource, UITableViewDelegate, Car
             let cards = CoreDataManager.shared.fetchCards(for: user)
             let cardToDelete = cards[indexPath.row]
 
-            // ✅ Delete from Core Data
+            // Delete from Core Data
             CoreDataManager.shared.deleteCard(cardToDelete)
 
             // Refresh list

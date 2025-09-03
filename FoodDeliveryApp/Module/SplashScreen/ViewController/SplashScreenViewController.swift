@@ -15,7 +15,7 @@ class SplashScreenViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
             guard let self = self else { return }
             
-            if UserDefaults.standard.bool(forKey: "isLoggedIn") {
+            if UserDefaults.standard.bool(forKey: Main.Key.isLoggedInKey) {
                 self.showMainTabBar()
             } else {
                 let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)

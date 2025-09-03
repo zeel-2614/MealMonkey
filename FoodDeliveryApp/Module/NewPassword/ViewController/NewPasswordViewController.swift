@@ -21,7 +21,7 @@ class NewPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setLeftAlignedTitleWithBack("New Password", target: self, action: #selector(backButtonTapped))
+        setLeftAlignedTitleWithBack(Main.setTitle.newPasswordTitle, target: self, action: #selector(backButtonTapped))
         self.navigationController?.isNavigationBarHidden = false
         
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .gray, textField: [txtNewPassword, txtConfiemPassword, btnNext])
@@ -35,23 +35,23 @@ class NewPasswordViewController: UIViewController {
     /// If valid, navigates to `NextPageViewController`.
     func validateNewPasswordConfirmPassword() {
         guard let newPassword = txtNewPassword.text, !newPassword.isEmpty else {
-            UIAlertController.showAlert(title: "Error", message: "Please enter your new password.", viewController: self)
+            UIAlertController.showAlert(title: Main.loginAlert.errorTitle, message: Main.newPasswordAlert.newPasswordErrorMessage, viewController: self)
             return
         }
         guard !ValidationHelper.isValidPassword(newPassword) else {
             UIAlertController.showAlert(
-                title: "Invalid Password",
-                message: "Password must have at least 8 characters, including uppercase, lowercase, a number, and a special symbol.",
+                title: Main.newPasswordAlert.newPasswordAlertTitle,
+                message: Main.newPasswordAlert.newPasswordMessage,
                 viewController: self
             )
             return
         }
         guard let confirmPassword = txtConfiemPassword.text, !confirmPassword.isEmpty else {
-            UIAlertController.showAlert(title: "Error", message: "Please confirm your password.", viewController: self)
+            UIAlertController.showAlert(title: Main.loginAlert.errorTitle, message: Main.newPasswordAlert.confirmPasswordMessage, viewController: self)
             return
         }
         guard confirmPassword == newPassword else {
-            UIAlertController.showAlert(title: "Error", message: "Passwords do not match.", viewController: self)
+            UIAlertController.showAlert(title: Main.loginAlert.errorTitle, message: Main.newPasswordAlert.wrongPasswordMessage, viewController: self)
             return
         }
         let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)
@@ -83,7 +83,7 @@ class NewPasswordViewController: UIViewController {
     @IBAction func btnPasswordEyeClick(_ sender: Any) {
         isPasswordVisible = !isPasswordVisible
         txtConfiemPassword.isSecureTextEntry = !isPasswordVisible
-        let imageName = isPasswordVisible ? "eye" : "eye.slash"
+        let imageName = isPasswordVisible ? Main.Images.btnPassword : Main.Images.btnPasswordVisible
         if let button = sender as? UIButton {
             button.setImage(UIImage(systemName: imageName), for: .normal)
         }
@@ -94,7 +94,7 @@ class NewPasswordViewController: UIViewController {
     @IBAction func btnConfirmPasswordEyeClick(_ sender: Any) {
         isPasswordVisible = !isPasswordVisible
         txtNewPassword.isSecureTextEntry = !isPasswordVisible
-        let imageName = isPasswordVisible ? "eye" : "eye.slash"
+        let imageName = isPasswordVisible ? Main.Images.btnPassword : Main.Images.btnPasswordVisible
         if let button = sender as? UIButton {
             button.setImage(UIImage(systemName: imageName), for: .normal)
         }

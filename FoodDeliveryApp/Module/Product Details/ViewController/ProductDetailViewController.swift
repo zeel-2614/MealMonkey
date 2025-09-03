@@ -43,17 +43,17 @@ class ProductDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewScroll.showsVerticalScrollIndicator = false
-        setLeftAlignedTitleWithBack("Food Detail", target: self, action: #selector(detailBackBtnTapped))
+        setLeftAlignedTitleWithBack(Main.setTitle.productDetailTitle, target: self, action: #selector(detailBackBtnTapped))
         setCartButtonWithBadge(target: self, action: #selector(cartBtnTapped))
-        // ✅ Set navigation bar title and icon color to white
+        // Set navigation bar title and icon color to white
         currentQuantity = 1
         showLoadingState()
         
         if let product = selectedProduct {
             lblTitle.text = product.strProductName
             lblDescription.text = product.strProductDescription
-            lblPrice.text = "$\(product.doubleProductPrice)"
-            lblRattings.text = "\(product.floatProductRating) Star Ratings"
+            lblPrice.text = "\(Main.cartAlertMessage.priceSymbol)\(product.doubleProductPrice)"
+            lblRattings.text = "\(product.floatProductRating) \(Main.offer.starRating)"
             imgProduct.image = UIImage(named: product.strProductImage)
         }
         // Do any additional setup after loading the view.
@@ -61,9 +61,9 @@ class ProductDetailViewController: UIViewController {
         if let product = selectedProduct,
            let user = CoreDataManager.shared.getOrCreateCurrentUser(),
            CoreDataManager.shared.isInWishlist(productId: product.intId, for: user) {
-            btnHeart.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            btnHeart.setImage(UIImage(systemName: Main.Images.btnWishlist), for: .normal)
         } else {
-            btnHeart.setImage(UIImage(systemName: "heart"), for: .normal)
+            btnHeart.setImage(UIImage(systemName: Main.Images.btnWishlistState), for: .normal)
         }
     }
     
@@ -90,7 +90,7 @@ class ProductDetailViewController: UIViewController {
             navBar?.isTranslucent = true
             navBar?.backgroundColor = .clear
 
-            // ✅ Force layout update
+            // Force layout update
             navBar?.layoutIfNeeded()
     }
     // MARK: - Navigation Button Actions
@@ -110,15 +110,15 @@ class ProductDetailViewController: UIViewController {
         lblTitle.text = product.strProductName
         lblDescription.text = product.strProductDescription
         imgProduct.image = UIImage(named: product.strProductImage)
-        lblRattings.text = "\(product.floatProductRating) (\(product.intTotalNumberOfRatings) ratings)"
+        lblRattings.text = "\(product.floatProductRating) (\(product.intTotalNumberOfRatings) \(Main.offer.ratings))"
         updatePriceAndQuantityUI()
     }
     
     func updatePriceAndQuantityUI() {
         guard let product = selectedProduct else { return }
         let total = product.doubleProductPrice * Double(currentQuantity)
-        lblPrice.text = "$\(String(format: "%.2f", product.doubleProductPrice))"
-        lblLKR.text = "$\(String(format: "%.2f", total))"
+        lblPrice.text = "\(Main.cartAlertMessage.priceSymbol)\(String(format: Main.cartAlertMessage.priceFormat, product.doubleProductPrice))"
+        lblLKR.text = "\(Main.cartAlertMessage.priceSymbol)\(String(format: Main.cartAlertMessage.priceFormat, total))"
         lblCount.text = "\(currentQuantity)"
     }
     
@@ -141,12 +141,12 @@ class ProductDetailViewController: UIViewController {
         
         CoreDataManager.shared.addOrUpdateCartItem(product: product, quantity: Int16(currentQuantity), for: user)
         
-        // ✅ Use fetchCartItems instead of getCartItems
+        // Use fetchCartItems instead of getCartItems
         let cartCount = CoreDataManager.shared.fetchCartItems(for: user).count
         CartBadgeManager.shared.updateCartCount(to: cartCount)
         
-        let alert = UIAlertController(title: "Success", message: "Added to cart!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        let alert = UIAlertController(title: Main.cartAlertMessage.productAddedTitle, message: Main.cartAlertMessage.productAddedMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Main.cartAlertMessage.cartAction, style: .default))
         present(alert, animated: true)
     }
     // MARK: - Cart Button
@@ -163,10 +163,10 @@ class ProductDetailViewController: UIViewController {
         
         if CoreDataManager.shared.isInWishlist(productId: product.intId, for: user) {
             CoreDataManager.shared.removeFromWishlist(productId: product.intId, for: user)
-            btnHeart.setImage(UIImage(systemName: "heart"), for: .normal)
+            btnHeart.setImage(UIImage(systemName: Main.Images.btnWishlistState), for: .normal)
         } else {
             CoreDataManager.shared.addToWishlist(product: product, for: user)
-            btnHeart.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            btnHeart.setImage(UIImage(systemName: Main.Images.btnWishlist), for: .normal)
         }
     }
     

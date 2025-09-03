@@ -12,7 +12,7 @@ class OTPViewController: UIViewController {
         super.viewDidLoad()
         
         // Set custom title with a back button
-        setLeftAlignedTitleWithBack("OTP", target: self, action: #selector(otpBackBtnTapped))
+        setLeftAlignedTitleWithBack(Main.setTitle.resetPasswordTitle, target: self, action: #selector(otpBackBtnTapped))
         
         // Group all OTP text fields for setup
         // Apply rounded style to Next button
@@ -50,15 +50,6 @@ class OTPViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func btnNextClick(_ sender: Any) {
-        // Combine all OTP digits into a single string
-        //        let otp = "\(txtFirstDigit.text ?? "")\(txtSecondDigit.text ?? "")\(txtThirdDigit.text ?? "")\(txtFourthDigit.text ?? "")"
-        //
-        //        // Check if OTP is empty or incomplete
-        //        if otp.count < 4 {
-        //            UIAlertController.showAlert(title: "Error", message: "Please enter the complete 4-digit OTP.", viewController: self)
-        //            return
-        //        }
-        
         // If OTP is valid, navigate to NewPasswordViewController
         let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)
         if let VC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.newPasswordViewController) as? NewPasswordViewController {
@@ -67,7 +58,7 @@ class OTPViewController: UIViewController {
     }
     
     @IBAction func btnDidNotReceiveClick(_ sender: Any) {
-        UIAlertController.showAlert(title: "Success", message: "OTP Sent Successfully", viewController: self)
+        UIAlertController.showAlert(title: Main.profileAlert.successAlertTitle, message: Main.profileAlert.otpSuccessMessage, viewController: self)
     }
 }
 

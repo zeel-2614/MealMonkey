@@ -14,7 +14,7 @@ class MoreViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationController?.isNavigationBarHidden = false
-        setLeftAlignedTitle("More")
+        setLeftAlignedTitle(Main.setTitle.moreTitle)
         setCartButtonWithBadge(target: self, action: #selector(cartButtonTapped))
         tblMenu.register(UINib(nibName: Main.CellIdentifiers.moreTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.moreTableViewCell)
     }

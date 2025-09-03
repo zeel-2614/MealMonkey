@@ -16,7 +16,7 @@ class OffersViewController: UIViewController {
         
         viewStyle(cornerRadius: btnCheckOffer.frame.size.height/2, borderWidth: 0, borderColor: .systemGray, textField: [btnCheckOffer])
         
-        setLeftAlignedTitle("Latest Offers")
+        setLeftAlignedTitle(Main.setTitle.offersTitle)
         setCartButtonWithBadge(target: self, action: #selector(btnCartTapped))
         
         tblOffers.showsVerticalScrollIndicator = false
