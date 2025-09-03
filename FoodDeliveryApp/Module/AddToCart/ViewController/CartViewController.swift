@@ -60,7 +60,7 @@ class CartViewController: UIViewController {
         
         super.viewDidLoad()
         
-        setLeftAlignedTitleWithBack("Cart", target: self, action: #selector(backBtnTapped))
+        setLeftAlignedTitleWithBack(Main.setTitle.cartTitle, target: self, action: #selector(backBtnTapped))
         
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .gray, textField: [btnPlaceOrder])
         
@@ -68,8 +68,8 @@ class CartViewController: UIViewController {
         // Setup reusable empty state
         let emptyState = EmptyStateHelper.setupEmptyState(
             in: view,
-            animationName: "Empty Cart",   // name of your Lottie JSON
-            message: "Your Cart is Empty!"
+            animationName: Main.Animation.cartAnimationName.0,   // name of your Lottie JSON
+            message: Main.Animation.cartAnimationName.1
         )
         emptyCartAnimationView = emptyState.animationView
         lblEmptyCart = emptyState.label
@@ -106,16 +106,16 @@ class CartViewController: UIViewController {
             updateEmptyCartUI()
             CartBadgeManager.shared.updateCartCount(to: 0)
             
-            let alert = UIAlertController(title: "Order Placed",
-                                          message: "Your order has been placed successfully!",
+            let alert = UIAlertController(title: Main.cartAlertMessage.cartTitle,
+                                          message: Main.cartAlertMessage.cartMessage,
                                           preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            alert.addAction(UIAlertAction(title: Main.cartAlertMessage.cartAction, style: .default))
             present(alert, animated: true)
         } else {
-            let alert = UIAlertController(title: "Cart is Empty",
-                                          message: "Please add items to your cart before placing an order.",
+            let alert = UIAlertController(title: Main.cartAlertMessage.cartTitle2,
+                                          message: Main.cartAlertMessage.cartMessage2,
                                           preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            alert.addAction(UIAlertAction(title: Main.cartAlertMessage.cartAction, style: .default))
             present(alert, animated: true)
         }
     }

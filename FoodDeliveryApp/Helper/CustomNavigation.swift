@@ -20,7 +20,7 @@ extension UIViewController {
     ) {
         // Create the back button with system chevron icon
         let backButton = UIButton(type: .system)
-        backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        backButton.setImage(UIImage(systemName: Main.Images.backButton), for: .normal)
         backButton.tintColor = textColor
         backButton.addTarget(target, action: action, for: .touchUpInside)
         

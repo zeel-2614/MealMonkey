@@ -27,7 +27,7 @@ class DessertsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(productsLoaded), name: NSNotification.Name("ProductsLoaded"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(productsLoaded), name: NSNotification.Name(Main.Key.productsLoadedKey), object: nil)
         
         viewStyle(cornerRadius: txtSearchDesserts.frame.size.height/2, borderWidth: 0, borderColor: .systemGray, textField: [txtSearchDesserts])
         
@@ -41,20 +41,20 @@ class DessertsViewController: UIViewController {
         
         switch selectedProductType {
         case .food:
-            setLeftAlignedTitleWithBack("Food", target: self, action: #selector(dessertBackBtn))
+            setLeftAlignedTitleWithBack(Main.setTitle.foodTitle, target: self, action: #selector(dessertBackBtn))
             
         case .Beverages:
-            setLeftAlignedTitleWithBack("Beverages", target: self, action: #selector(dessertBackBtn))
+            setLeftAlignedTitleWithBack(Main.setTitle.beveragesTitle, target: self, action: #selector(dessertBackBtn))
             
         case .Desserts:
-            setLeftAlignedTitleWithBack("Desserts", target: self, action: #selector(dessertBackBtn))
+            setLeftAlignedTitleWithBack(Main.setTitle.dessertsTitle, target: self, action: #selector(dessertBackBtn))
         }
         // Listen for search text changes.
         txtSearchDesserts.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
         let emptyState = EmptyStateHelper.setupEmptyState(
             in: view,
-            animationName: "No data Found",   // name of your Lottie JSON
-            message: "No Data Found"
+            animationName: Main.Animation.dessertsAnimationName.0,   // name of your Lottie JSON
+            message: Main.Animation.dessertsAnimationName.1
         )
         emptyAnimationView = emptyState.animationView
         emptyLabel = emptyState.label

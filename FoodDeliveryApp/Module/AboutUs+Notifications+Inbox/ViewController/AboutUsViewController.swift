@@ -20,15 +20,15 @@ class AboutUsViewController: UIViewController {
             
         case .Notification:
             arrCurrent = AboutModel.addNotificationData()
-            setLeftAlignedTitleWithBack("Notifications", target: self, action: #selector(backButtonTapped))
+            setLeftAlignedTitleWithBack(Main.setTitle.notificationTitle, target: self, action: #selector(backButtonTapped))
             setCartButtonWithBadge(target: self, action: #selector(cartTapped))
         case .Inbox:
             arrCurrent = AboutModel.addInboxData()
-            setLeftAlignedTitleWithBack("Inbox", target: self, action: #selector(backButtonTapped))
+            setLeftAlignedTitleWithBack(Main.setTitle.inboxTitle, target: self, action: #selector(backButtonTapped))
             setCartButton(target: self, action: #selector(cartTapped))
         case .AboutUs:
             arrCurrent = AboutModel.addAboutData()
-            setLeftAlignedTitleWithBack("About Us", target: self, action: #selector(backButtonTapped))
+            setLeftAlignedTitleWithBack(Main.setTitle.aboutUsTitle, target: self, action: #selector(backButtonTapped))
             setCartButton(target: self, action: #selector(cartTapped))
             
         default:

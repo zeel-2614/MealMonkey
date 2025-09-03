@@ -19,13 +19,12 @@ class MenuTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Handles the selection state change for the cell
     }
-    
     // MARK: - Configuration Method
     /// Configures the cell UI with a given category model
     /// - Parameter category: The `ClassCategory` object containing data
     func configureCell(category: ClassCategory) {
         imgCategory.image = UIImage(named: category.imgCategory)
         lblCategoryName.text = category.strCategoryName
-        lblItems.text = "\(category.intItems) Items"
+        lblItems.text = "\(category.intItems) \(Main.menu.items)"
     }
 }

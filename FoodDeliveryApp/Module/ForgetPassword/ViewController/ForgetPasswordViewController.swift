@@ -23,7 +23,7 @@ class ForgetPasswordViewController: UIViewController {
         setPadding(textfield: [txtEmail])
         
         // Set a left-aligned navigation title with a back button
-        setLeftAlignedTitleWithBack("Forgot Password", target: self, action: #selector(backButtonTapped))
+        setLeftAlignedTitleWithBack(Main.setTitle.forgotPasswordTitle, target: self, action: #selector(backButtonTapped))
     }
     // MARK: - Navigation
     /// Handles the back button tap action.
@@ -50,18 +50,18 @@ class ForgetPasswordViewController: UIViewController {
         
         if email.isEmpty {
             // Email field is empty
-            UIAlertController.showAlert(title: "Email Missing",
-                                        message: "Please enter your Email.",
+            UIAlertController.showAlert(title: Main.forgetPasswordAlert.emailAlertTitle,
+                                        message: Main.forgetPasswordAlert.emailAlertMessage,
                                         viewController: self)
         } else if !ValidationHelper.isValidEmail(email) {
             // Email is not valid
-            UIAlertController.showAlert(title: "Invalid Email",
-                                        message: "Please enter a valid email address.",
+            UIAlertController.showAlert(title: Main.forgetPasswordAlert.emailAlertTitle2,
+                                        message: Main.forgetPasswordAlert.emailAlertMessage2,
                                         viewController: self)
         } else {
             // Email is valid, show success alert and navigate to OTP
-            showAlert(title: "Success",
-                      message: "OTP Sent Successfully",
+            showAlert(title: Main.forgetPasswordAlert.successAlert,
+                      message: Main.forgetPasswordAlert.successMessage,
                       viewController: self)
         }
     }
@@ -74,7 +74,7 @@ class ForgetPasswordViewController: UIViewController {
     func showAlert(title: String, message: String, viewController: UIViewController) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: {_ in
+        alert.addAction(UIAlertAction(title: Main.forgetPasswordAlert.successOkAction, style: .default, handler: {_ in
             let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)
             if let VC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.otpViewController) as? OTPViewController {
                 self.navigationController?.pushViewController(VC, animated: true)

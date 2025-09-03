@@ -24,7 +24,7 @@ class NextPageViewController: UIViewController {
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .systemGray, textField: [btnDone])
         pageControl.numberOfPages = features.count
         updateLabels(for: 0)
-        btnDone.setTitle("Next", for: .normal)
+        btnDone.setTitle(Main.setTitle.nextPageTitle, for: .normal)
         
         // Register the custom collection view cell
         collectionViewNextPage.register(UINib(nibName: Main.CellIdentifiers.nextPageCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: Main.CellIdentifiers.nextPageCollectionViewCell)
@@ -39,6 +39,7 @@ class NextPageViewController: UIViewController {
                let sceneDelegate = windowScene.delegate as? SceneDelegate {
                 sceneDelegate.window?.rootViewController = tabBarController
                 sceneDelegate.window?.makeKeyAndVisible()
+                tabBarController.selectedIndex = 2
             }
         }
     }
@@ -68,6 +69,6 @@ class NextPageViewController: UIViewController {
         lblDescription.text = model.subTitle
         pageControl.currentPage = index
         currentIndex = index
-        btnDone.setTitle(index == features.count - 1 ? "Done" : "Next", for: .normal)
+        btnDone.setTitle(index == features.count - 1 ? Main.setTitle.nextPageDoneTitle : Main.setTitle.nextPageTitle, for: .normal)
     }
 }

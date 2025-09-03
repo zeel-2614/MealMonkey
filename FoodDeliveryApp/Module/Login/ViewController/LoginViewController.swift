@@ -40,47 +40,47 @@ class LoginViewController: UIViewController {
     /// Validates user input for login and navigates to the main tab bar if valid.
     func validateLoginPassword() {
         guard let email = txtEmail.text, !email.isEmpty else {
-            UIAlertController.showAlert(title: "Error", message: "Please enter your email address.", viewController: self)
+            UIAlertController.showAlert(title: Main.loginAlert.errorTitle, message: Main.loginAlert.emailErrorMessage, viewController: self)
             return
         }
         guard let password = txtPassword.text, !password.isEmpty else {
-            UIAlertController.showAlert(title: "Error", message: "Please enter your password.", viewController: self)
+            UIAlertController.showAlert(title: Main.loginAlert.errorTitle, message: Main.loginAlert.passwordErrorMessage, viewController: self)
             return
         }
         guard ValidationHelper.isValidEmail(email) else {
-            UIAlertController.showAlert(title: "Invalid Email", message: "Please enter a valid email address.", viewController: self)
+            UIAlertController.showAlert(title: Main.loginAlert.validEmailAlertTitle, message: Main.loginAlert.validEmailMessage, viewController: self)
             return
         }
         guard ValidationHelper.isValidPassword(password) else {
-            UIAlertController.showAlert(title: "Invalid Password", message: "Password must include uppercase, lowercase, number, and special character.", viewController: self)
+            UIAlertController.showAlert(title: Main.loginAlert.validPasswordAlertTitle, message: Main.loginAlert.validPasswordMessage, viewController: self)
             return
         }
-        // ✅ Core Data Fetch
+        // Core Data Fetch
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext
         
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "email == %@ AND password == %@", email, password)
+        fetchRequest.predicate = NSPredicate(format: Main.loginAlert.emailPasswordFormat, email, password)
         
         do {
             let users = try context.fetch(fetchRequest)
             if let user = users.first {
-                // ✅ Save logged-in user email
+                // Save logged-in user email
                 SessionManager.save(email: user.email ?? "")
-                UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                UserDefaults.standard.set(true, forKey: Main.Key.isLoggedInKey)
                 UserDefaults.standard.synchronize()
                 
                 // Navigate to Main Tab
                 showMainTabBar()
             } else {
                 UIAlertController.showAlert(
-                    title: "Login Failed",
-                    message: "User not registered or invalid email or password.",
+                    title: Main.loginAlert.loginErrorTitle,
+                    message: Main.loginAlert.loginErrorMessage,
                     viewController: self
                 )
             }
         } catch {
-            print("❌ Fetch error: \(error.localizedDescription)")
+            print("Fetch error: \(error.localizedDescription)")
         }
     }
     
@@ -116,15 +116,9 @@ class LoginViewController: UIViewController {
     @IBAction func btnEyeClick(_ sender: Any) {
         isPasswordVisible = !isPasswordVisible
         txtPassword.isSecureTextEntry = !isPasswordVisible
-        let imageName = isPasswordVisible ? "eye" : "eye.slash"
+        let imageName = isPasswordVisible ? Main.Images.btnPassword : Main.Images.btnPasswordVisible
         if let button = sender as? UIButton {
             button.setImage(UIImage(systemName: imageName), for: .normal)
-        }
-    }
-    @IBAction func btnRedirect(_ sender: Any) {
-        let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)
-        if let VC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.forgetPasswordViewController) as? ForgetPasswordViewController {
-            self.navigationController?.pushViewController(VC, animated: true)
         }
     }
     /// Triggered when the "Forgot Password" button is clicked.
@@ -132,7 +126,6 @@ class LoginViewController: UIViewController {
         let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.forgetPasswordViewController) as? ForgetPasswordViewController {
             self.navigationController?.pushViewController(vc, animated: true)
-            print("Forget Password tapped")
         }
     }
     
@@ -141,9 +134,6 @@ class LoginViewController: UIViewController {
         let storyboard = UIStoryboard(name: Main.Storyboards.userStoryBoard, bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.signUpViewController) as? SignUpViewController {
             self.navigationController?.pushViewController(vc, animated: true)
-            print("Sign Up tapped")
-        } else {
-            print("❌ Could not instantiate SignUpViewController")
         }
     }
 }

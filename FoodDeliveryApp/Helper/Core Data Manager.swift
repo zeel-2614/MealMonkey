@@ -25,7 +25,7 @@ final class CoreDataManager {
             do {
                 try context.save()
             } catch {
-                print("❌ Failed to save context: \(error)")
+                print("Failed to save context: \(error)")
             }
         }
     }
@@ -37,11 +37,10 @@ final class CoreDataManager {
     
     func fetchUser(byEmail email: String) -> User? {
         let request: NSFetchRequest<User> = User.fetchRequest()
-        request.predicate = NSPredicate(format: "email == %@", email)
+        request.predicate = NSPredicate(format: Main.loginAlert.emailFormat, email)
         request.fetchLimit = 1
         return try? context.fetch(request).first
     }
-    
     // MARK: - Card Methods
     func addCard(for user: User,
                  number: String,
@@ -60,7 +59,6 @@ final class CoreDataManager {
         card.user = user
         saveContext()
     }
-    
     // MARK: - Save Card
     func saveCard(for user: User, number: String) {
         let card = Card(context: context)
@@ -69,15 +67,15 @@ final class CoreDataManager {
         
         do {
             try context.save()
-            print("✅ Card saved successfully")
+            print("Card saved successfully")
         } catch {
-            print("❌ Failed to save card: \(error.localizedDescription)")
+            print("Failed to save card: \(error.localizedDescription)")
         }
     }
     
     func fetchCards(for user: User) -> [Card] {
         let request: NSFetchRequest<Card> = Card.fetchRequest()
-        request.predicate = NSPredicate(format: "user == %@", user)
+        request.predicate = NSPredicate(format: Main.loginAlert.userFormat, user)
         return (try? context.fetch(request)) ?? []
     }
     
@@ -85,7 +83,6 @@ final class CoreDataManager {
         context.delete(card)
         saveContext()
     }
-    
     /// Optionally create the user if missing
     func getOrCreateCurrentUser() -> User? {
         guard let email = SessionManager.getEmail(), !email.isEmpty else { return nil }
@@ -95,12 +92,11 @@ final class CoreDataManager {
         do { try context.save() } catch { print("Failed create user:", error) }
         return user
     }
-    
     // MARK: - Cart: Add / Update (Upsert)
     /// Adds a product or increases its quantity if it already exists.
     func addOrUpdateCartItem(product: ProductModel, quantity: Int16, for user: User) {
         let request: NSFetchRequest<CartItems> = CartItems.fetchRequest()
-        request.predicate = NSPredicate(format: "productId == %d AND user == %@ AND (status == nil OR status == 'cart')", product.intId, user)
+        request.predicate = NSPredicate(format: Main.cartAlertMessage.cartFormat, product.intId, user)
         
         do {
             if let existingItem = try context.fetch(request).first {
@@ -120,13 +116,13 @@ final class CoreDataManager {
             }
             try context.save()
         } catch {
-            print("❌ Failed to add/update cart item: \(error)")
+            print("Failed to add/update cart item: \(error)")
         }
     }
     /// Sets an exact quantity for a product (deletes if qty <= 0)
     func setQuantity(productId: Int, to qty: Int16, for user: User) {
         let request: NSFetchRequest<CartItems> = CartItems.fetchRequest()
-        request.predicate = NSPredicate(format: "productId == %d AND user == %@", productId, user)
+        request.predicate = NSPredicate(format: Main.cartAlertMessage.quantityFormat, productId, user)
         do {
             if let item = try context.fetch(request).first {
                 if qty <= 0 {
@@ -136,43 +132,41 @@ final class CoreDataManager {
                 }
                 try context.save()
             }
-        } catch { print("❌ setQuantity error:", error) }
+        } catch { print("setQuantity error:", error) }
     }
-    
     // MARK: - Cart: Fetch
     func fetchCartItems(for user: User) -> [CartItems] {
         let request: NSFetchRequest<CartItems> = CartItems.fetchRequest()
-        request.predicate = NSPredicate(format: "user == %@ AND (status == nil OR status == 'cart')", user)
-        request.sortDescriptors = [NSSortDescriptor(key: "productName", ascending: true)]
+        request.predicate = NSPredicate(format: Main.cartAlertMessage.fetchCartFormat, user)
+        request.sortDescriptors = [NSSortDescriptor(key: Main.Key.productNameKey, ascending: true)]
         
         do {
             return try context.fetch(request)
         } catch {
-            print("❌ Failed to fetch cart items: \(error)")
+            print("Failed to fetch cart items: \(error)")
             return []
         }
     }
     // MARK: - Cart: Remove
     func removeCartItem(productId: Int, for user: User) {
         let request: NSFetchRequest<CartItems> = CartItems.fetchRequest()
-        request.predicate = NSPredicate(format: "productId == %d AND user == %@ AND (status == nil OR status == 'cart')", productId, user)
+        request.predicate = NSPredicate(format: Main.cartAlertMessage.cartFormat, productId, user)
         
         do {
             let items = try context.fetch(request)
             items.forEach { context.delete($0) }
             try context.save()
         } catch {
-            print("❌ Failed to remove cart item: \(error)")
+            print("Failed to remove cart item: \(error)")
         }
     }
     
     func clearCart(for user: User) {
         fetchCartItems(for: user).forEach { context.delete($0) }
         let request: NSFetchRequest<CartItems> = CartItems.fetchRequest()
-        request.predicate = NSPredicate(format: "user == %@ AND status == 'cart'", user)
-        do { try context.save() } catch { print("❌ Failed to clear cart: \(error)") }
+        request.predicate = NSPredicate(format: Main.cartAlertMessage.clearCartFormat, user)
+        do { try context.save() } catch { print("Failed to clear cart: \(error)") }
     }
-    
     // MARK: - Cart: Aggregate
     func cartTotals(for user: User) -> (itemCount: Int, total: Double) {
         let items = fetchCartItems(for: user)
@@ -196,14 +190,14 @@ final class CoreDataManager {
     /// Fetch all orders for a user
     func fetchOrders(for user: User) -> [[ProductModel]] {
         let fetchRequest: NSFetchRequest<Orders> = Orders.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "userEmail == %@", user.email ?? "")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        fetchRequest.predicate = NSPredicate(format: Main.cartAlertMessage.fetchOrderFormat, user.email ?? "")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: Main.Key.dateKey, ascending: false)]
         
         do {
             let orders = try context.fetch(fetchRequest)
             return orders.compactMap { $0.products?.toProducts() }
         } catch {
-            print("❌ Failed to fetch orders: \(error.localizedDescription)")
+            print("Failed to fetch orders: \(error.localizedDescription)")
             return []
         }
     }
@@ -220,7 +214,7 @@ final class CoreDataManager {
     func addToWishlist(product: ProductModel, for user: User) {
         // Check if product already exists in wishlist for this user
         let request: NSFetchRequest<Wishlist> = Wishlist.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %d AND user == %@", product.intId, user)
+        request.predicate = NSPredicate(format: Main.cartAlertMessage.wishlistFormat, product.intId, user)
         
         do {
             let existing = try context.fetch(request)
@@ -236,13 +230,13 @@ final class CoreDataManager {
                 saveContext()
             }
         } catch {
-            print("❌ Failed to add wishlist item: \(error)")
+            print("Failed to add wishlist item: \(error)")
         }
     }
     
     func removeFromWishlist(productId: Int, for user: User) {
         let request: NSFetchRequest<Wishlist> = Wishlist.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %d AND user == %@", productId, user)
+        request.predicate = NSPredicate(format: Main.cartAlertMessage.wishlistFormat, productId, user)
         
         do {
             if let item = try context.fetch(request).first {
@@ -250,30 +244,30 @@ final class CoreDataManager {
                 saveContext()
             }
         } catch {
-            print("❌ Failed to remove wishlist item: \(error)")
+            print("Failed to remove wishlist item: \(error)")
         }
     }
     
     func fetchWishlist(for user: User) -> [Wishlist] {
         let request: NSFetchRequest<Wishlist> = Wishlist.fetchRequest()
-        request.predicate = NSPredicate(format: "user == %@", user)
+        request.predicate = NSPredicate(format: Main.loginAlert.userFormat, user)
         
         do {
             return try context.fetch(request)
         } catch {
-            print("❌ Failed to fetch wishlist: \(error)")
+            print("Failed to fetch wishlist: \(error)")
             return []
         }
     }
     
     func isInWishlist(productId: Int, for user: User) -> Bool {
         let request: NSFetchRequest<Wishlist> = Wishlist.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %d AND user == %@", productId, user)
+        request.predicate = NSPredicate(format: Main.cartAlertMessage.wishlistFormat, productId, user)
         
         do {
             return try context.fetch(request).first != nil
         } catch {
-            print("❌ Error checking wishlist: \(error)")
+            print("Error checking wishlist: \(error)")
             return false
         }
     }

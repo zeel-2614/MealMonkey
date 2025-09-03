@@ -61,7 +61,7 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
         super.viewDidLoad()
         
         // Set navigation title with back button
-        setLeftAlignedTitleWithBack("Checkout", target: self, action: #selector(checkoutBackBtn))
+        setLeftAlignedTitleWithBack(Main.setTitle.checkoutTitle, target: self, action: #selector(checkoutBackBtn))
         
         setupUI()
         // Table view configuration
@@ -90,7 +90,7 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
             tblCheckout.reloadData()
         }
         
-        if let savedAddress = UserDefaults.standard.string(forKey: "currentAddress") {
+        if let savedAddress = UserDefaults.standard.string(forKey: Main.Key.addressKey) {
             lblDeliveryAddress.text = savedAddress
         }
     }
@@ -115,7 +115,7 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
     @IBAction func btnChangeAddressClick(_ sender: Any) {
         let storyboard = UIStoryboard(name: Main.Storyboards.moreStoryBoard, bundle: nil)
         if let VC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.addressViewController) as? AddressViewController{
-            VC.delegate = self  // ✅ Set delegate here
+            VC.delegate = self  // Set delegate here
             self.navigationController?.pushViewController(VC, animated: true)
         }
     }
@@ -150,56 +150,61 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
             self.setTabBar(hidden: false)
         }
     }
-    
     /// Validates and saves a new card to user defaults.
     @IBAction func btnEnterCardClick(_ sender: Any) {
         // Validate card number
         guard let cardNumber = txtCardNumber.text, cardNumber.count == 16 else {
-            showAlert(message: "Card number must be exactly 16 digits.")
+            showAlert(message: Main.checkoutAlertMessage.cardNumberAlert)
             return
         }
-        
         // Validate expiry month
         guard let expiryMonth = txtExpiryMonth.text,
               let month = Int(expiryMonth),
               expiryMonth.count == 2,
               (1...12).contains(month) else {
-            showAlert(message: "Expiry month must be between 01 and 12.")
+            showAlert(message: Main.checkoutAlertMessage.expiryMonthAlert)
             return
         }
-        
         // Validate expiry year
         guard let expiryYear = txtExpiryYear.text,
               let year = Int(expiryYear),
               expiryYear.count == 2 else {
-            showAlert(message: "Expiry year must be 2 digits.")
+            showAlert(message: Main.checkoutAlertMessage.expiryYearAlert)
             return
         }
-        
         // Validate security code
         guard let securityCode = txtSecurityCode.text, securityCode.count == 3 else {
-            showAlert(message: "Security Code must be 3 digits.")
+            showAlert(message: Main.checkoutAlertMessage.securityCodeAlert)
             return
         }
-        
-        // ✅ Validate expiry is not in the past
+        // First name validation
+        guard let firstName = txtFirstName.text, !firstName.trimmingCharacters(in: .whitespaces).isEmpty else {
+            showAlert(message: Main.checkoutAlertMessage.firstNameAlert)
+            return
+        }
+        // Last name validation
+        guard let lastName = txtLastName.text, !lastName.trimmingCharacters(in: .whitespaces).isEmpty else {
+            showAlert(message: Main.checkoutAlertMessage.lastNameAlert)
+            return
+        }
+        // Validate expiry is not in the past
         let currentDate = Date()
         let calendar = Calendar.current
         let currentYear = calendar.component(.year, from: currentDate) % 100  // Last two digits
         let currentMonth = calendar.component(.month, from: currentDate)
         
         if year < currentYear || (year == currentYear && month < currentMonth) {
-            showAlert(message: "Card expiry date cannot be in the past.")
+            showAlert(message: Main.checkoutAlertMessage.expiryMonthYearAlert)
             return
         }
         
         // Confirmation Alert
-        let confirmAlert = UIAlertController(title: "Confirm Card",
-                                             message: "Do you want to save this card?",
+        let confirmAlert = UIAlertController(title: Main.checkoutAlertMessage.cardAlertTitle,
+                                             message: Main.checkoutAlertMessage.cardAlertMessage,
                                              preferredStyle: .alert)
-        confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        confirmAlert.addAction(UIAlertAction(title: Main.checkoutAlertMessage.cardCancelAction, style: .cancel))
         
-        confirmAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
+        confirmAlert.addAction(UIAlertAction(title: Main.checkoutAlertMessage.cardSaveAction, style: .default, handler: { _ in
             if let user = self.currentUser {
                 CoreDataManager.shared.addCard(
                     for: user,
@@ -222,8 +227,8 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
     
     /// Shows an alert with a given message.
     func showAlert(message: String) {
-        let alert = UIAlertController(title: "Invalid Input", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        let alert = UIAlertController(title: Main.checkoutAlertMessage.cardAlertTitle2, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Main.checkoutAlertMessage.cardOkAction, style: .default))
         present(alert, animated: true)
     }
     
@@ -307,7 +312,7 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
     /// - Parameter value: The value to be formatted.
     /// - Returns: A string in the format `$xx.xx`.
     private func formatPrice(_ value: Double) -> String {
-        return "$\(String(format: "%.2f", value))"
+        return "\(Main.cartAlertMessage.priceSymbol)\(String(format: Main.cartAlertMessage.priceFormat, value))"
     }
     
     /// Action triggered when tracking an order. Currently unimplemented.
@@ -316,9 +321,20 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
     
     /// Navigates back to the home menu screen.
     @IBAction func btnBackToHomeClick(_ sender: Any) {
+        showMainTabBar()
+    }
+    
+    private func showMainTabBar() {
         let storyboard = UIStoryboard(name: Main.Storyboards.homeStoryBoard, bundle: nil)
-        if let mlvc = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.menuViewController) as? MenuViewController {
-            self.navigationController?.pushViewController(mlvc, animated: true)
+        if let tabBarController = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.mainTabBarViewController) as? UITabBarController {
+            
+            // Set as rootViewController
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let sceneDelegate = windowScene.delegate as? SceneDelegate {
+                sceneDelegate.window?.rootViewController = tabBarController
+                sceneDelegate.window?.makeKeyAndVisible()
+                tabBarController.selectedIndex = 2
+            }
         }
     }
 }

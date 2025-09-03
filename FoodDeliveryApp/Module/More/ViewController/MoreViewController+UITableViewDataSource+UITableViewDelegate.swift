@@ -42,11 +42,11 @@ extension MoreViewController: UITableViewDelegate {
                 self.navigationController?.pushViewController(VC, animated: true)
             }
         case 5:
+            // Navigate to Wishlist screen.
             let storyboard = UIStoryboard(name: Main.Storyboards.productStoryBoard, bundle: nil)
             if let plvc = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.wishListViewController) as? WishlistViewController {
                 self.navigationController?.pushViewController(plvc, animated: true)
             }
-            print("fifth row selected")
         default:
             break
         }

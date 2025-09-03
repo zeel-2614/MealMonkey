@@ -29,7 +29,7 @@ extension CheckoutViewController : UITableViewDelegate, UITableViewDataSource, U
                 for: indexPath
             ) as! CashOnDeliveryTableViewCell
             
-            cell.btnSelect.setImage(UIImage(systemName: selectedPaymentIndex == indexPath.row ? "circle.inset.filled" : "circle"), for: .normal)
+            cell.btnSelect.setImage(UIImage(systemName: selectedPaymentIndex == indexPath.row ? Main.Images.btnSelect : Main.Images.btnSelectState), for: .normal)
             return cell
         }
         
@@ -43,7 +43,7 @@ extension CheckoutViewController : UITableViewDelegate, UITableViewDataSource, U
             let cardIndex = indexPath.row - 1
             let fullCardNumber = arrCards[cardIndex]
             cell.lblCardNo.text = maskedCardNumber(fullCardNumber)
-            cell.btnSelect.setImage(UIImage(systemName: selectedPaymentIndex == indexPath.row ? "circle.inset.filled" : "circle"), for: .normal)
+            cell.btnSelect.setImage(UIImage(systemName: selectedPaymentIndex == indexPath.row ? Main.Images.btnSelect : Main.Images.btnSelectState), for: .normal)
             return cell
         }
         
@@ -53,7 +53,7 @@ extension CheckoutViewController : UITableViewDelegate, UITableViewDataSource, U
             for: indexPath
         ) as! GmailTableViewCell
         
-        cell.btnSelect.setImage(UIImage(systemName: selectedPaymentIndex == indexPath.row ? "circle.inset.filled" : "circle"), for: .normal)
+        cell.btnSelect.setImage(UIImage(systemName: selectedPaymentIndex == indexPath.row ? Main.Images.btnSelect : Main.Images.btnSelectState), for: .normal)
         return cell
     }
     

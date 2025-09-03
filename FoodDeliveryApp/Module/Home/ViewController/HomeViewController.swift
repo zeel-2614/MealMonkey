@@ -22,7 +22,7 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
     // MARK: - View Life Cycle
     override func viewWillAppear(_ animated: Bool) {
         // Load saved address from UserDefaults
-        if let savedAddress = UserDefaults.standard.string(forKey: "currentAddress") {
+        if let savedAddress = UserDefaults.standard.string(forKey: Main.Key.addressKey) {
             lblCurrentLocation.text = savedAddress
         }
         // Load recent items and reload the table
@@ -40,7 +40,7 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.post(name: NSNotification.Name("ProductsLoaded"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(Main.Key.productsLoadedKey), object: nil)
         
         // Set navigation bar title and cart button
         displayGreeting()
@@ -69,23 +69,23 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
     }
     
     func displayGreeting() {
-        guard let email = UserDefaults.standard.string(forKey: "loggedInUserEmail"),
+        guard let email = UserDefaults.standard.string(forKey: Main.Key.loggedInUserEmailKey),
               let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            setLeftAlignedTitle("Good morning, User!")
+            setLeftAlignedTitle(Main.setTitle.homePageTitle)
             return
         }
         
         let context = appDelegate.persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+        fetchRequest.predicate = NSPredicate(format: Main.loginAlert.emailFormat, email)
         
         do {
             let users = try context.fetch(fetchRequest)
             let name = users.first?.name ?? "User"
-            setLeftAlignedTitle("Good morning, \(name)!")
+            setLeftAlignedTitle("\(Main.homeAlert.userHomeTitle) \(name)!")
         } catch {
             print("Failed to fetch user for greeting: \(error.localizedDescription)")
-            setLeftAlignedTitle("Good morning, User!")
+            setLeftAlignedTitle(Main.setTitle.homePageTitle)
         }
     }
     
@@ -105,8 +105,8 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
                     // Handle case where products array is empty (e.g., failed to fetch or decode)
                     print("Could not fetch products or received an empty list.")
                     // You might want to show an alert to the user here.
-                    let alert = UIAlertController(title: "Error", message: "Failed to load products. Please try again.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    let alert = UIAlertController(title: Main.homeAlert.homeAlertTitle, message: Main.homeAlert.homeAlertMessage, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: Main.homeAlert.homeOkAction, style: .default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
                 self.tblHome.reloadData()

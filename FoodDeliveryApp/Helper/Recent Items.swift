@@ -47,7 +47,6 @@ class RecentItemsHelper {
     func getRecentItems() -> [ProductModel] {
         return recentItems
     }
-    
     /// Clears all stored recent items.
     func clear() {
         recentItems.removeAll()

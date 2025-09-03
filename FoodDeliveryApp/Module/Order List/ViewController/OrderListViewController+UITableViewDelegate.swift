@@ -25,17 +25,17 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
         let products = orders[indexPath.row]
         
         // Show product names
-        cell.lblProductName.text = products.map { $0.strProductName }.joined(separator: ", ")
+        cell.lblProductName.text = products.map { $0.strProductName }.joined(separator: Main.menu.separator)
         
         // Show total amount
         let total = products.reduce(0.0) { $0 + ($1.doubleProductPrice * Double($1.intProductQty ?? 1)) }
-        cell.lblTotal.text = "Total: $\(total)"
+        cell.lblTotal.text = "\(Main.menu.total)\(total)"
         
         // Product Image
-        cell.imgOrderedProduct.image = UIImage(named: products.first?.strProductImage ?? "placeholder")
+        cell.imgOrderedProduct.image = UIImage(named: products.first?.strProductImage ?? Main.Images.profileImage)
         
         // Order number
-        cell.lblOrderNumber.text = "Order #\(indexPath.row + 1)"
+        cell.lblOrderNumber.text = "\(Main.menu.order)\(indexPath.row + 1)"
         
         return cell
     }
