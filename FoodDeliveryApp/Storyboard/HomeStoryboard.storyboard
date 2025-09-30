@@ -75,6 +75,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="LYt-j8-2pp"/>
                     <connections>
+                        <outlet property="menuView" destination="mWv-3d-bJk" id="xG8-ei-WFw"/>
                         <outlet property="tblBackView" destination="SeF-M3-7Kp" id="TxY-Gm-fC0"/>
                         <outlet property="tblCategory" destination="Wdc-jR-OQr" id="o6V-OV-vZR"/>
                         <outlet property="txtSearchFood" destination="T0S-ZJ-4Ht" id="lMl-04-Tih"/>
@@ -150,6 +151,7 @@ meals and more!</string>
                     <navigationItem key="navigationItem" id="3Cb-wP-ikn"/>
                     <connections>
                         <outlet property="btnCheckOffer" destination="3w0-i0-HEb" id="eY7-qf-jpc"/>
+                        <outlet property="offersView" destination="nno-kW-9na" id="Y0d-yj-Slu"/>
                         <outlet property="tblOffers" destination="ip6-VG-91x" id="9tq-Oe-Pm5"/>
                     </connections>
                 </viewController>
@@ -268,6 +270,7 @@ meals and more!</string>
                     <navigationItem key="navigationItem" id="a5g-O1-F4I"/>
                     <connections>
                         <outlet property="btnCurrentLocation" destination="H4g-KI-kEv" id="CPB-e1-hsA"/>
+                        <outlet property="homeView" destination="raN-BF-A8Y" id="sRW-nI-Qcp"/>
                         <outlet property="lblCurrentLocation" destination="Pn2-7g-1LW" id="iw9-oF-0Jo"/>
                         <outlet property="tblHome" destination="2iP-y2-eMg" id="aDu-wg-Cvu"/>
                         <outlet property="txtSearch" destination="UcL-VY-n6g" id="I1G-r1-G4s"/>
@@ -471,10 +474,13 @@ meals and more!</string>
                     </view>
                     <navigationItem key="navigationItem" id="Cut-pt-9wq"/>
                     <connections>
+                        <outlet property="btnEditProfile" destination="qzx-BW-weI" id="iZm-dO-ou2"/>
                         <outlet property="btnSave" destination="Guk-T9-L6m" id="WAs-Tg-W5i"/>
                         <outlet property="btnSignOut" destination="3rt-AJ-NGK" id="SZA-SW-gJ3"/>
                         <outlet property="imgProfile" destination="A0t-R1-yD0" id="yYn-wb-9Mc"/>
                         <outlet property="lblUserName" destination="cr1-Gu-zRz" id="BYD-hw-877"/>
+                        <outlet property="profileView" destination="AUQ-JQ-ADY" id="Zjq-UL-VAo"/>
+                        <outlet property="profileView2" destination="gxs-qi-KSx" id="bEn-7t-Mkt"/>
                         <outlet property="txtAddress" destination="3AL-p8-rIX" id="JyL-xE-tyR"/>
                         <outlet property="txtEmail" destination="bKI-mo-ZeY" id="vrV-vk-Mqk"/>
                         <outlet property="txtMobileNo" destination="LrL-bq-N4Z" id="zyI-CY-jsy"/>
@@ -525,6 +531,7 @@ meals and more!</string>
                     </view>
                     <navigationItem key="navigationItem" id="eRO-sX-IuH"/>
                     <connections>
+                        <outlet property="moreView" destination="EPK-q7-BML" id="ozr-cu-Obv"/>
                         <outlet property="tblMenu" destination="hAi-qJ-zCg" id="RZ2-vO-aib"/>
                     </connections>
                 </viewController>

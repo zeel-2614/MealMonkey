@@ -18,6 +18,7 @@ class MyOrderTableViewCell: UITableViewCell {
     /// Called after the cell is loaded from the nib or storyboard.
     override func awakeFromNib() {
         super.awakeFromNib()
+        applyTheme()
         // Initialization code
     }
     
@@ -26,6 +27,20 @@ class MyOrderTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        // Labels
+        lblProductName.textColor = theme.labelTextColor
+        lblProductPrice.textColor = theme.labelTextColor
+        lblProductQty.textColor = theme.labelTextColor
+        
+        // Background
+        contentView.backgroundColor = theme.cardCellBackgroundColor
+        backgroundColor = .clear
+        
     }
     
 }

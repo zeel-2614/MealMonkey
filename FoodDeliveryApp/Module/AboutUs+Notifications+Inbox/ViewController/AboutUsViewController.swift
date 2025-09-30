@@ -12,6 +12,7 @@ class AboutUsViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        applyTheme()
         
         self.navigationController?.isNavigationBarHidden = false
         
@@ -42,6 +43,11 @@ class AboutUsViewController: UIViewController {
         if let user = CoreDataManager.shared.getOrCreateCurrentUser() {
             CartBadgeManager.shared.syncCartCount(for: user)
         }
+        reloadLocalizedData()
+        applyTheme()
+        
+        // Reload table with themed cells
+        tblMoreOpions.reloadData()
     }
     // MARK: - Actions
     @objc func backButtonTapped() {
@@ -53,5 +59,46 @@ class AboutUsViewController: UIViewController {
         if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.cartViewController) as? CartViewController {
             navigationController?.pushViewController(menuVC, animated: true)
         }
+    }
+    
+    func reloadLocalizedData() {
+        // Repopulate the array based on current objPageType
+        switch objPageType {
+        case .Notification:
+            arrCurrent = AboutModel.addNotificationData()
+        case .Inbox:
+            arrCurrent = AboutModel.addInboxData()
+        case .AboutUs:
+            arrCurrent = AboutModel.addAboutData()
+        default:
+            arrCurrent = []
+        }
+        
+        // Reload table view
+        tblMoreOpions.reloadData()
+        
+        // Reset navigation title with new localized strings
+        switch objPageType {
+        case .Notification:
+            setLeftAlignedTitleWithBack(Main.setTitle.notificationTitle, target: self, action: #selector(backButtonTapped))
+        case .Inbox:
+            setLeftAlignedTitleWithBack(Main.setTitle.inboxTitle, target: self, action: #selector(backButtonTapped))
+        case .AboutUs:
+            setLeftAlignedTitleWithBack(Main.setTitle.aboutUsTitle, target: self, action: #selector(backButtonTapped))
+        default:
+            break
+        }
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        // Background
+        view.backgroundColor = theme.backgroundColor
+        
+        // Navigation Bar
+        navigationController?.navigationBar.barTintColor = theme.navigationBarColor
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: theme.labelTextColor]
+        navigationController?.navigationBar.tintColor = theme.labelTextColor
     }
 }

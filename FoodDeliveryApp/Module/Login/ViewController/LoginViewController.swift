@@ -7,7 +7,12 @@ import CoreData
 class LoginViewController: UIViewController {
     
     // MARK: - IBOutlets
+    @IBOutlet weak var lblLoginTitle: UILabel!
+    @IBOutlet weak var loginView2: UIView!
+    @IBOutlet weak var lblOrLogin: UILabel!
+    @IBOutlet weak var loginView: UIView!
     @IBOutlet weak var txtEmail: UITextField!
+    @IBOutlet weak var lblLoginDetails: UILabel!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var btnLogin: UIButton!
     @IBOutlet weak var btnFacebook: UIButton!
@@ -25,16 +30,19 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationController?.isNavigationBarHidden = true
-        
+        applyTheme()
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .gray, textField: [txtEmail, txtPassword, btnLogin, btnGoogle, btnFacebook])
         
         setPadding(textfield: [txtEmail, txtPassword])
+        reloadLocalizedData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         // Keep navigation and tab bars hidden when the view appears
         self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = true
+        reloadLocalizedData()
+        applyTheme()
     }
     
     /// Validates user input for login and navigates to the main tab bar if valid.
@@ -135,5 +143,86 @@ class LoginViewController: UIViewController {
         if let vc = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.signUpViewController) as? SignUpViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    func reloadLocalizedData() {
+        // Assign localized text
+        txtEmail.placeholder = Main.loginAlert.emailTextField
+        txtPassword.placeholder = Main.loginAlert.passwordTextField
+        btnLogin.setTitle(Main.loginAlert.loginButton, for: .normal)
+        btnFacebook.setTitle(Main.loginAlert.facebookButton, for: .normal)
+        btnGoogle.setTitle(Main.loginAlert.googleButton, for: .normal)
+        btnForgotPassword.setTitle(Main.loginAlert.forgotPasswordButton, for: .normal)
+        
+        // Optionally, if you have a label for title/details
+        lblLoginTitle.text = Main.loginAlert.screenTitleLabel
+        lblLoginDetails.text = Main.loginAlert.loginDetailsLabel
+        lblOrLogin.text = Main.loginAlert.orLoginLabel
+        
+        // 1. Get the localized string
+        let localizedText = Main.loginAlert.signupButton
+        // Example: "Don't have an Account? Sign Up"
+
+        // 2. Create a mutable attributed string
+        let attributedText = NSMutableAttributedString(string: localizedText)
+
+        // 3. Define your colors
+        let grayColor = UIColor(hex: "#7C7D7E")   // for "Don't have an Account?"
+        let orangeColor = UIColor(hex: "#FC6011") // for "Sign Up"
+
+        // 4. Apply gray to the whole string first
+        attributedText.addAttributes([
+            .foregroundColor: grayColor,
+            .font: UIFont.systemFont(ofSize: 14, weight: .regular)
+        ], range: NSRange(location: 0, length: attributedText.length))
+
+        // 5. Apply orange only to "Sign Up"
+        if let range = localizedText.range(of: "Sign Up") {
+            let nsRange = NSRange(range, in: localizedText)
+            attributedText.addAttributes([
+                .foregroundColor: orangeColor,
+                .font: UIFont.systemFont(ofSize: 14, weight: .regular)
+            ], range: nsRange)
+        }
+
+        // 6. Set it on the button
+        btnSignup.setAttributedTitle(attributedText, for: .normal)
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+
+        // Background
+        view.backgroundColor = theme.backgroundColor
+        loginView2.backgroundColor = theme.backgroundColor
+        loginView.backgroundColor = theme.backgroundColor
+
+        // Labels
+        lblLoginTitle.textColor = theme.labelTextColor
+        lblOrLogin.textColor = theme.labelTextColor
+        lblLoginDetails.textColor = theme.labelTextColor
+
+        // TextFields
+        txtEmail.backgroundColor = theme.cardCellBackgroundColor
+        txtEmail.textColor = theme.labelTextColor
+        txtEmail.tintColor = theme.labelTextColor
+
+        txtPassword.backgroundColor = theme.cardCellBackgroundColor
+        txtPassword.textColor = theme.labelTextColor
+        txtPassword.tintColor = theme.labelTextColor
+
+        // Buttons
+        btnLogin.backgroundColor = theme.buttonColor
+        btnLogin.setTitleColor(theme.buttonTextColor, for: .normal)
+
+        btnFacebook.backgroundColor = theme.facebookButtonColor
+        btnFacebook.setTitleColor(.white, for: .normal) // Facebook text is usually white
+
+        btnGoogle.backgroundColor = theme.googleButtonColor
+        btnGoogle.setTitleColor(.white, for: .normal) // Google text is usually white
+
+        btnSignup.setTitleColor(theme.labelTextColor, for: .normal)
+        btnForgotPassword.setTitleColor(theme.labelTextColor, for: .normal)
+        btnEye.tintColor = theme.labelTextColor
     }
 }

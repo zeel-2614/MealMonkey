@@ -16,6 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let lang = LanguageManager.shared.currentLanguage
+        Bundle.setLanguage(lang.rawValue)
+        if let saved = UserDefaults.standard.string(forKey: "SelectedTheme"),
+           let savedTheme = AppTheme(rawValue: saved) {
+            ThemeManager.shared.applyTheme(savedTheme)
+        } else {
+            ThemeManager.shared.applyTheme(.light)  // default
+        }
         return true
     }
 

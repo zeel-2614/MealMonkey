@@ -16,6 +16,7 @@ extension DessertsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none // Disable default selection highlight
         // Configure the cell with product data
         cell.dessertConfigureCell(dessert: filteredProducts[indexPath.row])
+        cell.applyTheme()
         return cell
     }
     

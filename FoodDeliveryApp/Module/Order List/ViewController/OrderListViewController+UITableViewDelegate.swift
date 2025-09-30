@@ -36,6 +36,7 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
         
         // Order number
         cell.lblOrderNumber.text = "\(Main.menu.order)\(indexPath.row + 1)"
+        cell.applyTheme()
         
         return cell
     }

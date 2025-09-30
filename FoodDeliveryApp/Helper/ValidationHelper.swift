@@ -11,7 +11,7 @@ struct ValidationHelper {
     /// Validates email format
     static func isValidEmail(_ email: String) -> Bool {
         let emailRegex = Main.loginAlert.emailRegex
-        let emailTest = NSPredicate(format: Main.loginAlert.TestFormat, emailRegex)
+        let emailTest = NSPredicate(format: Main.loginAlert.testFormat, emailRegex)
         return emailTest.evaluate(with: email)
     }
     
@@ -23,7 +23,7 @@ struct ValidationHelper {
     /// - At least 1 special character
     static func isValidPassword(_ password: String) -> Bool {
         let passwordRegex = Main.loginAlert.passwordRegex
-        let passwordTest = NSPredicate(format: Main.loginAlert.TestFormat, passwordRegex)
+        let passwordTest = NSPredicate(format: Main.loginAlert.testFormat, passwordRegex)
         return passwordTest.evaluate(with: password)
     }
 }

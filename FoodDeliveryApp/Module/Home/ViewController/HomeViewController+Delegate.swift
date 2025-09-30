@@ -45,6 +45,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.lblCollectionViewTitle.isHidden = true
             cell.btnViewAll.isHidden = true
             cell.delegate = self
+            cell.applyTheme()
             cell.collectionViewHomeHeight.constant = 113 // Fixed height for horizontal category list
         case 1:
             // Popular section
@@ -54,6 +55,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.lblCollectionViewTitle.text = Main.setTitle.popularTitle
             cell.lblCollectionViewTitle.text = isSearching ? Main.setTitle.searchingTitle : Main.setTitle.popularTitle
             cell.delegate = self
+            cell.applyTheme()
             
             // Show products based on search or category selection
             if isSearching {
@@ -78,6 +80,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.lblCollectionViewTitle.text = isSearching ? Main.setTitle.searchingTitle : Main.setTitle.mostPopularTitle
             cell.lblCollectionViewTitle.text = Main.setTitle.mostPopularTitle // Ensures fixed title
             cell.collectionViewHomeHeight.constant = 185
+            cell.applyTheme()
             cell.delegate = self
             
             // Show products based on search or category selection
@@ -100,6 +103,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.lblCollectionViewTitle.text = Main.setTitle.recentItemsTitle
             cell.products = recentItems
             cell.delegate = self
+            cell.applyTheme()
             
             // Adjust height dynamically
             cell.collectionViewHomeHeight.constant = cell.collectionViewHome.collectionViewLayout.collectionViewContentSize.height
@@ -109,6 +113,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
         // Reload the collection view inside the cell
         cell.collectionViewHome.reloadData()
+        cell.applyTheme()
         
         // Update collection height after layout
         DispatchQueue.main.async {

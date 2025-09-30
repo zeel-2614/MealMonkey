@@ -28,13 +28,13 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Kar-VV-cBl">
                                 <rect key="frame" x="21" y="234.66666666666666" width="368" height="33.333333333333343"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minute by tuk tuk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rrm-Ud-Q0u">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minute by tuk tuk" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rrm-Ud-Q0u">
                                         <rect key="frame" x="0.0" y="0.0" width="368" height="14"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                         <color key="textColor" name="LabelPrimaryColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="34H-jz-49l">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="34H-jz-49l">
                                         <rect key="frame" x="0.0" y="19.000000000000028" width="368" height="14.333333333333336"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fPB-IY-nW3">
@@ -65,7 +65,7 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Western Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkM-Zk-hAw">
-                                                <rect key="frame" x="121.66666666666664" y="0.0" width="246.33333333333337" height="14.333333333333334"/>
+                                                <rect key="frame" x="111.66666666666666" y="0.0" width="256.33333333333337" height="14.333333333333334"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                                 <color key="textColor" name="LabelOffer"/>
                                                 <nil key="highlightedColor"/>
@@ -102,6 +102,7 @@
                 <outlet property="lblProductName" destination="rrm-Ud-Q0u" id="ko3-g3-BwV"/>
                 <outlet property="lblRattings" destination="p26-Ca-9df" id="x9I-OL-6NR"/>
                 <outlet property="lblTotalNumberRattings" destination="m4W-6u-KrU" id="jnQ-wA-FUK"/>
+                <outlet property="popularView" destination="0E3-lA-P3W" id="474-SV-iCp"/>
             </connections>
             <point key="canvasLocation" x="358.77862595419845" y="108.45070422535211"/>
         </collectionViewCell>

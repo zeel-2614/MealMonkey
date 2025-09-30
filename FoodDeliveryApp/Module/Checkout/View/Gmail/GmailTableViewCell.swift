@@ -19,7 +19,7 @@ class GmailTableViewCell: UITableViewCell {
     /// Used to apply initial styling and configuration.
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        applyTheme()
         // Apply border, corner radius, and styling to the Gmail view
         viewStyle.viewStyle(cornerRadius: 6, borderWidth: 1, borderColor: .labelPrimary, textField: [viewGmail])
         // Initialization code
@@ -33,5 +33,13 @@ class GmailTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        contentView.backgroundColor = theme.backgroundColor
+        viewGmail.backgroundColor = theme.cardCellBackgroundColor
+        viewGmail.layer.borderColor = theme.cardCellBorderColor.cgColor
+        btnSelect.tintColor = theme.buttonColor
     }
 }

@@ -60,6 +60,7 @@ class OrderListViewController: UIViewController {
         
         if isOrderEmpty {
             emptyAnimationView.play()
+            applyTheme()
         } else {
             emptyAnimationView.stop()
         }
@@ -75,6 +76,15 @@ class OrderListViewController: UIViewController {
         guard let user = CoreDataManager.shared.getOrCreateCurrentUser() else { return }
         orders = CoreDataManager.shared.fetchOrders(for: user)
         updateEmptyOrderUI()
+        applyTheme()
         tblOrderList.reloadData()
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        view.backgroundColor = theme.backgroundColor
+        tblOrderList.backgroundColor = theme.backgroundColor
+        emptyAnimationView.backgroundColor = theme.backgroundColor
+        emptyLabel.textColor = theme.labelTextColor
     }
 }

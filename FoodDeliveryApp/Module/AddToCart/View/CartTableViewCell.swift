@@ -18,6 +18,7 @@ class CartTableViewCell: UITableViewCell {
     /// Called after the cell is loaded from the nib or storyboard.
     override func awakeFromNib() {
         super.awakeFromNib()
+        applyThemes()
     }
     
     /// Sets the selected state for the cell.
@@ -46,5 +47,16 @@ class CartTableViewCell: UITableViewCell {
         lblType.text = cartItem.type ?? ""
         lblCategory.text = cartItem.category ?? ""
         lblQty.text = "\(Main.cartAlertMessage.quantity) \(cartItem.quantity)"
+    }
+    
+    func applyThemes() {
+        // Apply theme to cell
+        let theme = ThemeManager.shared.currentTheme
+        backgroundColor = theme.backgroundColor
+        lblProductTitle.textColor = theme.foodTitleColor
+        lblType.textColor = theme.labelTextColor
+        lblPrice.textColor = theme.labelTextColor
+        lblQty.textColor = theme.labelTextColor
+        lblCategory.textColor = theme.labelTextColor
     }
 }

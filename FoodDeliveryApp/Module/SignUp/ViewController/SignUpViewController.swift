@@ -7,8 +7,13 @@ class SignUpViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var txtName: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
+    @IBOutlet weak var lblSignUpTitle: UILabel!
     @IBOutlet weak var txtMobileNo: UITextField!
+    @IBOutlet weak var signUpView: UIView!
+    @IBOutlet weak var lblSignUpDetail: UILabel!
+    @IBOutlet weak var signupView: UIView!
     @IBOutlet weak var txtAddress: UITextField!
+    @IBOutlet weak var btnBackToLogin: UIButton!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtConfirmPassword: UITextField!
     @IBOutlet weak var btnSignUp: UIButton!
@@ -23,13 +28,20 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationController?.isNavigationBarHidden = false
-        
+        applyTheme()
         setLeftAlignedTitleWithBack(Main.setTitle.signUpTitle, target: self, action: #selector(signUpBackBtnTapped))
         
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .systemGray, textField: [txtName, txtEmail, txtMobileNo, txtAddress, txtPassword, txtConfirmPassword, btnSignUp])
         setPadding(textfield: [txtName, txtEmail, txtMobileNo, txtAddress, txtPassword, txtConfirmPassword])
+        // Assign placeholders and button titles
+        reloadLocalizedData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadLocalizedData()
+        applyTheme()
+    }
     // MARK: - Form Validation
     func validateSignUpForm() -> Bool {
         let name = txtName.text ?? ""
@@ -38,7 +50,7 @@ class SignUpViewController: UIViewController {
         let address = txtAddress.text ?? ""
         let password = txtPassword.text ?? ""
         let confirmPassword = txtConfirmPassword.text ?? ""
-
+        
         if name.isEmpty || email.isEmpty || mobile.isEmpty || address.isEmpty || password.isEmpty || confirmPassword.isEmpty {
             UIAlertController.showAlert(title: Main.signUpAlert.missingInfoAlertTitle, message: Main.signUpAlert.missingInfoAlertMessage, viewController: self)
             return false
@@ -94,14 +106,56 @@ class SignUpViewController: UIViewController {
     // MARK: - Sign Up Button Action
     @IBAction func btnSignUpClick(_ sender: Any) {
         let name = txtName.text ?? ""
-            let email = txtEmail.text ?? ""
-            let mobile = txtMobileNo.text ?? ""
-            let address = txtAddress.text ?? ""
-            let password = txtPassword.text ?? ""
-            
-            if validateSignUpForm() {
-                saveUserToCoreData(name: name, email: email, mobile: mobile, address: address, password: password)
-            }
+        let email = txtEmail.text ?? ""
+        let mobile = txtMobileNo.text ?? ""
+        let address = txtAddress.text ?? ""
+        let password = txtPassword.text ?? ""
+        
+        if validateSignUpForm() {
+            saveUserToCoreData(name: name, email: email, mobile: mobile, address: address, password: password)
+        }
+    }
+    
+    func reloadLocalizedData() {
+        txtName.placeholder = Main.signUpAlert.nameTextField
+        txtEmail.placeholder = Main.signUpAlert.emailTextField
+        txtMobileNo.placeholder = Main.signUpAlert.mobileTextField
+        txtAddress.placeholder = Main.signUpAlert.addressTextField
+        txtPassword.placeholder = Main.signUpAlert.passwordTextField
+        txtConfirmPassword.placeholder = Main.signUpAlert.confirmPasswordTextField
+        btnSignUp.setTitle(Main.signUpAlert.signUpButton, for: .normal)
+        lblSignUpTitle.text = Main.signUpAlert.screenTitleLabel
+        lblSignUpDetail.text = Main.signUpAlert.signUpDetailLabel
+        setLeftAlignedTitleWithBack(Main.setTitle.signUpTitle, target: self, action: #selector(signUpBackBtnTapped))
+        
+        // 1. Get the localized string
+        let localizedText = Main.signUpAlert.loginButton
+        // Example: "Already have an Account? Login"
+
+        // 2. Create a mutable attributed string
+        let attributedText = NSMutableAttributedString(string: localizedText)
+
+        // 3. Define your colors
+        let grayColor = UIColor(hex: "#7C7D7E")   // for "Already have an Account?"
+        let orangeColor = UIColor(hex: "#FC6011") // for "Login"
+
+        // 4. Apply gray to the whole string first
+        attributedText.addAttributes([
+            .foregroundColor: grayColor,
+            .font: UIFont.systemFont(ofSize: 14, weight: .regular)
+        ], range: NSRange(location: 0, length: attributedText.length))
+
+        // 5. Apply orange only to "Login"
+        if let range = localizedText.range(of: "Login") {
+            let nsRange = NSRange(range, in: localizedText)
+            attributedText.addAttributes([
+                .foregroundColor: orangeColor,
+                .font: UIFont.systemFont(ofSize: 14, weight: .regular)
+            ], range: nsRange)
+        }
+
+        // 6. Set it on the button
+        btnBackToLogin.setAttributedTitle(attributedText, for: .normal)
     }
 }
 
@@ -118,7 +172,7 @@ extension SignUpViewController {
         do {
             let existingUsers = try context.fetch(fetchRequest)
             if !existingUsers.isEmpty {
-                UIAlertController.showAlert(title: Main.signUpAlert.existedEmailALertTitle, message: Main.signUpAlert.existedEmailALertMessage, viewController: self)
+                UIAlertController.showAlert(title: Main.signUpAlert.existedEmailAlertTitle, message: Main.signUpAlert.existedEmailAlertMessage, viewController: self)
                 return
             }
             
@@ -142,5 +196,27 @@ extension SignUpViewController {
         } catch {
             print("Failed to save user: \(error.localizedDescription)")
         }
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        view.backgroundColor = theme.backgroundColor
+        signupView.backgroundColor = theme.backgroundColor
+        signUpView.backgroundColor = theme.backgroundColor
+        lblSignUpTitle.textColor = theme.labelTextColor
+        lblSignUpDetail.textColor = theme.labelTextColor
+        
+        [txtName, txtEmail, txtMobileNo, txtAddress, txtPassword, txtConfirmPassword].forEach {
+            $0?.backgroundColor = theme.cardCellBackgroundColor    // use an existing color
+            $0?.textColor = theme.labelTextColor
+            $0?.tintColor = theme.labelTextColor       // use labelTextColor for cursor
+        }
+        
+        btnSignUp.backgroundColor = theme.buttonColor
+        btnSignUp.tintColor = theme.labelTextColor
+        btnBackToLogin.tintColor = theme.labelTextColor
+        btnEye.tintColor = theme.labelTextColor
+        btnConfirmEye.tintColor = theme.labelTextColor
     }
 }

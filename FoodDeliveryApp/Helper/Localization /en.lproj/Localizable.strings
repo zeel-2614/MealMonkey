@@ -1,0 +1,355 @@
+/* 
+  Localizable.strings
+  FoodDeliveryApp
+
+  Created by Zeel Shah on 06/09/25.
+  
+*/
+
+"more_screen_title" = "More";
+"more_screen_payment_detail_title" = "Payment Details";
+"more_screen_wishlist_title" = "Wishlist";
+"more_screen_my_order_title" = "My Orders";
+"more_screen_inbox_title" = "Inbox";
+"more_screen_about_us_title" = "About Us";
+"more_screen_notifications_title" = "Notifications";
+"more_screen_theme_title" = "Theme";
+"more_screen_language_title" = "Language";
+
+"offers_screen_title" = "Latest Offers";
+"offers_screen_offers_cafe_name_1" = "Cafe de Noires";
+"offers_screen_offers_cafe_name_2" = "Isso";
+"offers_screen_offers_cafe_name_3" = "Cafe Beans";
+"offers_screen_offers_cafe_type" = "Cafe";
+"offers_screen_offers_food_type" = "Western Food";
+"offers_screen_offers_label" = "Find discount, Offers special meals and more!";
+"offers_screen_check_offers_button" = "Check Offers";
+
+"aboutus_screen_inside_title" = "About Us";
+"aboutus_screen_inside_first_text" = "Our mission is to deliver a seamless and intuitive shopping experience that prioritizes user satisfaction. We aim to create a platform where browsing, purchasing, and managing products feels effortless, thanks to our simple user interface and reliable service.";
+"aboutus_screen_inside_second_text" = "We are dedicated to maintaining high standards of performance, transparency, and trust. Our team continuously works to enhance app functionality, ensure data privacy, and provide responsive customer support, making your shopping journey smooth and secure.";
+"aboutus_screen_inside_third_text" = "Your feedback matters. If you have any questions, suggestions, or encounter any issues, we’re here to help. Reach out through our support page or email us directly. Together, we strive to build a better and more inclusive experience for everyone.";
+"aboutus_screen_inside_fourth_text" = "We believe that technology should serve people. That’s why we constantly refine our platform based on real user behavior and needs, aiming to make every interaction faster, simpler, and more enjoyable.";
+"aboutus_screen_inside_fifth_text" = "Security is our priority. We use industry-standard protocols to safeguard your personal information and provide a safe and secure shopping environment at all times.";
+"aboutus_screen_inside_sixth_text" = "We value accessibility and inclusiveness. Our platform is designed to be usable by people of all backgrounds, devices, and technical abilities, ensuring that everyone can benefit from our services.";
+"aboutus_screen_inside_seventh_text" = "Sustainability matters to us. We support eco-friendly business practices and work with partners who share our values to reduce our environmental impact.";
+
+"notification_screen_inside_title" = "Notifications";
+"notification_screen_inside_orderPlacedTitle" = "Order placed successfully";
+"notification_screen_inside_orderPlacedSubTitle" = "Just now";
+
+"notification_screen_inside_paymentConfirmedTitle" = "Your payment has been confirmed";
+"notification_screen_inside_paymentConfirmedSubTitle" = "5m ago";
+
+"notification_screen_inside_foodPreparedTitle" = "Your food is being prepared";
+"notification_screen_inside_foodPreparedSubTitle" = "10m ago";
+
+"notification_screen_inside_agentAssignedTitle" = "Delivery agent assigned";
+"notification_screen_inside_agentAssignedSubTitle" = "30m ago";
+
+"notification_screen_inside_orderOnWayTitle" = "Your order is on the way";
+"notification_screen_inside_orderOnWaySubTitle" = "1h ago";
+
+"notification_screen_inside_discountTitle" = "Special discount available!";
+"notification_screen_inside_discountSubTitle" = "2h ago";
+
+"notification_screen_inside_appUpdateTitle" = "Download our new app update";
+"notification_screen_inside_appUpdateSubTitle" = "3h ago";
+
+"notification_screen_inside_referFriendTitle" = "Refer a friend and earn";
+"notification_screen_inside_referFriendSubTitle" = "5h ago";
+
+"notification_screen_inside_limitedDealTitle" = "Limited-time deal ending soon";
+"notification_screen_inside_limitedDealSubTitle" = "12h ago";
+
+"notification_screen_inside_deliveryDoneTitle" = "Delivery completed";
+"notification_screen_inside_deliveryDoneSubTitle" = "1d ago";
+
+"notification_screen_inside_rateMealTitle" = "Rate your last meal";
+"notification_screen_inside_rateMealSubTitle" = "2d ago";
+
+"notification_screen_inside_weekendOfferTitle" = "Weekend offer just for you";
+"notification_screen_inside_weekendOfferSubTitle" = "3d ago";
+
+"notification_screen_inside_freeDeliveryTitle" = "Free delivery on orders above ₹299";
+"notification_screen_inside_freeDeliverySubTitle" = "5d ago";
+
+"notification_screen_inside_thanksTitle" = "Thanks for being with us!";
+"notification_screen_inside_thanksSubTitle" = "6d ago";
+
+"notification_screen_inside_newRestaurantsTitle" = "New restaurants added near you";
+"notification_screen_inside_newRestaurantsSubTitle" = "1w ago";
+
+"inbox_screen_inside_title" = "Inbox";
+
+"inbox_screen_inside_promotionsTitle" = "MealMonkey Promotions";
+"inbox_screen_inside_promotionsSubTitle" = "6th July";
+"inbox_screen_inside_promotionsDescription" = "Get 20% off on your next meal!";
+
+"inbox_screen_inside_orderUpdateTitle" = "Order Update";
+"inbox_screen_inside_orderUpdateSubTitle" = "6th July";
+"inbox_screen_inside_orderUpdateDescription" = "Your order is being prepared by the restaurant.";
+
+"inbox_screen_inside_deliveryRemindersTitle" = "Delivery Reminder";
+"inbox_screen_inside_deliveryRemindersSubTitle" = "6th July";
+"inbox_screen_inside_deliveryRemindersDescription" = "Your delivery agent is on the way.";
+
+"inbox_screen_inside_welcomeTitle" = "Welcome to MealMonkey";
+"inbox_screen_inside_welcomeSubTitle" = "6th July";
+"inbox_screen_inside_welcomeDescription" = "Thanks for joining us! Start exploring meals.";
+
+"inbox_screen_inside_experienceTitle" = "Rate Your Experience";
+"inbox_screen_inside_experienceSubTitle" = "6th July";
+"inbox_screen_inside_experienceDescription" = "How was your recent meal order?";
+
+"inbox_screen_inside_flashSaleTitle" = "Flash Sale";
+"inbox_screen_inside_flashSaleSubTitle" = "6th July";
+"inbox_screen_inside_flashSaleDescription" = "Enjoy 30% off on all pasta orders today only.";
+
+"inbox_screen_inside_newRestaurantsTitle" = "New Restaurants";
+"inbox_screen_inside_newRestaurantsSubTitle" = "6th July";
+"inbox_screen_inside_newRestaurantsDescription" = "Discover trending restaurants in your area.";
+
+"inbox_screen_inside_referEarnTitle" = "Refer & Earn";
+"inbox_screen_inside_referEarnSubTitle" = "6th July";
+"inbox_screen_inside_referEarnDescription" = "Invite friends and earn ₹100 credits!";
+
+"inbox_screen_inside_weekendSpecialTitle" = "Weekend Special";
+"inbox_screen_inside_weekendSpecialSubTitle" = "6th July";
+"inbox_screen_inside_weekendSpecialDescription" = "Free dessert on orders above ₹499.";
+
+"inbox_screen_inside_tipsTitle" = "MonkeyMeal Tips";
+"inbox_screen_inside_tipsSubTitle" = "6th July";
+"inbox_screen_inside_tipsDescription" = "Customize your orders with special instructions.";
+
+"inbox_screen_inside_orderCancelTitle" = "Order Cancelled";
+"inbox_screen_inside_orderCancelSubTitle" = "6th July";
+"inbox_screen_inside_orderCancelDescription" = "Your order has been cancelled as requested.";
+
+"inbox_screen_inside_loyaltyProgramTitle" = "Loyalty Program";
+"inbox_screen_inside_loyaltyProgramSubTitle" = "6th July";
+"inbox_screen_inside_loyaltyProgramDescription" = "Collect Monkey Points with every purchase.";
+
+"inbox_screen_inside_securityUpdateTitle" = "Security Update";
+"inbox_screen_inside_securityUpdateSubTitle" = "6th July";
+"inbox_screen_inside_securityUpdateDescription" = "Your password was recently changed.";
+
+"inbox_screen_inside_accountVerifiedTitle" = "Account Verified";
+"inbox_screen_inside_accountVerifiedSubTitle" = "6th July";
+"inbox_screen_inside_accountVerifiedDescription" = "Your account has been verified successfully.";
+
+"inbox_screen_inside_limitedDealTitle" = "Limited Time Deal";
+"inbox_screen_inside_limitedDealSubTitle" = "6th July";
+"inbox_screen_inside_limitedDealDescription" = "Flat ₹50 off on biryani orders today.";
+
+"menu_screen_title" = "Menu";
+"menu_screen_food_title" = "Food";
+"menu_screen_beverages_title" = "Bevarages";
+"menu_screen_desserts_title" = "Desserts";
+"menu_screen_items" = "Items";
+
+"payment_details_screen_inside_title" = "Payment Details";
+"payment_details_screen_inside_label_title" = "Customize your payment method";
+"payment_detail_screen_inside_btnAddCard" = "Add another Credit/Debit Card";
+"payment_detail_screen_inside_view_label" = "Add Credit/Debit Card";
+"payment_detail_screen_inside_view_cardnumber_textfield" = "Card Number";
+"payment_detail_screen_inside_view_month_textfield" = "Month";
+"payment_detail_screen_inside_view_year_textfield" = "Year";
+"payment_detail_screen_inside_view_expiry_label" = "Expiry";
+"payment_detail_screen_inside_view_securityCode_label" = "Security Code";
+"payment_detail_screen_inside_view_firstName_label" = "First Name";
+"payment_detail_screen_inside_view_lastName_label" = "Last Name";
+"payment_detail_screen_inside_view_removeCard_label" = "You can remove this card at anytime";
+"payment_detail_screen_inside_view_btnAddCard" = "Add Card";
+
+"orderlist_screen_title" = "Order List";
+"wishlist_screen_title" = "Wishlist";
+"cart_screen_title" = "Cart";
+"cart_screen_place_order_button" = "Place Order";
+
+"homepage_screen_title" = "Good morning User!";
+"homepage_screen_category_all_title" = "All";
+"homepage_screen_category_punjabi_title" = "Punjabi";
+"homepage_screen_category_chinese_title" = "Chinese";
+"homepage_screen_category_gujarati_title" = "Gujarati";
+"homepage_screen_category_southIndian_title" = "South Indian";
+"homepage_screen_category_westernFood_title" = "Western Food";
+"homepage_screen_popular_food_title" = "Popular";
+"homepage_screen_view_all_button" = "View All";
+"homepage_screen_most_popular_food_title" = "Most Popular";
+"homepage_screen_recent_items_title" = "Recent Items";
+"homepage_screen_search_food_textfield" = "Search food";
+
+"edit_profile_screen_title" = "Profile";
+"edit_profile_screen_profile_label" = "Edit Profile";
+"edit_profile_screen_hello_label" = "Hello there, User!";
+"edit_profile_screen_sign_out_button" = "Sign out";
+"edit_profile_screen_name_textfield" = "Name";
+"edit_profile_screen_email_textfield" = "Email";
+"edit_profile_screen_mobile_no_textfield" = "Mobile No";
+"edit_profile_screen_address_textfield" = "Address";
+"edit_profile_screen_save_button" = "Save";
+
+"login_page_screen_title_label" = "Login";
+"login_page_screen_login_details_label" = "Add your details to login";
+"login_page_screen_email_login_textfield" = "Email";
+"login_page_screen_password_login_textfield" = "Password";
+"login_page_screen_login_button" = "Login";
+"login_page_screen_forgot_password_button" = "Forgot your Password";
+"login_page_screen_or_login_label" = "or Login With";
+"login_page_screen_facebook_button" = "Login with Facebook";
+"login_page_screen_google_button" = "Login with Google";
+"login_page_screen_signup_button" = "Don't have an Account? Sign Up";
+
+"signup_page_screen_title" = "Sign Up";
+"signup_page_screen_signup_detail_label" = "Add your details to sign up";
+"signup_page_screen_name_textfield" = "Name";
+"signup_page_screen_email_textfield" = "Email";
+"signup_page_screen_mobile_no_textfield" = "Mobile No";
+"signup_page_screen_address_textfield" = "Address";
+"signup_page_screen_password_textfield" = "Password";
+"signup_page_screen_confirm_password_textfield" = "Confirm Password";
+"signup_page_screen_signup_button" = "Sign Up";
+"signup_page_screen_login_button" = "Already have an Account? Login";
+
+"forget_password_screen_title" = "Forgot Password";
+"forgot_password_screen_label" = "Please enter your email to receive a link to create a new password via email";
+"forgot_password_screen_email_textfield" = "Email";
+"forgot_password_screen_send_button" = "Send";
+
+"otp_screen_title" = "OTP";
+"otp_screen_label_title" = "We have sent an OTP to your Mobile";
+"otp_screen_label_2_title" = "Please check your mobile number 071*****12 continue to reset your password";
+"otp_screen_next_button" = "Next";
+"otp_screen_click_here_button" = "Didn't Receive? Click Here";
+
+"new_password_screen_title" = "New Password";
+"new_password_screen_label" = "Please enter your email to receive a link to  create a new password via email ";
+"new_password_screen_password_textfield" = "New Password";
+"new_password_screen_confirm_password_textfield" = "Confirm Password";
+"new_password_screen_next_button" = "Next";
+
+"next_page_screen_title_1_text" = "Find Food You Love";
+"next_page_screen_sub_title_1_text" = "Discover the best foods from over 1,000 restaurants and fast delivery to your doorstep";
+"next_page_screen_title_2_text" = "Fast Delivery";
+"next_page_screen_sub_title_2_text" = "Fast food delivery to your home, office wherever you are";
+"next_page_screen_title_3_text" = "Live Tracking";
+"next_page_screen_sub_title_3_text" = "Real time tracking of your food on the app once you placed the order";
+"next_page_screen_next_button_text" = "Next";
+"next_page_screen_done_button_text" = "Done";
+
+"my_order_screen_title" = "My Order";
+"my_order_screen_restaurant_name_label" = "Meal Monkey";
+"my_order_screen_rating_label" = "(124 ratings)";
+"my_order_screen_address_label" = "No 03 4th Lane, Newyork";
+"my_order_screen_delivery_instruction_label" = "Delivery Instructions";
+"my_order_screen_sub_total_label" = "Sub Total";
+"my_order_screen_delivery_cost_label" = "Delivery Cost";
+"my_order_screen_total_label" = "Total";
+"my_order_screen_checkout_button" = "Checkout";
+"my_order_screen_add_notes_button" = "Add Notes";
+
+"checkout_page_screen_title" = "Checkout";
+"checkout_page_screen_delivery_address_label" = "Delivery Address";
+"checkout_page_screen_change_button" = "Change";
+"checkout_page_screen_payment_method_label" = "Payment Method";
+"checkout_page_screen_add_card_button" = "Add Card";
+"checkout_page_screen_cash_on_delivery_label" = "Cash on delivery";
+"checkout_page_screen_sub_total_label" = "Sub Total";
+"checkout_page_screen_delivery_cost_label" = "Delivery Cost";
+"checkout_page_screen_discount_label" = "Discount";
+"checkout_page_screen_total_label" = "Total";
+"checkout_page_screen_send_order_button" = "Send Order";
+"checkout_page_screen_card_number_textfield" = "Card Number";
+"checkout_page_screen_expiry_label" = "Expiry";
+"checkout_page_screen_month_textfield" = "Month";
+"checkout_page_screen_year_textfield" = "Year";
+"checkout_page_screen_security_code_textfield" = "Security Code";
+"checkout_page_screen_first_name_textfield" = "First Name";
+"checkout_page_screen_last_name_textfield" = "Last Name";
+"checkout_page_screen_remove_card_label" = "You can remove this card at anytime";
+"checkout_page_screen_add_card_label" = "Add Credit/Debit Card";
+"checkout_page_screen_thank_you_title" = "Thank You";
+"checkout_page_screen_thank_you_label" = "for your order";
+"checkout_page_screen_thank_you_label_2" = "Your Order is now being processed. We will let you know once the order is picked from the outlet. Check the status of your Order";
+"checkout_page_screen_track_order_button" = "Track my order";
+"checkout_page_screen_back_to_home_button" = "Back to home";
+
+"change_address_screen_title" = "Change Address";
+"change_address_screen_search_address_textfield" = "Search Address";
+"change_address_screen_alert_title" = "Location Permission Needed";
+"change_address_screen_alert_message" = "Please enable location access in Settings to use this feature.";
+"change_address_screen_alerst_action" = "Cancel";
+"change_address_screen_alert_address_title_2" = "Open Settings";
+"change_address_screen_alert_full_address" = "Unknown Location";
+"change_address_screen_identifier" = "Custom Pin";
+"change_address_screen_address_title_3" = "Loading address...";
+
+"cart_screen_alert_title" = "Order Placed";
+"cart_screen_alert_message" = "Your order has been placed successfully!";
+"cart_screen_alert_action" = "OK";
+"cart_screen_alert_title_2" = "Cart is Empty!";
+"cart_screen_alert_message_2" = "Please add items to your cart before placing an order.";
+"cart_screen_alert_product_added_title" = "Success";
+"cart_screen_alert_product_added_message" = "Product added to cart successfully.";
+
+"checkout_screen_card_number_alert" = "Card number must be exactly 16 digits.";
+"checkout_screen_expiry_month_alert" = "Expiry month must be between 01 and 12.";
+"checkout_screen_expiry_year_alert" = "Expiry year must be 2 digits";
+"checkout_screen_security_code_alert" = "Security code must be 3 digits.";
+"checkout_screen_expiry_month_year_alert" = "Card expiry date cannot be in the past.";
+"checkout_screen_card_alert_title" = "Confirm Card Details";
+"checkout_screen_first_name_alert" = "Please enter your first name.";
+"checkout_screen_last_name_alert" = "Please enter your last name";
+"checkout_screen_card_alert_message" = "Do you want to save this card?";
+"checkout_screen_card_save_action" = "Save";
+"checkout_screen_card_cancel_action" = "Cancel";
+"checkout_screen_card_alert_title_2" = "Invalid Input";
+"checkout_screen_card_ok_action" = "OK";
+
+"forget_password_email_alert_title" = "Email Missing";
+"forget_password_email_alert_message" = "Please enter your Email.";
+"forget_password_email_alert_title_2" = "Invalid Email";
+"forget_password_email_alert_message_2" = "Please enter a valid Email";
+"forget_password_success_alert" = "Success";
+"forget_password_success_message" = "OTP Sent Successfully";
+"forget_password_success_ok_action" = "OK";
+
+"homepage_screen_alert_title" = "Error";
+"homepage_screen_alert_message" = "Failed to load products. Please try again.";
+"homepage_screen_home_ok_action" = "OK";
+"homepage_screen_user_home_title" = "Good morning, ";
+
+"login_page_screen_error_title" = "Error";
+"login_page_screen_email_error_message" = "Please enter your email address.";
+"login_page_screen_password_error_message" = "Please enter your password.";
+"login_page_screen_valid_email_alert_title" = "Invalid Email";
+"login_page_screen_valid_email_message" = "Please enter a valid email address";
+"login_page_screen_valid_password_alert_title" = "Invalid Password";
+"login_page_screen_valid_password_message" = "Password must include uppercase, lowercase, number and special character.";
+"login_page_screen_login_error_title" = "Login Failed";
+"login_page_screen_login_error_message" = "User not registered or invalid email or password.";
+
+"new_password_page_screen_new_password_error_message" = "Please enter your new password";
+"new_password_page_screen_new_password_alert_title" = "Invalid Password";
+"new_password_page_screen_new_password_message" = "Password must include uppercase, lowercase, number and special character.";
+"new_password_page_screen_confirm_password_message" = "Please confirm your new password.";
+"new_password_page_screen_wrong_password_message" = "Passwords do not match.";
+
+"profile_page_invalid_email_alert_title" = "Invalid Email";
+"profile_page_invalid_email_alert_message" = "Please enter a valid email address.";
+"profile_page_email_exist_alert_title" = "Email Exists";
+"profile_page_email_exist_alert_message" = "This email address is already registered with another account";
+"profile_page_no_field_changed_alert" = "Info";
+"profile_page_no_field_changes_message" = "No changes detected.";
+"profile_page_success_alert_title" = "Success";
+"profile_page_success_alert_message" = "Profile updated successfully.";
+"profile_page_otp_success_message" = "OTP sent successfully";
+
+"signup_page_screen_missing_info_alert_title" = "Missing Info";
+"signup_page_screen_missing_info_alert_message" = "Please enter all fields";
+"signup_page_screen_invalid_confirm_password" = "Passwords do not match.";
+"signup_page_screen_invalid_confirm_password_message" = "The password and confirm password must be the same.";
+"signup_page_screen_existed_email_alert_title" = "Error";
+"signup_page_screen_existed_email_alert_message" = "Email already registered. Please login.";
+"signup_page_screen_password_alert_message" = "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.";

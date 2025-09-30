@@ -54,6 +54,7 @@
             </constraints>
             <size key="customSize" width="247" height="207"/>
             <connections>
+                <outlet property="categoryCollectionView" destination="0lV-E6-QYr" id="dsA-ML-EGF"/>
                 <outlet property="imgCategory" destination="fpT-NU-pux" id="YBN-um-v2e"/>
                 <outlet property="lblCategory" destination="GTY-9G-KAi" id="3F3-LF-mAu"/>
             </connections>

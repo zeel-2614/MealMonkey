@@ -5,6 +5,7 @@ import Lottie
 /// Displays the menu screen with a list of food categories and a search bar.
 class MenuViewController: UIViewController {
     // MARK: - Outlets
+    @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var txtSearchFood: UITextField!
     @IBOutlet weak var tblCategory: UITableView!
     @IBOutlet weak var tblBackView: UIView!
@@ -30,12 +31,15 @@ class MenuViewController: UIViewController {
         tblCategory.backgroundColor = .clear
         tblCategory.register(UINib(nibName: Main.CellIdentifiers.menuTableViewCell, bundle: nil), forCellReuseIdentifier: Main.CellIdentifiers.menuTableViewCell)
         setAnimation()
+        applyTheme()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         if let user = CoreDataManager.shared.getOrCreateCurrentUser() {
             CartBadgeManager.shared.syncCartCount(for: user)
         }
+        reloadLocalizedData()
+        applyTheme()
     }
     // MARK: - Actions
     /// Handles cart button tap event
@@ -79,5 +83,36 @@ class MenuViewController: UIViewController {
         }
         viewStyle(cornerRadius: txtSearchFood.frame.size.height/2 , borderWidth: 0, borderColor: .systemGray, textField: [txtSearchFood])
         setPadding(textfield: [txtSearchFood])
+    }
+    
+    func reloadLocalizedData() {
+        // 1. Repopulate your categories using localized strings
+        arrCategory = ClassCategory.addCategory()
+        arrFilterCategory = arrCategory
+        
+        // 2. Reload table view
+        tblCategory.reloadData()
+        
+        // 3. Update navigation title and other UI if needed
+        setLeftAlignedTitle(Main.setTitle.menuTitle)
+        
+        // 4. Reapply empty state animation if necessary
+        setAnimation()
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        // Backgrounds
+        view.backgroundColor = theme.backgroundColor
+        tblBackView.backgroundColor = theme.buttonColor
+        tblCategory.backgroundColor = .clear
+        menuView.backgroundColor = theme.backgroundColor
+        
+        // TextField
+        txtSearchFood.backgroundColor = theme.cardCellBackgroundColor
+        txtSearchFood.textColor = theme.labelTextColor
+        txtSearchFood.tintColor = theme.labelTextColor
+        viewStyle(cornerRadius: txtSearchFood.frame.size.height/2, borderWidth: 0, borderColor: .systemGray, textField: [txtSearchFood])
     }
 }

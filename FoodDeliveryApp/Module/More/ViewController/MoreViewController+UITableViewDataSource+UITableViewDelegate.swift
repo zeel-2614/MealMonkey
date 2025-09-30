@@ -47,8 +47,82 @@ extension MoreViewController: UITableViewDelegate {
             if let plvc = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.wishListViewController) as? WishlistViewController {
                 self.navigationController?.pushViewController(plvc, animated: true)
             }
+            
         default:
             break
+        }
+        
+        let item = arrMore[indexPath.row]
+        if item.intTag == 6 {  // Language cell
+            showLanguagePicker()
+        }
+        
+        let themesitem = arrMore[indexPath.row]
+        if themesitem.intTag == 7 {  // Language cell
+            showThemePicker()
+        }
+        
+        func showLanguagePicker() {
+            let alert = UIAlertController(title: "Select Language", message: "\n\n\n\n\n\n", preferredStyle: .alert)
+            
+            let picker = UIPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
+            picker.tag = 1  // Theme picker
+            picker.dataSource = self
+            picker.delegate = self
+            
+            let current = LanguageManager.shared.currentLanguage
+            if let index = LanguageManager.Language.allCases.firstIndex(of: current) {
+                picker.selectRow(index, inComponent: 0, animated: false)
+            }
+            
+            alert.view.addSubview(picker)
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                let selectedIndex = picker.selectedRow(inComponent: 0)
+                let selectedLang = LanguageManager.Language.allCases[selectedIndex]
+                LanguageManager.shared.setLanguage(selectedLang)
+                LanguageManager.shared.reloadAppInterface()
+            }))
+            
+            present(alert, animated: true, completion: nil)
+        }
+        
+        func showThemePicker() {
+            let alert = UIAlertController(title: "Select Theme", message: "\n\n\n\n\n\n", preferredStyle: .alert)
+            
+            let picker = UIPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
+            picker.tag = 2  // Theme picker
+            picker.dataSource = self
+            picker.delegate = self
+
+            // Preselect current theme
+            if let currentIndex = AppTheme.allCases.firstIndex(of: ThemeManager.shared.currentThemeEnum) {
+                picker.selectRow(currentIndex, inComponent: 0, animated: false)
+            }
+
+            alert.view.addSubview(picker)
+
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                let selectedIndex = picker.selectedRow(inComponent: 0)
+                let selectedTheme = AppTheme.allCases[selectedIndex]
+                
+                // Apply theme immediately
+                ThemeManager.shared.applyTheme(selectedTheme)
+                
+                // Apply theme to this view controller
+                self.applyTheme()
+                
+                // If you want to update navigation bar
+                self.navigationController?.navigationBar.barTintColor = ThemeManager.shared.currentTheme.navigationBarColor
+                self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: ThemeManager.shared.currentTheme.labelTextColor]
+                
+                // Reload table to apply theme on cells
+                self.tblMenu.reloadData()
+            }))
+
+            present(alert, animated: true)
         }
     }
 }
@@ -65,7 +139,28 @@ extension MoreViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MoreTableViewCell = tableView.dequeueReusableCell(withIdentifier: Main.CellIdentifiers.moreTableViewCell, for: indexPath) as! MoreTableViewCell
         cell.configureMenuCell(more: arrMore[indexPath.row])
+        cell.applyTheme()
         return cell
+    }
+}
+
+extension MoreViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView.tag == 1 { // Language picker
+            return LanguageManager.Language.allCases.count
+        } else { // Theme picker
+            return AppTheme.allCases.count
+        }
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView.tag == 1 { // Language picker
+            return LanguageManager.Language.allCases[row].displayName
+        } else { // Theme picker
+            return AppTheme.allCases[row].rawValue.capitalized
+        }
     }
 }
 

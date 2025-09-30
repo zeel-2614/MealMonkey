@@ -6,6 +6,7 @@ class OffersTableViewCell: UITableViewCell {
     // MARK: - IBOutlets
     @IBOutlet weak var imgOffer: UIImageView!
     @IBOutlet weak var lblOfferTitle: UILabel!
+    @IBOutlet weak var offerView: UIView!
     @IBOutlet weak var btnStar: UIButton!
     @IBOutlet weak var lblRating: UILabel!
     @IBOutlet weak var lblRater: UILabel!
@@ -15,6 +16,7 @@ class OffersTableViewCell: UITableViewCell {
     /// Called after the view has been loaded from the nib.
     override func awakeFromNib() {
         super.awakeFromNib()
+        applyTheme()
     }
     
     /// Configures the selected state of the cell.
@@ -40,5 +42,18 @@ class OffersTableViewCell: UITableViewCell {
         lblRater.text = "(\(offer.intRater ?? 0) \(Main.offer.ratings))"
         lblCafe.text = offer.strCafeName
         lblFoodVariety.text = offer.strFoodVariety
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        offerView.backgroundColor = theme.backgroundColor
+        contentView.backgroundColor = theme.backgroundColor
+        // Labels
+        lblOfferTitle.textColor = theme.labelTextColor
+        lblRating.textColor = theme.labelTextColor
+        lblRater.textColor = theme.labelTextColor
+        lblCafe.textColor = theme.labelTextColor
+        lblFoodVariety.textColor = theme.labelTextColor
     }
 }

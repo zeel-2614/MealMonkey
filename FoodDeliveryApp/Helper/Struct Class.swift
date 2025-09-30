@@ -9,7 +9,7 @@ import Foundation
 
 /**
  `Main` is a centralized structure containing various nested structures that store constants used throughout the app.
-
+ 
  These constants include:
  - **Cell Identifiers:** For table view and collection view cells.
  - **Image Names:** For assets used in the app.
@@ -19,7 +19,7 @@ import Foundation
  - **Alert Messages:** For user-facing error or confirmation dialogs.
  - **Keys:** For UserDefaults and persistent storage keys.
  - **Animations:** Names and descriptions for Lottie or similar animations.
-
+ 
  Using this structure ensures consistent usage of strings across the project, reducing hard-coded string usage and improving maintainability.
  */
 struct Main {
@@ -63,6 +63,8 @@ struct Main {
         static let inbox = "ic_inbox"
         static let aboutUs = "ic_aboutus"
         static let wishlist = "ic_wishlist"
+        static let languageImage = "ic_language"
+        static let themeImage = "ic_theme"
         static let image1 = "ic_image1"
         static let image2 = "ic_image2"
         static let image3 = "ic_image3"
@@ -115,233 +117,416 @@ struct Main {
     }
     // MARK: - About Us Texts
     struct aboutUsModel {
-        static let strText1 = "Our mission is to deliver a seamless and intuitive shopping experience that prioritizes user satisfaction. We aim to create a platform where browsing, purchasing, and managing products feels effortless, thanks to our simple user interface and reliable service."
-        static let strText2 = "We are dedicated to maintaining high standards of performance, transparency, and trust. Our team continuously works to enhance app functionality, ensure data privacy, and provide responsive customer support, making your shopping journey smooth and secure."
-        static let strText3 = "Your feedback matters. If you have any questions, suggestions, or encounter any issues, we’re here to help. Reach out through our support page or email us directly. Together, we strive to build a better and more inclusive experience for everyone."
-        static let strText4 = "We believe that technology should serve people. That’s why we constantly refine our platform based on real user behavior and needs, aiming to make every interaction faster, simpler, and more enjoyable."
-        static let strText5 = "Security is our priority. We use industry-standard protocols to safeguard your personal information and provide a safe and secure shopping environment at all times."
-        static let strText6 = "We value accessibility and inclusiveness. Our platform is designed to be usable by people of all backgrounds, devices, and technical abilities, ensuring that everyone can benefit from our services."
-        static let strText7 = "Sustainability matters to us. We support eco-friendly business practices and work with partners who share our values to reduce our environmental impact."
+        static var strText1: String { NSLocalizedString("aboutus_screen_inside_first_text", comment: "") }
+        static var strText2: String { NSLocalizedString("aboutus_screen_inside_second_text", comment: "") }
+        static var strText3: String { NSLocalizedString("aboutus_screen_inside_third_text", comment: "") }
+        static var strText4: String { NSLocalizedString("aboutus_screen_inside_fourth_text", comment: "") }
+        static var strText5: String { NSLocalizedString("aboutus_screen_inside_fifth_text", comment: "") }
+        static var strText6: String { NSLocalizedString("aboutus_screen_inside_sixth_text", comment: "") }
+        static var strText7: String { NSLocalizedString("aboutus_screen_inside_seventh_text", comment: "") }
     }
     // MARK: - Notification Data Model
     struct notificationModel {
-        static let orderPlaced = ("Order placed successfully", "Just now")
-        static let paymentConfirmed = ("Your payment has been confirmed", "5m ago")
-        static let foodPrepared = ("Your food is being prepared", "10m ago")
-        static let agentAssigned = ("Delivery agent assigned", "30m ago")
-        static let orderOnWay = ("Your order is on the way", "1h ago")
-        static let discount = ("Special discount available!", "2h ago")
-        static let appUpdate = ("Download our new app update", "3h ago")
-        static let referFriend = ("Refer a friend and earn", "5h ago")
-        static let limitedDeal = ("Limited-time deal ending soon", "12h ago")
-        static let deliveryDone = ("Delivery completed", "1d ago")
-        static let rateMeal = ("Rate your last meal", "2d ago")
-        static let weekendOffer = ("Weekend offer just for you", "3d ago")
-        static let freeDelivery = ("Free delivery on orders above ₹299", "5d ago")
-        static let thanks = ("Thanks for being with us!", "6d ago")
-        static let newRestaurants = ("New restaurants added near you", "1w ago")
+        static var orderPlacedTitle: String { NSLocalizedString("notification_screen_inside_orderPlacedTitle", comment: "") }
+        static var orderPlacedSubTitle: String { NSLocalizedString("notification_screen_inside_orderPlacedSubTitle", comment: "") }
+        
+        static var paymentConfirmedTitle: String { NSLocalizedString("notification_screen_inside_paymentConfirmedTitle", comment: "") }
+        static var paymentConfirmedSubTitle: String { NSLocalizedString("notification_screen_inside_paymentConfirmedSubTitle", comment: "") }
+        
+        static var foodPreparedTitle: String { NSLocalizedString("notification_screen_inside_foodPreparedTitle", comment: "") }
+        static var foodPreparedSubTitle: String { NSLocalizedString("notification_screen_inside_foodPreparedSubTitle", comment: "") }
+        
+        static var agentAssignedTitle: String { NSLocalizedString("notification_screen_inside_agentAssignedTitle", comment: "") }
+        static var agentAssignedSubTitle: String { NSLocalizedString("notification_screen_inside_agentAssignedSubTitle", comment: "") }
+        
+        static var orderOnWayTitle: String { NSLocalizedString("notification_screen_inside_orderOnWayTitle", comment: "") }
+        static var orderOnWaySubTitle: String { NSLocalizedString("notification_screen_inside_orderOnWaySubTitle", comment: "") }
+        
+        static var discountTitle: String { NSLocalizedString("notification_screen_inside_discountTitle", comment: "") }
+        static var discountSubTitle: String { NSLocalizedString("notification_screen_inside_discountSubTitle", comment: "") }
+        
+        static var appUpdateTitle: String { NSLocalizedString("notification_screen_inside_appUpdateTitle", comment: "") }
+        static var appUpdateSubTitle: String { NSLocalizedString("notification_screen_inside_appUpdateSubTitle", comment: "") }
+        
+        static var referFriendTitle: String { NSLocalizedString("notification_screen_inside_referFriendTitle", comment: "") }
+        static var referFriendSubTitle: String { NSLocalizedString("notification_screen_inside_referFriendSubTitle", comment: "") }
+        
+        static var limitedDealTitle: String { NSLocalizedString("notification_screen_inside_limitedDealTitle", comment: "") }
+        static var limitedDealSubTitle: String { NSLocalizedString("notification_screen_inside_limitedDealSubTitle", comment: "") }
+        
+        static var deliveryDoneTitle: String { NSLocalizedString("notification_screen_inside_deliveryDoneTitle", comment: "") }
+        static var deliveryDoneSubTitle: String { NSLocalizedString("notification_screen_inside_deliveryDoneSubTitle", comment: "") }
+        
+        static var rateMealTitle: String { NSLocalizedString("notification_screen_inside_rateMealTitle", comment: "") }
+        static var rateMealSubTitle: String { NSLocalizedString("notification_screen_inside_rateMealSubTitle", comment: "") }
+        
+        static var weekendOfferTitle: String { NSLocalizedString("notification_screen_inside_weekendOfferTitle", comment: "") }
+        static var weekendOfferSubTitle: String { NSLocalizedString("notification_screen_inside_weekendOfferSubTitle", comment: "") }
+        
+        static var freeDeliveryTitle: String { NSLocalizedString("notification_screen_inside_freeDeliveryTitle", comment: "") }
+        static var freeDeliverySubTitle: String { NSLocalizedString("notification_screen_inside_freeDeliverySubTitle", comment: "") }
+        
+        static var thanksTitle: String { NSLocalizedString("notification_screen_inside_thanksTitle", comment: "") }
+        static var thanksSubTitle: String { NSLocalizedString("notification_screen_inside_thanksSubTitle", comment: "") }
+        
+        static var newRestaurantsTitle: String { NSLocalizedString("notification_screen_inside_newRestaurantsTitle", comment: "") }
+        static var newRestaurantsSubTitle: String { NSLocalizedString("notification_screen_inside_newRestaurantsSubTitle", comment: "") }
     }
     // MARK: - Inbox Model Data
     struct inboxModel {
-        static let promotions = ("MealMonkey Promotions", "6th July", "Get 20% off on your next meal!")
-        static let orderUpdate = ("Order Update", "6th July", "Your order is being prepared by the restaurant.")
-        static let deliveryReminders = ("Delivery Reminder", "6th July", "Your delivery agent is on the way.")
-        static let welcome = ("Welcome to MealMonkey", "6th July", "Thanks for joining us! Start exploring meals.")
-        static let experience = ("Rate Your Experience", "6th July", "How was your recent meal order?")
-        static let flashSale = ("Flash Sale", "6th July", "Enjoy 30% off on all pasta orders today only.")
-        static let newRestaurants = ("New Restaurants", "6th July", "Discover trending restaurants in your area.")
-        static let referEarn = ("Refer & Earn", "6th July", "Invite friends and earn ₹100 credits!")
-        static let weekendSpecial = ("Weekend Special", "6th July", "Free dessert on orders above ₹499.")
-        static let tips = ("MonkeyMeal Tips", "6th July", "Customize your orders with special instructions.")
-        static let orderCancel = ("Order Cancelled", "6th July", "Your order has been cancelled as requested.")
-        static let loyaltyProgram = ("Loyalty Program", "6th July", "Collect Monkey Points with every purchase.")
-        static let securityUpdate = ("Security Update", "6th July", "Your password was recently changed.")
-        static let accountVerified = ("Account Verified", "6th July", "Your account has been successfully verified.")
-        static let limitedDeal = ("Limited Time Deal", "6th July", "Flat ₹50 off on biryani orders today.")
+        static var promotionsTitle: String { NSLocalizedString("inbox_screen_inside_promotionsTitle", comment: "") }
+        static var promotionsSubTitle: String { NSLocalizedString("inbox_screen_inside_promotionsSubTitle", comment: "") }
+        static var promotionsDescription: String { NSLocalizedString("inbox_screen_inside_promotionsDescription", comment: "") }
+        
+        static var orderUpdateTitle: String { NSLocalizedString("inbox_screen_inside_orderUpdateTitle", comment: "") }
+        static var orderUpdateSubTitle: String { NSLocalizedString("inbox_screen_inside_orderUpdateSubTitle", comment: "") }
+        static var orderUpdateDescription: String { NSLocalizedString("inbox_screen_inside_orderUpdateDescription", comment: "") }
+        
+        static var deliveryRemindersTitle: String { NSLocalizedString("inbox_screen_inside_deliveryRemindersTitle", comment: "") }
+        static var deliveryRemindersSubTitle: String { NSLocalizedString("inbox_screen_inside_deliveryRemindersSubTitle", comment: "") }
+        static var deliveryRemindersDescription: String { NSLocalizedString("inbox_screen_inside_deliveryRemindersDescription", comment: "") }
+        
+        static var welcomeTitle: String { NSLocalizedString("inbox_screen_inside_welcomeTitle", comment: "") }
+        static var welcomeSubTitle: String { NSLocalizedString("inbox_screen_inside_welcomeSubTitle", comment: "") }
+        static var welcomeDescription: String { NSLocalizedString("inbox_screen_inside_welcomeDescription", comment: "") }
+        
+        static var experienceTitle: String { NSLocalizedString("inbox_screen_inside_experienceTitle", comment: "") }
+        static var experienceSubTitle: String { NSLocalizedString("inbox_screen_inside_experienceSubTitle", comment: "") }
+        static var experienceDescription: String { NSLocalizedString("inbox_screen_inside_experienceDescription", comment: "") }
+        
+        static var flashSaleTitle: String { NSLocalizedString("inbox_screen_inside_flashSaleTitle", comment: "") }
+        static var flashSaleSubTitle: String { NSLocalizedString("inbox_screen_inside_flashSaleSubTitle", comment: "") }
+        static var flashDescription: String { NSLocalizedString("inbox_screen_inside_flashSaleDescription", comment: "") }
+        
+        static var newRestaurantsTitle: String { NSLocalizedString("inbox_screen_inside_newRestaurantsTitle", comment: "") }
+        static var newRestaurantsSubTitle: String { NSLocalizedString("inbox_screen_inside_newRestaurantsSubTitle", comment: "") }
+        static var newRestaurantsDescription: String { NSLocalizedString("inbox_screen_inside_newRestaurantsDescription", comment: "") }
+        
+        static var referEarnTitle: String { NSLocalizedString("inbox_screen_inside_referEarnTitle", comment: "") }
+        static var referEarnSubTitle: String { NSLocalizedString("inbox_screen_inside_referEarnSubTitle", comment: "") }
+        static var referEarnDescription: String { NSLocalizedString("inbox_screen_inside_referEarnDescription", comment: "") }
+        
+        static var weekendSpecialTitle: String { NSLocalizedString("inbox_screen_inside_weekendSpecialTitle", comment: "") }
+        static var weekendSpecialSubTitle: String { NSLocalizedString("inbox_screen_inside_weekendSpecialSubTitle", comment: "") }
+        static var weekendSpecialDescription: String { NSLocalizedString("inbox_screen_inside_weekendSpecialDescription", comment: "") }
+        
+        static var tipsTitle: String { NSLocalizedString("inbox_screen_inside_tipsTitle", comment: "") }
+        static var tipsSubTitle: String { NSLocalizedString("inbox_screen_inside_tipsSubTitle", comment: "") }
+        static var tipsDescription: String { NSLocalizedString("inbox_screen_inside_tipsDescription", comment: "") }
+        
+        static var orderCancelTitle: String { NSLocalizedString("inbox_screen_inside_orderCancelTitle", comment: "") }
+        static var orderCancelSubTitle: String { NSLocalizedString("inbox_screen_inside_orderCancelSubTitle", comment: "") }
+        static var orderCancelDescription: String { NSLocalizedString("inbox_screen_inside_orderCancelDescription", comment: "") }
+        
+        static var loyaltyProgramTitle: String { NSLocalizedString("inbox_screen_inside_loyaltyProgramTitle", comment: "") }
+        static var loyaltyProgramSubTitle: String { NSLocalizedString("inbox_screen_inside_loyaltyProgramSubTitle", comment: "") }
+        static var loyaltyProgramDescription: String { NSLocalizedString("inbox_screen_inside_loyaltyProgramDescription", comment: "") }
+        
+        static var securityUpdateTitle: String { NSLocalizedString("inbox_screen_inside_securityUpdateTitle", comment: "") }
+        static var securityUpdateSubTitle: String { NSLocalizedString("inbox_screen_inside_securityUpdateSubTitle", comment: "") }
+        static var securityUpdateDescription: String { NSLocalizedString("inbox_screen_inside_securityUpdateDescription", comment: "") }
+        
+        static var accountVerifiedTitle: String { NSLocalizedString("inbox_screen_inside_accountVerifiedTitle", comment: "") }
+        static var accountVerifiedSubTitle: String { NSLocalizedString("inbox_screen_inside_accountVerifiedSubTitle", comment: "") }
+        static var accountVerifiedDescription: String { NSLocalizedString("inbox_screen_inside_accountVerifiedDescription", comment: "") }
+        
+        static var limitedDealTitle: String { NSLocalizedString("inbox_screen_inside_limitedDealTitle", comment: "") }
+        static var limitedDealSubTitle: String { NSLocalizedString("inbox_screen_inside_limitedDealSubTitle", comment: "") }
+        static var limitedDealDescription: String { NSLocalizedString("inbox_screen_inside_limitedDealDescription", comment: "") }
     }
     // MARK: - Other Nested Structures
     /* Contains menu-related constants */
     struct menu {
-        static let food = "Food"
-        static let beverages = "Beverages"
-        static let desserts = "Desserts"
-        static let items = "Items"
+        static var food: String { NSLocalizedString("menu_screen_food_title", comment: "") }
+        static var beverages: String { NSLocalizedString("menu_screen_beverages_title", comment: "") }
+        static var desserts: String { NSLocalizedString("menu_screen_desserts_title", comment: "") }
+        static var items: String { NSLocalizedString("menu_screen_items", comment: "") }
+        
+        // Non-localized constants can stay as let
         static let separator = ", "
         static let total = "Total: $"
         static let order = "Order #"
     }
     /* Contains "More" section constants */
     struct more {
-        static let paymentDetails = "Payment Details"
-        static let myOrder = "My Orders"
-        static let notification = "Notifications"
-        static let inbox = "Inbox"
-        static let aboutUs = "About Us"
-        static let wishlist = "Wishlist"
+        static var paymentDetails: String { NSLocalizedString("more_screen_payment_detail_title", comment: "") }
+        static var myOrder: String { NSLocalizedString("more_screen_my_order_title", comment: "") }
+        static var notification: String { NSLocalizedString("more_screen_notifications_title", comment: "") }
+        static var inbox: String { NSLocalizedString("more_screen_inbox_title", comment: "") }
+        static var aboutUs: String { NSLocalizedString("more_screen_about_us_title", comment: "") }
+        static var wishlist: String { NSLocalizedString("more_screen_wishlist_title", comment: "") }
+        static var language: String { NSLocalizedString("more_screen_language_title", comment: "") }
+        static var theme: String { NSLocalizedString("more_screen_theme_title", comment: "") }
     }
     /* Contains offers and ratings */
     struct offer {
-        static let offerTitle1 = ("Cafe de Noires", "Cafe", "Western Food")
-        static let offerTitle2 = ("Isso", "Cafe", "Wester Food")
-        static let offerTitle3 = ("Cafe Beans", "Cafe", "Western Food")
+        static var offerTitle1: String { NSLocalizedString("offers_screen_offers_cafe_name_1", comment: "") }
+        static var offerTitle2: String { NSLocalizedString("offers_screen_offers_cafe_name_2", comment: "") }
+        static var offerTitle3: String { NSLocalizedString("offers_screen_offers_cafe_name_3", comment: "") }
+        static var offersCafeType: String { NSLocalizedString("offers_screen_offers_cafe_type", comment: "") }
+        static var offersFoodType: String { NSLocalizedString("offers_screen_offers_food_type", comment: "") }
+        static var offersLabel: String { NSLocalizedString("offers_screen_offers_label", comment: "") }
+        static var checkOffersButton: String { NSLocalizedString("offers_screen_check_offers_button", comment: "") }
+        
+        // Non-localized constants
         static let ratings = "Ratings"
         static let starRating = "Star Ratings"
     }
     /* Data for onboarding/next pages */
     struct nextPage {
-        static let nextPage1 = ("Find Food You Love", "Discover the best foods from over 1,000 restaurants and fast delivery to your doorstep")
-        static let nextPage2 = ("Fast Delivery", "Fast food delivery to your home, office wherever you are")
-        static let nextPage3 = ("Live Tracking", "Real time tracking of your food on the app once you placed the order")
+        static var nextPage1: String { NSLocalizedString("next_page_screen_title_1_text", comment: "") }
+        static var nextPage1Description: String { NSLocalizedString("next_page_screen_sub_title_1_text", comment: "") }
+        
+        static var nextPage2: String { NSLocalizedString("next_page_screen_title_2_text", comment: "") }
+        static var nextPage2Description: String { NSLocalizedString("next_page_screen_sub_title_2_text", comment: "") }
+        
+        static var nextPage3: String { NSLocalizedString("next_page_screen_title_3_text", comment: "") }
+        static var nextPage3Description: String { NSLocalizedString("next_page_screen_sub_title_3_text", comment: "") }
     }
     /* Titles for different screens */
     struct setTitle {
-        static let notificationTitle = "Notifications"
-        static let inboxTitle = "Inbox"
-        static let aboutUsTitle = "About Us"
-        static let changeAddressTitle = "Change Address"
-        static let cartTitle = "Cart"
-        static let checkoutTitle = "Checkout"
-        static let foodTitle = "Food"
-        static let beveragesTitle = "Beverages"
-        static let dessertsTitle = "Desserts"
-        static let forgotPasswordTitle = "Forgot Password"
-        static let menuTitle = "Menu"
-        static let moreTitle = "More"
-        static let myOrderTitle = "My Order"
-        static let newPasswordTitle = "New Password"
-        static let offersTitle = "Latest Offers"
-        static let orderListTitle = "Order List"
-        static let paymentDetailsTitle = "Payment Details"
+        static var notificationTitle: String { NSLocalizedString("notification_screen_inside_title", comment: "") }
+        static var inboxTitle: String { NSLocalizedString("inbox_screen_inside_title", comment: "") }
+        static var aboutUsTitle: String { NSLocalizedString("aboutus_screen_inside_title", comment: "") }
+        static var changeAddressTitle: String { NSLocalizedString("change_address_screen_title", comment: "") }
+        static var cartTitle: String { NSLocalizedString("cart_screen_title", comment: "") }
+        static var checkoutTitle: String { NSLocalizedString("checkout_page_screen_title", comment: "") }
+        static var foodTitle: String { NSLocalizedString("menu_screen_food_title", comment: "") }
+        static var beveragesTitle: String { NSLocalizedString("menu_screen_beverages_title", comment: "") }
+        static var dessertsTitle: String { NSLocalizedString("menu_screen_desserts_title", comment: "") }
+        static var forgotPasswordTitle: String { NSLocalizedString("forget_password_screen_title", comment: "") }
+        static var menuTitle: String { NSLocalizedString("menu_screen_title", comment: "") }
+        static var moreTitle: String { NSLocalizedString("more_screen_title", comment: "") }
+        static var myOrderTitle: String { NSLocalizedString("my_order_screen_title", comment: "") }
+        static var newPasswordTitle: String { NSLocalizedString("new_password_screen_title", comment: "") }
+        static var offersTitle: String { NSLocalizedString("offers_screen_title", comment: "") }
+        static var orderListTitle: String { NSLocalizedString("orderlist_screen_title", comment: "") }
+        static var paymentDetailsTitle: String { NSLocalizedString("payment_details_screen_inside_title", comment: "") }
+        
+        // Non-localized (hardcoded for now)
         static let productDetailTitle = "Food Details"
-        static let profileTitle = "Profile"
-        static let resetPasswordTitle = "OTP"
-        static let signUpTitle = "Sign Up"
-        static let wishlistTitle = "Wishlist"
-        static let restaurantName = "Meal Monkey"
-        static let popularTitle = "Popular"
+        
+        static var profileTitle: String { NSLocalizedString("edit_profile_screen_title", comment: "") }
+        static var resetPasswordTitle: String { NSLocalizedString("otp_screen_title", comment: "") }
+        static var signUpTitle: String { NSLocalizedString("signup_page_screen_title", comment: "") }
+        static var wishlistTitle: String { NSLocalizedString("wishlist_screen_title", comment: "") }
+        static var restaurantName: String { NSLocalizedString("my_order_screen_restaurant_name_label", comment: "") }
+        static var popularTitle: String { NSLocalizedString("homepage_screen_popular_food_title", comment: "") }
+        
+        // Non-localized (hardcoded for now)
         static let searchingTitle = "Search Results"
-        static let mostPopularTitle = "Most Popular"
-        static let recentItemsTitle = "Recent Items"
-        static let nextPageTitle = "Next"
-        static let nextPageDoneTitle = "Done"
+        
+        static var mostPopularTitle: String { NSLocalizedString("homepage_screen_most_popular_food_title", comment: "") }
+        static var recentItemsTitle: String { NSLocalizedString("homepage_screen_recent_items_title", comment: "") }
+        static var nextPageTitle: String { NSLocalizedString("next_page_screen_next_button_text", comment: "") }
+        static var nextPageDoneTitle: String { NSLocalizedString("next_page_screen_done_button_text", comment: "") }
         static let homePageTitle = "Good morning, User!"
-        static let profilePageTitle = "Hello there, User!"
+        static var profilePageTitle: String { NSLocalizedString("edit_profile_screen_hello_label", comment: "") }
     }
     /* Location and address alerts */
     struct addressAlertMessage {
-        static let addressTitle = "Location Permission Needed"
-        static let addressMessage = "Please enable location access in Settings to use this feature."
-        static let addressAction = "Cancel"
-        static let addressTitle2 = "Open Settings"
-        static let fullAddress = "Unknown Location"
-        static let identifier = "CustomPin"
-        static let addressTitle3 = "Loading address..."
+        static var addressTitle: String { NSLocalizedString("change_address_screen_alert_title", comment: "") }
+        static var addressMessage: String { NSLocalizedString("change_address_screen_alert_message", comment: "") }
+        static var addressAction: String { NSLocalizedString("change_address_screen_alert_action", comment: "") }
+        static var addressTitle2: String { NSLocalizedString("change_address_screen_alert_address_title_2", comment: "") }
+        static var fullAddress: String { NSLocalizedString("change_address_screen_alert_full_address", comment: "") }
+        static var identifier: String { NSLocalizedString("change_address_screen_identifier", comment: "") }
+        static var addressTitle3: String { NSLocalizedString("change_address_screen_address_title_3", comment: "") }
+        
+        static var changeAddressTitle: String { NSLocalizedString("change_address_screen_title", comment: "") }
+        static var searchAddressPlaceholder: String { NSLocalizedString("change_address_screen_search_address_textfield", comment: "") }
     }
     /* Cart alerts and formats */
     struct cartAlertMessage {
-        static let cartTitle = "Order Placed"
-        static let cartMessage = "Your order has been placed successfully!"
-        static let cartAction = "OK"
-        static let cartTitle2 = "Cart is Empty"
-        static let cartMessage2 = "Please add items to your cart before placing an order."
-        static let productAddedTitle = "Success"
-        static let productAddedMessage = "Product added to cart successfully."
+        static var cartTitle: String { NSLocalizedString("cart_screen_alert_title", comment: "") }
+        static var cartMessage: String { NSLocalizedString("cart_screen_alert_message", comment: "") }
+        static var cartAction: String { NSLocalizedString("cart_screen_alert_action", comment: "") }
+        static var cartTitle2: String { NSLocalizedString("cart_screen_alert_title_2", comment: "") }
+        static var cartMessage2: String { NSLocalizedString("cart_screen_alert_message_2", comment: "") }
+        static var productAddedTitle: String { NSLocalizedString("cart_screen_alert_product_added_title", comment: "") }
+        static var productAddedMessage: String { NSLocalizedString("cart_screen_alert_product_added_message", comment: "") }
+        static var btnPlaceOrder: String { NSLocalizedString("cart_screen_place_order_button", comment: "") }
+        
+        // Constants & Formats
         static let cartFormat = "productId == %d AND user == %@ AND (status == nil OR status == 'cart')"
         static let quantityFormat = "productId == %d AND user == %@"
         static let fetchCartFormat = "user == %@ AND (status == nil OR status == 'cart')"
         static let clearCartFormat = "user == %@ AND status == 'cart'"
         static let fetchOrderFormat = "userEmail == %@"
         static let wishlistFormat = "id == %d AND user == %@"
+        
         static let priceSymbol = "$"
         static let priceFormat = "%.2f"
-        static let quantity = "QTY:"
         static let dessertPriceFormat = "%.1f"
+        static let quantity = "QTY:"
     }
     /* Payment and checkout messages */
     struct checkoutAlertMessage {
-        static let cardNumberAlert = "Card number must be exactly 16 digits."
-        static let expiryMonthAlert = "Expiry month must be between 01 and 12."
-        static let expiryYearAlert = "Expiry year must be 2 digits"
-        static let securityCodeAlert = "Security code must be 3 digits."
-        static let expiryMonthYearAlert = "Card expiry date cannot be in the past."
-        static let cardAlertTitle = "Confirm Card Details"
-        static let firstNameAlert = "Please enter your first name."
-        static let lastNameAlert = "Please enter your last name."
-        static let cardAlertMessage = "Do you want to save this card?"
-        static let cardSaveAction = "Save"
-        static let cardCancelAction = "Cancel"
-        static let cardAlertTitle2 = "Invalid Input"
-        static let cardOkAction = "OK"
+        // ⚠️ Validation & Alerts
+        static var cardNumberAlert: String { NSLocalizedString("checkout_screen_card_number_alert", comment: "") }
+        static var expiryMonthAlert: String { NSLocalizedString("checkout_screen_expiry_month_alert", comment: "") }
+        static var expiryYearAlert: String { NSLocalizedString("checkout_screen_expiry_year_alert", comment: "") }
+        static var securityCodeAlert: String { NSLocalizedString("checkout_screen_security_code_alert", comment: "") }
+        static var expiryMonthYearAlert: String { NSLocalizedString("checkout_screen_expiry_month_year_alert", comment: "") }
+        static var cardAlertTitle: String { NSLocalizedString("checkout_screen_card_alert_title", comment: "") }
+        static var firstNameAlert: String { NSLocalizedString("checkout_screen_first_name_alert", comment: "") }
+        static var lastNameAlert: String { NSLocalizedString("checkout_screen_last_name_alert", comment: "") }
+        static var cardAlertMessage: String { NSLocalizedString("checkout_screen_card_alert_message", comment: "") }
+        static var cardSaveAction: String { NSLocalizedString("checkout_screen_card_save_action", comment: "") }
+        static var cardCancelAction: String { NSLocalizedString("checkout_screen_card_cancel_action", comment: "") }
+        static var cardAlertTitle2: String { NSLocalizedString("checkout_screen_card_alert_title_2", comment: "") }
+        static var cardOkAction: String { NSLocalizedString("checkout_screen_card_ok_action", comment: "") }
+        
+        // ✅ Localized UI strings
+        static var screenTitle: String { NSLocalizedString("checkout_page_screen_title", comment: "") }
+        static var deliveryAddress: String { NSLocalizedString("checkout_page_screen_delivery_address_label", comment: "") }
+        static var change: String { NSLocalizedString("checkout_page_screen_change_button", comment: "") }
+        static var paymentMethod: String { NSLocalizedString("checkout_page_screen_payment_method_label", comment: "") }
+        static var addCard: String { NSLocalizedString("checkout_page_screen_add_card_button", comment: "") }
+        static var cashOnDelivery: String { NSLocalizedString("checkout_page_screen_cash_on_delivery_label", comment: "") }
+        static var subTotal: String { NSLocalizedString("checkout_page_screen_sub_total_label", comment: "") }
+        static var deliveryCost: String { NSLocalizedString("checkout_page_screen_delivery_cost_label", comment: "") }
+        static var discount: String { NSLocalizedString("checkout_page_screen_discount_label", comment: "") }
+        static var total: String { NSLocalizedString("checkout_page_screen_total_label", comment: "") }
+        static var sendOrder: String { NSLocalizedString("checkout_page_screen_send_order_button", comment: "") }
+        static var cardNumber: String { NSLocalizedString("checkout_page_screen_card_number_textfield", comment: "") }
+        static var expiry: String { NSLocalizedString("checkout_page_screen_expiry_label", comment: "") }
+        static var month: String { NSLocalizedString("checkout_page_screen_month_textfield", comment: "") }
+        static var year: String { NSLocalizedString("checkout_page_screen_year_textfield", comment: "") }
+        static var securityCode: String { NSLocalizedString("checkout_page_screen_security_code_textfield", comment: "") }
+        static var firstName: String { NSLocalizedString("checkout_page_screen_first_name_textfield", comment: "") }
+        static var lastName: String { NSLocalizedString("checkout_page_screen_last_name_textfield", comment: "") }
+        static var removeCard: String { NSLocalizedString("checkout_page_screen_remove_card_label", comment: "") }
+        static var addCardLabel: String { NSLocalizedString("checkout_page_screen_add_card_label", comment: "") }
+        static var thankYou: String { NSLocalizedString("checkout_page_screen_thank_you_title", comment: "") }
+        static var thankYouLabel: String { NSLocalizedString("checkout_page_screen_thank_you_label", comment: "") }
+        static var thankYouLabel2: String { NSLocalizedString("checkout_page_screen_thank_you_label_2", comment: "") }
+        static var trackOrder: String { NSLocalizedString("checkout_page_screen_track_order_button", comment: "") }
+        static var backToHome: String { NSLocalizedString("checkout_page_screen_back_to_home_button", comment: "") }
     }
     /* Forget password alerts */
     struct forgetPasswordAlert {
-        static let emailAlertTitle = "Email Missing"
-        static let emailAlertMessage = "Please enter your Email."
-        static let emailAlertTitle2 = "Invalid Email"
-        static let emailAlertMessage2 = "Please enter a valid Email."
-        static let successAlert = "Success"
-        static let successMessage = "OTP Sent Successfully"
-        static let successOkAction = "OK"
+        static var emailAlertTitle: String { NSLocalizedString("forget_password_email_alert_title", comment: "") }
+        static var emailAlertMessage: String { NSLocalizedString("forget_password_email_alert_message", comment: "") }
+        static var emailAlertTitle2: String { NSLocalizedString("forget_password_email_alert_title_2", comment: "") }
+        static var emailAlertMessage2: String { NSLocalizedString("forget_password_email_alert_message_2", comment: "") }
+        static var successAlert: String { NSLocalizedString("forget_password_success_alert", comment: "") }
+        static var successMessage: String { NSLocalizedString("forget_password_success_message", comment: "") }
+        static var successOkAction: String { NSLocalizedString("forget_password_success_ok_action", comment: "") }
+        
+        static var screenTitle: String { NSLocalizedString("forget_password_screen_title", comment: "") }
+        static var screenLabel: String { NSLocalizedString("forgot_password_screen_label", comment: "") }
+        static var emailTextField: String { NSLocalizedString("forgot_password_screen_email_textfield", comment: "") }
+        static var sendButton: String { NSLocalizedString("forgot_password_screen_send_button", comment: "") }
     }
     /* Home screen alerts */
     struct homeAlert {
-        static let homeAlertTitle = "Error"
-        static let homeAlertMessage = "Failed to load products. Please try again."
-        static let homeOkAction = "OK"
+        static var homeAlertTitle: String { NSLocalizedString("homepage_screen_alert_title", comment: "") }
+        static var homeAlertMessage: String { NSLocalizedString("homepage_screen_alert_message", comment: "") }
+        static var homeOkAction: String { NSLocalizedString("homepage_screen_home_ok_action", comment: "") }
         static let userHomeTitle = "Good morning,"
+        static var viewAllButton: String { NSLocalizedString("homepage_screen_view_all_button", comment: "") }
+        static var searchPlaceholder: String { NSLocalizedString("homepage_screen_search_food_textfield", comment: "") }
     }
     /* Login screen alerts and regex */
     struct loginAlert {
-        static let errorTitle = "Error"
-        static let emailErrorMessage = "Please enter your email address."
-        static let passwordErrorMessage = "Please enter your password."
-        static let validEmailAlertTitle = "Invalid Email"
-        static let validEmailMessage = "Please enter a valid email address."
-        static let validPasswordAlertTitle = "Invalid Password"
-        static let validPasswordMessage = "Password must include uppercase, lowercase, number and special character."
+        // Localized Alerts & UI Strings
+        static var errorTitle: String { NSLocalizedString("login_page_screen_error_title", comment: "") }
+        static var emailErrorMessage: String { NSLocalizedString("login_page_screen_email_error_message", comment: "") }
+        static var passwordErrorMessage: String { NSLocalizedString("login_page_screen_password_error_message", comment: "") }
+        static var validEmailAlertTitle: String { NSLocalizedString("login_page_screen_valid_email_alert_title", comment: "") }
+        static var validEmailMessage: String { NSLocalizedString("login_page_screen_valid_email_message", comment: "") }
+        static var validPasswordAlertTitle: String { NSLocalizedString("login_page_screen_valid_password_alert_title", comment: "") }
+        static var validPasswordMessage: String { NSLocalizedString("login_page_screen_valid_password_message", comment: "") }
+        static var loginErrorTitle: String { NSLocalizedString("login_page_screen_login_error_title", comment: "") }
+        static var loginErrorMessage: String { NSLocalizedString("login_page_screen_login_error_message", comment: "") }
+        static var loginDetailsLabel: String { NSLocalizedString("login_page_screen_login_details_label", comment: "") }
+        static var emailTextField: String { NSLocalizedString("login_page_screen_email_login_textfield", comment: "") }
+        static var passwordTextField: String { NSLocalizedString("login_page_screen_password_login_textfield", comment: "") }
+        static var loginButton: String { NSLocalizedString("login_page_screen_login_button", comment: "") }
+        static var forgotPasswordButton: String { NSLocalizedString("login_page_screen_forgot_password_button", comment: "") }
+        static var orLoginLabel: String { NSLocalizedString("login_page_screen_or_login_label", comment: "") }
+        static var facebookButton: String { NSLocalizedString("login_page_screen_facebook_button", comment: "") }
+        static var googleButton: String { NSLocalizedString("login_page_screen_google_button", comment: "") }
+        static var signupButton: String { NSLocalizedString("login_page_screen_signup_button", comment: "") }
+        static var screenTitleLabel: String { NSLocalizedString("login_page_screen_title_label", comment: "") }
+        
+        // Non-localized constants
         static let emailPasswordFormat = "email == %@ AND password == %@"
         static let emailFormat = "email == %@"
-        static let loginErrorTitle = "Login Failed"
-        static let loginErrorMessage = "User not registered or invalid email or password."
         static let userFormat = "user == %@"
         static let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
-        static let TestFormat = "SELF MATCHES %@"
+        static let testFormat = "SELF MATCHES %@"
         static let passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
     }
     /* Alerts for setting a new password */
     struct newPasswordAlert {
-        static let newPasswordErrorMessage = "Please enter your new password."
-        static let newPasswordAlertTitle = "Invalid Password"
-        static let newPasswordMessage = "Password must include uppercase, lowercase, number and special character."
-        static let confirmPasswordMessage = "Please confirm your new password."
-        static let wrongPasswordMessage = "Passwords do not match."
+        static var newPasswordErrorMessage: String { NSLocalizedString("new_password_page_screen_new_password_error_message", comment: "") }
+        static var newPasswordAlertTitle: String { NSLocalizedString("new_password_page_screen_new_password_alert_title", comment: "") }
+        static var newPasswordMessage: String { NSLocalizedString("new_password_page_screen_new_password_message", comment: "") }
+        static var confirmPasswordMessage: String { NSLocalizedString("new_password_page_screen_confirm_password_message", comment: "") }
+        static var wrongPasswordMessage: String { NSLocalizedString("new_password_page_screen_wrong_password_message", comment: "") }
+        
+        static var screenTitle: String { NSLocalizedString("new_password_screen_title", comment: "") }
+        static var label: String { NSLocalizedString("new_password_screen_label", comment: "") }
+        static var newPasswordTextfield: String { NSLocalizedString("new_password_screen_password_textfield", comment: "") }
+        static var confirmPasswordTextfield: String { NSLocalizedString("new_password_screen_confirm_password_textfield", comment: "") }
+        static var nextButton: String { NSLocalizedString("new_password_screen_next_button", comment: "") }
     }
     /* Profile update alerts */
     struct profileAlert {
-        static let invalidEmailAlertTitle = "Invalid Email"
-        static let invalidEmailAlertMessage = "Please enter a valid email address."
+        // Alerts & messages
+        static var invalidEmailAlertTitle: String { NSLocalizedString("profile_page_invalid_email_alert_title", comment: "") }
+        static var invalidEmailAlertMessage: String { NSLocalizedString("profile_page_invalid_email_alert_message", comment: "") }
         static let newEmailFormat = "email == %@ AND self != %@"
-        static let emailExistAlertTitle = "Email Exists"
-        static let emailExistAlertMessage = "This email address is already registered with another account"
-        static let noFieldChangedAlert = "Info"
-        static let noFieldChangedMessage = "No changes detected."
-        static let successAlertTitle = "Success"
-        static let successAlertMessage = "Profile updated successfully."
-        static let otpSuccessMessage = "OTP sent successfully."
+        
+        static var emailExistAlertTitle: String { NSLocalizedString("profile_page_email_exist_alert_title", comment: "") }
+        static var emailExistAlertMessage: String { NSLocalizedString("profile_page_email_exist_alert_message", comment: "") }
+        
+        static var noFieldChangedAlert: String { NSLocalizedString("profile_page_no_field_changed_alert", comment: "") }
+        static var noFieldChangedMessage: String { NSLocalizedString("profile_page_no_field_changes_message", comment: "") }
+        
+        static var successAlertTitle: String { NSLocalizedString("profile_page_success_alert_title", comment: "") }
+        static var successAlertMessage: String { NSLocalizedString("profile_page_success_alert_message", comment: "") }
+        static var otpSuccessMessage: String { NSLocalizedString("profile_page_otp_success_message", comment: "") }
+        
+        // UI Labels & Buttons
+        static var profileLabel: String { NSLocalizedString("edit_profile_screen_profile_label", comment: "") }
+        static var helloLabel: String { NSLocalizedString("edit_profile_screen_hello_label", comment: "") }
+        static var signOutButton: String { NSLocalizedString("edit_profile_screen_sign_out_button", comment: "") }
+        static var nameTextField: String { NSLocalizedString("edit_profile_screen_name_textfield", comment: "") }
+        static var emailTextField: String { NSLocalizedString("edit_profile_screen_email_textfield", comment: "") }
+        static var mobileTextField: String { NSLocalizedString("edit_profile_screen_mobile_no_textfield", comment: "") }
+        static var addressTextField: String { NSLocalizedString("edit_profile_screen_address_textfield", comment: "") }
+        static var saveButton: String { NSLocalizedString("edit_profile_screen_save_button", comment: "") }
+        static var editProfileButton: String { NSLocalizedString("edit_profile_screen_profile_label", comment: "") }
     }
     /* Sign-up related alerts */
     struct signUpAlert {
-        static let missingInfoAlertTitle = "Missing Info"
-        static let missingInfoAlertMessage = "Please enter all fields"
-        static let invalidConfirmPassword = "Passwords do not match."
-        static let invalidConfirmPasswordMessage = "The password and confirm password must be the same."
-        static let existedEmailALertTitle = "Error"
-        static let existedEmailALertMessage = "Email already registered. Please login."
-        static let passwordAlertMessage = "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character."
+        // Alerts & messages
+        static var missingInfoAlertTitle: String { NSLocalizedString("signup_page_screen_missing_info_alert_title", comment: "") }
+        static var missingInfoAlertMessage: String { NSLocalizedString("signup_page_screen_missing_info_alert_message", comment: "") }
+        static var invalidConfirmPassword: String { NSLocalizedString("signup_pagesignup_page_screen_invalid_confirm_password_screen_title", comment: "") }
+        static var invalidConfirmPasswordMessage: String { NSLocalizedString("signup_page_screen_invalid_confirm_password_message", comment: "") }
+        static var existedEmailAlertTitle: String { NSLocalizedString("signup_page_screen_existed_email_alert_title", comment: "") }
+        static var existedEmailAlertMessage: String { NSLocalizedString("signup_page_screen_existed_email_alert_message", comment: "") }
+        static var passwordAlertMessage: String { NSLocalizedString("signup_page_screen_password_alert_message", comment: "") }
+
+        // UI Labels & Buttons
+        static var screenTitleLabel: String { NSLocalizedString("signup_page_screen_title", comment: "") }
+        static var signUpDetailLabel: String { NSLocalizedString("signup_page_screen_signup_detail_label", comment: "") }
+        static var nameTextField: String { NSLocalizedString("signup_page_screen_name_textfield", comment: "") }
+        static var emailTextField: String { NSLocalizedString("signup_page_screen_email_textfield", comment: "") }
+        static var mobileTextField: String { NSLocalizedString("signup_page_screen_mobile_no_textfield", comment: "") }
+        static var addressTextField: String { NSLocalizedString("signup_page_screen_address_textfield", comment: "") }
+        static var passwordTextField: String { NSLocalizedString("signup_page_screen_password_textfield", comment: "") }
+        static var confirmPasswordTextField: String { NSLocalizedString("signup_page_screen_confirm_password_textfield", comment: "") }
+        static var signUpButton: String { NSLocalizedString("signup_page_screen_signup_button", comment: "") }
+        static var loginButton: String { NSLocalizedString("signup_page_screen_login_button", comment: "") }
     }
     /* Lottie animation names and messages */
     struct Animation {
-        static let cartAnimationName = ("Shopping Cart", "Your Cart is Empty!")
+        static let cartAnimationName = ("Shopping Cart (1)", "Your Cart is Empty!")
         static let dessertsAnimationName = ("No data Found", "No Data Found")
         static let menuAnimationName = ("Search", "No Data Found")
         static let orderListAnimationName = ("no result found", "You have no orders yet!")
@@ -357,5 +542,41 @@ struct Main {
         static let savedCardsKey = "savedCards"
         static let productNameKey = "productName"
         static let dateKey = "date"
+    }
+    
+    struct paymentModel {
+        static var addDebitCreditCardCustomizeLabel: String { NSLocalizedString("payment_details_screen_inside_label_title", comment: "") }
+        static var addNewCardButton : String { NSLocalizedString("payment_detail_screen_inside_btnAddCard", comment: "") }
+        static var addCardViewLabel : String { NSLocalizedString("payment_detail_screen_inside_view_label", comment: "") }
+        static var cardNumberPlaceholder : String { NSLocalizedString("payment_detail_screen_inside_view_cardnumber_textfield", comment: "") }
+        static var monthPlaceholder : String { NSLocalizedString("payment_detail_screen_inside_view_month_textfield", comment: "") }
+        static var yearPlaceholder : String { NSLocalizedString("payment_detail_screen_inside_view_year_textfield", comment: "") }
+        static var expiryLabel : String { NSLocalizedString("payment_detail_screen_inside_view_expiry_label", comment: "") }
+        static var securityCodePlaceholder : String { NSLocalizedString("payment_detail_screen_inside_view_securityCode_label", comment: "") }
+        static var firstNamePlaceholder : String { NSLocalizedString("payment_detail_screen_inside_view_firstName_label", comment: "") }
+    static var lastNamePlaceholder : String { NSLocalizedString("payment_detail_screen_inside_view_lastName_label", comment: "") }
+    static var removeCardLabel : String { NSLocalizedString("payment_detail_screen_inside_view_removeCard_label", comment: "") }
+    static var addCardButton : String { NSLocalizedString("payment_detail_screen_inside_view_btnAddCard", comment: "") }
+    }
+    
+    struct otpModel {
+        static var screenTitle: String { NSLocalizedString("otp_screen_title", comment: "") }
+        static var labelTitle: String { NSLocalizedString("otp_screen_label_title", comment: "") }
+        static var labelSubTitle: String { NSLocalizedString("otp_screen_label_2_title", comment: "") }
+        static var nextButton: String { NSLocalizedString("otp_screen_next_button", comment: "") }
+        static var clickHereButton: String { NSLocalizedString("otp_screen_click_here_button", comment: "") }
+    }
+    
+    struct myOrderModel {
+        static var screenTitle : String { NSLocalizedString("my_order_screen_title", comment: "") }
+        static var restaurantName : String { NSLocalizedString("my_order_screen_restaurant_name_label", comment: "") }
+        static var rating : String { NSLocalizedString("my_order_screen_rating_label", comment: "") }
+        static var address : String { NSLocalizedString("my_order_screen_address_label", comment: "") }
+        static var deliveryInstruction : String { NSLocalizedString("my_order_screen_delivery_instruction_label", comment: "") }
+        static var subTotal : String { NSLocalizedString("my_order_screen_sub_total_label", comment: "") }
+        static var deliveryCost : String { NSLocalizedString("my_order_screen_delivery_cost_label", comment: "") }
+        static var total : String { NSLocalizedString("my_order_screen_total_label", comment: "") }
+        static var checkout : String { NSLocalizedString("my_order_screen_checkout_button", comment: "") }
+        static var addNotes : String { NSLocalizedString("my_order_screen_add_notes_button", comment: "") }
     }
 }

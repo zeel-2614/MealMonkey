@@ -28,6 +28,7 @@ class WishlistTableViewCell: UITableViewCell {
     /// Called when the cell is loaded from the nib file.
     override func awakeFromNib() {
         super.awakeFromNib()
+        applyTheme()
         // Initialization code
     }
     
@@ -57,6 +58,7 @@ class WishlistTableViewCell: UITableViewCell {
         
         btnWishlist.setImage(UIImage(systemName: Main.Images.btnWishlist), for: .normal)
         btnWishlist.tintColor = .buttonBackground
+        applyTheme()
     }
     
     // MARK: - Actions
@@ -69,5 +71,22 @@ class WishlistTableViewCell: UITableViewCell {
         CoreDataManager.shared.removeFromWishlist(productId: Int(product.id), for: user)
         
         onWishlistUpdate?()  // refresh table
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        // Labels
+        lblProductName.textColor = theme.labelTextColor
+        lblProductCategory.textColor = theme.labelTextColor
+        lblProductPrice.textColor = theme.labelTextColor
+        lblProductType.textColor = theme.labelTextColor
+        lblProductQty.textColor = theme.labelTextColor
+        
+        // Wishlist button
+        btnWishlist.tintColor = theme.buttonColor
+        
+        // Background
+        contentView.backgroundColor = theme.backgroundColor
     }
 }

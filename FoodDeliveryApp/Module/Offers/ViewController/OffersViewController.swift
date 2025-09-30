@@ -4,6 +4,7 @@ import UIKit
 class OffersViewController: UIViewController {
     
     // MARK: - IBOutlets
+    @IBOutlet weak var offersView: UIView!
     @IBOutlet weak var btnCheckOffer: UIButton!
     @IBOutlet weak var tblOffers: UITableView!
     
@@ -13,10 +14,12 @@ class OffersViewController: UIViewController {
     /// Called after the view has been loaded into memory.
     override func viewDidLoad() {
         super.viewDidLoad()
+        applyTheme()
         
         viewStyle(cornerRadius: btnCheckOffer.frame.size.height/2, borderWidth: 0, borderColor: .systemGray, textField: [btnCheckOffer])
         
         setLeftAlignedTitle(Main.setTitle.offersTitle)
+        btnCheckOffer.setTitle(Main.offer.checkOffersButton, for: .normal)
         setCartButtonWithBadge(target: self, action: #selector(btnCartTapped))
         
         tblOffers.showsVerticalScrollIndicator = false
@@ -27,6 +30,8 @@ class OffersViewController: UIViewController {
         if let user = CoreDataManager.shared.getOrCreateCurrentUser() {
             CartBadgeManager.shared.syncCartCount(for: user)
         }
+        reloadLocalizedData()
+        applyTheme()
     }
     /**
      Action triggered when the cart button is tapped.
@@ -37,5 +42,30 @@ class OffersViewController: UIViewController {
         if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.cartViewController) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
+    }
+    
+    func reloadLocalizedData() {
+        // Reload localized strings
+        setLeftAlignedTitle(Main.setTitle.offersTitle)
+        btnCheckOffer.setTitle(Main.offer.checkOffersButton, for: .normal)
+        
+        // Reload table data
+        arrOffer = OfferModel.addOffers()
+        tblOffers.reloadData()
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        // Background
+        view.backgroundColor = theme.backgroundColor
+        offersView.backgroundColor = theme.backgroundColor
+        
+        // Buttons
+        btnCheckOffer.backgroundColor = theme.buttonColor
+        btnCheckOffer.setTitleColor(theme.buttonTextColor, for: .normal)
+        
+        // Table view background
+        tblOffers.backgroundColor = theme.backgroundColor
     }
 }

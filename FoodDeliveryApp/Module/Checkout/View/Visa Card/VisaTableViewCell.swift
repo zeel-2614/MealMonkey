@@ -19,7 +19,7 @@ class VisaTableViewCell: UITableViewCell {
     /// Used to apply initial styling and setup.
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        applyTheme()
         // Apply border, corner radius, and styling to the Visa view
         viewStyle.viewStyle(cornerRadius: 6, borderWidth: 1, borderColor: .labelPrimary, textField: [viewVisa])
         // Initialization code
@@ -33,5 +33,14 @@ class VisaTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        contentView.backgroundColor = theme.backgroundColor
+        viewVisa.backgroundColor = theme.cardCellBackgroundColor
+        viewVisa.layer.borderColor = theme.cardCellBorderColor.cgColor
+        lblCardNo.textColor = theme.labelTextColor
+        btnSelect.tintColor = theme.buttonColor
     }
 }

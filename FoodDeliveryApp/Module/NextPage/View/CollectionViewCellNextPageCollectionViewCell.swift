@@ -4,6 +4,7 @@ import UIKit
 class CollectionViewCellNextPageCollectionViewCell: UICollectionViewCell {
     
     // MARK: - IBOutlets
+    @IBOutlet weak var nextpageView: UIView!
     @IBOutlet weak var imgNextPage: UIImageView!
     
     /// Called after the cell has been loaded from the nib or storyboard.
@@ -15,5 +16,11 @@ class CollectionViewCellNextPageCollectionViewCell: UICollectionViewCell {
     /// - Parameter model: The `Feature` instance containing image details.
     func configure(with model: Feature){
         imgNextPage.image = UIImage(named: model.imageName)
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        nextpageView.backgroundColor = theme.backgroundColor
     }
 }

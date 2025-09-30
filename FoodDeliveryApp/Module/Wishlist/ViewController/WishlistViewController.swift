@@ -18,6 +18,7 @@ class WishlistViewController: UIViewController {
     var emptyLabel: UILabel!
     // MARK: - Outlets
     /// The table view used to display the wishlist items.
+    @IBOutlet weak var wishlistView: UIView!
     @IBOutlet weak var tblWishlist: UITableView!
     
     // MARK: - Lifecycle Methods
@@ -42,6 +43,7 @@ class WishlistViewController: UIViewController {
         super.viewWillAppear(animated)
         /// Fetch the wishlist data from the app delegate whenever the view appears.
         loadWishlist()
+        applyTheme()
     }
     
     func loadWishlist() {
@@ -65,5 +67,16 @@ class WishlistViewController: UIViewController {
     /// Handles the back button tap by popping the current view controller.
     @objc func backBtnTapped() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        view.backgroundColor = theme.backgroundColor
+        wishlistView.backgroundColor = theme.backgroundColor
+        tblWishlist.backgroundColor = theme.backgroundColor
+        tblWishlist.separatorColor = theme.labelTextColor.withAlphaComponent(0.2)
+        emptyLabel.textColor = theme.labelTextColor
+        emptyAnimationView.backgroundColor = theme.backgroundColor
     }
 }

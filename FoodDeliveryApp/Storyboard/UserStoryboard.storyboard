@@ -253,6 +253,11 @@
                         <outlet property="btnGoogle" destination="TQO-lT-OGR" id="edi-NQ-Msb"/>
                         <outlet property="btnLogin" destination="2w0-l5-NG3" id="jVW-ji-51s"/>
                         <outlet property="btnSignup" destination="UmE-P3-Xkz" id="lHC-LI-jWZ"/>
+                        <outlet property="lblLoginDetails" destination="aTl-rU-ffd" id="ukl-3b-T2n"/>
+                        <outlet property="lblLoginTitle" destination="Qrt-g7-Qko" id="Cz2-rv-eMy"/>
+                        <outlet property="lblOrLogin" destination="VkC-nw-dsJ" id="ndz-tn-PQQ"/>
+                        <outlet property="loginView" destination="Wz1-SZ-UW5" id="6bU-NJ-cSU"/>
+                        <outlet property="loginView2" destination="8Mk-Vw-RqK" id="1vw-Kw-TyO"/>
                         <outlet property="txtEmail" destination="ugK-Uv-b8o" id="DZN-hg-TNm"/>
                         <outlet property="txtPassword" destination="fhz-p2-32r" id="5qE-Ee-fXG"/>
                     </connections>
@@ -521,9 +526,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnBackToLogin" destination="uOl-f0-t4a" id="bPd-h1-PHs"/>
                         <outlet property="btnConfirmEye" destination="aF2-yt-0tn" id="8VS-3A-4RQ"/>
                         <outlet property="btnEye" destination="6KW-D1-fHY" id="qnY-Uq-v9P"/>
                         <outlet property="btnSignUp" destination="93c-EF-7gE" id="pJZ-7H-66O"/>
+                        <outlet property="lblSignUpDetail" destination="T3W-S2-hXi" id="SK9-uo-UzC"/>
+                        <outlet property="lblSignUpTitle" destination="fGB-Zv-xJ5" id="WcG-Qb-27H"/>
+                        <outlet property="signUpView" destination="F8N-rT-A42" id="AWV-gh-qHC"/>
+                        <outlet property="signupView" destination="hNQ-0g-9iU" id="9JL-jy-dlS"/>
                         <outlet property="txtAddress" destination="2OA-8g-yN5" id="vKo-2I-C81"/>
                         <outlet property="txtConfirmPassword" destination="XCJ-vX-Ayd" id="Ipy-bH-oV4"/>
                         <outlet property="txtEmail" destination="y4L-1Q-GVz" id="me1-LQ-Z31"/>
@@ -557,9 +567,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQ6-Rd-crr">
-                                        <rect key="frame" x="72.666666666666671" y="91" width="247.66666666666663" height="42"/>
+                                        <rect key="frame" x="16" y="91" width="361" height="42"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="42" id="2ub-0i-12h"/>
+                                            <constraint firstAttribute="height" constant="42" id="Y9d-lh-pfX"/>
                                         </constraints>
                                         <string key="text">Please enter your email to receive a 
 link to  create a new password via email</string>
@@ -600,13 +610,14 @@ link to  create a new password via email</string>
                                 <constraints>
                                     <constraint firstItem="gjC-3J-f3s" firstAttribute="top" secondItem="hkY-5W-XsD" secondAttribute="bottom" constant="34" id="3zL-eH-JZ8"/>
                                     <constraint firstItem="gjC-3J-f3s" firstAttribute="leading" secondItem="hkY-5W-XsD" secondAttribute="leading" id="6fU-vN-aFg"/>
-                                    <constraint firstItem="hkY-5W-XsD" firstAttribute="top" secondItem="cQ6-Rd-crr" secondAttribute="bottom" constant="59" id="7uL-A9-aUT"/>
+                                    <constraint firstAttribute="trailing" secondItem="cQ6-Rd-crr" secondAttribute="trailing" constant="16" id="7QQ-9O-Vny"/>
                                     <constraint firstItem="hkY-5W-XsD" firstAttribute="leading" secondItem="rcA-fZ-KZ9" secondAttribute="leading" constant="34" id="Bxb-mt-XEn"/>
-                                    <constraint firstItem="cQ6-Rd-crr" firstAttribute="top" secondItem="dFW-6J-kIy" secondAttribute="bottom" constant="13" id="GL1-Jr-886"/>
+                                    <constraint firstItem="hkY-5W-XsD" firstAttribute="top" secondItem="cQ6-Rd-crr" secondAttribute="bottom" constant="59" id="LUP-F6-Hbh"/>
+                                    <constraint firstItem="cQ6-Rd-crr" firstAttribute="leading" secondItem="rcA-fZ-KZ9" secondAttribute="leading" constant="16" id="Mhr-ym-lK5"/>
                                     <constraint firstAttribute="trailing" secondItem="hkY-5W-XsD" secondAttribute="trailing" constant="34" id="TX9-fp-qIX"/>
                                     <constraint firstItem="gjC-3J-f3s" firstAttribute="trailing" secondItem="hkY-5W-XsD" secondAttribute="trailing" id="e1d-uu-cmB"/>
+                                    <constraint firstItem="cQ6-Rd-crr" firstAttribute="top" secondItem="dFW-6J-kIy" secondAttribute="bottom" constant="13" id="eBX-QD-zAW"/>
                                     <constraint firstItem="dFW-6J-kIy" firstAttribute="top" secondItem="rcA-fZ-KZ9" secondAttribute="top" constant="42" id="sLx-Bo-0rg"/>
-                                    <constraint firstItem="cQ6-Rd-crr" firstAttribute="centerX" secondItem="rcA-fZ-KZ9" secondAttribute="centerX" id="xdQ-63-elS"/>
                                     <constraint firstItem="dFW-6J-kIy" firstAttribute="centerX" secondItem="rcA-fZ-KZ9" secondAttribute="centerX" id="zBG-Pi-tcW"/>
                                 </constraints>
                             </view>
@@ -622,6 +633,9 @@ link to  create a new password via email</string>
                     </view>
                     <connections>
                         <outlet property="btnSend" destination="gjC-3J-f3s" id="CVi-IY-kZ2"/>
+                        <outlet property="forgetPasswordView" destination="rcA-fZ-KZ9" id="ocS-3g-DBD"/>
+                        <outlet property="lblDescription" destination="cQ6-Rd-crr" id="0kp-WG-1yy"/>
+                        <outlet property="lblForgotPasswordTitle" destination="dFW-6J-kIy" id="hEW-el-Jnp"/>
                         <outlet property="txtEmail" destination="hkY-5W-XsD" id="vdW-yO-a50"/>
                     </connections>
                 </viewController>
@@ -650,9 +664,9 @@ link to  create a new password via email</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zDW-Hq-qxf">
-                                        <rect key="frame" x="72.666666666666671" y="91" width="247.66666666666663" height="42"/>
+                                        <rect key="frame" x="16" y="91" width="361" height="42"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="42" id="TvM-fI-7CA"/>
+                                            <constraint firstAttribute="height" constant="42" id="Zs7-m3-zD9"/>
                                         </constraints>
                                         <string key="text">Please enter your email to receive a 
 link to  create a new password via email</string>
@@ -734,18 +748,19 @@ link to  create a new password via email</string>
                                     <constraint firstItem="giv-1J-OfN" firstAttribute="top" secondItem="eoA-Ew-zdu" secondAttribute="top" constant="42" id="DJE-9k-g4B"/>
                                     <constraint firstItem="S5L-Df-8Xo" firstAttribute="top" secondItem="6Ek-4N-mcg" secondAttribute="top" id="Dp6-yW-bgF"/>
                                     <constraint firstItem="6Ek-4N-mcg" firstAttribute="leading" secondItem="jOc-dj-UAd" secondAttribute="leading" id="GIP-2l-nuS"/>
+                                    <constraint firstItem="zDW-Hq-qxf" firstAttribute="leading" secondItem="eoA-Ew-zdu" secondAttribute="leading" constant="16" id="HbQ-Ux-IDf"/>
                                     <constraint firstItem="dEw-zY-Zez" firstAttribute="trailing" secondItem="6Ek-4N-mcg" secondAttribute="trailing" id="LF9-F6-h4K"/>
                                     <constraint firstAttribute="trailing" secondItem="jOc-dj-UAd" secondAttribute="trailing" constant="34" id="QhJ-Yj-8bC"/>
                                     <constraint firstItem="jOc-dj-UAd" firstAttribute="leading" secondItem="eoA-Ew-zdu" secondAttribute="leading" constant="34" id="Tfp-od-dQM"/>
-                                    <constraint firstItem="zDW-Hq-qxf" firstAttribute="centerX" secondItem="eoA-Ew-zdu" secondAttribute="centerX" id="bkH-wc-l9s"/>
-                                    <constraint firstItem="jOc-dj-UAd" firstAttribute="top" secondItem="zDW-Hq-qxf" secondAttribute="bottom" constant="59" id="cpe-GJ-btY"/>
+                                    <constraint firstItem="zDW-Hq-qxf" firstAttribute="top" secondItem="giv-1J-OfN" secondAttribute="bottom" constant="13" id="aAH-1C-wxT"/>
+                                    <constraint firstItem="jOc-dj-UAd" firstAttribute="top" secondItem="zDW-Hq-qxf" secondAttribute="bottom" constant="59" id="cpw-B6-JDf"/>
                                     <constraint firstItem="dEw-zY-Zez" firstAttribute="top" secondItem="6Ek-4N-mcg" secondAttribute="bottom" constant="28" id="dWw-LY-5GG"/>
                                     <constraint firstItem="DFE-GE-pYb" firstAttribute="trailing" secondItem="jOc-dj-UAd" secondAttribute="trailing" id="f4r-li-d46"/>
                                     <constraint firstItem="dEw-zY-Zez" firstAttribute="leading" secondItem="6Ek-4N-mcg" secondAttribute="leading" id="fmS-iw-pz1"/>
-                                    <constraint firstItem="zDW-Hq-qxf" firstAttribute="top" secondItem="giv-1J-OfN" secondAttribute="bottom" constant="13" id="h76-HU-2oA"/>
                                     <constraint firstItem="S5L-Df-8Xo" firstAttribute="trailing" secondItem="DFE-GE-pYb" secondAttribute="trailing" id="jNP-kH-ndq"/>
                                     <constraint firstItem="giv-1J-OfN" firstAttribute="centerX" secondItem="eoA-Ew-zdu" secondAttribute="centerX" id="obu-1M-gSU"/>
                                     <constraint firstItem="DFE-GE-pYb" firstAttribute="centerY" secondItem="jOc-dj-UAd" secondAttribute="centerY" id="sgd-eY-LbH"/>
+                                    <constraint firstAttribute="trailing" secondItem="zDW-Hq-qxf" secondAttribute="trailing" constant="16" id="wnp-f2-UqK"/>
                                     <constraint firstItem="6Ek-4N-mcg" firstAttribute="trailing" secondItem="jOc-dj-UAd" secondAttribute="trailing" id="yL2-Qx-OCT"/>
                                 </constraints>
                             </view>
@@ -763,6 +778,9 @@ link to  create a new password via email</string>
                         <outlet property="btnConfirmPasswordEye" destination="DFE-GE-pYb" id="E8A-7v-jEM"/>
                         <outlet property="btnNext" destination="dEw-zY-Zez" id="ML4-4l-qPx"/>
                         <outlet property="btnPasswordEye" destination="S5L-Df-8Xo" id="kbf-Ly-gCN"/>
+                        <outlet property="lblDescription" destination="zDW-Hq-qxf" id="M1K-vl-dFw"/>
+                        <outlet property="lblTitle" destination="giv-1J-OfN" id="H0x-M9-FET"/>
+                        <outlet property="newPasswordView" destination="eoA-Ew-zdu" id="jNp-re-Gob"/>
                         <outlet property="txtConfiemPassword" destination="6Ek-4N-mcg" id="Q71-iw-0nU"/>
                         <outlet property="txtNewPassword" destination="jOc-dj-UAd" id="Z8f-qQ-KaC"/>
                     </connections>
@@ -897,6 +915,8 @@ link to  create a new password via email</string>
                         <outlet property="collectionViewNextPage" destination="ZIy-Uz-Uov" id="Nlj-EN-QVG"/>
                         <outlet property="lblDescription" destination="yG0-1S-xjP" id="8i8-fe-qos"/>
                         <outlet property="lblTitle" destination="PZ7-H8-6mM" id="v3F-jL-zEK"/>
+                        <outlet property="nextPageView" destination="Mg5-Jk-59B" id="j5o-0H-A83"/>
+                        <outlet property="nextPageView2" destination="AMg-R6-oQj" id="UGg-hb-VRt"/>
                         <outlet property="pageControl" destination="LEU-1N-XOz" id="LNa-L6-vjD"/>
                     </connections>
                 </viewController>
@@ -924,9 +944,9 @@ your Mobile</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eb-3S-Aey">
-                                        <rect key="frame" x="54" y="112.66666666666666" width="285" height="42"/>
+                                        <rect key="frame" x="16" y="112.66666666666666" width="361" height="42"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="42" id="xDX-zg-hcO"/>
+                                            <constraint firstAttribute="height" constant="42" id="SSb-YC-OXu"/>
                                         </constraints>
                                         <string key="text">Please check your mobile number 071*****12 
 continue to reset your password</string>
@@ -998,14 +1018,15 @@ continue to reset your password</string>
                                     <constraint firstAttribute="trailing" secondItem="GxL-O9-MDj" secondAttribute="trailing" constant="34" id="6xE-p8-H0t"/>
                                     <constraint firstItem="E2m-gR-UAT" firstAttribute="top" secondItem="GxL-O9-MDj" secondAttribute="bottom" constant="33" id="NIK-zT-9lo"/>
                                     <constraint firstItem="h0i-Oc-8hb" firstAttribute="top" secondItem="Gt4-nH-fA6" secondAttribute="top" constant="42" id="Pmf-9x-vcN"/>
-                                    <constraint firstItem="1nU-9N-JGT" firstAttribute="top" secondItem="0eb-3S-Aey" secondAttribute="bottom" constant="53" id="Tsj-Mn-TWM"/>
-                                    <constraint firstItem="0eb-3S-Aey" firstAttribute="centerX" secondItem="Gt4-nH-fA6" secondAttribute="centerX" id="f2g-Sl-nhs"/>
+                                    <constraint firstItem="0eb-3S-Aey" firstAttribute="leading" secondItem="Gt4-nH-fA6" secondAttribute="leading" constant="16" id="R0X-fl-kaA"/>
                                     <constraint firstItem="GxL-O9-MDj" firstAttribute="top" secondItem="1nU-9N-JGT" secondAttribute="bottom" constant="35" id="f56-wy-VWo"/>
-                                    <constraint firstItem="0eb-3S-Aey" firstAttribute="top" secondItem="h0i-Oc-8hb" secondAttribute="bottom" constant="13" id="lCJ-X9-Iko"/>
                                     <constraint firstItem="1nU-9N-JGT" firstAttribute="leading" secondItem="Gt4-nH-fA6" secondAttribute="leading" constant="34" id="qAY-xv-nFW"/>
                                     <constraint firstItem="GxL-O9-MDj" firstAttribute="leading" secondItem="Gt4-nH-fA6" secondAttribute="leading" constant="34" id="rvq-Me-AAR"/>
                                     <constraint firstItem="h0i-Oc-8hb" firstAttribute="centerX" secondItem="Gt4-nH-fA6" secondAttribute="centerX" id="skf-uo-6Iw"/>
+                                    <constraint firstAttribute="trailing" secondItem="0eb-3S-Aey" secondAttribute="trailing" constant="16" id="uN1-Fu-Rdz"/>
                                     <constraint firstItem="E2m-gR-UAT" firstAttribute="centerX" secondItem="Gt4-nH-fA6" secondAttribute="centerX" id="uxT-bq-lPd"/>
+                                    <constraint firstItem="1nU-9N-JGT" firstAttribute="top" secondItem="0eb-3S-Aey" secondAttribute="bottom" constant="53" id="wFZ-Ti-237"/>
+                                    <constraint firstItem="0eb-3S-Aey" firstAttribute="top" secondItem="h0i-Oc-8hb" secondAttribute="bottom" constant="13" id="zRM-Hq-dYq"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1019,9 +1040,12 @@ continue to reset your password</string>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btnDidNotReceive" destination="E2m-gR-UAT" id="XXJ-th-37Y"/>
+                        <outlet property="btnDidNotReceive" destination="E2m-gR-UAT" id="2YS-Bl-SeU"/>
                         <outlet property="btnNext" destination="GxL-O9-MDj" id="K6C-W1-pWH"/>
-                        <outlet property="otpView" destination="1nU-9N-JGT" id="qp5-ch-gkx"/>
+                        <outlet property="lblSubTitle" destination="0eb-3S-Aey" id="H7d-mf-8SN"/>
+                        <outlet property="lblTitle" destination="h0i-Oc-8hb" id="IQt-Li-M7s"/>
+                        <outlet property="otpView" destination="1nU-9N-JGT" id="J0w-au-2pW"/>
+                        <outlet property="otpView2" destination="Gt4-nH-fA6" id="Y69-Ro-949"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hk3-kv-tcU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

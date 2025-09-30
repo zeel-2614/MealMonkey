@@ -7,8 +7,13 @@ class PaymentViewController: UIViewController, UITextFieldDelegate {
     // MARK: - IBOutlets
     @IBOutlet weak var viewMain: UIView!
     @IBOutlet weak var btnAddNewCard: UIButton!
+    @IBOutlet weak var viewBack: UIView!
     @IBOutlet weak var viewAddCard: UIView!
     @IBOutlet weak var viewScroll: UIView!
+    @IBOutlet weak var lblAddCreditCard: UILabel!
+    @IBOutlet weak var lblExpiry: UILabel!
+    @IBOutlet weak var lblCustomizePaymentMethod: UILabel!
+    @IBOutlet weak var lblRemoveCard: UILabel!
     @IBOutlet weak var txtSecurityCode: UITextField!
     @IBOutlet weak var txtExpiryMonth: UITextField!
     @IBOutlet weak var txtExpiryYear: UITextField!
@@ -32,10 +37,14 @@ class PaymentViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         viewAddCard.isHidden = true
+        viewBack.isHidden = true
         setLeftAlignedTitleWithBack(Main.setTitle.paymentDetailsTitle, target: self, action: #selector(backBtnTapped))
         setCartButtonWithBadge(target: self, action: #selector(btnCartPressed))
         
         setupUI()
+//        applyTheme()
+        // Set localized strings
+        reloadLocalizedData()
         // Setup reusable empty state
         let emptyState = EmptyStateHelper.setupEmptyState(
             in: view,
@@ -61,6 +70,8 @@ class PaymentViewController: UIViewController, UITextFieldDelegate {
         if let user = CoreDataManager.shared.getOrCreateCurrentUser() {
             CartBadgeManager.shared.syncCartCount(for: user)
         }
+        reloadLocalizedData()
+        applyTheme()
     }
     // MARK: - Helper Methods
     /**
@@ -113,6 +124,7 @@ class PaymentViewController: UIViewController, UITextFieldDelegate {
     @IBAction func btnAddNewCardClick(_ sender: Any) {
         clearCardEntryFields()
         viewAddCard.isHidden = false
+        viewBack.isHidden = false
         UIView.animate(withDuration: 0.3) {
             self.viewAddCard.transform = .identity
             self.tabBarController?.tabBar.isHidden = true
@@ -137,9 +149,11 @@ class PaymentViewController: UIViewController, UITextFieldDelegate {
             self.viewAddCard.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
         }) { _ in
             self.viewAddCard.isHidden = true
+            self.viewBack.isHidden = true
             self.tabBarController?.tabBar.isHidden = false
         }
         setTabBar(hidden: false)
+        updateEmptyCardLabel()
     }
     
     /// Action triggered when the remove card switch value changes.
@@ -307,6 +321,50 @@ class PaymentViewController: UIViewController, UITextFieldDelegate {
             }
         } else {
             tabBar.frame.origin.y = offsetY
+        }
+    }
+    
+    func reloadLocalizedData() {
+        btnAddNewCard.setTitle(Main.paymentModel.addNewCardButton, for: .normal)
+        btnAddCard.setTitle(Main.paymentModel.addCardButton, for: .normal)
+            
+        txtCardNumber.placeholder = Main.paymentModel.cardNumberPlaceholder
+        txtExpiryMonth.placeholder = Main.paymentModel.monthPlaceholder
+        txtExpiryYear.placeholder = Main.paymentModel.yearPlaceholder
+        txtSecurityCode.placeholder = Main.paymentModel.securityCodePlaceholder
+        txtFirstName.placeholder = Main.paymentModel.firstNamePlaceholder
+        txtLastName.placeholder = Main.paymentModel.lastNamePlaceholder
+        
+        // You can also add a UILabel for the view label and remove card label if needed
+        lblExpiry.text = Main.paymentModel.expiryLabel
+        lblCustomizePaymentMethod.text = Main.paymentModel.addDebitCreditCardCustomizeLabel
+        lblAddCreditCard.text = Main.paymentModel.addCardViewLabel
+        lblRemoveCard.text = Main.paymentModel.removeCardLabel
+        setLeftAlignedTitleWithBack(Main.setTitle.paymentDetailsTitle, target: self, action: #selector(backBtnTapped))
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        view.backgroundColor = theme.backgroundColor
+        tblCardDetails.backgroundColor = theme.backgroundColor
+        viewAddCard.backgroundColor = theme.backgroundColor
+        viewScroll.backgroundColor = theme.backgroundColor
+        emptyCardAnimationView?.backgroundColor = theme.backgroundColor
+        lblEmptyCard.textColor = theme.labelTextColor
+        btnAddCard.backgroundColor = theme.buttonColor
+        btnAddCard.setTitleColor(theme.buttonTextColor, for: .normal)
+        btnAddNewCard.backgroundColor = theme.buttonColor
+        btnAddNewCard.setTitleColor(theme.buttonTextColor, for: .normal)
+        let allLabels: [UILabel] = [
+            lblAddCreditCard, lblRemoveCard, lblExpiry
+        ]
+        allLabels.forEach { $0.textColor = theme.labelTextColor }
+        // TextFields
+        let allTextFields: [UITextField] = [
+            txtCardNumber, txtExpiryMonth, txtExpiryYear, txtSecurityCode, txtFirstName, txtLastName
+        ]
+        allTextFields.forEach {
+            $0.backgroundColor = theme.cardCellBackgroundColor
         }
     }
 }

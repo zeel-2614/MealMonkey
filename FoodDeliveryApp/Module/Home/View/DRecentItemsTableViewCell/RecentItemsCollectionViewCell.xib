@@ -103,6 +103,7 @@
                 <outlet property="lblFoodType" destination="glA-bi-00B" id="zgc-ug-EdR"/>
                 <outlet property="lblItemName" destination="UwP-cK-5ZL" id="hAO-Aa-nGC"/>
                 <outlet property="lblTotalNumberOfRattings" destination="RW6-tC-xNH" id="IqJ-vb-orP"/>
+                <outlet property="recentItemsView" destination="rDz-aO-cZ8" id="BGX-8q-kK1"/>
             </connections>
             <point key="canvasLocation" x="264.12213740458014" y="39.7887323943662"/>
         </collectionViewCell>
