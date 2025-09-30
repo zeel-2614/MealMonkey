@@ -12,6 +12,7 @@ class MenuTableViewCell: UITableViewCell {
     // MARK: - Lifecycle Methods
     override func awakeFromNib() {
         super.awakeFromNib()
+        applyTheme()
         // Called after the cell's view has been loaded from the nib or storyboard
     }
     
@@ -26,5 +27,17 @@ class MenuTableViewCell: UITableViewCell {
         imgCategory.image = UIImage(named: category.imgCategory)
         lblCategoryName.text = category.strCategoryName
         lblItems.text = "\(category.intItems) \(Main.menu.items)"
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        // Labels
+        lblCategoryName.textColor = theme.labelTextColor
+        lblItems.textColor = theme.labelTextColor
+        
+        // Background
+        contentView.backgroundColor = theme.cardCellBackgroundColor
+        imgCategory.backgroundColor = .clear // optional
     }
 }

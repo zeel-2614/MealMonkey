@@ -4,12 +4,14 @@ import UIKit
 class HomeCategoryCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Outlets
+    @IBOutlet weak var categoryCollectionView: UIView!
     @IBOutlet weak var imgCategory: UIImageView!
     @IBOutlet weak var lblCategory: UILabel!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        applyTheme()
         // Style category image
         viewStyle.viewStyle(cornerRadius: 10, borderWidth: 0, borderColor: .systemGray, textField: [imgCategory])
     }
@@ -34,5 +36,20 @@ class HomeCategoryCollectionViewCell: UICollectionViewCell {
         case .WesternFood:
             imgCategory.image = UIImage(named: Main.Images.margheritaPizza)
         }
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        // Cell background
+        contentView.backgroundColor = theme.backgroundColor
+        categoryCollectionView.backgroundColor = theme.backgroundColor
+        
+        // Label
+        lblCategory.textColor = theme.labelTextColor
+        
+        // Image border (optional)
+        imgCategory.layer.borderColor = theme.cardCellBorderColor.cgColor
+        imgCategory.layer.borderWidth = 1
     }
 }

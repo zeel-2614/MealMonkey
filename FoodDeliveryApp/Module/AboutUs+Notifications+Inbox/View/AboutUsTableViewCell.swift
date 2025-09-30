@@ -14,6 +14,7 @@ class AboutUsTableViewCell: UITableViewCell {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        applyTheme()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -54,6 +55,22 @@ class AboutUsTableViewCell: UITableViewCell {
         stackViewTrailing.constant = 12
     }
     
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        backgroundColor = theme.cardCellBackgroundColor
+        contentView.backgroundColor = theme.cardCellBackgroundColor
+        layer.borderColor = theme.cardCellBorderColor.cgColor
+        layer.borderWidth = 1
+        layer.cornerRadius = 8
+        layer.masksToBounds = true
+        
+        lblText.textColor = theme.labelTextColor
+        lblText2.textColor = theme.labelTextColor
+        lblTimezone.textColor = theme.foodTitleColor
+        
+        btnStar.tintColor = theme.buttonColor
+    }
     // MARK: - Actions
     @IBAction func btnStarClick(_ sender: Any) {
     }

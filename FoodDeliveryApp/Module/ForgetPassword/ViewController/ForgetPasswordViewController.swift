@@ -6,13 +6,16 @@ import UIKit
 class ForgetPasswordViewController: UIViewController {
     
     // MARK: - Outlets
+    @IBOutlet weak var lblDescription: UILabel!
+    @IBOutlet weak var forgetPasswordView: UIView!
+    @IBOutlet weak var lblForgotPasswordTitle: UILabel!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var btnSend: UIButton!
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        applyTheme()
         // Show the navigation bar
         self.navigationController?.isNavigationBarHidden = false
         
@@ -24,6 +27,14 @@ class ForgetPasswordViewController: UIViewController {
         
         // Set a left-aligned navigation title with a back button
         setLeftAlignedTitleWithBack(Main.setTitle.forgotPasswordTitle, target: self, action: #selector(backButtonTapped))
+        
+        reloadLocalizedData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadLocalizedData()
+        applyTheme()
     }
     // MARK: - Navigation
     /// Handles the back button tap action.
@@ -82,5 +93,42 @@ class ForgetPasswordViewController: UIViewController {
         }))
         
         viewController.present(alert, animated: true)
+    }
+    
+    func reloadLocalizedData() {
+        setLeftAlignedTitleWithBack(Main.setTitle.forgotPasswordTitle, target: self, action: #selector(backButtonTapped))
+        
+        // Localized placeholders & button
+        txtEmail.placeholder = Main.forgetPasswordAlert.emailTextField
+        btnSend.setTitle(Main.forgetPasswordAlert.sendButton, for: .normal)
+        
+        // Localized label
+        lblForgotPasswordTitle.text = Main.forgetPasswordAlert.screenTitle
+        lblDescription.text = Main.forgetPasswordAlert.screenLabel
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+
+        // View background
+        view.backgroundColor = theme.backgroundColor
+        forgetPasswordView.backgroundColor = theme.backgroundColor
+
+        // Labels
+        lblForgotPasswordTitle.textColor = theme.labelTextColor
+        lblDescription.textColor = theme.labelTextColor // fallback, since no secondaryTextColor
+
+        // TextField
+        txtEmail.backgroundColor = theme.cardCellBackgroundColor  // fallback
+        txtEmail.textColor = theme.labelTextColor
+        txtEmail.tintColor = theme.buttonColor            // cursor color fallback
+
+        // Button
+        btnSend.backgroundColor = theme.buttonColor
+        btnSend.setTitleColor(theme.buttonTextColor, for: .normal)
+
+        // Corner radius
+        txtEmail.layer.cornerRadius = 28
+        btnSend.layer.cornerRadius = 28
     }
 }

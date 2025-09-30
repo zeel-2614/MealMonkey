@@ -22,13 +22,13 @@ class Feature: NSObject{
     /// A predefined list of app features.
     static let features: [Feature] = [
         Feature(imageName: Main.Images.image1,
-                title: Main.nextPage.nextPage1.0,
-                subTitle: Main.nextPage.nextPage1.1),
+                title: Main.nextPage.nextPage1,
+                subTitle: Main.nextPage.nextPage1Description),
         Feature(imageName: Main.Images.image2,
-                title: Main.nextPage.nextPage2.0,
-                subTitle: Main.nextPage.nextPage2.1),
+                title: Main.nextPage.nextPage2,
+                subTitle: Main.nextPage.nextPage2Description),
         Feature(imageName: Main.Images.image3,
-                title: Main.nextPage.nextPage3.0,
-                subTitle: Main.nextPage.nextPage3.1)
+                title: Main.nextPage.nextPage3,
+                subTitle: Main.nextPage.nextPage3Description)
     ]
 }

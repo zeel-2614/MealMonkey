@@ -19,6 +19,7 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var btnHeart: UIButton!
     @IBOutlet weak var countView: UIView!
     @IBOutlet weak var btnCart: UIButton!
+    @IBOutlet weak var detailView: UIView!
     @IBOutlet weak var lblLKR: UILabel!
     @IBOutlet weak var btnAddToCart: UIButton!
     @IBOutlet weak var btnPlus: UIButton!
@@ -48,6 +49,7 @@ class ProductDetailViewController: UIViewController {
         // Set navigation bar title and icon color to white
         currentQuantity = 1
         showLoadingState()
+        applyTheme()
         
         if let product = selectedProduct {
             lblTitle.text = product.strProductName
@@ -76,6 +78,7 @@ class ProductDetailViewController: UIViewController {
         if let user = CoreDataManager.shared.getOrCreateCurrentUser() {
             CartBadgeManager.shared.syncCartCount(for: user)
         }
+        applyTheme()
         
         let navBar = navigationController?.navigationBar
             navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -244,5 +247,20 @@ class ProductDetailViewController: UIViewController {
             self.setupUI()
             self.configureUI()
         }
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        view.backgroundColor = theme.backgroundColor
+        detailView.backgroundColor = theme.backgroundColor
+        productDetailView.backgroundColor = theme.cardCellBackgroundColor  // mapped from cardCellBackgroundColor
+        lblTitle.textColor = theme.labelTextColor                          // mapped from labelTextColor
+        lblDescription.textColor = theme.labelTextColor                    // mapped from labelTextColor
+        lblPrice.textColor = theme.buttonColor                              // mapped from buttonColor
+        lblLKR.textColor = theme.buttonColor                                // mapped from buttonColor
+        lblRattings.textColor = theme.labelTextColor                        // mapped from labelTextColor
+        btnAddToCart.backgroundColor = theme.buttonColor                    // mapped from buttonColor
+        btnHeart.tintColor = theme.buttonColor                               // mapped from buttonColor
     }
 }

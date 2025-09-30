@@ -40,7 +40,13 @@ class ClassMore: NSObject {
                       intTag: 4),
             ClassMore(strMoreName: Main.more.wishlist,
                       imgMenu: Main.Images.wishlist,
-                      intTag: 5)
+                      intTag: 5),
+            ClassMore(strMoreName: Main.more.language,
+                      imgMenu: Main.Images.languageImage,
+                      intTag: 6),
+            ClassMore(strMoreName: Main.more.theme,
+                      imgMenu: Main.Images.themeImage,
+                      intTag: 7)
         ]
     }
 }

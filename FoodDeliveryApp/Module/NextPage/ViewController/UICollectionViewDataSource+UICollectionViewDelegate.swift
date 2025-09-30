@@ -22,6 +22,7 @@ extension NextPageViewController: UICollectionViewDelegate, UICollectionViewData
         
         // Configure the cell with the feature data
         cell.configure(with: model)
+        cell.applyTheme()
         
         return cell
     }

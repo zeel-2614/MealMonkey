@@ -13,6 +13,7 @@ class OrderListTableViewCell: UITableViewCell {
     // MARK: - IBOutlets
     @IBOutlet weak var lblProductName: UILabel!
     @IBOutlet weak var lblOrderNumber: UILabel!
+    @IBOutlet weak var orderListView: UIView!
     @IBOutlet weak var lblTotal: UILabel!
     @IBOutlet weak var imgOrderedProduct: UIImageView!
     
@@ -37,5 +38,15 @@ class OrderListTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        lblProductName.textColor = theme.labelTextColor
+        lblOrderNumber.textColor = theme.labelTextColor
+        lblTotal.textColor = theme.labelTextColor
+        backgroundColor = theme.backgroundColor
+        contentView.backgroundColor = theme.backgroundColor
+        orderListView.backgroundColor = theme.backgroundColor
     }
 }

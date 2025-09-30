@@ -4,6 +4,7 @@ import Lottie
 class DessertsViewController: UIViewController {
     
     // MARK: - IBOutlets
+    @IBOutlet weak var dessertsView: UIView!
     @IBOutlet weak var txtSearchDesserts: UITextField!
     @IBOutlet weak var tblDesserts: UITableView!
     
@@ -26,6 +27,7 @@ class DessertsViewController: UIViewController {
     /// Called after the controller’s view is loaded into memory.
     override func viewDidLoad() {
         super.viewDidLoad()
+        applyTheme()
         
         NotificationCenter.default.addObserver(self, selector: #selector(productsLoaded), name: NSNotification.Name(Main.Key.productsLoadedKey), object: nil)
         
@@ -69,10 +71,32 @@ class DessertsViewController: UIViewController {
         if let user = CoreDataManager.shared.getOrCreateCurrentUser() {
             CartBadgeManager.shared.syncCartCount(for: user)
         }
+        reloadLocalizedData()
+        applyTheme()
     }
     
     @objc func productsLoaded() {
         filteredProducts = arrProducts
+        tblDesserts.reloadData()
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        // Main view
+        view.backgroundColor = theme.backgroundColor
+        dessertsView.backgroundColor = theme.backgroundColor
+        
+        // Search text field
+        txtSearchDesserts.backgroundColor = theme.cardCellBackgroundColor
+        txtSearchDesserts.textColor = theme.labelTextColor
+        txtSearchDesserts.tintColor = theme.labelTextColor
+        viewStyle(cornerRadius: txtSearchDesserts.frame.size.height/2, borderWidth: 0, borderColor: theme.cardCellBorderColor, textField: [txtSearchDesserts])
+        
+        // TableView
+        tblDesserts.backgroundColor = theme.backgroundColor
+        tblDesserts.separatorColor = theme.cardCellBorderColor
+        
         tblDesserts.reloadData()
     }
     // MARK: - Search Handling
@@ -121,6 +145,19 @@ class DessertsViewController: UIViewController {
     func setPadding(textfield: [UITextField]) {
         for item in textfield {
             item.setPadding(left: 34, right: 34)
+        }
+    }
+    
+    func reloadLocalizedData() {
+        switch selectedProductType {
+        case .food:
+            setLeftAlignedTitleWithBack(Main.setTitle.foodTitle, target: self, action: #selector(dessertBackBtn))
+            
+        case .Beverages:
+            setLeftAlignedTitleWithBack(Main.setTitle.beveragesTitle, target: self, action: #selector(dessertBackBtn))
+            
+        case .Desserts:
+            setLeftAlignedTitleWithBack(Main.setTitle.dessertsTitle, target: self, action: #selector(dessertBackBtn))
         }
     }
 }

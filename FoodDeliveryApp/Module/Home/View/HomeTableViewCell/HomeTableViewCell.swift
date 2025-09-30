@@ -63,6 +63,8 @@ class HomeTableViewCell: UITableViewCell {
         collectionViewHome.register(UINib(nibName: Main.CellIdentifiers.popularCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: Main.CellIdentifiers.popularCollectionViewCell)
         collectionViewHome.register(UINib(nibName: Main.CellIdentifiers.mostPopularCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: Main.CellIdentifiers.mostPopularCollectionViewCell)
         collectionViewHome.register(UINib(nibName: Main.CellIdentifiers.recentItemsCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: Main.CellIdentifiers.recentItemsCollectionViewCell)
+        btnViewAll.setTitle(Main.homeAlert.viewAllButton, for: .normal)
+        applyTheme()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -91,24 +93,28 @@ extension HomeTableViewCell: UICollectionViewDataSource, UICollectionViewDelegat
             let cell: HomeCategoryCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Main.CellIdentifiers.homeCategoryCollectionViewCell, for: indexPath) as! HomeCategoryCollectionViewCell
             let category = categories[indexPath.row]
             cell.configure(with: category)
+            cell.applyTheme()
             return cell
             
         case .popular:
             let cell: PopularCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Main.CellIdentifiers.popularCollectionViewCell, for: indexPath) as! PopularCollectionViewCell
             let product = products[indexPath.row]
             cell.configure(with: product)
+            cell.applyTheme()
             return cell
             
         case .mostPopular:
             let cell: MostPopularCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Main.CellIdentifiers.mostPopularCollectionViewCell, for: indexPath) as! MostPopularCollectionViewCell
             let product = products[indexPath.row]
             cell.configure(with: product)
+            cell.applyTheme()
             return cell
             
         case .RecentItems:
             let cell: RecentItemsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Main.CellIdentifiers.recentItemsCollectionViewCell, for: indexPath) as! RecentItemsCollectionViewCell
             let product = products[indexPath.row]
             cell.configure(with: product)
+            cell.applyTheme()
             return cell
         }
     }
@@ -136,5 +142,22 @@ extension HomeTableViewCell: UICollectionViewDataSource, UICollectionViewDelegat
             let selectedProduct = products[indexPath.row]
             delegate?.homeTableViewCell(self, didSelectProduct: selectedProduct)
         }
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        // Cell background
+        contentView.backgroundColor = theme.backgroundColor
+        
+        // Labels
+        lblCollectionViewTitle.textColor = theme.labelTextColor
+        btnViewAll.setTitleColor(theme.labelTextColor, for: .normal)
+        
+        // Collection view background
+        collectionViewHome.backgroundColor = theme.backgroundColor
+        
+        // Optionally reload collection view cells to apply theme inside them
+        collectionViewHome.reloadData()
     }
 }

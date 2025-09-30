@@ -20,6 +20,23 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
     
     // MARK: - IBOutlets
     @IBOutlet weak var lblDeliveryAddress: UILabel!
+    @IBOutlet weak var lblDeliveryAddressLabel: UILabel!
+    
+    @IBOutlet weak var addressLabelView: UIView!
+    @IBOutlet weak var lblRemoveCardLabel: UILabel!
+    @IBOutlet weak var checkoutView: UIView!
+    @IBOutlet weak var lblThankYouLable: UILabel!
+    @IBOutlet weak var lblTotalLabel: UILabel!
+    @IBOutlet weak var lblExpiryLabel: UILabel!
+    @IBOutlet weak var lblAddCardLabel: UILabel!
+    @IBOutlet weak var lblThankYouLabel3: UILabel!
+    @IBOutlet weak var lblDiscountLabel: UILabel!
+    @IBOutlet weak var totalView: UIView!
+    @IBOutlet weak var lblThankYouLabel2: UILabel!
+    @IBOutlet weak var paymentTableView: UIView!
+    @IBOutlet weak var lblDeliveryCostLabel: UILabel!
+    @IBOutlet weak var lblPaymentMethodLabel: UILabel!
+    @IBOutlet weak var lblSubTotalLabel: UILabel!
     @IBOutlet weak var lblTotal: UILabel!
     @IBOutlet weak var lblDiscount: UILabel!
     @IBOutlet weak var lblDeliveryCost: UILabel!
@@ -79,8 +96,35 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
         }
         
         updateCheckoutLabels()
-        
+        applyTheme()
         tblCheckout.reloadData()
+        
+        // ✅ Localized labels & buttons
+        btnChangeAddress.setTitle(Main.checkoutAlertMessage.change, for: .normal)
+        btnAddCard.setTitle(Main.checkoutAlertMessage.addCard, for: .normal)
+        btnSendOrder.setTitle(Main.checkoutAlertMessage.sendOrder, for: .normal)
+        btnTrackYourOrder.setTitle(Main.checkoutAlertMessage.trackOrder, for: .normal)
+        btnBackToHome.setTitle(Main.checkoutAlertMessage.backToHome, for: .normal)
+        
+        txtCardNumber.placeholder = Main.checkoutAlertMessage.cardNumber
+        txtExpiryMonth.placeholder = Main.checkoutAlertMessage.month
+        txtExpiryYear.placeholder = Main.checkoutAlertMessage.year
+        txtSecurityCode.placeholder = Main.checkoutAlertMessage.securityCode
+        txtFirstName.placeholder = Main.checkoutAlertMessage.firstName
+        txtLastName.placeholder = Main.checkoutAlertMessage.lastName
+        
+        // (Optional) if you have UILabels for section headers:
+        lblSubTotalLabel.text = Main.checkoutAlertMessage.subTotal
+        lblDeliveryCostLabel.text = Main.checkoutAlertMessage.deliveryCost
+        lblDiscountLabel.text = Main.checkoutAlertMessage.discount
+        lblTotalLabel.text = Main.checkoutAlertMessage.total
+        lblDeliveryAddressLabel.text = Main.checkoutAlertMessage.deliveryAddress
+        lblPaymentMethodLabel.text = Main.checkoutAlertMessage.paymentMethod
+        lblExpiryLabel.text = Main.checkoutAlertMessage.expiry
+        lblRemoveCardLabel.text = Main.checkoutAlertMessage.removeCard
+        lblThankYouLable.text = Main.checkoutAlertMessage.thankYou
+        lblThankYouLabel2.text = Main.checkoutAlertMessage.thankYouLabel
+        lblThankYouLabel3.text = Main.checkoutAlertMessage.thankYouLabel2
     }
     
     /// Called before the view appears on screen.
@@ -88,11 +132,13 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
         if let user = currentUser {
             arrCards = CoreDataManager.shared.fetchCards(for: user).compactMap { $0.number }
             tblCheckout.reloadData()
+            reloadlocalizedData()
         }
         
         if let savedAddress = UserDefaults.standard.string(forKey: Main.Key.addressKey) {
             lblDeliveryAddress.text = savedAddress
         }
+        applyTheme()
     }
     
     // MARK: - Navigation
@@ -336,5 +382,91 @@ class CheckoutViewController: UIViewController, ChangeAddressDelegate {
                 tabBarController.selectedIndex = 2
             }
         }
+    }
+    
+    func reloadlocalizedData() {
+        // ✅ Localized labels & buttons
+        btnChangeAddress.setTitle(Main.checkoutAlertMessage.change, for: .normal)
+        btnAddCard.setTitle(Main.checkoutAlertMessage.addCard, for: .normal)
+        btnSendOrder.setTitle(Main.checkoutAlertMessage.sendOrder, for: .normal)
+        btnTrackYourOrder.setTitle(Main.checkoutAlertMessage.trackOrder, for: .normal)
+        btnBackToHome.setTitle(Main.checkoutAlertMessage.backToHome, for: .normal)
+        
+        txtCardNumber.placeholder = Main.checkoutAlertMessage.cardNumber
+        txtExpiryMonth.placeholder = Main.checkoutAlertMessage.month
+        txtExpiryYear.placeholder = Main.checkoutAlertMessage.year
+        txtSecurityCode.placeholder = Main.checkoutAlertMessage.securityCode
+        txtFirstName.placeholder = Main.checkoutAlertMessage.firstName
+        txtLastName.placeholder = Main.checkoutAlertMessage.lastName
+        
+        // (Optional) if you have UILabels for section headers:
+        lblSubTotalLabel.text = Main.checkoutAlertMessage.subTotal
+        lblDeliveryCostLabel.text = Main.checkoutAlertMessage.deliveryCost
+        lblDiscountLabel.text = Main.checkoutAlertMessage.discount
+        lblTotalLabel.text = Main.checkoutAlertMessage.total
+        lblDeliveryAddressLabel.text = Main.checkoutAlertMessage.deliveryAddress
+        lblPaymentMethodLabel.text = Main.checkoutAlertMessage.paymentMethod
+        lblExpiryLabel.text = Main.checkoutAlertMessage.expiry
+        lblRemoveCardLabel.text = Main.checkoutAlertMessage.removeCard
+        lblThankYouLable.text = Main.checkoutAlertMessage.thankYou
+        lblThankYouLabel2.text = Main.checkoutAlertMessage.thankYouLabel
+        lblThankYouLabel3.text = Main.checkoutAlertMessage.thankYouLabel2
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        // Main views
+        view.backgroundColor = theme.backgroundColor
+        viewEnterCard.backgroundColor = theme.cardCellBackgroundColor
+        viewTransparent.backgroundColor = theme.backgroundColor.withAlphaComponent(0.5)
+        viewThankYou.backgroundColor = theme.backgroundColor
+        viewAddCard2.backgroundColor = theme.backgroundColor
+        viewThankYou2.backgroundColor = theme.backgroundColor
+        checkoutView.backgroundColor = theme.backgroundColor
+        addressLabelView.backgroundColor = theme.backgroundColor
+        paymentTableView.backgroundColor = theme.backgroundColor
+        totalView.backgroundColor = theme.backgroundColor
+        
+        // Buttons
+        btnAddCard.backgroundColor = .clear
+        btnAddCard.setTitleColor(theme.labelTextColor, for: .normal)
+        
+        btnChangeAddress.backgroundColor = .clear
+        btnChangeAddress.setTitleColor(theme.labelTextColor, for: .normal)
+        
+        btnSendOrder.backgroundColor = theme.buttonColor
+        btnSendOrder.setTitleColor(theme.buttonTextColor, for: .normal)
+        
+        btnTrackYourOrder.backgroundColor = theme.buttonColor
+        btnTrackYourOrder.setTitleColor(theme.buttonTextColor, for: .normal)
+        
+        btnBackToHome.setTitleColor(theme.buttonColor, for: .normal)
+        
+        btnEnterCard.backgroundColor = theme.buttonColor
+        btnEnterCard.setTitleColor(theme.buttonTextColor, for: .normal)
+        
+        // Labels
+        let allLabels: [UILabel] = [
+            lblDeliveryAddress, lblDeliveryAddressLabel, lblRemoveCardLabel,
+            lblThankYouLable, lblTotalLabel, lblExpiryLabel, lblAddCardLabel,
+            lblThankYouLabel2, lblDiscountLabel, lblThankYouLabel3, lblDeliveryCostLabel,
+            lblPaymentMethodLabel, lblSubTotalLabel, lblTotal, lblDiscount,
+            lblDeliveryCost, lblSubTotal
+        ]
+        allLabels.forEach { $0.textColor = theme.labelTextColor }
+        
+        // TextFields
+        let allTextFields: [UITextField] = [
+            txtCardNumber, txtExpiryMonth, txtExpiryYear, txtSecurityCode, txtFirstName, txtLastName
+        ]
+        allTextFields.forEach {
+            $0.backgroundColor = theme.cardCellBackgroundColor
+        }
+        
+        // TableView
+        tblCheckout.backgroundColor = theme.backgroundColor
+        tblCheckout.separatorColor = theme.cardCellBorderColor
+        tblCheckout.reloadData()
     }
 }

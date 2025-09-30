@@ -5,10 +5,13 @@ import UIKit
 class NewPasswordViewController: UIViewController {
     
     // MARK: - Outlets
+    @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var txtNewPassword: UITextField!
+    @IBOutlet weak var newPasswordView: UIView!
     @IBOutlet weak var btnConfirmPasswordEye: UIButton!
     @IBOutlet weak var btnPasswordEye: UIButton!
     @IBOutlet weak var txtConfiemPassword: UITextField!
+    @IBOutlet weak var lblDescription: UILabel!
     @IBOutlet weak var btnNext: UIButton!
     
     // MARK: - Properties
@@ -23,11 +26,17 @@ class NewPasswordViewController: UIViewController {
         
         setLeftAlignedTitleWithBack(Main.setTitle.newPasswordTitle, target: self, action: #selector(backButtonTapped))
         self.navigationController?.isNavigationBarHidden = false
-        
+        applyTheme()
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .gray, textField: [txtNewPassword, txtConfiemPassword, btnNext])
         setPadding(textfield: [txtNewPassword, txtConfiemPassword])
+        reloadLocalizedData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadLocalizedData()
+        applyTheme()
+    }
     // MARK: - Validation
     
     /// Validates the new password and confirm password fields.
@@ -98,5 +107,41 @@ class NewPasswordViewController: UIViewController {
         if let button = sender as? UIButton {
             button.setImage(UIImage(systemName: imageName), for: .normal)
         }
+    }
+    
+    func reloadLocalizedData() {
+        lblTitle.text = Main.newPasswordAlert.screenTitle
+        lblDescription.text = Main.newPasswordAlert.label
+        txtNewPassword.placeholder = Main.newPasswordAlert.newPasswordTextfield
+        txtConfiemPassword.placeholder = Main.newPasswordAlert.confirmPasswordTextfield
+        btnNext.setTitle(Main.newPasswordAlert.nextButton, for: .normal)
+        setLeftAlignedTitleWithBack(Main.setTitle.newPasswordTitle, target: self, action: #selector(backButtonTapped))
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        // Background
+        view.backgroundColor = theme.backgroundColor
+        newPasswordView.backgroundColor = theme.backgroundColor
+        
+        // Labels
+        lblTitle.textColor = theme.labelTextColor
+        lblDescription.textColor = theme.labelTextColor
+        
+        // TextFields
+        txtNewPassword.backgroundColor = theme.cardCellBackgroundColor
+        txtNewPassword.textColor = theme.labelTextColor
+        txtNewPassword.tintColor = theme.labelTextColor
+        
+        txtConfiemPassword.backgroundColor = theme.cardCellBackgroundColor
+        txtConfiemPassword.textColor = theme.labelTextColor
+        txtConfiemPassword.tintColor = theme.labelTextColor
+        
+        // Buttons
+        btnNext.backgroundColor = theme.buttonColor
+        btnNext.setTitleColor(theme.buttonTextColor, for: .normal)
+        btnPasswordEye.tintColor = theme.labelTextColor
+        btnConfirmPasswordEye.tintColor = theme.labelTextColor
     }
 }

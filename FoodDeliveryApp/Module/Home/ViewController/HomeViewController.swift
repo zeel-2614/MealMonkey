@@ -9,6 +9,7 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
     // MARK: - Outlets
     @IBOutlet weak var lblCurrentLocation: UILabel!
     @IBOutlet weak var tblHome: UITableView!
+    @IBOutlet weak var homeView: UIView!
     @IBOutlet weak var btnCurrentLocation: UIButton!
     @IBOutlet weak var txtSearch: UITextField!
     
@@ -35,6 +36,8 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
             CartBadgeManager.shared.syncCartCount(for: user)
         }
         displayGreeting()
+        reloadLocalizedData()
+        applyTheme()
     }
     
     override func viewDidLoad() {
@@ -61,11 +64,13 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
         filteredProductData = HomeViewController.arrProductData //new added
         
         fetchProductDataFromAPI()
+        txtSearch.placeholder = Main.homeAlert.searchPlaceholder
         
         // Reload the table after UI setup
         DispatchQueue.main.async {
             self.tblHome.reloadData()
         }
+        applyTheme()
     }
     
     func displayGreeting() {
@@ -91,7 +96,7 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
     
     func fetchProductDataFromAPI() {
         // 🚨 IMPORTANT: Replace "YOUR_API_ENDPOINT_URL_HERE" with your actual URL.
-        let apiURLString = "https://mocki.io/v1/a2248104-c72d-4088-bd15-c34986dc071b"
+        let apiURLString = "https://68b5441de5dc090291ae69ea.mockapi.io/products"
         
         APICalls.getData(from: apiURLString) { [weak self] (products: [ProductModel]) in
             guard let self = self else { return }
@@ -175,5 +180,24 @@ class HomeViewController: UIViewController, HomeTableViewCellDelegate, UITextFie
         if let mlvc = storyboard.instantiateViewController(withIdentifier: Main.ViewControllers.addressViewController) as? AddressViewController {
             self.navigationController?.pushViewController(mlvc, animated: true)
         }
+    }
+    
+    func reloadLocalizedData() {
+        txtSearch.placeholder = Main.homeAlert.searchPlaceholder
+        setLeftAlignedTitle(Main.setTitle.homePageTitle)
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        view.backgroundColor = theme.backgroundColor
+        tblHome.backgroundColor = theme.backgroundColor
+        lblCurrentLocation.textColor = theme.labelTextColor
+        txtSearch.textColor = theme.labelTextColor
+        txtSearch.backgroundColor = theme.cardCellBackgroundColor
+        txtSearch.tintColor = theme.labelTextColor
+        homeView.backgroundColor = theme.backgroundColor
+        
+        tblHome.reloadData()
     }
 }

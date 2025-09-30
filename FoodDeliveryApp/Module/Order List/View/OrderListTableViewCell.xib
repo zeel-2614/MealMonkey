@@ -77,6 +77,7 @@
                 <outlet property="lblOrderNumber" destination="zSH-AB-QTz" id="qT4-G7-ZSt"/>
                 <outlet property="lblProductName" destination="hAA-Mz-PQC" id="k8v-qA-dae"/>
                 <outlet property="lblTotal" destination="aXD-Bl-UhV" id="1th-YT-QsM"/>
+                <outlet property="orderListView" destination="WdZ-Sy-Taa" id="2fx-Gk-vxT"/>
             </connections>
             <point key="canvasLocation" x="81.679389312977094" y="42.605633802816904"/>
         </tableViewCell>

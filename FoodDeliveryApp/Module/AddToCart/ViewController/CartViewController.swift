@@ -1,4 +1,3 @@
-
 import UIKit
 import Lottie
 
@@ -23,6 +22,8 @@ class CartViewController: UIViewController {
         cartItems = CoreDataManager.shared.fetchCartItems(for: user)
         updateEmptyCartUI()
         tblCartView.reloadData()
+        reloadlocalizedData()
+        applyTheme()
     }
     
     func deleteCartItem(at indexPath: IndexPath) {
@@ -75,8 +76,24 @@ class CartViewController: UIViewController {
         lblEmptyCart = emptyState.label
         emptyCartAnimationView?.isHidden = false
         emptyCartAnimationView?.play()
+        btnPlaceOrder.setTitle(Main.cartAlertMessage.btnPlaceOrder, for: .normal)
+        applyTheme()
     }
     
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        view.backgroundColor = theme.backgroundColor
+        tblCartView.backgroundColor = theme.backgroundColor
+        tblCartView.separatorColor = theme.cardCellBorderColor
+        
+        btnPlaceOrder.backgroundColor = theme.buttonColor
+        btnPlaceOrder.setTitleColor(theme.buttonTextColor, for: .normal)
+        btnPlaceOrder.layer.cornerRadius = 28
+        
+        lblEmptyCart.textColor = theme.labelTextColor
+        emptyCartAnimationView?.backgroundColor = theme.backgroundColor
+    }
     /// Action triggered when the "Place Order" button is tapped.
     /// - Parameter sender: The object that initiated the action.
     @IBAction func btnPlaceOrderClick(_ sender: Any) {
@@ -118,5 +135,10 @@ class CartViewController: UIViewController {
             alert.addAction(UIAlertAction(title: Main.cartAlertMessage.cartAction, style: .default))
             present(alert, animated: true)
         }
+    }
+    
+    func reloadlocalizedData() {
+        btnPlaceOrder.setTitle(Main.cartAlertMessage.btnPlaceOrder, for: .normal)
+        setLeftAlignedTitleWithBack(Main.setTitle.cartTitle, target: self, action: #selector(backBtnTapped))
     }
 }

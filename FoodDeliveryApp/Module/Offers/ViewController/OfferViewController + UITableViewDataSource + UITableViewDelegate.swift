@@ -29,6 +29,7 @@ extension OffersViewController: UITableViewDataSource, UITableViewDelegate {
         ) as! OffersTableViewCell
         // Configure the cell with the offer at the current index.
         cell.offerConfigureCell(offer: arrOffer[indexPath.row])
+        cell.applyTheme()
         
         return cell
     }

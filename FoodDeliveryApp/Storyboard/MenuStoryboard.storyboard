@@ -61,6 +61,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dessertsView" destination="NoV-il-yee" id="3ZB-Rn-55S"/>
                         <outlet property="tblDesserts" destination="kPP-fV-u6Q" id="Mbo-x7-DSL"/>
                         <outlet property="txtSearchDesserts" destination="kt9-SL-8ee" id="sud-X6-Vb6"/>
                     </connections>

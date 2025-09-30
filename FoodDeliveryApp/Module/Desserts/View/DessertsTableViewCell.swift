@@ -15,6 +15,7 @@ class DessertsTableViewCell: UITableViewCell {
     /// Called after the cell has been loaded from the Interface Builder.
     override func awakeFromNib() {
         super.awakeFromNib()
+        applyTheme()
     }
     
     /// Called to configure the cell’s selection state.
@@ -36,6 +37,24 @@ class DessertsTableViewCell: UITableViewCell {
         imgShade.image = UIImage(named: Main.Images.dessertsBackShade)
     }
     
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        
+        // Cell background
+        contentView.backgroundColor = theme.cardCellBackgroundColor
+        
+        // Labels
+        lblDessertTitle.textColor = theme.buttonTextColor          // use main text color
+        lblRestaurantName.textColor = theme.buttonTextColor        // or theme.secondaryTextColor if available
+        lblCategoryName.textColor = theme.buttonTextColor
+        lblRating.textColor = theme.buttonTextColor
+        
+        // Button
+        btnStar.tintColor = theme.buttonColor
+        
+        // Image overlay / shade (optional)
+        imgShade.backgroundColor = UIColor.orange.withAlphaComponent(0.3) // temporary fallback
+    }
     // MARK: - Helper Method
     /**
      Creates a styled attributed string where the "•" character is highlighted in orange.

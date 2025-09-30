@@ -137,6 +137,7 @@
                     </view>
                     <connections>
                         <outlet property="tblWishlist" destination="dpU-Sd-ihk" id="hj6-s3-9bs"/>
+                        <outlet property="wishlistView" destination="rNM-8w-ztz" id="uGB-py-eQl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bQA-Oe-Nr5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -506,6 +507,7 @@
                         <outlet property="btnMinus" destination="Pa0-Lf-4lw" id="DhM-u2-XKW"/>
                         <outlet property="btnPlus" destination="HHn-0N-wmW" id="nh7-0Z-Dia"/>
                         <outlet property="countView" destination="ZRZ-tQ-ndB" id="Lrk-4U-k3f"/>
+                        <outlet property="detailView" destination="l2m-9e-KQC" id="QDB-F0-qG5"/>
                         <outlet property="imgProduct" destination="C4X-rs-gzr" id="yOf-iX-WVg"/>
                         <outlet property="lblCount" destination="hV8-n6-XwU" id="ecp-Ic-Tdv"/>
                         <outlet property="lblDescription" destination="oXZ-1v-JAK" id="gd1-4K-bFk"/>

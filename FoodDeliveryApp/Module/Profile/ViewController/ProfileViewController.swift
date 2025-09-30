@@ -4,9 +4,12 @@ import CoreData
 class ProfileViewController: UIViewController {
     
     // MARK: - IBOutlets
+    @IBOutlet weak var profileView: UIView!
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var txtName: UITextField!
+    @IBOutlet weak var profileView2: UIView!
+    @IBOutlet weak var btnEditProfile: UIButton!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtMobileNo: UITextField!
     @IBOutlet weak var btnSignOut: UIButton!
@@ -22,6 +25,7 @@ class ProfileViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
         let imgPicker = UITapGestureRecognizer(target: self, action: #selector(imgTap))
         imgProfile.addGestureRecognizer(imgPicker)
+        applyTheme()
         
         viewStyle(cornerRadius: imgProfile.frame.size.width/2, borderWidth: 0, borderColor: .systemGray, textField: [imgProfile])
         viewStyle(cornerRadius: 28, borderWidth: 0, borderColor: .systemGray, textField: [txtName, txtEmail, txtAddress, txtMobileNo, btnSave])
@@ -34,6 +38,7 @@ class ProfileViewController: UIViewController {
             $0?.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
         loadUserData()
+        reloadLocalizedData()
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -48,6 +53,8 @@ class ProfileViewController: UIViewController {
         if let user = CoreDataManager.shared.getOrCreateCurrentUser() {
             CartBadgeManager.shared.syncCartCount(for: user)
         }
+        reloadLocalizedData()
+        applyTheme()
     }
     
     func updateSaveButtonState() {
@@ -208,5 +215,34 @@ class ProfileViewController: UIViewController {
         } catch {
             print("Failed to update user: \(error.localizedDescription)")
         }
+    }
+    
+    func reloadLocalizedData() {
+//        lblUserName.text = Main.profileAlert.helloLabel
+        btnSignOut.setTitle(Main.profileAlert.signOutButton, for: .normal)
+        btnSave.setTitle(Main.profileAlert.saveButton, for: .normal)
+        txtName.placeholder = Main.profileAlert.nameTextField
+        txtEmail.placeholder = Main.profileAlert.emailTextField
+        txtMobileNo.placeholder = Main.profileAlert.mobileTextField
+        txtAddress.placeholder = Main.profileAlert.addressTextField
+        btnEditProfile.setTitle(Main.profileAlert.editProfileButton, for: .normal)
+        setLeftAlignedTitle(Main.setTitle.profileTitle)
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+        view.backgroundColor = theme.backgroundColor
+        lblUserName.textColor = theme.labelTextColor
+        [txtName, txtEmail, txtMobileNo, txtAddress].forEach {
+            $0?.backgroundColor = theme.cardCellBackgroundColor       // instead of textFieldBackgroundColor
+            $0?.textColor = theme.labelTextColor
+            $0?.tintColor = theme.labelTextColor              // instead of primaryColor
+        }
+        btnSave.backgroundColor = btnSave.isUserInteractionEnabled ? theme.buttonColor : .lightGray
+        btnEditProfile.tintColor = theme.labelTextColor       // instead of primaryColor
+        btnSignOut.backgroundColor = .clear
+        imgProfile.layer.borderColor = theme.labelTextColor.cgColor // instead of primaryColor
+        profileView.backgroundColor = theme.backgroundColor
+        profileView2.backgroundColor = theme.backgroundColor
     }
 }

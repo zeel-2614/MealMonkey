@@ -19,6 +19,7 @@ class AddressViewController: UIViewController, CLLocationManagerDelegate, UISear
     weak var delegate: ChangeAddressDelegate?
     @IBOutlet weak var btnRedirectCurrentAddress: UIButton!
     @IBOutlet weak var btnSavedAddress: UIButton!
+    @IBOutlet weak var addressView: UIView!
     @IBOutlet weak var imgStar: UIImageView!
     @IBOutlet weak var txtSearchAddress: UITextField!
     @IBOutlet weak var mapView: MKMapView!
@@ -34,6 +35,13 @@ class AddressViewController: UIViewController, CLLocationManagerDelegate, UISear
         mapView.delegate = self
         setupUI()
         setupMap()
+        applyTheme()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadlocalizedData()
+        applyTheme() // 👈 apply theme whenever the view appears
     }
     /// Sets up the UI components.
     private func setupUI() {
@@ -48,6 +56,8 @@ class AddressViewController: UIViewController, CLLocationManagerDelegate, UISear
             target: self,
             action: #selector(BackBtnTapped)
         )
+        
+        txtSearchAddress.placeholder = Main.addressAlertMessage.searchAddressPlaceholder
         /// Adds a tap gesture recognizer to the map view for placing pins.
         let tapGesture = UITapGestureRecognizer(
             target: self,
@@ -63,6 +73,33 @@ class AddressViewController: UIViewController, CLLocationManagerDelegate, UISear
         )
     }
     
+    func applyTheme() {
+        let theme = ThemeManager.shared.currentTheme
+
+        view.backgroundColor = theme.backgroundColor
+        mapView.backgroundColor = theme.backgroundColor
+        addressView.backgroundColor = theme.backgroundColor
+
+        btnRedirectCurrentAddress.backgroundColor = .clear
+        btnRedirectCurrentAddress.setTitleColor(theme.buttonTextColor, for: .normal)
+        btnRedirectCurrentAddress.layer.cornerRadius = 10
+
+        btnSavedAddress.backgroundColor = .clear
+        btnSavedAddress.setTitleColor(theme.buttonTextColor, for: .normal)
+        btnSavedAddress.layer.cornerRadius = 10
+
+        txtSearchAddress.textColor = theme.labelTextColor
+        txtSearchAddress.backgroundColor = theme.cardCellBackgroundColor
+        txtSearchAddress.attributedPlaceholder = NSAttributedString(
+            string: Main.addressAlertMessage.searchAddressPlaceholder,
+            attributes: [.foregroundColor: theme.labelTextColor.withAlphaComponent(0.6)]
+        )
+
+        navigationController?.navigationBar.tintColor = theme.buttonColor
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: theme.foodTitleColor
+        ]
+    }
     /// Adds left and right padding to given text fields.
     func setPadding(textfield: [UITextField]){
         for item in textfield {
@@ -292,5 +329,14 @@ class AddressViewController: UIViewController, CLLocationManagerDelegate, UISear
             annotationView?.annotation = annotation
         }
         return annotationView
+    }
+    
+    func reloadlocalizedData() {
+        txtSearchAddress.placeholder = Main.addressAlertMessage.searchAddressPlaceholder
+        setLeftAlignedTitleWithBack(
+            Main.setTitle.changeAddressTitle,
+            target: self,
+            action: #selector(BackBtnTapped)
+        )
     }
 }

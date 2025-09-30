@@ -43,6 +43,7 @@
             <size key="customSize" width="181" height="203"/>
             <connections>
                 <outlet property="imgNextPage" destination="ps7-vV-H8f" id="XWW-w8-p77"/>
+                <outlet property="nextpageView" destination="HeS-h1-zNl" id="bzC-Kz-hCz"/>
             </connections>
             <point key="canvasLocation" x="183.96946564885496" y="73.591549295774655"/>
         </collectionViewCell>

@@ -95,6 +95,7 @@
                 <outlet property="lblFoodCategory" destination="8pk-ye-vN1" id="pen-t8-pxJ"/>
                 <outlet property="lblFoodName" destination="3Yt-ze-CzT" id="8gK-gj-QKY"/>
                 <outlet property="lblRattings" destination="ehs-5c-Biq" id="gjr-jn-yK7"/>
+                <outlet property="mostPopularView" destination="Mbw-me-fEB" id="RUW-1m-NTb"/>
             </connections>
             <point key="canvasLocation" x="258.77862595419845" y="84.154929577464799"/>
         </collectionViewCell>
